@@ -1,0 +1,12 @@
+site:
+  title: Placeholder
+  start_page: takoyaki::placeholder
+content:
+  sources:
+  - url: .
+    branches: HEAD
+    start_path: src
+ui:
+  bundle:
+    url: 
+    snapshot: true
