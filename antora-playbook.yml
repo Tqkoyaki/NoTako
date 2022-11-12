@@ -1,12 +1,11 @@
 site:
-  title: Placeholder
-  start_page: takoyaki::placeholder
+  title: Takoyaki Notes
+  start_page: TuringTako::index.adoc
 content:
   sources:
-  - url: .
-    branches: HEAD
-    start_path: src
+  - url: https://github.com/Tqkoyaki/TuringTako.git
+    branches: master
 ui:
   bundle:
-    url: 
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
