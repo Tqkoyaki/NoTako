@@ -1,0 +1,105 @@
+---
+id: page-3
+title: Sequences
+sidebar_position: 3
+---
+Sometimes you want to store a list of values that are related to each other and creating a variable for each one would be excessive, inefficient, and will never be flexible for many needs. This is why we have data structures to organize more complex data and the first example of a data structure is a list. A list holds a sequence of values.
+
+## Creating Lists
+You can create a list with square brackets and commas separating the values. You can also use `list()` to create a list.
+
+```python title="Creating Lists" showLineNumbers
+[1, 2, 3] # (1) Creating Lists
+['abc', 'def', 'ghi']
+list([1, 2, 3])
+
+[1, 'abc', 2, 'def', 3, 'ghi'] # (2) Multiple Types of Values
+
+[] # (3) Empty List
+list()
+```
+1. You can create a list with square brackets `[]` and commas seperating the values.
+2. In Python, lists can hold multiple types of values.
+3. You can create an empty list with `[]` or `list()`.
+
+## Accessing List Values
+The first thing we want to do is retrieve a value from the list, to do this we need to use an ***index***. In most programming languages like Python, we index lists starting at 0. This means the first item is indexed at 0, the second item is indexed at 1.
+
+```python title="Indexing Lists" showLineNumbers
+names = ["bob", "steve", "john"]
+print(names[0]) # Prints "bob" [first item]
+print(names[2]) # Prints "john" [third item]
+
+names[2] = "jane" # Replaces "john" with "jane"
+
+print(names[3]) # ERROR! (1)
+```
+1. This will throw an error because there is no item at index 3. The last item is at index 2.
+
+## List Methods
+There are a few ***methods*** that are useful for lists. These are built in tools that are available to use in Python.
+
+```python title="List Methods" showLineNumbers
+names = ["bob", "steve", "john"]
+
+print(len(names)) # Prints 3 [length of list]
+names.append("jane") # Adds "jane" to the end of the list
+
+deletedItem = names.pop() # Removes the last item from the list and returns it
+deletedItem = names.pop(1) # Removes the item at index 1 and returns it
+
+del names[0] # Removes the item at index 0
+
+print(max(names)) # Prints "steve" because it is alphabetically last so the biggest
+print(min(names)) # Prints "bob" because it is alphabetically first so the smallest
+print(sum(names)) # ERROR! (1)
+```
+1. This will throw an error because you can't add strings together. But this would work for a list of numbers.
+
+:::caution
+Not all methods are avaliable for all data types. Googling `python [method name]` typically will give you information about the method.
+:::
+
+## Strings are Lists Too
+Even through strings are a data type in Python, they are technically just a list of characters, this means we can do many things with strings that we can do with lists.
+
+The difference between a list and a string is that a string is ***immutable***, this means we cannot change the value of a string. We can read the values of a string the same way as lists but we cannot change them.
+
+```python title="Strings Methods" showLineNumbers
+name = "bob"
+print(name[0]) # Prints the first character "b"
+print(len(name)) # Prints 3 [length of string]
+
+name.append("j") # Error because strings are immutable
+
+del name[0] # Error because strings are immutable
+```
+
+All the things we can do with a string are also available to us with lists.
+
+```python title="Lists Expressions" showLineNumbers
+names = ["bob", "steve", "john"]
+names2 = ["dave", "jane"]
+
+names3 = names + names2 # Appends the values of names2 to the end of names
+names4 = names * 2 # Repeats the values of names twice
+```
+
+## Slicing Lists
+
+One useful functionality built into Python is list slicing which lets you get a subset of a list and because this is not changing the contents of the list, it works with strings too.
+
+```python title="List Slicing" showLineNumbers
+names = ["bob", "steve", "john", "dave", "jane"]
+names2 = names[1:3] # Gets the second and third items from the list
+names3 = names[1:] # Gets all the items from the second item to the end
+names4 = names[:3] # Gets all the items from the start to the third item
+names5 = names[:] # Gets all the items from the start to the end
+```
+
+The syntax used here is `list[start:end]` where `start` is the index of the first item to get and `end` is the index of the first item to not get. This means that `list[start:end]` will get all items from `start` to `end - 1` because the item at `end` is not included.
+
+If the start or end is not specified, it will default to the start or end of the list.
+
+## Negative Indexing
+WIP
