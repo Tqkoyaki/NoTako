@@ -10,16 +10,18 @@ const katex = require('rehype-katex');
 const config = {
   title: 'NoTako',
   tagline: 'Octobots are cool',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://tqkoyaki.github.io',
+  baseUrl: '/NoTako/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'Tqkoyaki', // Usually your GitHub org/user name.
+  projectName: 'NoTako', // Usually your repo name.
+  deploymentBranch: 'deploy', // Branch that GitHub pages will deploy from.
+  trailingSlash: false, // GitHub pages adds a trailing slash by default.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
