@@ -85,8 +85,55 @@ names3 = names + names2 # Appends the values of names2 to the end of names
 names4 = names * 2 # Repeats the values of names twice
 ```
 
-## Slicing Lists
+### More String Functionality
 
+There are a few more string specific methods there that are useful. These type of methods are ***invocations***, which are functions that are called on a value.
+
+```python title="String Methods" showLineNumbers
+stuff = ' Hello world '
+
+stuff.upper() # (1) HELLO WORLD
+stuff.lower() # hello world
+
+stuff.find('o') # (2) 4
+
+stuff.strip() # (3) 'Hello world'
+
+stuff.startswith('Hello') # (4) True
+stuff.endswith('world') # False
+
+stuff.split() # (5) ['Hello', 'world']
+stuff.split('o') # ['Hell', ' w', 'rld']
+```
+1. `upper()` returns the string in all uppercase letters, `lower()` returns the string in all lowercase letters.  
+2. `find()` returns the index of the first occurance of the character, if it doesn't exist it returns -1.  
+3. `strip()` removes all whitespace from the beginning and end of the string.  
+4. `startswith()` returns `True` if the string starts with the given string, `endswith()` returns `True` if the string ends with the given string.    
+5. `split()` returns a list of strings that are split at the given character, if no character is given it splits at whitespace.  
+
+What makes these methods different from other methods is that we use the . notation to call them. The syntax here is `<value/variable>.<method name>()`. This is called ***dot notation***.
+
+### Formating Strings
+One common use of strings is to format results and displaying them to a user. There are many instances where you want to use the values of variables in strings and the + operator can make the code messy and hard to read. You can use the built in `%` operator to format strings.
+
+```python title="Formating Strings" showLineNumbers
+name = "bob"
+age = 20
+'Hello, my name is %s and I am %d years old.' % (name, age) # (1) Hello, my name is bob and I am 20 years old.
+```
+1. The `%` operator takes the string and replaces the `%s` with the first value in the parentheses and the `%d` with the second value in the parentheses.
+
+You can have as many values as you want formatted. Inside the string the letter after the % is the type of value you want to format. The types are:
+
+| Type | Description |
+| :--- | :--- |
+| `s` | String |
+| `d` | Integer |
+| `f` | Float |
+| `c` | Character |
+| `b` | Boolean |
+
+## Slicing Lists
 One useful functionality built into Python is list slicing which lets you get a subset of a list and because this is not changing the contents of the list, it works with strings too.
 
 ```python title="List Slicing" showLineNumbers
@@ -101,5 +148,29 @@ The syntax used here is `list[start:end]` where `start` is the index of the firs
 
 If the start or end is not specified, it will default to the start or end of the list.
 
-## Negative Indexing
-WIP
+You can also skip items in a list by using a third number in the slice. The syntax is `list[start:end:skip]` where `skip` is the number of items to skip.
+
+```python title="List Slicing with Skip" showLineNumbers
+names = ["bob", "steve", "john", "dave", "jane"]
+names2 = names[1:4:2] # Gets the second and fourth items from the list
+names3 = names[1::2] # Gets all the items from the second item to the end skipping every other item
+names4 = names[:4:2] # Gets all the items from the start to the fourth item skipping every other item
+names5 = names[::2] # Gets all the items from the start to the end skipping every other item
+```
+
+### Negative Indexing
+Python is unique in that it allows you to use negative numbers to index lists. This is useful because it lets you get items from the end of the list.
+    
+```python title="Negative Indexing" showLineNumbers
+names = ["bob", "steve", "john", "dave", "jane"]
+print(names[-1]) # Prints "jane"
+print(names[-2]) # Prints "dave"
+
+print(names[-3:]) # (1) Prints ["john", "dave", "jane"]
+
+print(names[::-1]) # (2) Prints ["jane", "dave", "john", "steve"]
+```
+1. This gets all the items from the third item from the end to the end of the list.
+2. This is a popular way to reverse a list.
+
+Overall, list splicing and negative indexing allow for various creative ways to get the exact items you want from a list and a great tool to have in your toolbox.
