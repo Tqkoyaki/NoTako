@@ -3,4 +3,480 @@ id: page-4
 title: Control Flow
 sidebar_position: 4
 ---
-loops, conditionals, and functions
+Sometimes running a program in order from top to bottom is not the best way to go about writing a program. We want to be able to decide what code runs under specific conditions, we want to be able to repeat code so that we don't have to write it over and over again. All of these issues are solved by implementing control flow. Control flow are different ways we can control how our program runs allowing us to deviate from the normal top to bottom execution.
+
+## Deeper Dive into Booleans
+Before we can talk about control flow, we need to talk about booleans because we will use this data type often here.
+
+So far we have worked a lot with integers, floats, and strings. A boolean is a data type with only two possible values, `True` and `False`.
+
+### Comparison Operators
+One way we use booleans is to compare between two values.
+
+```python title="Comparison Operators" showLineNumbers
+1 == 2 # False
+1 != 2 # True
+1 < 2 # True
+1 > 2 # False
+1 <= 2 # True
+1 >= 2 # False
+
+"hello" == "hello" # True
+1.0 == 1 # True
+"bob" > "alice" # True
+"alice" > "bob" # False
+
+1 == 1.0 # True
+"str" == 1 # False
+```
+
+There are the six comparison operators that we use to compare between any data type. You can compare between any data type, but the result will always be a boolean.
+
+:::note
+The `==` operator is used to check if two values are equal. The `=` operator is used to assign a value to a variable.
+:::
+
+For strings with greater than and less than, we order them ***lexiographically*** which means alphabetical order. In the example, `"bob"` is greater than `"alice"` because `b` comes after `a` in the alphabet.
+
+In the situation where the first letter is the same, we move on to the next letter and compare that, and so on. If one string ends before the other and they have been the same up to that point, the shorter string is considered less than the longer string.
+
+### Logical Operators
+Sometimes we want to combine multiple comparisons together. For that we use logical operators.
+
+```python title="Logical Operators" showLineNumbers
+1 == 1 and 2 == 2 # (1) True
+1 == 1 and 2 == 3 # False
+
+1 == 1 or 2 == 3 # (2) True
+1 == 2 or 2 == 3 # False
+
+not 1 == 1 # (3) False
+not 1 == 2 # True
+```
+1. The `and` operator returns `True` if **both** comparisons are `True`.  
+2. The `or` operator returns `True` if **either** comparison is `True`.  
+3. The `not` operator returns the **opposite** of the comparison.  
+
+### Order of Operations
+These comparison operators and logical operators are well operators and the values between them are operands just like with addition and the other operations. This means they also need to be added to our order of operations somewhere.
+
+    Our Updated Order of Operations...
+    1. Parentheses ()
+    2. Exponents **
+    3. Negation -
+    3. Multiplication *, Division /, and Modulo %
+    4. Addition and Subtraction + and -
+    5. Comparison Operators <, >, <=, >=, ==, !=
+    6. Logical Operators not, and, or
+
+### Short-Circuit Evaluation
+When we use the `and` and `or` operators, we can take advantage of short-circuit evaluation. This is a special feature that make the `and` and `or` operators more efficient.
+
+```python title="Short-Circuit Evaluation" showLineNumbers
+1 == 1 or 2 == 2 # True
+```
+When Python runs this code, it checks the first comparison and sees that it is `True`. Since the `or` operator is used, it doesn't check the second comparison because it doesn't need to. Even if the second comparison was `False`, the result would still be `True`. The second comparison is only checked if the first comparison is `False`.
+
+```python title="Short-Circuit Evaluation" showLineNumbers
+1 == 2 and 2 == 2 # True
+```
+The same idea runs for the `and` operator. If the first comparison is `False`, there is no point checking the second comparison because the result will be `False` no matter what. The second comparison is only checked if the first comparison is `True`.
+
+This unique feature can be used for some interesting things. One commonly used example is to use it to avoid dividing by zero efficiently.
+
+```python title="Short-Circuit Evaluation" showLineNumbers
+x = 0
+if(x != 0 and 3 / x == 1):
+    print("x is 3")
+```
+Here we never divide by zero which would cause an error because if `x` is zero like in this example, the second comparison is never checked.
+
+## If Statements
+
+The first control flow we will talk about is the branching. Branching is when we have to make a decision about which code to run. This allows us to only run specific code depending on the conditions.
+
+An example of this is a car at a traffic light. We only want to drive if the light is green. This is a sitatuation where we want to do something only if the condition is met.
+
+To achieve branching we use an `if` statement. An `if` statement is a block of code that only runs if the condition is `True`. Everything inside the `if` statement is indented to tell Python what is apart of the `if` statement.
+
+    The syntax is...
+    if <condition>:
+        <code>
+
+The `condition` is a boolean expression, anything can be inside it as long as it returns a boolean.
+```python title="If Statement" showLineNumbers
+x = 1
+
+if x == 1:
+    print("1 is equal to 1") # This will run
+
+if x == 2:
+    print("1 is equal to 2") # This will not run
+print("This will always run") # Not part of body because not indented
+
+if False: # Always False so this will never run
+    print("This will never run")
+```
+
+In the code above, the first `if` statement is run because `x == 1` is `True` and the second one does not run because it returns false. 
+
+### Else Statements
+Sometimes when we are branching, we want to run some code if a condition is met, if not we want to run other code.
+
+Going back to the car example. Lets say now we want to drive the car if the light is green and if it is not green we want to stop the car. This is a situation where we want to do something if the condition is met, and if it is not met we want to do something else.
+
+To achieve this we use an `else` statement. An `else` statement acts like a default case if the `if` statement does not run.
+
+    The syntax is...
+    if <condition>:
+        <code>
+    else:
+        <code>
+
+```python title="Else Statement" showLineNumbers
+x = 1
+
+if x == 2:
+    print("1 is equal to 1") # This will not run
+else:
+    print("1 is not equal to 1") # This will run
+```
+:::note
+You always need an `if` statement before an `else` statement and this means there will always be some code in this control flow that is bound to run.
+:::
+
+### Elif Statements
+Sometimes we want to have more than two options when we are branching. There are multiple conditions that decide what code to run.
+
+Going back to the car example. Lets say now we want to drive the car if the light is green, if it is yellow we want to slow down. If it is neither green or yellow, it must be red so we want to stop.
+
+To achieve this we use an `elif` statement. An `elif` statement is like an `else` statement but it is for when we have more than two options.
+
+    The syntax is...
+    if <condition>:
+        <code>
+    elif <condition>:
+        <code>
+    else:
+        <code>
+
+:::note
+You always need an `if` statement before an `elif` statement and you do not always need an `else` statement but if you have one you need to have it at the end. The `else` statement is just a default case if none of the other conditions are met.
+:::
+
+```python title="Elif Statement" showLineNumbers
+x = 1
+
+if x == 2:
+    print("1 is equal to 1") # This will not run
+elif x == 1:
+    print("1 is equal to 1") # This will run
+else:
+    print("1 is not equal to 1") # This will not run
+
+# elif doesn't have to be used with else
+if x > 3:
+    print("x is greater than 3") # This will not run
+elif x > 2:
+    print("x is greater than 2") # This will run
+elif x > 1:
+    print("x is greater than 1") # This will not run
+```
+
+:::caution
+This conditional control flow runs in order so if a condition is met it will not check the other conditions. At most only one of the conditions will be met. Avoid using `elif` statements if you need to run multiple conditions.
+:::
+
+### Nested If Statements
+A commonly used feature of `if` statements is nesting them. This means you can put an if inside of an if. There is no limit in what code goes inside the body of an `if` statement so another `if` statement is a valid option.
+
+```python title="Nested If Statement" showLineNumbers
+x = 0
+if x < 1:
+    print("x is less than 1") # This will run
+
+    if x > -1:
+        print("x is between -1 and 1") # This will run
+    else:
+        print("x is less than -1") # This will not run
+else:
+    print("x is greater than 1") # This will not run
+```
+
+## Loops
+The second control flow we will talk about is looping. Looping is when we want to run a block of code multiple times. This allows us to run the same code multiple times without having to write it out multiple times.
+
+One example of this is printing hello world 10 times. This gets tedious to write 10 times and tedious. What if we wanted to print it 100 times? 1000 times? 1000000 times? Looping is the solution to this problem.
+
+There are two types of loops, `for` loops and `while` loops. We will talk about `for` loops first.
+
+### For Loops
+A `for` loop is a loop that runs a block of code a certain number of times. This is useful when we know how many times we want to run the code.
+
+```python title="For Loop" showLineNumbers
+for i in range(10):
+    print("Hello World") # Prints Hello World 10 times
+```
+
+This code prints "Hello World" 10 times. To change the number of times it prints, we change the number in the `range()` function. 
+
+Whats unique about for loops in Python is what they really do is loop through a list. The `range(end)` function is a function that returns a list of numbers. The list will start at 0 and will create a list of numbers up to but not including `end`. So `range(10)` will return `[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]`.
+
+You can also use `range(start, end)` to specify the start of the list. Finally, you can use `range(start, end, step)` to specify the step size of the list. The step size is how much the number increases by each time. So `range(2, 10, 2)` will return `[2, 4, 6, 8]`.
+
+Understanding that Python uses lists to loop through is important because it is shown in the syntax and it also means we can loop through any list we want.
+
+    The syntax is...
+    for <variable> in <list>:
+        <code>
+
+```python title="For Loop" showLineNumbers
+for i in range(5):
+    print(i) # Prints 0, 1, 2, 3, 4
+
+for i in [1, 2, 3, 4, 5]:
+    print(i) # Prints 1, 2, 3, 4, 5
+
+for i in ["Bob", "John", "Sally"]:
+    print(i) # Prints Bob, John, Sally
+
+for i in "Hello World":
+    print(i) # Prints H, e, l, l, o, , W, o, r, l, d
+```
+
+During the loop, the variable `i` is set to the current value in the list. So in the first loop, it is set to the first value in the list. On the second loop, it is set to the second value in the list. This variable is called the ***iterative variable*** and is commonly used inside the loop.
+
+### While Loops
+The second type of loop is a `while` loop which is a mix between a `for` loop and an `if` statement. A `while` loop takes in a condition and runs a block of code repeadly until the condition is no longer met.
+
+```python title="While Loop" showLineNumbers
+i = 0
+while i < 10:
+    print("Hello World") # Prints Hello World 10 times
+    i += 1
+```
+
+In this situation, the loop is dictated by the condition that i is less than 10. Unlike our previous iterative variable, this one does not automatically increase. We have to manually update it. However, the benefit is that we can make the condition whatever we want. We can make it more complicated or more simple.
+
+    The syntax is...
+    while <condition>:
+        <code>
+
+The while loop will check the condition and if it is met it will run the body. After each loop, it will check the condition again and if it is met it will run the body again.
+
+:::caution
+If the condition is not when the while loop is first approached, the loop will never run. For loops also will never run if the list is empty.
+:::
+
+Typically, when we are deciding between a `for` loop and a `while` loop, we should usually use a `for` loop if we know how many times we want to run the code and a `while` loop if we don't know how many times we want to run the code. There is no hard rule for this though.
+
+### Infinite Loops
+Due to the nature of while loops, it is possible to create an infinite loop. Just like there is a possiblity of an `while` loop never running if the condition is never met, if the condition is always met, the loop will run forever.
+
+```python title="Infinite Loop" showLineNumbers
+i = 0
+while i < 10:
+    print("Hello World") # Prints Hello World forever because i is never updated
+
+while i < 10:
+    print("Hello World") # Prints Hello World forever because i is always less than 10
+    i -= 1
+
+while True:
+    print("Hello World") # Prints Hello World forever because the condition is always met
+```
+
+Infinite loops are not a problem for computers, they will keep running it as long as a problem doesn't occur.
+
+:::tip 
+To escape an infinite loop, you can press `Ctrl + C` in the console to stop the program.
+:::
+
+### Breaks and Continues
+There are two special keywords used in loops that allow us to control the flow of the loop itself. The first is `break` which allows us to exit the loop early. The second is `continue` which allows us to skip the rest of the loop and go to the next iteration.
+
+```python title="Break and Continue" showLineNumbers
+for i in range(10):
+    if i == 5:
+        break # Exits the loop early
+    print(i) # Prints 0, 1, 2, 3, 4
+
+for i in range(10):
+    if i == 5:
+        continue # Skips the rest of the loop and goes to the next iteration
+    print(i) # Prints 0, 1, 2, 3, 4, 6, 7, 8, 9
+```
+
+Typical a `break` or `continue` is paired with a conditional statement. If the condition is met, the loop will exit early or skip the rest of the loop.
+
+## Functions
+The last control flow we will talk about is functions. One benefit with control flow espically loops so far is that we avoid redundant code. It gets really tedious to write the same code over and over again. Another control flow to help with avoid redundant code are functions. They are a way to group code together that can be reused multiple times.
+
+Functions serve to break a code into smaller pieces, each that does something and can be reused. We have already used functions because Python has built in functions. We use functions to execute commands but there are behind the scenes code that runs that we don't always see.
+
+```python title="Built in Functions" showLineNumbers
+print("Hello World") # A built in function that prints a value to the console
+type(5) # A built in function that returns the type of a value
+input("Enter a number: ") # A built in function that takes in a value from the user
+len("Hello World") # A built in function that returns the length of a value
+```
+
+### Import Statements 
+There are many more functions outside of the built in functions that we can utilize. These functions come from libraries that other people have written that we can use. Two of the most common libraries are the `math` library and the `random` library. To use a library, we have to import it.
+
+The syntax for importing a library is `import <library>`. We can then use the functions from the library by using `<library>.<function>`.
+
+```python title="Import Statements" showLineNumbers
+import math # Imports the math library (must come before the function is used)
+import random # Imports the random library
+
+print(math.sqrt(4)) # The sqrt function returns the square root of a number
+print(math.log(10)) # The log function returns the natural log of a number
+print(math.log(10, 2)) # The log function can also take in a base
+print(math.sin(0)) # The sin function returns the sine of an angle in radians
+print(math.cos(0)) # The cos function returns the cosine of an angle in radians
+print(math.tan(0)) # The tan function returns the tangent of an angle in radians
+
+print(random.randint(1, 10)) # The randint function returns a random integer between two numbers
+print(random.random()) # The random function returns a random float between 0 and 1
+print(random.choice([1, 2, 3, 4, 5])) # The choice function returns a random value from a list
+```
+
+:::tip
+A programmer's best friend is google. When you are trying to find a function or a library you want to use, google it and learn more about it.
+:::
+
+It should also be noted that libraries can also hold variables that we can use. In this case the `math` library has two very useful variables, `pi` and `e`.
+
+The syntax for using a variable from a library is `<library>.<variable>`.
+
+```python title="Math Library Variables" showLineNumbers
+import math # Imports the math library
+
+print(math.pi) # The pi variable is the value of pi
+print(math.e) # The e variable is the value of e
+```
+
+### Creating Functions
+We can also create our own functions instead of only using built-in functions. When our code gets more complex, it is benefitical to break our code into functions that can be reused.
+
+    The syntax for defining a basic function...
+    def <function name>():
+        <code>
+    
+    The syntax to use a function after it is defined is...
+    <function name>()
+
+Just like with loops and conditionals, the body of the function is indented and is the only thing that is run when the function is called.
+
+```python title="Basic Function" showLineNumbers
+def hello_world():
+    print("Hello World")
+
+hello_world() # Prints Hello World
+hello_world() # Prints Hello World
+hello_world() # Prints Hello World
+```
+When we are defining a function, we use `def` but after we define the function, we can use it like any other function. When we are using the function, we say that we are calling the function. Calling the function is kind of like a detour in the control flow because the code will jump to the function definition to figure out what code to run and then jump back to where it was.
+
+:::caution
+The function must be defined before it is used. If the function is defined after it is used, the program will spit out an error.
+:::
+
+### Parameters
+Currently our code is not very versitile because it does the same thing every time. We can add parameters to give the function inputs that can adjust its behavior.
+
+    The syntax for defining a function with parameters...
+    def <function name>(<parameter 1>, <parameter 2>, ...):
+        <code>
+    
+    The syntax to use a function with parameters after it is defined is...
+    <function name>(<argument 1>, <argument 2>, ...)
+
+You can have as many parameters as you want but you must pass in the same number of arguments as there are parameters. The arguments are the values that are passed into the function when it is called. The order of the arguments must match the order of the parameters as well.
+
+```python title="Function with Parameters" showLineNumbers
+def hello_world(name):
+    print("Hello " + name)
+
+hello_world("World") # Prints Hello World
+hello_world("Python") # Prints Hello Python
+hello_world("Everyone") # Prints Hello Everyone
+```
+Do note that the variable we use when defining the function is called a ***parameter*** and the value we use when calling the function is called an ***argument***.
+
+### Return Values
+We added versitiliy to our code with parameters but we can also allow the function to return a value instead of printing so that we can use the output in other parts of the code.
+
+    The syntax for defining a function with a return value...
+    def <function name>(<parameter 1>, <parameter 2>, ...):
+        <code>
+        return <value>
+    
+    The syntax to use a function with a return value after it is defined is...
+    <variable> = <function name>(<argument 1>, <argument 2>, ...)
+
+```python title="Function with Return Value" showLineNumbers
+def add(num1, num2):
+    return num1 + num2
+
+print(add(1, 2)) # Prints 3
+var = add(1, 2) # var is now 3
+print(add(1, 2) + 1) # Prints 4
+```
+After a function with a return value is called, it becomes a placeholder for the value that was returned. That way we can use the function like we would use a variable.
+
+Functions without a return value are called ***void functions*** because they return a value called `None` which is a special value that means nothing.
+
+## Exception Handling
+Somes we are bound to obtain an error when we are running our code espically when things are not predictable like users. What if we expect the user to enter a number but they enter a letter? We know how to handle the error because we can reprompt the user till a valid input is entered but a computer doesn't.
+
+We can use ***exception handling*** to handle errors that we expect to occur.
+    
+        The syntax for exception handling...
+        try:
+            <code>
+        except <error type>:
+            <code>
+
+The `try` block is the code that we are trying to run normally and the `except` block is the code that will run if an error occurs.
+
+```python title="Exception Handling" showLineNumbers
+try:
+    num = int(input("Enter a number: ")) # Trying to get input from the user
+    print(num)
+except:
+    print("That is not a number")
+
+print("This will always run")
+```
+If the user does not enter a number, int casting will throw an error and then the except block will run. The code after the try and catch block will always run regardless of if an error occurs or not.
+
+### User Prompting
+The code above is good at catching if the user enters something that is not a number but it doesn't really fix the problem. We should keep prompting the user till they enter a valid input but we don't know how many times we need to reprompt the user so we should use a `while` loop to help us.
+
+```python title="User Prompting" showLineNumbers
+# highlight-next-line
+while True: # This will run forever until we break out of the loop
+    try:
+        num = int(input("Enter a number: ")) # Trying to get input from the user
+        print(num)
+        # highlight-next-line
+        break # Once we get a valid input, we can break out of the loop
+    except:
+        print("That is not a number")
+```
+The highlighted lines are new lines added to the previous code which add a control flow properly to fix our problem. Different programs will require different control flows to fix the problem. With control flows now, we can fix almost any coding problem that we can think of.
+
+
+
+
+
+
+
+
+
+
+
+
+
