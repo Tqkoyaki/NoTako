@@ -3,4 +3,288 @@ id: page-5
 title: Data Handling
 sidebar_position: 5
 ---
-This deals with dict, tuples, databases, files, list comprehension
+A big part of programming is dealing with data and data can get very complex very quickly. There are many different ways to organize and deal with data. So far lists are the only data structure we have seen but there are many more and they all have their own strengths and weaknesses.
+
+## Dictionaries
+Other than lists, dictionaries are one of the most commonly used data structure used in Python. Dictionaries are a collection of key-value pairs and each unique key is connected to a value. You can create a dictionary by using curly braces `{}` and separating each key-value pair with a comma. The key and value are separated by a colon. You can also create an empty dictionary by using empty curly braces or with the `dict()` function.
+
+```python title="Creating Dictionaries" showLineNumbers
+# Create a dictionary
+my_dict = {"key1": "value1", "key2": "value2"}
+
+# The key and value can be any data type
+my_dict = {1: 1, "key2": 2.0, 2: True, "key4": [1, 2, 3]}
+
+# Empty dictionaries
+my_dict = {}
+my_dict = dict()
+```
+
+You can access and change the values in a dictionary by using the key like you would with a list but instead of using an index you use the key. You can also add new key-value pairs to a dictionary by using the key and assigning it a value.
+
+```python title="Manipulating Dictionaries" showLineNumbers
+# Create a dictionary
+my_dict = {"key1": "value1", "key2": "value2"}
+
+# Read a value
+my_dict["key1"] # "value1"
+
+# Update a value
+my_dict["key1"] = "new value"
+
+# Delete a value
+del my_dict["key1"]
+```
+
+Besides the basic operations you can also use the `in` operator to check if a key is in a dictionary and the `len()` function to get the number of key-value pairs in a dictionary. The `in` operator is very useful when you want to check if a key is in a dictionary before trying to access it. If you try to access a key that is not in a dictionary you will get a `KeyError`.
+
+```python title="Dictionary Operations" showLineNumbers
+# Create a dictionary
+my_dict = {"key1": "value1", "key2": "value2"}
+
+# Check if a key is in a dictionary
+"key1" in my_dict # True
+"key3" in my_dict # False
+
+# Get the number of key-value pairs in a dictionary
+len(my_dict) # 2
+
+# Try to access a key that is not in a dictionary
+my_dict["key3"] # KeyError
+```
+
+There are also multiple methods that increase the flexibility that dictionaries have. The `keys()` method returns a list of all the keys in a dictionary. The `values()` method returns a list of all the values in a dictionary. Finally, to avoid getting a `KeyError` you can use the `get()` method to get the value of a key. If the key is not in the dictionary it will return `None` instead of throwing an error. It is a quicker way to get a value that may or may not be in a dictionary instead of using the `in` operator. One other thing to note is you can give the `get()` method a second argument that will be returned if the key is not in the dictionary.
+
+```python title="Dictionary Methods" showLineNumbers
+# Create a dictionary
+my_dict = {"key1": "value1", "key2": "value2"}
+
+# Returns a list of all the keys in a dictionary
+my_dict.keys() # ["key1", "key2"]
+
+# Returns a list of all the values in a dictionary
+my_dict.values() # ["value1", "value2"]
+
+# Get the value of a key
+my_dict.get("key1") # "value1"
+my_dict.get("key3") # None
+my_dict.get("key3", "default value") # "default value"
+```
+
+## Tuples
+Tuples are similar to lists but they are ***immutable*** like strings. This means once created, you cannot change the values in a tuple. You can create a tuple by using parentheses `()` and separating each value with a comma. You can also create an empty tuple by using empty parentheses or with the `tuple()` function. You can also ignore the parentheses and just separate the values with commas to create a tuple.
+
+```python title="Creating Tuples" showLineNumbers
+# Create a tuple
+my_tuple = (1, 2, 3)
+my_tuple = 1, 2, 3
+
+# Empty tuple
+my_tuple = ()
+my_tuple = tuple()
+```
+
+Like stated earlier, you cannot change the values in a tuple but can still access them the same way you access values in a list. You can also use the `in` operator to check if a value is in a tuple and the `len()` function to get the number of values in a tuple.
+
+```python title="Manipulating Tuples" showLineNumbers
+# Create a tuple
+my_tuple = (1, 2, 3)
+
+# Read a value
+my_tuple[0] # 1
+
+# Check if a value is in a tuple
+1 in my_tuple # True
+4 in my_tuple # False
+
+# Get the number of values in a tuple
+len(my_tuple) # 3
+
+# ILLEGAL ACTIONS
+my_tuple[0] = 4 # TypeError
+del my_tuple[0] # TypeError
+```
+
+### Comparing Tuples
+Tuples can be compared to each other using the comparison operations. The comparison is done by looking at the first element in the list and comparing it to the first element in the other tuple. If the comparison cannot be done by the first element, it checks the next element and so on. For equality, it checks if all the elements are equal and if one tuple is a subset of the other, the subset is smaller.
+
+```python title="Comparing Tuples" showLineNumbers
+(1, 2, 3) == (1, 2, 3) # True
+(1, 2, 3) == (1, 2, 4) # False
+(1, 2, 3) != (1, 2) # True
+
+(1, 2, 3) < (1, 2, 4) # True
+(1, 2, 3) < (1, 2) # False
+
+(1, 2) > (1, 3, 2) # False
+(1, 2) >= (1, 2, 3) # False
+(1, 2) <= (1, 2, 3) # True
+```
+
+### Python Tuple Features
+Python has unique features that make tuples more useful than other languages. The first feature where you can assign multiple variables at once using a tuple.
+
+```python title="Tuple Assignment" showLineNumbers
+# Assign multiple variables at once using a tuple
+x, y = 1, 2
+
+# Common way to swap the values of two variables
+x, y = y, x
+```
+
+You can even use tuples in a for loop to use multiple ***iterative variables*** in the loop. To recall, an iterative variable is a variable that changes each time the loop runs.
+
+```python title="Iterative Tuples" showLineNumbers
+# Each element in the tuple is assigned to a separate variable
+for x, y in [(1, 2), (3, 4), (5, 6)]:
+    print(x + y)
+```
+
+## Files
+So far we have worked with data that we create in the program and the data dies when the program dies. There are many programs where saving data between program runs is necessary. This is why we save data in long term storage through means like files. A file is a collection of data that is stored on a computer. Files can be text files, image files, audio files, and many more. Even all the python files we have been working with are files and all types of files can be opened and read in python.
+
+Common file types are:
+* Text files - `.txt`
+* Comma separated values - `.csv`
+* Images - `.png`, `.jpg`, `.jpeg`, `.gif`
+* Audio - `.mp3`, `.wav`
+
+The modes that can be used to open a file are:
+* Read - `r` - Opens a file only for reading
+* Write - `w` - Opens a file or creates a new file replacing the contents of the file
+* Append - `a` - Opens a file if it exists or creates a new file and appends to the end of the file
+
+```python title="Opening Files" showLineNumbers
+# Syntax to open a file
+file_1 = open("filepath.filetype", "mode")
+
+# Example files to open
+file_1 = open("data.txt", "r") # Opens a text file in read mode
+file_2 = open("data.csv", "w") # Opens a csv file in write mode
+file_3 = open("data.png", "a") # Opens a png file in append mode
+file_4 = open("data.mp3", "rw") # Opens a mp3 file in read and write mode
+```
+
+The most common way to read a file is reading each line using a for loop in the file. Each line ends with a newline character `\n` and can be removed using the `strip()` method. This method works because each line is given as a string.
+
+```python title="Reading Files" showLineNumbers
+# Open a file
+file_1 = open("data.txt", "r")
+
+# Read each line in the file
+for line in file_1:
+    print(line)
+
+# Close the file (Good practice)
+file_1.close()
+```
+
+You can also write to a file using the `write()` method. This method takes a string as an argument and writes to the file.
+
+```python title="Writing Files" showLineNumbers
+# Open a file
+file_1 = open("data.txt", "w")
+
+# Write to the file
+file_1.write("Hello World!")
+
+# Close the file (Good practice)
+file_1.close()
+```
+
+## Databases
+Databases are one of the best options for storing organized data for long term storage. One of the most popular databases is the ***SQLite*** database. SQLite is a relational database that stores data in tables. Each table has a name and a set of columns. Each column has a name and a data type. Each row in the table is a record and each record has a value for each column. As this is a Python course, we will be using the `sqlite3` module to work with SQLite databases.
+
+:::caution
+As this is a Python course, we are focusing on Python syntax. If you want to learn more about databases, you can check out the [Databases](https://www.w3schools.com/sql/default.asp) section on W3Schools.
+:::
+
+```python title="SQLite" showLineNumbers
+# You need to import the sqlite3 module to work with SQLite databases
+import sqlite3
+
+# Create a connection to a database (Creates a new database if it doesn't exist)
+connection = sqlite3.connect("database.db")
+
+# Create a cursor to execute SQL commands
+cursor = connection.cursor()
+
+# Execute SQL commands (Use execute() to execute SQL commands in the database)
+cursor.execute("CREATE TABLE IF NOT EXISTS table_name (column_1 data_type, column_2 data_type, ...)")
+cursor.execute("INSERT INTO table_name (column_1, column_2, ...) VALUES (value_1, value_2, ...)")
+cursor.execute("SELECT * FROM table_name")
+
+# Get the results of the SQL command (Use fetchall() to get all the results)
+results = cursor.fetchall()
+
+# Commit the changes to the database (Use commit() to save the changes)
+connection.commit()
+
+# Close the connection to the database (Use close() to close the connection)
+connection.close()
+```
+
+## List Comprehension
+Now that we have learned how to store data, we can look at some convenient ways to handle data. The first method we will look at is list comprehension. It lets us loop and create a new list in one line of code. The syntax is `[expression for item in list]`.
+
+```python title="List Comprehension" showLineNumbers
+# Create a list of numbers
+numbers = [1, 2, 3, 4, 5]
+numbers = [i in range(1, 6)] # List of numbers from 1 to 5
+
+# Create a new list with each number doubled
+doubled_numbers = [i * 2 for i in range(1, 6)] # [2, 4, 6, 8, 10]
+
+# You can use lists inside list comprehension
+doubled_numbers = [i * 2 for i in [1, 2, 3, 4, 5]] # [2, 4, 6, 8, 10]
+
+# You can use if statements inside list comprehension
+numbers = [i for i in range(1, 6) if i % 2 == 0] # [2, 4]
+
+# You don't always need to set a variable
+print([i for i in range(1, 6)]) # [1, 2, 3, 4, 5]
+```
+
+## Regex
+As you can see from earlier section, list comprehension is a very powerful tool that can be used to create and manipulate lists. The next technique is mainly used for strings and is not Python specific. It is called ***regex*** and it is used to find patterns in strings. Regex is a very powerful tool that can be used in many different languages besides Python.
+
+```python title="Regex" showLineNumbers
+# Import the regex module
+import re
+
+# A random string to test regex
+string = "Hello 123 World 456"
+
+# Find all the numbers in the string
+numbers = re.findall("[0-9]+", string) # ['123', '456']
+
+# Find all the words in the string
+words = re.findall("[a-zA-Z]+", string) # ['Hello', 'World']
+
+# Find all the words that start with H
+words = re.findall("H[a-zA-Z]+", string) # ['Hello']
+```
+
+The technique above were examples of the ways to use regex. Regex has an elaborate syntax that can virtually find any pattern. The syntax is...
+* `^` - Matches the beginning of a string
+* `$` - Matches the end of a string
+* `.` - Matches any character
+* `\s` - Matches whitespace
+* `\S` - Matches any non-whitespace character
+* `*` - Repeats a character zero or more times
+* `*?` - Repeats a character zero or more times (non-greedy)
+* `+` - Repeats a character one or more times
+* `+?` - Repeats a character one or more times (non-greedy)
+* `[aeiou]` - Matches a single character in the listed set
+* `[^XYZ]` - Matches a single character not in the listed set
+* `[a-z0-9]` - The set of characters can include a range
+* `(` - Indicates where string extraction is to start
+* `)` - Indicates where string extraction is to end
+
+
+
+
+
+
+
+
