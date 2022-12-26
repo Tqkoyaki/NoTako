@@ -3,4 +3,242 @@ id: page-7
 title: Networking
 sidebar_position: 7
 ---
-JSON, XML, APIs, getting data online
+There is a limit to how much data we can get on our own and there is lots of data that can be found online for programs to use. Data can come in many forms and can be used for many different purposes.
+
+## Data Formats
+There are two popular data formats that are used in programming: JSON and XML. JSON stands for JavaScript Object Notation and XML stands for Extensible Markup Language. Both of these formats are used to store data in a way that is easy to read and write. XML is the older of the two and is considered more verbose than JSON. JSON is the newer of the two and is considered more concise than XML.
+
+### XML
+With XML, each pair of opening and closing tag represents an element or node. Each element can have text, atrributes, and other elements inside of it.
+
+```xml title="XML Example" showLineNumbers
+<person>
+    <name>Chuck Norris</name>
+    <phone type="intl">
+        +1 734 303 4456
+    </phone>
+    <email hide="yes" />
+</person>
+```
+
+You can open the XML file like a regular file and read it as a string in Python because there is an XML module that can parse the string into a tree of elements that helps you navigate the data in Python.
+
+```python title="XML in Python" showLineNumbers
+# Import needed to parse XML
+import xml.etree.ElementTree as ET
+
+# Open the XML file and read it into a string
+file_xml = open("data.xml", "r")
+file_xml_string = file_xml.read()
+file_xml.close()
+
+# Parse the XML string into a tree of elements
+root = ET.fromstring(file_xml_string)
+
+# Find a specific tag
+name = root.find("name")
+
+# Get the text of the tag
+name_text = name.text # Chuck Norris
+
+# Get the attributes of the tag
+phone = root.find("phone")
+phone_type = phone.get("type") # intl
+
+# Find all tags with a specific tag name
+emails = root.findall("email") # List of all email tags
+```
+
+### JSON
+JSON is a more modern and concise way of storing data. Each element is a key-value pair where the value can be a value, an array, or another json object. An array is shown using [] with each element separated by a comma. A json object is shown using {} with each key-value pair separated by a comma.
+
+```json title="JSON Example" showLineNumbers
+{
+    "person": {
+        "name": "Chuck Norris",
+        "phone": {
+            "type": "intl",
+            "number": "+1 734 303 4456"
+        },
+        "email": {
+            "hide": "yes"
+        },
+        "sample_array": [1, 2, 3]
+    }
+}
+```
+
+As you can see, JSON is very similar to a Python dictionary. We can open the JSON file using the json module but then use the object like a dictionary.
+
+```python title="JSON in Python" showLineNumbers
+# Import needed to parse JSON
+import json
+
+# Open the JSON file and read it into a string
+file_json = open("data.json", "r")
+file_json_string = file_json.read()
+file_json.close()
+
+# Parse the JSON string into a dictionary
+data = json.loads(file_json_string)
+
+# Get the value of a key
+name = data["person"]["name"] # Chuck Norris
+
+# Get the value of a key in an array
+sample_array = data["person"]["sample_array"] # [1, 2, 3]
+
+# Get the value of a key in an array at a specific index
+sample_array_index = data["person"]["sample_array"][0] # 1
+```
+
+You can also convert a Python dictionary into a JSON string.
+
+```python title="Python Dictionary to JSON" showLineNumbers
+# Import needed to parse JSON
+import json
+
+# Create a Python dictionary
+data = {"people": [
+    {"name": "Chuck Norris", "age": 80},
+    {"name": "Bruce Lee", "age": 32}
+]}
+
+# Convert the dictionary into a JSON string
+json_string = json.dumps(data)
+
+# Writes the JSON string to a file
+file_json = open("data.json", "w")
+file_json.write(json_string)
+file_json.close()
+```
+
+## HyperText Transfer Protocol (HTTP)
+To make network connections in Python, you need a ***socket*** that is a two-way connection between two programs. It lets you send and receive data over the network. A socket needs a protocol to know how to send and receive data. A ***protocol*** is a set of rules that determines who sends data, how to deal with the data and even how it should be responded to. One example of a protocol is ***HTTP*** which is used to send and receive web pages.
+
+```python title="HTTP in Python" showLineNumbers
+# Import to work with sockets
+import socket
+
+# Create a socket
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connect to a server (host, port) ex. connecting to google.com's web server
+s.connect(("www.google.com", 80))
+
+# Send a request to the server (Each HTTP needs to be formatted GET [url] HTTP/1.0)
+request = "GET / HTTP/1.1\r\nHost: www.google.com\r\n\r\n"
+
+# All data sent over a socket must be in bytes which is why we encode the string
+request_bytes = request.encode()
+
+# Send the request to the server
+s.send(request_bytes)
+
+# Loops until all data is received
+while True:
+    # Receive the response from the server (The parameter is the max amount of data you want to receive)
+    response = s.recv(4096)
+
+    # Decode the response from bytes to a string
+    response_string = response.decode()
+
+    # Print the response
+    print(response_string)
+
+    # If there is no more data to receive, break out of the loop
+    if len(response) < 1:
+        break
+
+# Close the connection like you would a file
+s.close()
+```
+
+When working with web pages in particular in Python, there is another module that makes it easier to work with HTTP requests and responses. ***Sockets*** lets you work with any protocol but this one is specifically for HTTP.
+
+```python title="HTTP in Python" showLineNumbers
+# Import to work with HTTP
+import urllib.request
+
+# Open a connection to a URL
+f = urllib.request.urlopen("http://www.google.com")
+
+# Loop through each line in the response instead of receiving all the data at once incase it is a large response
+for line in f:
+    # Decode the line from bytes to a string
+    line_string = line.decode()
+
+    # Print the line
+    print(line_string)
+```
+
+## Web Scraping
+With the earlier methods you are getting data from the webpage completely raw. You can work with that but it is often easier to work with the data in a more structured way. ***Web scraping*** is the process of extracting data from a webpage and there are tools that make it easier to do so even if the webpage's code is not formatted well. The most popular tool is `BeautifulSoup` which is a Python library that makes it easy to work with HTML.
+
+```python title="Web Scraping in Python" showLineNumbers
+# Import to work with HTML
+from bs4 import BeautifulSoup
+
+# Open a connection to a URL
+f = urllib.request.urlopen("http://www.google.com")
+
+# Read the response into a string
+response = f.read()
+
+# Parse the HTML string into a tree of elements
+soup = BeautifulSoup(response, "html.parser")
+
+# Find a specific tag
+title = soup.find("title")
+
+# Get the text of the tag
+title_text = title.text # Google
+
+# Find all tags with a specific tag name
+links = soup.findAll("a") # List of all a tags (links in HTML)
+```
+
+## Application Programming Interface (API)
+The methods above with networking are taking data from a source that is not really formatted for use. You need that extra layer of code that cleans up the data to be able to use later in the code. There are many websites that give data tat is more structured to be used and it comes in the form of an ***API***. The data is typically formatted and the ***API*** gives you the tools to get the data you need.
+
+```python title="API in Python" showLineNumbers
+# Import to work with JSON (APIs often return JSON)
+import json
+
+# To get data from an API, you need to make a request to the API
+import urllib.request, urllib.parse, urllib.error
+
+# This module lets you work with certification issues
+import ssl
+
+# Ignore SSL certificate errors (Don't worry about this for now)
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+
+# Open a connection to the API (This is a free API that gives you the current exchange rate for USD)
+f = urllib.request.urlopen("https://api.exchangerate-api.com/v4/latest/USD", context=ctx)
+
+# Read the response into a string (Remember this is JSON)
+response = f.read()
+
+# Parse the JSON string into a dictionary
+data = json.loads(response)
+
+# Get the value of a key
+rate = data["rates"]["CAD"] # 1.309
+
+# Close the connection like you would a file
+f.close()
+```
+
+
+
+
+
+
+
+
+
+
+
