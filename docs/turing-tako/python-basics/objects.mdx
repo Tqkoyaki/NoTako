@@ -3,4 +3,142 @@ id: page-6
 title: Objects
 sidebar_position: 6
 ---
-Object orientated programming
+So far there have been four basic programming patterns used to design programs. They are sequential code, conditional code (if statement), repetitive code (loops), and the use of store and reuse (functions). For highly complex code, these patterns are not enough. This is where object orientated programming comes in.
+
+## Objects
+A program can be thought of as a collection of objects that interact with each other. Each object is like a "zone" of the program that has well defined inputs and outputs and a set of rules that govern how it interacts with other objects. The benefit of this is that it allows each object to hide its internal complexity from the rest of the program so you can focus on just how to use them instead of how they work.
+
+Python comes with built in classes that we have already used. We didn't care about how they were coded internally because we just cared about how we could use them.
+
+```python title="Built-in objects" showLineNumbers
+# Examples of built-in objects
+list_object = list()
+dict_object = dict()
+```
+
+There is code behind the `list()` and `dict()` objects that lets them do what they do. For example, we can add values to a list using the `append()` method and there is code behind that method that makes it work but we don't need to know how it works internally to use it. So it lets us focus on the bigger details of our program.
+
+You can also create your own objects using classes which are like blueprints for objects. Each object can have a ***constructor*** which controls how the object is created. There are also ***properties*** which are like variables / data that are specific to the object and finally there are ***methods*** which are like functions that are specific to the object.
+
+```python title="Creating a class" showLineNumbers
+# The name of the object is Person (everything inside the class defines the object)
+class Person:
+    # The constructor is a method called when the object is created. You can require certain properties to be passed in at the time of creation.
+    # To access the properties, you need to take self as a parameter and then use self.property_name to access the property.
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    # Methods are like functions that are specific to the object. They can take parameters and return values.
+    def say_hello(self):
+        print("Hello, my name is " + self.name)
+
+# Create a new object using the Person class
+# They have different data held by name and age
+person_1 = Person("John", 20)
+person_2 = Person("Jane", 21)
+
+# Call the say_hello method on the objects
+person_1.say_hello() # Hello, my name is John
+person_2.say_hello() # Hello, my name is Jane
+
+# Access the properties of the objects
+print(person_1.name) # John
+print(person_2.age) # 21
+```
+
+:::tip
+You can use dir(object) to see all the properties and methods of an object.
+:::
+
+## Magic Methods
+Python have magic methods to make it easier to work with objects like adding functionality where you can add two objects together or compare them. All magic methods start and end with two underscores. For example, the `__init__` method is called when the object is created and the one we will look at is the `__del__` method which is called when the object is deleted.
+
+```python title="Magic methods" showLineNumbers
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def say_hello(self):
+        print("Hello, my name is " + self.name)
+    
+    # This method is called when the object is deleted
+    def __del__(self):
+        print("Goodbye " + self.name)
+
+person_1 = Person("John", 20)
+del person_1 # Goodbye John
+```
+
+Another useful magic method is `__getitem__` which allows you to access the object like a list and `__setitem__` which allows you to set the value of an item in the object like a list.
+
+```python title="Magic methods like lists" showLineNumbers
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def say_hello(self):
+        print("Hello, my name is " + self.name)
+    
+    # This method is called when you access the object like a list
+    def __getitem__(self, key):
+        if key == 0:
+            return self.name
+        elif key == 1:
+            return self.age
+        else:
+            raise IndexError("Index out of range")
+    
+    # This method is called when you set the value of an item in the object like a list
+    def __setitem__(self, key, value):
+        if key == 0:
+            self.name = value
+        elif key == 1:
+            self.age = value
+        else:
+            raise IndexError("Index out of range")
+
+person_1 = Person("John", 20)
+print(person_1[0]) # John
+print(person_1[1]) # 20
+person_1[0] = "Jane"
+print(person_1[0]) # Jane
+```
+
+## Inheritance
+Inheritance is a way to get all the properties and methods from another class. Lets say we have a class called `Animal` that has a `name` property and a `make_sound()` method. We can create a new class called `Dog` that inherits from `Animal` and has all the properties and methods from `Animal` but we can also add new properties and methods to `Dog` that are specific to it. We call the parent class `Animal` the ***superclass*** and the child class `Dog` the ***subclass***.
+
+```python title="Inheritance" showLineNumbers
+# Parent class
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def make_sound(self):
+        print("I am an animal")
+    
+    def __del__(self):
+        print("Goodbye " + self.name)
+
+# Child class
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+    
+    def make_sound(self):
+        print("Woof")
+
+dog_1 = Dog("Fido", "Labrador")
+
+# The dog method goes first and if it doesn't have a make_sound method, it will call the make_sound method from Animal
+dog_1.make_sound() # Woof
+
+# Even though dog does not have a __del__ method, it still calls the __del__ method from Animal
+del dog_1 # Goodbye Fido
+```
+
+
+
