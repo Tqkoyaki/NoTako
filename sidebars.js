@@ -35,7 +35,17 @@ const sidebars = {
         'turing-tako/python-basics/page-6',
         'turing-tako/python-basics/page-7',
       ]
-    }
+    },
+    {
+      type: 'category',
+      label: 'Intro to Computer Science',
+      items: [
+        'turing-tako/intro-to-cs/page-1',
+        'turing-tako/intro-to-cs/page-2',
+        'turing-tako/intro-to-cs/page-3',
+        'turing-tako/intro-to-cs/page-4',
+      ]
+    },
   ],
 };
 

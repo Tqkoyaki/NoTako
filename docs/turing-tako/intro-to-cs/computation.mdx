@@ -1,0 +1,153 @@
+---
+id: page-1
+title: Introduction to Computation
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import comp1 from '@site/static/img/turing/intro-to-cs/comp-1.jpg';
+import comp2 from '@site/static/img/turing/intro-to-cs/comp-2.jpg';
+import comp3 from '@site/static/img/turing/intro-to-cs/comp-3.jpg';
+import comp4 from '@site/static/img/turing/intro-to-cs/comp-4.jpg';
+
+Computers are powerful tools that have allowed us to do things that were previously impossible but they can only do what we tell them to do. There are two types of knowledge, declarative and imperative. ***Declarative knowledge*** is a statement of facts like **square root of a number x is y such that y \* y = x**. However a computer cannot understand this statement, it can only understand instructions (how-to) which is called ***imperative knowledge***. You can give a computer a list of instructions to find the square root of a number, it will not understand the results but it will be able to find the square root of a number with the right instructions.
+
+<Fig src={comp1} caption='Modern Computer' num={1}/>
+
+## What is a Computer?
+Computers can do two things, they can store information and they can process instructions. To be exact the six primative actions that a ***turing complete*** computer does is...
+```
+1. Move right
+2. Move left
+3. Write
+4. Scan 
+5. Erase
+6. Do nothing
+```
+With just these six actions, a computer can both store data and process instructions.
+
+### Basic Machine Architecture
+Our computers have specific hardware to do everything it needs to do like dealing with instructions. All instructions are stored in a ***memory*** before they are executed by the ***Control Unit*** which fetches instructions from the memory and executes them. The memory also stores the data that the instructions are operating on. When the control unit needs calculations done, it sends the data to the ***Arithmetic Logic Unit*** which performs the calculations like addition and multiplication.
+
+Most of the time, we want our programs to communicate with the outside world and to do this we need ***input*** and ***output*** devices. Input devices allow us to give the computer data and output devices allow us to get data from the computer.
+
+<Fig src={comp2} caption='Machine Architecture' num={2}/>
+
+### Programs
+As programmers we focus on creating these instructions for a computer to follow using programs. A ***program*** is a set of instructions and the ***interpreter*** executes each one of these instructions line by line. Programs interact with two types of computers. ***Fixed program computers*** hold only one program and can only do one thing like calculators while ***stored program computers*** can hold multiple programs and can do multiple things like computers.
+
+<Fig src={comp3} caption='Fixed Program Computer' num={3}/>
+
+***Programming languages*** are what we use to write programs and they are all ***turing complete*** languages so anything computable in one of these languages can be computed in any other languages.
+
+<Fig src={comp4} caption='Popular Programming Languages' num={4}/>
+
+Every programming language has a ***syntax*** which define the structure of the language like grammar in languages like English. The ***semantics*** of a programming language define the meaning. With english, a phrase like "bark dogs three" does not have meaning but "three dogs bark" does. One thing to note is that phrases in languages like English can have many meanings but these statements in programming languages have only one meaning and are unambiguous.
+
+Programming languages are able to catch syntax errors really well but not semantic errors. Static semantic errors are errors that can be caught by the compiler while dynamic semantic errors are errors that can only be caught after the program is run. Dynamic semantic errors can include things like unexpected results, infinitely running programs, and crashes.
+
+## Python
+Everything in Python is an ***object*** and a Python program manipulates these data objects. Data objects have types that define what you can do to these objects. These types can be broken into two categories. ***Scalar objects*** cannot be subdivided while ***Non-scalar objects*** have internal structure that can be accessed. Scalar objects include things like integers (int), floating point numbers (float), boolean (bool), and no value (NoneType). On the other hand, a non-scalar object is a string because you can subdivide a string into characters.
+
+```python title="Data Objects" showLineNumbers
+# Scalar Data Types
+12 # int (whole numbers)
+3.14 # float (decimal numbers)
+True # bool (True or False)
+None # NoneType (no value)
+
+# Non-Scalar Data Types
+"Hello World" # string (characters)
+
+# Use type() to get the type of an object (1)
+type(12) # int
+type(3.14) # float
+
+# Casting allows you to convert between types (2)
+int(3.14) # 3
+float(12) # 12.0
+```
+1. The `type()` command returns the type of an object.
+2. Casting allows you to convert between types if possible, otherwise it will throw an error. The `int()` command converts a data type into an integer and the `float()` command converts a data type into a float.
+
+### Output
+One of the two ways to interact with the outside world is through a ***output***. The `print()` command is used to output data to the ***console***, a text based screen. The `print()` command can also take multiple arguments and will print each argument with a space in between.
+
+```python title="Output" showLineNumbers
+print("Hello World") # Prints Hello World
+print(12) # 12
+print(3.14) # 3.14
+
+print("Hello", "World") # Hello World
+print(True, False) # True False
+```
+The output is...
+```console
+Hello World
+12
+3.14
+Hello World
+True False
+```
+
+### Operations
+Expressions combine objects with operators to create new objects.
+   
+```python title="Operations" showLineNumbers
+# Addition
+print(1 + 2) # 3
+
+# Subtraction
+print(3 - 1) # 2
+
+# Multiplication
+print(2 * 3) # 6
+
+# Division
+print(6 / 2) # 3.0
+
+# Exponentiation
+print(2 ** 3) # 8
+
+# Modulo (Remainder During Division)
+print(7 % 3) # 1
+```
+
+Like in math, the order of operations is followed in Python. The order of operations is...
+```
+1. Parentheses
+2. Exponentiation
+3. Multiplication, Division, Modulo
+4. Addition, Subtraction
+```
+So, `2 + 3 * 4` is `20` because `3 * 4` is done first.
+
+### Variables
+We can use variables to bind values to names which can give these values meaning.
+    
+```python title="Variables" showLineNumbers
+# Variables are created with the assignment operator
+x = 12
+y = 3.14
+
+# Once created you can use the variable name to refer to the value
+print(x) # 12
+
+# Variables give values meaning
+pi = 3.14
+radius = 5
+area = pi * radius ** 2
+print(area)
+```
+
+The `=` operator is used differently from how it is used in math. In math it means two things are equal but in programming it means to assign a value to a variable. For example, in math `x = x + 1` is an invalid statement because this can never be equal but this is a valid statement in programming because it means to assign the value of `x + 1` to `x`. In that way, you are adding 1 to whatever value `x` already was. This also means you can rebind a variable to a new value.
+
+```python title="Assignment Operator" showLineNumbers
+x = 1 # x is binded to 1
+x = 3 # x is now rebinded to 3
+
+# x is rebinded to 8 because x was 3 before and 3 + 5 is 8
+x = x + 5
+```
+
+Once you rebind a variable, you lose the old value. Once `x` was changed to 3, you could no longer access the value 1.
