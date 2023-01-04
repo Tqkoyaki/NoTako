@@ -3,3 +3,169 @@ id: page-3
 title: Strings and Algorithms
 sidebar_position: 3
 ---
+Some ways we have worked with strings include ***concatenation*** and repeating strings using multiplication. There are other ways to work with strings that we will explore in this section because being able to work with strings is a very important skill for a programmer.
+
+Now that we have worked with a lot of programming concepts, we can start to combine them to solve more complex problems.
+
+## Strings 
+As stated before, strings are a sequence of characters. We can start by using `len()` to find the length of a string.
+
+```python title="Length of a String" showLineNumbers
+len("Hello World") # 11
+```
+
+### Indexing Strings
+You can access individual characters in a string using the ***index*** of the character. The index of a string marks its position in a string and positions start with 0. The index of the first character in a string is 0.
+
+```
+H e l l o   W o r l d
+0 1 2 3 4 5 6 7 8 9 10
+
+W is at index 6
+d is at index 10
+
+l is at indices 2, 3, and 9
+```
+
+In Python, you can access the character at a specific index using square brackets `[]`
+    
+```python title="Accessing a Character" showLineNumbers
+print("Hello World"[6]) # W
+
+msg = "Hello World"
+print(msg[2]) # l
+print(msg[6]) # W
+print(msg[10]) # d
+```
+
+Python is special because it also allows you to use negative indices. Negative indices start at -1 and count backwards from the end of the string.
+
+```
+H  e  l  l  o
+0  1  2  3  4
+-5 -4 -3 -2 -1
+```
+
+You use the same square brackets `[]` to access a character at a negative index.
+
+```python title="Negative Indices" showLineNumbers
+msg = "Hello"
+
+print(msg[-1]) # o
+print(msg[-2]) # l
+print(msg[-5]) # H
+```
+
+### Slicing
+You can access a range of characters using the ***slice*** operator `:`. It is similar to the range function we used in the previous section.
+
+If one value is provided inside the square brackets, it will return the character at that index.
+
+If two values are provided inside the square brackets, it will return the characters from the first index to the second index, not including the second index.
+
+If three values are provided inside the square brackets, it will return the characters from the first index to the second index, not including the second index, and it will increment by the third value. The third value is called the step.
+
+```python title="Slicing" showLineNumbers
+msg = "Hello World"
+
+# Indexing one value
+print(msg[6]) # W
+print(msg[-1]) # d
+
+# Slicing two values
+print(msg[0:5]) # Hello
+print(msg[6:11]) # World
+
+# Slicing three values
+print(msg[0:5:2]) # Hlo
+print(msg[6:11:2]) # Wrd
+```
+
+### Immutability
+One thing you cannot do with strings is modify them. Strings are ***immutable***, which means they cannot be changed. You can only create new strings from existing strings.
+
+```python title="Immutability" showLineNumbers
+msg = "Hello World"
+msg[0] = "h" # Error
+
+msg = "M" + msg[1:] # Mello World
+```
+
+The variable `msg` gets rebinded to a new string so we aren't modify the original string just replacing it with a new string.
+
+## Algorithms
+An ***algorithm*** is a well defined set of instructions with a systematic order that can solve any given problem. Algorithms give computer scientists a way to solve complex problems in a systematic way.
+
+### Guess and Check
+Another name for guess and check is ***Exhaustive Enumeration***. It is an algorithm that keeps trying different values until it finds the correct answer.
+
+One example of guess and check is finding the square root of a number. You can guess the square root of a number by guessing a number and then checking if the square of that number is the same as the original number. If it is not, you can try a different number. You can keep trying different numbers until you find the correct answer.
+
+```python title="Guess and Check" showLineNumbers
+# The number we are trying to find the square root of
+x = 25
+
+# Guess and Check
+for guess in range(1, x): # Check all numbers till x
+    if guess ** 2 == x: # Check if guess is the square root
+        print(guess) # Print the guess if it is correct
+        break # Leaves the loop
+```
+
+### Approximation
+The guess and check algorithm above works if `x` is a perfect square. What if `x` is not a perfect square? We can use a different algorithm called ***Approximation*** to find the square root of a number. It guesses like the guess and check algorithm but it adds on to it by incrementing by a small amount and accepting the guess if it is close enough.
+
+```python title="Approximation" showLineNumbers
+# The number we are trying to find the square root of
+x = 25
+
+# Our margin of error
+epsilon = 0.01
+
+# The increment
+step = 0.01
+
+# The guess and check with approximation
+guess = 0.0
+while abs(guess ** 2 - x) >= epsilon and guess <= x: # Check if guess is close enough
+    guess += step # Increments as long as the guess is not close enough
+
+print(guess) # Print the answer
+```
+
+The bigger the step or the bigger the epsilon (margin of error), the faster the algorithm will run but the less accurate it will be.
+
+### Bisection Search
+The approximation algorithm can find the square root of most numbers but it is not the most efficient algorithm. Typically any algorithm that checks every possible answer is not the most efficient algorithm. We can use a different algorithm called ***Bisection Search*** to write more efficient algorithms. It works by checking the middle of a range of values and then eliminating half of the range by seeing what side of the middle the answer is on.
+
+Similar to a higher or lower game, you can guess the square root of a number by guessing the middle of the range of number and if the guess is too high or too low, you can eliminate half of the range and guess the middle of the remaining range.
+
+```python title="Bisection Search" showLineNumbers
+# The number we are trying to find the square root of
+x = 25
+
+# Our margin of error
+epsilon = 0.01
+
+# The bounds
+low = 0.0
+high = x
+
+# Checks the middle of the range
+guess = (low + high) / 2.0
+
+# The bisection search
+while abs(guess ** 2 - x) >= epsilon:
+    if guess ** 2 < x: # If the guess is too low
+        low = guess # Eliminate the lower half of the range
+    else: # If the guess is too high
+        high = guess # Eliminate the upper half of the range
+    guess = (low + high) / 2.0 # Check the middle of the range
+
+print(guess) # Print the answer
+```
+This is a more efficient algorithm because it only checks the middle of the range instead of every possible answer. The number of guesses converges on the order of log<sub>2</sub>(n) where n is the number of possible answers.
+
+:::caution
+Bisection search only works on nonincreasing or nondecreasing lists. It will not work for ranges that are not sorted because you cannot reasonably eliminate half of the range and be sure the answer is in the remaining range.
+:::

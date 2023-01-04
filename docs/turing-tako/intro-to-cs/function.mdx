@@ -3,3 +3,112 @@ id: page-4
 title: Functions
 sidebar_position: 4
 ---
+As programs get larger, they become more difficult to understand and maintain. In computer science, we take two approaches to break down complex programs into smaller, more manageable pieces.
+
+The first approach is to use ***abstraction***. The idea is to hide the details of a complex process behind a simple interface. For example, every car has a steering wheel to drive it. You don't need to know how the car works to drive it, just how to use the steering wheel. The steering wheel is an abstraction that hides the details of the car's internal complexity.
+
+The second approach is to use ***decomposition***. We can break down a complex program into smaller, more manageable pieces and then combine them to solve the problem. For example, we can write a program to draw simple shapes like circles and rectangles. Then we can combine these simple shapes to draw more complex shapes like a house or a car.
+
+## Functions
+Instead of using one of these approaches, we use both of them using ***functions***. A function helps divide a program into smaller, reusable pieces. This lets our code be more organized and easier to understand.
+
+The syntax for a function is:
+```
+def <function_name>(<parameters>):
+    <statements>
+    ...
+    <statements>
+    return <value>
+```
+1. The keyword `def` tells Python that we are defining a function.
+2. The function name is the name of the function. Like variable names, function names should be descriptive and give functions meaning.
+3. The parameters are the values that the function needs to its job. It is the input to the function and is optional. You can seperate multiple parameters with commas.
+4. You can have any number of statements in the body of the function. The statements are the code that the function will execute.
+5. The keyword `return` tells Python what value to return to the caller. The value is optional. If you don't use `return`, the function will return `None`.
+
+Here is an example of a function that adds two numbers:
+```python title="Example Functions" showLineNumbers
+# Adds two numbers and returns the result
+def add(a, b):
+    return a + b
+
+# Prints hello five times
+def five_hello(): # This function doesn't take any inputs
+    for i in range(5):
+        print("Hello") # This function doesn't return anything
+```
+
+### Calling Functions
+You can use these functions by calling them. The syntax for calling a function is:
+```
+<function_name>(<arguments>)
+```
+1. The function name is the name of the function you want to call.
+2. The arguments are the values that you want to pass to the function. Each argument corresponds to a parameter in the function so the order matters.
+
+Formal parameters get bounded to the value of the actual parameters when the function is called.
+
+Here is an example of using the `add` function:
+```python title="Example Function Calls" showLineNumbers
+# Adds 2 and 3 and prints the result
+print(add(2, 3)) # Prints 5
+print(add(7, 2)) # Prints 9
+
+# Prints hello fifteen times
+five_hello()
+five_hello()
+five_hello()
+```
+
+The benefit of using functions is that you can reuse them, recall them many times and you decompose your code into smaller pieces so you can debug each function individually which is easier than debugging a whole program in one go.
+
+### Docstring
+To add more abstraction to a function, you can add a ***docstring***. It is written right after the colon with triple quotes.
+```python title="Docstring" showLineNumbers
+def add(a, b):
+    """
+    Input: a and b are numbers
+    Output: the sum of a and b
+    """
+    return a + b
+```
+
+### Scope
+Variables behave differently inside and outside of functions. Variables defined inside a function are ***local*** to the function. This means that they only exist inside the function and cannot be accessed outside of it. Variables defined outside of a function are ***global***. This means that they can be accessed inside and outside of the function.
+
+Here is an example of local and global variables:
+```python title="Scope" showLineNumbers
+# Global variable
+x = 5
+
+# Function that prints the value of x
+def print_x():
+    # Can access global variable x
+    print(x)
+    y = 10 # Local variable
+
+# Cannot access local variable y
+print(y) # ERROR
+```
+
+You can name the local variable the same as the global variable but it will not affect the global variable. This is called ***shadowing***. When you access that variable, it will access the local variable instead of the global variable. Local variables cannot change global variable.
+
+Here is an example of shadowing:
+```python title="Shadowing" showLineNumbers
+# Global variable
+x = 5
+
+# Function that prints the value of x
+def print_x():
+    # Shadowing
+    x = 10 # Cannot access global variable x
+    print(x)
+
+print_x() # Prints 10
+print(x) # Prints 5 because the global x cannot be changed inside the function
+```
+
+:::note
+There is a `global` keyword that you can use to change global variables inside a function. However, it is frowned upon and should be avoided because it makes your code more difficult to understand.
+:::
+
