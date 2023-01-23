@@ -1,0 +1,270 @@
+---
+id: page-5
+title: Tuples and Lists
+sidebar_position: 5
+---
+Typically we want to hold more than one data in a variable like a sequence of numbers or names. To be able to do that we need to use tuples or lists. Both hold a sequence of data but they treat the data differently.
+
+## Tuples
+Tuples are an ordered sequence of elements where you can mix types.
+
+```python title="Creating Tuples" showLineNumbers
+# Create an empty tuple
+empty_tuple = ()
+
+# Creating a tuple with elements
+tuple_with_elements = (1, 2, 3, 4, 5)
+tuple_with_different_types = (1, "Hello", 3.14, True)
+tuple_without_parentheses = 1, 2, 3, 4, 5
+
+# Creating a tuple with a single element
+tuple_with_single_element = (1,)
+```
+
+The tuple itself is ***immutable*** which means you can't change the elements in the tuple once it is created, you can only access them. The only way to change a tuple is to create a new one and replace the old one.
+
+```python title="Tuple Operations" showLineNumbers
+# Creating a tuple
+samp_tuple = (1, 2, 3, 4, 5)
+
+# Accessing elements
+print(samp_tuple[0]) # 1
+print(samp_tuple[4]) # 5
+print(samp_tuple[-1]) # 5
+print(samp_tuple[6]) # ERROR!!!
+
+# Getting the length of the tuple
+print(len(samp_tuple)) # 5
+
+# Slicing the tuple
+print(samp_tuple[1:3]) # (2, 3)
+print(samp_tuple[2:]) # (3, 4, 5)
+
+# YOU CAN'T CHANGE THE ELEMENTS IN THE TUPLE
+samp_tuple[0] = 10 # ERROR!!!
+```
+
+As you can see from above, tuples behave like strings where you index the elements and slice the tuples. Both also cannot be changed once created. The only difference is that tuples can hold different types of data but strings can only hold characters.
+
+### Features of Tuples
+Tuples provide a few crucial features that are useful in Python. Firstly, it enables you to return multiple values from a function. Secondly, it enables you to assign multiple variables in a single line. One convenient side effect of this second feature is that it allows you to swap variable values in a clean way.
+
+```python title="Tuple Features" showLineNumbers 
+# Returning multiple values from a function
+def get_user_info():
+    return ("John", "Doe", 25)
+
+# Assigning multiple variables in a single line
+first_name, last_name, age = get_user_info()
+
+print(first_name) # John
+print(last_name) # Doe
+print(age) # 25
+
+# Another example of assigning multiple variables
+x, y = 10, 20
+
+print(x) # 10
+print(y) # 20
+
+# Swapping variable values
+x, y = y, x
+```
+
+You can also iterate over a tuple and you can do the same with the characters in a string.
+
+```python title="Iterating over a Tuple" showLineNumbers
+# Iterating over a tuple
+total = 0
+for num in (1, 2, 3):
+    total += num
+print(total) # 6
+
+# Iterating over a string
+for char in "Hello":
+    print(char) # Prints each character in the string
+```
+
+## Lists
+Another way to do sequences is to use a list which is also an ordered sequence of elements and is denoted by square brackets `[]` instead of parantheses `()`.
+
+Everything you can do with tuples you can also do with lists including mixing data types, slicing, indexing, and iterating.
+
+```python title="List and Tuple Operations" showLineNumbers
+# Creating a list
+empty_list = []
+samp_list = [1, 2, 3, 4, 5]
+mix_list = [1, "Hello", 3.14, True]
+single_element_list = [1]
+
+# Accessing elements
+print(samp_list[0]) # 1
+print(samp_list[4]) # 5
+print(samp_list[-1]) # 5
+
+# Getting the length of the list
+print(len(samp_list)) # 5
+
+# Slicing the list
+print(samp_list[1:3]) # (2, 3)
+
+# Iterating over a list
+total = 0
+for num in [1, 2, 3]:
+    total += num
+print(total) # 6
+```
+
+:::note
+Typically even though lists can also hold mixed types, they are homogeneous which means they are usually used to hold the same type of data. Examples include a list of numbers for grades or a list of strings for class roster.
+:::
+
+Both tuples and lists do the same things so why use lists? The main reason is that lists are ***mutable*** which means you can change the elements in the list once it is created. You can add, remove, or change elements in the list.
+
+```python title="List Specific Operations" showLineNumbers
+# Creating a list
+samp_list = [1, 2, 3, 4, 5]
+
+# Adding an element to the end of the list
+samp_list.append(6)
+print(samp_list) # [1, 2, 3, 4, 5, 6]
+
+# Adding an element at a specific index
+samp_list[0] = 10
+
+# Removing an element from the list
+samp_list.remove(6) # Removes the first 6 it finds
+
+# Remove the last element from the list
+samp_list.pop() # Removes the last element
+
+# Remove an element at a specific index
+del samp_list[0]
+
+# Add another list to the end of the list
+samp_list.extend([7, 8, 9])
+
+# Sorts the list in place
+samp_list.sort()
+print(samp_list) # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Reverse the list in place
+samp_list.reverse() # [9, 8, 7, 6, 5, 4, 3, 2, 1]
+```
+:::note
+We are doing list.method_name() which is new. As mentioned before everything in Python is an object and lists are no exception. The `.` notation is used to access the data and functions an object has. In this case, we are accessing the functions of the list object.
+:::
+
+All the actions above mutate the list which means they change the list itself. However, lists also have a few methods that don't mutate the list but instead return a new list.
+
+```python title="None Mutating Lists" showLineNumbers
+# Creating a list
+samp_list = [1, 2, 3, 4, 5]
+
+# Adding lists together
+new_list = samp_list + [6, 7, 8]
+
+# Sorting the list
+new_list = sorted(samp_list)
+```
+:::caution
+Remember that just because you can mutate a list doesn't mean you always need to. Python gives you the flexibility to choose the best option for your situation. However, you should be aware of if you are mutating a list or not because it can cause unexpected behavior.
+:::
+
+Just like tuples, strings are also immutable but Python has convinient methods to convert between the two allowing for more flexibility.
+
+```python title="Lists and Strings" showLineNumbers
+samp_string = "Hello World"
+
+# Converting a string to a list
+samp_list = list(samp_string)
+print(samp_list) # ['H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd']
+
+# Splitting a string into a list
+samp_list = samp_string.split() # Splits the string into a list of words (separated by spaces)
+print(samp_list) # ['Hello', 'World']
+samp_list = samp_string.split("e") # Splits the string into a list of words (separated by "l")
+print(samp_list) # ['H', 'llo World']
+samp_list = "first-name".split("-") # Splits the string into a list of words (separated by "-")
+print(samp_list) # ['first', 'name']
+
+# You can also convert a list to a string
+samp_list = ["Hel", "l", "o", " ", "W", "o", "r", "l", "d"]
+samp_string = "".join(samp_list)
+print(samp_string) # Hello World
+
+# You can decide what to join the list with
+samp_string = "-".join(["first", "last"])
+print(samp_string) # first-last
+samp_string = "+++".join(["first", "last", "middle"])
+print(samp_string) # first+++last+++middle
+```
+
+### Aliasing
+Aliasing is when you have more than one variable that points to the same object in memory. This can cause unexpected behavior if you mutate aliased objects.
+
+```python title="Aliasing" showLineNumbers
+# Creating a list
+samp_list = [1, 2, 3, 4, 5]
+
+# Aliasing the list
+alias_list = samp_list # Both variables point to the same list in memory
+
+# Mutating the list
+samp_list.append(6)
+print(samp_list) # [1, 2, 3, 4, 5, 6]
+
+# The alias is also mutated
+print(alias_list) # [1, 2, 3, 4, 5, 6]
+```
+
+Because both variables point to the same list in memory, when you mutate the list, the alias is also mutated. This can cause unexpected behavior if you don't realize that you are mutating an aliased object. Any list method that mutates the list will cause this behavior.
+
+### Cloning
+Aliasing can be avoided by cloning the list. This creates a copy of the list in memory so each variable points to a different list in memory even though they have the same values.
+
+```python title="Cloning" showLineNumbers
+# Creating a list
+samp_list = [1, 2, 3, 4, 5]
+
+# Cloning the list
+clone_list = samp_list[:] # Creates a copy of the list
+
+# Mutating the list
+samp_list.append(6)
+print(samp_list) # [1, 2, 3, 4, 5, 6]
+
+# The clone is not mutated
+print(clone_list) # [1, 2, 3, 4, 5]
+```
+
+The ability to mutate is heavily dependent on the situation. Most of the time you are going to mutate a list but there are times when you don't want to or need to. It is always important to understand the drawbacks and side effects of both options to better debug your code.
+
+### Looping Through Lists
+Just like tuples, you can loop through lists using a for loop. However, you need to be cautious when mutating a list while looping through it because the values the loop is iterating over is decided before the loop starts which means if you mutate the list while looping through it, you will miss some values, loop over the same value multiple times, or cause an error.
+
+```python title="Looping Through Lists" showLineNumbers
+# Creating a list
+samp_list = [1, 2, 3, 4, 5]
+
+# Looping through the list
+for i in samp_list:
+    samp_list.append(i)
+    print(i)
+```
+
+The output is...
+```
+1
+2
+3
+4
+5
+```
+
+Logically speaking this loop should run infinitely because you are adding a new value to the list every time so there is always a new value for the loop to look at. However, the loop only runs 5 times because the amount the loop iterates over is decided before the loop starts. The list had 5 values to begin with so the loop iterates over those 5 values. Usually, mutating a list that you are looping through can cause very unexpected behaviors because the loop does not update with the changing list.
+
+
+
+
+
