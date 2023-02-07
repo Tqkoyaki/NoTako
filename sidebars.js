@@ -46,6 +46,7 @@ const sidebars = {
         'turing-tako/intro-to-cs/page-4',
         'turing-tako/intro-to-cs/page-5',
         'turing-tako/intro-to-cs/page-6',
+        'turing-tako/intro-to-cs/page-7'
       ]
     },
   ],
