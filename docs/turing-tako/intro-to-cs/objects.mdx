@@ -1,0 +1,273 @@
+---
+id: page-8
+title: Object Oriented Programming
+sidebar_position: 4
+---
+In object orientated programming, the goal is to break a program into ***objects***.
+
+Objects allow you to bundle data together through ***attributes*** and ***methods***. This follows a divide and conquer type of development where each object is coded seperately and then combined together to create the program. This also builds in modularity and reduces complexity because objects solve smaller parts of the bigger problem and can be used repeatedly. 
+
+## Classes
+To create an object, we need to first define the objects attributes and functionality. This is done by creating a ***class*** which is the blueprint of an object. The syntax to create a class is `class <name of class>(object)`.
+
+Let's create a class that represents a `Point` in a 2D axis.
+
+```python title="Creating Point" showLineNumbers
+class Point(object):
+    # Define the class in here
+    # Everything indented is a part of the class
+```
+
+The first thing we want to write is code that should run everytime an object of this type is created. We call the object an ***instance*** of the class. THe special method `__init__` is run when a new instance is created and we can use this to initialize data attributes.
+
+```python title="Point Data Attributes" showLineNumbers {6-10}
+class Point(object):
+    # This method runs when a new Point is created.
+    # You always need to take self as a parameter because it refers to the instance.
+    # Other parameters needed to create the object should be specified
+    # For this object, we need a x and y as input
+    def __init__(self, x, y):
+        # This creates data attributes for the instance using self
+        # Self always refers to the instance
+        self.x = x
+        self.y = y
+
+# Creating instances of this object
+# You do not need to provide self
+origin = Point(0, 0)
+point_1 = Point(3, 1)
+point_2 = Point(-5, 3)
+```
+
+You can access a classes instance variables which are data attributes of a specific instance using the dot notation.
+
+```python title="Point Data Attributes" showLineNumbers
+# Creating instances of this object
+origin = Point(0, 0)
+point_1 = Point(3, 1)
+point_2 = Point(-5, 3)
+
+# Accessing the instance variables
+print(origin.x) # Prints 0
+print(point_1.x) # Prints 3
+print(point_1.y) # Prints 3
+```
+
+Besides data attributes, classes also define methods which build the functionality for a class. We can add a distance method for a `Point`.
+
+```python title="Point Methods" showLineNumbers {6-10}
+class Point(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    # Each method needs to take self as a parameter
+    def distance(self, other):
+        # You can access data attributes using self
+        x_diff_sq = (self.x - other.x) ** 2 
+        y_diff_sq = (self.y - other.y) ** 2 
+        return (x_diff_sq + y_diff_sq) ** 0.5
+
+origin = Point(0, 0)
+p1 = Point(3, 2)
+
+# You use dot notation to access a method
+# You do not give self as a parameter
+# Prints distance between point 1 and origin
+print(p1.distance(origin))
+```
+
+### Special Methods
+Everything in Python is made up of objects from lists to even adding integers. This is why Python allows for lots more customization on the functionality on how the class works.
+
+If we try to currently print our object out, it is uninformative. But we can change the behavior of what is printed if we implement the `__str__` method in our class.
+
+```python title="Printing Objects" showLineNumbers {12-13}
+class Point(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def distance(self, other):
+        x_diff_sq = (self.x - other.x) ** 2 
+        y_diff_sq = (self.y - other.y) ** 2 
+        return (x_diff_sq + y_diff_sq) ** 0.5
+    
+    # You have to return a string for this method
+    def __str__(self):
+        return '(' + str(self.x) + ',' + str(self.y) + ')'
+o = Point(0, 0)
+
+# WITHOUT __str__
+print(o) # Prints something like <__main__.Point object at 0x000001F58C1F0FD0>
+
+# WITH __str__
+print(o) # Prints (0,0)
+```
+
+Besides `__str__` there are many other special methods you can use. A few commonly used ones are...
+
+| Method | Functionality |
+| - | - |
+| `__add__(self, other)` | Override the behavior of the add operator |
+| `__sub__(self, other)` | Override the behavior of the subtract operator |
+| `__lt__(self, other)` | Less than functionality |
+| `__le__(self, other)` | Less than or equal to functionality |
+| `__gt__(self, other)` | Greater than functionality |
+| `__ge__(self, other)` | Greater than or equal to functionality |
+| `__eq__(self, other)` | Equal to functionality |
+| `__ne__(self, other)` | Not equal to functionality |
+| `__getitem__(self, index)` | Allows for getting data using brackets like a[1] |
+| `__setitem__(self, index, item)` | Allows for setting data using brackets like a[3] = 1 |
+| `__len__(self)` | Allows the use of `len()` on the object |
+
+Let's see an example of adding points...
+
+```python title="Adding Points" showLineNumbers {15-19}
+class Point(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def distance(self, other):
+        x_diff_sq = (self.x - other.x) ** 2 
+        y_diff_sq = (self.y - other.y) ** 2 
+        return (x_diff_sq + y_diff_sq) ** 0.5
+
+    def __str__(self):
+        return '(' + str(self.x) + ',' + str(self.y) + ')'
+
+    # Other represents the other value you are adding together
+    def __add__(self, other):
+        x = self.x + other.x
+        y = self.y + other.y
+        # Return the result of adding
+        return Point(x, y)
+
+p1 = Point(2, 3)
+p2 = Point(5, 3)
+p3 = p1 + p2
+print(p3) # Prints (7, 6)
+```
+
+### Types 
+As mentioned before, when you are creating a class, you are in a way creating a new data type in Python.
+
+```python title="Types" showLineNumbers
+o = Point(0, 0)
+
+# Prints that its type is a Point
+print(type(o))
+
+# Prints that its type is a type
+print(type(Point))
+```
+
+To check if an object belongs to a certain class, you can use `isinstance(object, Class)`.
+
+```python title="Instance Checking" showLineNumbers
+o = Point(0, 0)
+p = 1
+
+print(isinstance(o, Point)) # True
+print(isinstance(p, Point)) # False
+```
+
+## Getters and Setters
+We create objects to abstract away the complexity. Take the `distance` method for example, to use the `Point` class, we do not need to know how these methods were implemented, just how to use the method. We do not need to know how the distance is calculated, just the fact that we can get the distance. This also means that someone could change how the `Point` class works and code that uses the class should still work.
+
+To be able to change the implementation without affecting external code, we need to hide all the implementation away from the user. Python does not do this because we can still access attributes like `origin.x` for the `Point` class. Instead we want to use getters and setters which control how to manipulate the attributes. The only way you should be able to access the class is should through methods.
+
+```python title="Getters and Setters" showLineNumbers {12-13,16-17,20-21,24-25}
+class Point(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+    
+    def distance(self, other):
+        x_diff_sq = (self.x - other.x) ** 2 
+        y_diff_sq = (self.y - other.y) ** 2 
+        return (x_diff_sq + y_diff_sq) ** 0.5
+    
+    # Getter for x
+    def get_x(self):
+        return self.x
+    
+    # Getter for y
+    def get_y(self):
+        return self.y
+    
+    # Setter for x
+    def set_x(self, x):
+        self.x = x
+    
+    # Setter for y
+    def set_y(self, y):
+        self.y = y
+
+    def __str__(self):
+        return '(' + str(self.x) + ',' + str(self.y) + ')'
+
+    def __add__(self, other):
+        x = self.x + other.x
+        y = self.y + other.y
+        return Point(x, y)
+
+origin = Point(0, 0)
+
+origin.x # BAD PRACTICE
+origin.get_x() # GOOD PRACTICE
+```
+
+These getters and setters give the class more control over how data is manipulated and so it is done to make sure the class is manipulated in the way it is intended.
+
+## Inheritance
+Objects can can have hierarchies through inheritance where objects inherit data and behavior from a different class and add on to it. This reduces redundancy for objects that share similar functionalities.
+
+Let's create a new class that represents an Animal to showcase this...
+```python title="Animal Class" showLineNumbers
+class Animal(object):
+    def __init__(self, age):
+        self.age = age
+    
+    def get_age(self):
+        return self.age
+    
+    def set_age(self, age):
+        self.age = age
+    
+    def eat():
+        print('Eating')
+```
+
+This is a simple class that creates a representation of an animal. Let's say we want to create a new class called `Rabbit`. This is an animal who should have an age, can eat, and can hop. Instead of creating a class to do all that, we can extend off Animal and add to its functionality.
+
+```python title="Rabbit Class" showLineNumbers
+# The class you are extending from goes inside the parenthesis
+class Rabbit(Animal):
+    def __init__(self, age):
+        # You can call the __init__ method of the parent class
+        # self needs to be passed in this case
+        Animal.__init__(self, age)
+    
+    def hop():
+        print('Hopping')
+    
+    def eat():
+        print('Munching on a carrot!')
+
+cherry = Rabbit(3)
+
+# You can use all the methods you created the same way
+print(cherry.hop()) # Prints Hopping
+
+# All methods from a parent class get added to the child class
+print(cherry.get_age()) # Prints 3
+
+# The child class can override a methods functionality by creating a method with the same name
+# Because the child class has a method called eat, it is used over the one in parent class
+print(cherry.eat()) # Prints Munching on a carrot!
+```
+
+Inheritance can span many classes like for example, if we create a Person class, it can inherit the functionality of the Animal class. But then we can create a Student class that inherits from the Person class and so on. This functionality allows for lower redundancy when coding and provides a lot more flexibility.
+
+
