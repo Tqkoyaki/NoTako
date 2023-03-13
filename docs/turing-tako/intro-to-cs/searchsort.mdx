@@ -1,0 +1,173 @@
+---
+id: page-10
+title: Searching and Sorting
+sidebar_position: 10
+---
+There are many times one needs to sort collections and search them as well. The collections we may run these algorithms on may be huge and we need to make sure we pick efficient solution to problems.
+
+## Searching
+Searching algorithms are methods for finding an item or group of items with specific properties within a collection of items.
+
+### Linear Search
+Linear search is where you look through each element in a list in order till you find the element you are looking for.
+
+```python title="Linear Search" showLineNumbers
+def search(L, e):
+    # Loop through whole list
+    for i in range(len(L)):
+        # Check if the element is found
+        if L[i] == e:
+            return True
+    # The element does not exist
+    return False
+```
+
+The worst case scenario is that the element does not exist so you loop through the list once and don't find the element so the complexity is `O(n)`.
+
+### Bisection Search
+The other type of search is bisection search which can only be used if the list is sorted. It finds the middle of the list and checks if that element is the element that we are looking for. If it is not, we check if the element is greater than or less than the element we are looking for and based on that we can eliminate half the list where the element cannot exist in. We know it does not exist because the list is sorted.
+
+```python title="Bisection Search" showLineNumbers
+def bisect_search(L, e):
+    if len(L) == 0: # Base case
+        return False
+    else:
+        return bisect_search_helper(L, e, 0, len(L) - 1)
+
+def bisect_search_helper(L, e, low, high):
+    if high == low: # Base case is the whole list is cleared
+        return L[low] == e
+    
+    # Finds the midpoint
+    mid = (low + high) // 2
+
+    # Check if the element is the midpoint
+    if L[mid] == e:
+        return True
+    # Checks if element is bigger than midpoint
+    elif L[mid] > e:
+        # Nothing left to search
+        if low == mid:
+            return False
+        else:
+            # Removes the higher half
+            return bisect_search_helper(L, e, low, mid - 1)
+    else:
+        # Remotes the top half
+        return bisect_search_helper(L, e, mid + 1, high)
+```
+
+Each time this algorithm reduces the problem by half by eliminating half of the list. Due to this, the complexity is `O(log n)`. This is much faster than linear search but it requires the list to be sorted.
+
+## Sorting
+Sorting algorithms help organize the list which can then be used to search faster with bisection sort. It is not valuable to sort and then search once because the fastest a sorting algorithm can be is `O(n)` because every element needs to be checked at least once. So, if you are sorting to use bisection search. It is better to only sort if you are going to search that list multiple times.
+
+### Monkey Sort (Bogosort)
+This is where you randomly organize the list and then go through the list to check if it is sorted. If it is not sorted, you randomly organize the list again.
+
+```python title="Monkey Sort" showLineNumbers
+def monkey_sort(L):
+    # Checks if the list is sorted
+    while not is_sorted(L):
+        # Randomly organizes the list
+        random.shuffle(L)
+```
+
+The best case is `O(n)` and this only happens if you get lucky and the list gets sorted first try. If randomly it is sorted, you still need to loop through the list once to check if the list is sorted. The worst case is `unbounded` because there is no definite number of times the algorithm can take to sort the list because of the random aspect to it.
+
+### Bubble Sort
+Bubble sort is where you check consecutive pairs and swap them if they are unsorted. You keep looping through the list till everything is sorted. The end of the list gets sorted first and you work backwards to the front of the list.
+
+```python title="Bubble Sort" showLineNumbers
+def bubble_sort(L):
+    swap = False
+    # As long as we have swapped at least once, we are not sorted
+    while not swap:
+        # Reset swap
+        swap = True
+        # Loop through the list
+        for i in range(1, len(L)):
+            # Checks if previous is greater than the current (meaning unsorted)
+            if L[i - 1] > L[i]:
+                # A swap has occured so the list is not sorted
+                swap = False
+                
+                # Swaps the elements to sort it
+                L[i - 1], L[i] = L[i], L[i - 1]
+```
+
+The while loop has a complexity of `O(n)` and the for loop also has a complexity of `O(n)`. Due to the fact they are nested, you multiply them to get the complexity of bubble sort which is `O(n^2)`.
+
+### Selection Sort
+Selection sort is where you loop through the list and find the minimum element and swap it with the first element of the unsorted list. Once that is done, that part of the list is sorted. You then extract the second minimum element and replace it with the second element in the list. You keep repeating this till all of the list is sorted. Unlike bubble sort, you are sorting from left to right instead of right to left.
+
+```python title="Selection Sort" showLineNumbers
+def selection_sort(L):
+    sorted_len = 0
+    # Loops through the list as long as the list is not sorted
+    while sorted_len != len(L):
+        # Loops through unsorted portion of list
+        for i in range(sorted_len, len(L)):
+            # Checks if the current element is smaller than the element we are sorting
+            if L[i] < L[sorted_len]:
+                # Swaps the element
+                L[sorted_len], L[i] = L[i], L[sorted_len]
+        # Increments size of sorted list
+        sorted_len += 1
+```
+
+There are also two loops that are nested in selection sort. The while loop has a complexity of `O(n)` and the second loop also has a worst case of `O(n)`. Due to the fact that they are nested, you get a complexity of `O(n^2)`.
+
+### Merge Sort
+Not every sorting algorithm is `O(n^2)`. We can do better with merge sort which has the best worst case complexity for sorting because it uses a divide and conquer approach. If the list is of size 0 or 1, we consider it sorted. So we take longer lists and split them into two smaller lists and sort them. Once each smaller list is sorted, we merge them back by sorting the smaller lists into bigger sorted lists.
+
+```python title="Merge Sort" showLineNumbers
+def merge_sort(L):
+    if len(L) < 2: # Base Case (Sorted)
+        return L
+    else:
+        # Midpoint found to split list into two smaller lists
+        middle = len(L) // 2
+
+        # Splits the list
+        left = merge_sort(L[:middle])
+        right = merge_sort(L[middle:])
+
+        # Merges the sorted list
+        return merge(left, right)
+
+def merge(left, right):
+    # Holds the result
+    result = []
+    # For indexing
+    i, j = 0, 0
+
+    # As long as there are elements left any list
+    while i < len(left) and j < len(right):
+        # Checks if left is smaller
+        if left[i] < right[j]:
+            # Adds left to sorted list because it is smaller
+            result.append(left[i])
+            # Looks at next element in list
+            i += 1
+        else:
+            # Adds right because it is smaller
+            result.append(right[j])
+            j += 1
+        
+        # Adds all the elements that are left in the smaller lists
+        # We can do this because the smaller lists are sorted and one list is empty now
+        while(i < len(left)):
+            result.append(left[i])
+            i += 1
+        while(j < len(right)):
+            result.append(right[i])
+            j += 1
+        
+        # Merge complete
+        return result
+```
+
+At each recursive level you are looping through the list one time so that is a `O(n)` complexity. You are also dividing the list in half during each call so this takes `O(log n)`. When you multiply them, you get the overall complexity of `O(n log(n))` which is faster than `O(n^2)`.
+        
+    
