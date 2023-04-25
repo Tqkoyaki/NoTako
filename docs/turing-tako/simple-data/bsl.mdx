@@ -1,0 +1,256 @@
+---
+id: page-1
+title: Beginner Student Language
+sidebar_position: 1
+---
+The Beginner Student Language (BSL) is a small and simple programming language which forms the core of nearly every other language you will ever use. It is built on top of racket but the design method using BSL can be adapted to fit any other programming language. 
+
+## Expressions
+The first thing we can do with BSL is to evaluate arthemetic expressions. These include adding, subtracting, multiplying, and dividing numbers together.
+
+```racket title="Arithmetic Expressions" showLineNumbers
+(+ 1 5) ; 6
+(- 10 3) ; 7
+(* 2 4) ; 8
+(/ 10 2) ; 5
+```
+
+:::note
+You can use `;` to write a comment. A comment is a line of text that is ignored by the computer meaning everything on the line after a semicolon is ignored. This is a great tool for writing notes to yourself or others.
+:::
+
+For BSL, the syntax we used was `(<primitive> <expression> ...)`. The primitive is the name of the operation we want to perform and that includes `+`, `-`, `*`, and `/`. The expression is the values or other expressions we want to perform the operation on.
+
+```racket title="Nested Expressions" showLineNumbers
+; You can have as many expressions in a single primitive
+(+ 1 2 3) ; 6
+
+; These expressions happen in order
+(- 10 2 3)
+(- 8 3)
+5
+
+; You can nest expressions where the inside expression is evaluated first
+(+ 1 (* 2 3))
+(+ 1 6)
+7
+```
+
+### More Primitives
+
+BSL has more primitives than just arithmetic. Here are some of the other primitives you can use in BSL.
+
+```racket title="More Primitives" showLineNumbers
+; Square root
+(sqrt 9) ; 3
+
+; Squared
+(sqr 3) ; 9
+
+; Absolute value
+(abs -5) ; 5
+
+; Remainder
+(remainder 10 3) ; 1
+```
+
+:::note
+More primitives can be found in the [BSL Primitive Reference](https://download.racket-lang.org/docs/5.1/html/htdp-langs/beginner-prim-ops.html).
+:::
+
+### Evaluation
+Nested expressions and expressions with multiple arguments show that there need to be well defined rules for how these expressions are evaluated so that the language is consistent. The rules for evaluating expressions in BSL are as follows:
+
+1. Reduce operands to values
+2. Apply primitive to values from left to right
+
+```racket title="Evaluation" showLineNumbers
+; 1. Reduce operands to values
+(+ (* 2 (/ 10 5) 2) (sqr 3))
+(+ (* 2 5 2) (sqr 3)) ; Evaluated (/ 10 5)
+(+ (* 10 2) (sqr 3)) ; Evaluted (* 2 5)
+(+ 20 (sqr 3)) ; Evaluated (* 10 2)
+(+ 20 9) ; Evaluated (sqr 3)
+29 ; Evaluated (+ 20 9)
+```
+
+## Strings
+Strings are a sequence of characters surrounded by double quotes. These strings can be used to represent text.
+
+```racket title="Strings" showLineNumbers
+"Hello World!"
+
+"123" ; Numbers are also characters (text if surrounded by quotes)
+```
+
+You can use the `string-append` primitive to combine as many strings together and you can use the `string-length` primitive to get the length of a string.
+
+```racket title="String Primitives" showLineNumbers
+(string-append "Hello " "World!") ; "Hello World!"
+(string-append "Hello " "Wor" "ld!") ; "Hello World!"
+
+(string-length "Hello World!") ; 11
+```
+
+You can get a subset of the string using the `substring` primitive. The first argument is the string, the second argument is the starting index, and the third argument is the ending index. The ending index is not included in the substring.
+
+The index of a character refers to its position in the string. The first character has an index of 0 and the last character has an index of the length of the string minus 1. This is caleld ***zero-based indexing***.
+
+```racket title="Substring" showLineNumbers
+; The index of the string
+; H e l l o   W o r l d
+; 0 1 2 3 4 5 6 7 8 9 10
+
+(substring "Hello World" 0 5) ; "Hello"
+(substring "Hello World" 6 11) ; "World"
+(substring "Hello World" 1 2) ; "e"
+```
+
+## Images
+BSL provides many tools for working with images. The first primitives allow you to create images of different shapes.
+
+```racket title="Image Primitives" showLineNumbers
+; You need this at the top of your file to use images
+(require 2htdp/image)
+
+; Create a red solid circle with radius 10
+(circle 10 "solid" "red")
+
+; Create a red outline circle with radius 20
+(circle 20 "outline" "red")
+
+; Create a red solid rectangle with width 10 and height 20
+(rectangle 10 20 "solid" "red")
+```
+
+You can combine images together using the `beside` and `above` primitives. The first primitive places the images side by side and the second places the images on top of each other.
+
+```racket title="Beside and Above" showLineNumbers
+; You need this at the top of your file to use images
+(require 2htdp/image)
+
+; Place two circles side by side
+(beside (circle 10 "solid" "red") (circle 10 "solid" "blue"))
+
+; You can place as many images as you want
+(beside (circle 10 "solid" "red") (circle 10 "solid" "blue") (circle 10 "solid" "green"))
+
+; Place two circles on top of each other
+(above (circle 10 "solid" "red") (circle 10 "solid" "blue"))
+
+; Same concept where you can place as many images as you want
+(above (circle 10 "solid" "red") (circle 10 "solid" "blue") (circle 10 "solid" "green"))
+```
+
+You can also get the width and height of an image using the `image-width` and `image-height` primitives.
+
+```racket title="Image Width and Height" showLineNumbers
+; You need this at the top of your file to use images
+(require 2htdp/image)
+
+; Create a red solid circle with radius 10
+(define CIRCLE (circle 10 "solid" "red"))
+
+; Get the width of the image
+(image-width CIRCLE) ; 20
+
+; Get the height of the image
+(image-height CIRCLE) ; 20
+```
+
+:::caution
+Future examples will not include the `require` statement at the top of the file. You will need to add it to your file if you want to use the image primitives.
+:::
+
+## Constants
+Constants are values that are given a name so that they can be used multiple times and they cannot be changed. Constants are defined using the `define` primitive. The syntax is `(define <name> <expression>)`.
+
+```racket title="Constants" showLineNumbers
+; Examples of simple constants
+(define RADIUS 10)
+(define WIDTH 20)
+(define HEIGHT 30)
+
+; You can have constants that are expressions and use constants in expressions
+(define RED_CIRCLE (circle RADIUS "solid" "red"))
+(define BLUE_CIRCLE (circle RADIUS "solid" "blue"))
+```
+
+## Functions
+Functions are a way to group a set of expressions together so that they can be used multiple times. Functions are defined using the `define` primitive. The syntax is `(define (<name> <parameter> ...) <expression>)`. Then you can call the function using the name and passing in the arguments using the syntax `(<name> <argument> ...)`. The arguments are evaluated before being passed into the function.
+
+```racket title="Functions" showLineNumbers
+; Define a function that takes a radius and returns a red circle
+(define (red-circle radius)
+  (circle radius "solid" "red"))
+
+; Call the function
+(red-circle 10) ; This is the same as (circle 10 "solid" "red")
+
+; Define a function that takes a width and height and returns a red rectangle
+(define (red-rectangle width height)
+  (rectangle width height "solid" "red"))
+
+; Call the function
+(red-rectangle 10 20) ; This is the same as (rectangle 10 20 "solid" "red")
+(red-rectangle 20 30) ; This is the same as (rectangle 20 30 "solid" "red")
+```
+
+## Booleans
+Booleans are a type of data that can be either `true` or `false`. They are used to represent the truth value of a statement.
+
+```racket title="Boolean Primitives" showLineNumbers
+; These are the boolean primitives
+(= 1 2) ; Checks if they are equal
+(< 1 2) ; Checks if the first is less than the second
+(> 1 2) ; Checks if the first is greater than the second
+(<= 1 2) ; Checks if the first is less than or equal to the second
+(>= 1 2) ; Checks if the first is greater than or equal to the second
+
+; Example of booleans is checking if two images are the same width
+(define I1 (circle 10 "solid" "red"))
+(define I2 (rectangle 20 30 "solid" "red"))
+(= (image-width I1) (image-width I2)) ; true
+(= (image-width I1) (image-height I2)) ; false
+
+; You can check if two strings are equal using a different primitive
+(string=? "Hello" "Hello") ; true
+```
+
+You can combine booleans together using the `and` and `or` primitives. The `and` primitive returns `true` if all of the arguments are `true` and `false` otherwise. The `or` primitive returns `true` if at least one of the arguments is `true` and `false` otherwise. You can also use the `not` primitive to negate a boolean.
+
+```racket title="And, Or, and Not" showLineNumbers
+(define I1 (circle 10 "solid" "red"))
+(define I2 (rectangle 20 30 "solid" "red"))
+
+(define BOOL_WIDTH (= (image-width I1) (image-width I2)))
+(define BOOL_HEIGHT (= (image-height I1) (image-height I2)))
+
+; Only true if both boolean expressions are true
+(and BOOL_WIDTH BOOL_HEIGHT) ; false
+
+; True if at least one boolean expression is true
+(or BOOL_WIDTH BOOL_HEIGHT) ; true
+
+; Negates the boolean expression
+(not true) ; false
+(not false) ; true
+```
+
+### If Expressions
+If expressions are a way to conditionally execute code based on a boolean expression. The syntax is `(if <boolean-expression> <expression> <expression>)`. If the boolean expression is `true` then the first expression is evaluated and returned. If the boolean expression is `false` then the second expression is evaluated and returned.
+
+```racket title="If Expressions" showLineNumbers
+(define I1 (circle 10 "solid" "red"))
+(define I2 (rectangle 20 30 "solid" "red"))
+
+; Only one string is produced 
+(if (= (image-width I1) (image-width I2))
+    "The images have the same width"
+    "The images do not have the same width")
+
+; In this case: "The images have the same width" because the boolean expression is true
+```
+
+
+

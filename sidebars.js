@@ -52,6 +52,15 @@ const sidebars = {
         'turing-tako/intro-to-cs/page-10'
       ]
     },
+    {
+      type: 'category',
+      label: 'How to Code: Simple Data',
+      items: [
+        'turing-tako/simple-data/page-1',
+        'turing-tako/simple-data/page-2',
+        'turing-tako/simple-data/page-3',
+      ]
+    }
   ],
 };
 

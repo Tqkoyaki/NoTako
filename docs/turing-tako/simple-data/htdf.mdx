@@ -1,0 +1,183 @@
+---
+id: page-2
+title: How to Design Functions
+sidebar_position: 2
+---
+The how to design functions is a design method built to help with systematic design of functions. With well defined functions using this recipe, it eases the process of solving more complex problems.
+
+## The Recipe
+There are 5 steps to the recipe where each step builds onto the next one...
+
+1. Signature, purpose, and stub
+2. Define examples
+3. Template and inventory
+4. Code the function body
+5. Test and debug until correct
+
+The idea of the HtDF (How to Design Functions) recipe is to enable the idea of "run early and run often". Eliminating mistakes at each step of the recipe will help you to avoid mistakes later on in the process.
+
+### Signature, Purpose, and Stub
+The signature of the function is defining the input and output types of the function. The purpose of the function is to define what the function does and the stub of the function is to define a syntactically correct function that does nothing.
+
+Let's say the given problem is to write a function called double that consumes a number and produces twice the number...
+
+```racket title="Signature, Purpose, and Stub" showLineNumbers
+; The input is a number and the output is a number
+; Signature: Number -> Number
+
+; The purpose is what the function does
+; Purpose: Produce two times the input number
+
+; The stub is a syntactically correct function that does nothing
+(define (double n) 0) ; Stub
+```
+
+:::note
+We leave the stub uncommented so we can run the code and make sure there are no syntax errors. We will also use the stub for the next step.
+:::
+
+### Define Examples
+The next step is to define examples. For this we will use a new function called `check-expect`. The syntax for `check-expect` is `(check-expect (function-name input) expected-output)`. This allows us to test the function by providing examples of how the function should behave.
+
+We want to have our examples cover many cases as possible. The signature from the double problem stated that the input is a number so we want to test decimal numbers, whole numbers, and negative numbers.
+
+```racket title="Define Examples" showLineNumbers
+; Signature, Purpose, and Stub from above
+; Number -> Number
+; Produce two times the input number
+(define (double n) 0) ; Stub
+
+; Examples of how double should behave
+(check-expect (double 0) 0)
+(check-expect (double 1) 2)
+(check-expect (double 2.3) (* 2 2.3)) ; 2.3 * 2 = 4.6
+(check-expect (double -1) -2)
+```
+
+:::note
+We can run the code at this point to see if there are no syntax errors. If there are syntax errors, we can fix them and run the code again. We expect the tests to fail at this point because we have not written the function yet.
+:::
+
+### Template and Inventory
+The next step is to create a template and inventory. The template builds off the stub and replaces the default value with an expression that uses the input parameter (still does nothing). The template gives a clear sense of what the function has to work with. The inventory is creating all the constant values that would be useful to the function.
+
+For the double function, there is no need for inventory because it requires no constants.
+
+```racket title="Template and Inventory" showLineNumbers
+; Number -> Number
+; Produce two times the input number
+#;
+(define (double n) 0) ; Stub
+
+(check-expect (double 0) 0)
+(check-expect (double 1) 2)
+(check-expect (double 2.3) (* 2 2.3))
+(check-expect (double -1) -2)
+
+; Template and Inventory
+(define (double n) 
+    (... n))
+```
+
+:::note
+The `#;` is a comment that comments out the next expression or definition. It is useful for commenting out the stub and the template. We cannot define a function twice so we comment out the stub and run the code to test if the template is correct.
+:::
+
+### Code the Function Body
+Now that all the prep work is done, we can start to code the function body.
+
+```racket title="Code the Function Body" showLineNumbers
+; Number -> Number
+; Produce two times the input number
+; (define (double n) 0)
+
+(check-expect (double 0) 0)
+(check-expect (double 1) 2)
+(check-expect (double 2.3) (* 2 2.3))
+(check-expect (double -1) -2)
+
+#;
+(define (double n) 
+    (... n))
+
+; Code the function body
+(define (double n) 
+    (* 2 n))
+```
+
+### Test and Debug Until Correct
+The last step is to test and debug until the function is correct. We know the function is correct when all the tests pass and if it does not, we use the error messages and the tests that failed to debug and fix the function.
+
+## More Examples
+This recipe may feel overkill for these simple functions but it is useful for more complex functions later on.
+
+### Tall Images
+The problem is to design a function that consumes an image and determine where the image is tall.
+
+We will have many problems like this one where the problem is not well defined. Our goal is to have well defined purposes that overcome these problems. Let's define being tall as having a height that is greater than the width.
+
+```racket title="Tall Images" showLineNumbers
+(require 2htdp/image)
+
+; Image -> Boolean
+; Produce true if the image is tall
+; (define (tall? img) false)
+
+(check-expect (tall? (rectangle 10 20 "solid" "red")) true)
+(check-expect (tall? (rectangle 20 10 "solid" "red")) false)
+(check-expect (tall? (rectangle 10 10 "solid" "red")) true) # Note this test is bad
+
+#;
+(define (tall? img) 
+    (... img))
+
+(define (tall? img) 
+    (if (> (image-height img) (image-width img))
+        true
+        false))
+```
+
+:::note
+This would give us issues when we get to the test and debug step because a test would fail. A test failing means that the function definition could be wrong, the test could be wrong, or both are wrong. Always verify that the test is correct before debugging the function.
+:::
+
+Once the test is fixed, this is a well defined function that solves the problem but it can be improved. When we have an if statement that returns true if the condition is true and false if the condition is false, we can simplify the code by using the condition itself.
+
+```racket title="Tall Images" showLineNumbers
+; THIS IS...
+(define (tall? img) 
+    (if (> (image-height img) (image-width img))
+        true
+        false))
+
+; THE SAME AS...
+(define (tall? img) 
+    (> (image-height img) (image-width img)))
+```
+
+### Image Area
+The problem here is to design a function that consumes an image and produces the area of the image.
+
+The one thing to note with this problem is that we can define the signature as `Image -> Number` but it is not fully correct. We want our signatures to be specific as possible and images have pixels which are positive whole numbers so the area will always be positive whole numbers. So a more well defined signature is `Image -> Natural`.
+
+```racket title="Image Area" showLineNumbers
+; Image -> Natural
+; Produce the area of the image
+; (define (image-area img) 0)
+
+(check-expect (image-area (rectangle 10 20 "solid" "red")) (* 10 20))
+(check-expect (image-area (rectangle 20 10 "solid" "red")) (* 20 10))
+
+#;
+(define (image-area img) 
+    (... img))
+
+(define (image-area img) 
+    (* (image-width img) (image-height img)))
+```
+
+
+
+
+
+

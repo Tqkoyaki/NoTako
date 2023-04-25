@@ -1,0 +1,239 @@
+---
+id: page-3
+title: How to Design Data
+sidebar_position: 3
+---
+The how to design data is a driving element in many design recipes because many problems involve the manipulation of data. A data definition's purpose is to establish the relationship between the information the program needs and the data itself.
+
+## Data Definition Recipe
+There are five parts to a data definition recipe...
+
+1. A possible structure definition (only for compound data)
+2. A type comment
+3. An interpretation
+4. One or more examples
+5. A template for a 1 argument function
+
+:::note
+We are working with simple data so we will not be using a structure definition.
+:::
+
+### Simple Atomic Data
+Atomic data is the most simpliest form of data. It is a single value that is not made up of other values. The most common atomic data is a number, but it can also be a string, boolean or anything else that is not made up of other values.
+
+### Type Comment and Interpretation
+The type comment helps define the new type's name and it also describes how to form data of that type. The intepretation is a description of how to interpret the data of that type.
+
+Let's build a new type that represents the time since the start of a game.
+
+```racket title="Type Comment" showLineNumbers=true
+; Time is Natural (No negative numbers)
+; interp. number of clock ticks since the start of the game
+```
+
+The first line shows how we are representing time and in this case we are using Natural Numbers to represent it. The second line tells us how to intepret the natural number.
+
+### Examples
+Once you have a type comment you can start to build examples of that type which showcases the type in action.
+
+```racket title="Examples" showLineNumbers=true
+; Time is Natural (No negative numbers)
+; interp. number of clock ticks since the start of the game
+
+(define START_TIME 0)
+(define OLD_TIME 1000)
+(define NEW_TIME 2000)
+```
+
+### Template
+The template is a function that takes a data of the new type as an argument and uses that data in some way.
+
+While creating the template, we also state all the template rules used.
+
+```racket title="Template" showLineNumbers=true
+; Time is Natural (No negative numbers)
+; interp. number of clock ticks since the start of the game
+
+(define START_TIME 0)
+(define OLD_TIME 1000)
+(define NEW_TIME 2000)
+
+#;
+(define (fn-for-time t)
+  (... t))
+
+; Template rules used:
+; - atomic non-distinct: Natural
+```
+
+Atomic data can be broken down into two categories, distinct and non-distinct. Distinct is where there are a set number of values that the data can be vs non-distinct where any value in the constraints is valid. You will see this later in this section.
+
+## Interval
+When we want the information to be represented is numbers within a certain range, we use an interval. If the number in the range is inclusive, we use square brackets. If the number in the range is exclusive, we use parentheses.
+
+For example, if we want to represent the number of lives a player has, we could use the interval `[0, 3]` to represent the number of lives. This means the number of lives can be 0, 1, 2 or 3. If we wanted to represent the number of lives a player has, but we wanted to exclude 0, we could use the interval `(0, 3]` to represent the number of lives. This means the number of lives can be 1, 2 or 3.
+
+```racket title="Interval" showLineNumbers=true
+; Lives is Integer[0, 3]
+; interp. number of lives the player has
+
+(define NO_LIVES 0)
+(define ONE_LIFE 1)
+(define ALL_LIVES 3)
+
+#;
+(define (fn-for-lives l)
+  (... l))
+
+; Template rules used:
+; - atomic non-distinct: Integer[0, 3]
+```
+
+The template rule is non-distinct because any value in the interval is valid.
+
+Data definitions help design functions and can be merged with the how to design functions recipe. The example below showcases a case where we need to make a function for adding lives to the player.
+
+```racket title="Life Adder" showLineNumbers
+;; Problem: Add a life to the player
+
+;; Lives -> Lives
+;; Add 1 to the number of lives without exceeding the maximum of 3 lives
+
+#;
+(define (add-life l) 0) ; stub 
+
+; Test closed boundaries
+(check-expect (add-life 0) 1)
+(check-expect (add-life 1) 2)
+(check-expect (add-life 3) 3)
+
+; Use template from Lives
+(define (add-life l)
+  (if (< l 3) (l + 1) l))
+```
+
+## Conditional
+Before moving to more definition types, we need to go through conditionals which are a cleaner way to write if statements.
+
+The syntax is `(cond [condition answer] [condition answer] ...)` where the last condition can be an `else` which is the default cause if all conditions fail.
+
+```racket title="Conditionals" showLineNumbers
+; Classify an image as tall, square or wide
+(if (> (image-height img) (image-width img))
+  "tall"
+  (if (= (image-height img) (image-width img))
+  "square"
+  "wide"))
+
+; This can be simplifed with a cond expression
+(cond [(> (image-height img) (image-width img)) "tall"]
+      [(= (image-height img) (image-width img)) "square"]
+      [else "wide"])
+```
+
+## Enumerations
+Enumerations are great for when the information that needs to be represented consists of a fixed number of distinct items like colors and letter grades.
+
+```racket title="Enumerations" showLineNumbers
+; Data Definitions:
+
+; LetterGrade is one of:
+; - "A"
+; - "B"
+; - "C"
+; interp. the letter grade in a course
+; <examples are redundant for enumerations>
+
+#;
+(define (fn-for-letter-grade lg)
+  (cond [(string=? lg "A") (...)] ; Use cond for each possible value
+        [(string=? lg "B") (...)]
+        [(string=? lg "C") (...)]))
+
+; Template rules used:
+; - one-of: 3 cases (cases show number of distinct items)
+; - atomic distinct: "A" (Enums use only distinct values)
+; - atomic distinct: "B"
+; - atomic distinct: "C"
+```
+
+Just like with intervals, any data definition can be used to help with designing functions. In this case, we will build a function that bumps a grade up by one.
+
+```racket title="Bump Grade Up" showLineNumbers
+;; LetterGrade -> LetterGrade
+;; Produce the next highest letter grade (no change for A)
+
+#;
+(define (bump-up lg) "A") ; stub
+
+; There should be at least as many tests as enumerations
+(check-expect (bump-up "A") "A")
+(check-expect (bump-up "B") "A")
+(check-expect (bump-up "C") "B")
+
+; Use template from LetterGrade
+(define (bump-up lg)
+  (cond [(string=? lg "A") "A"]
+        [(string=? lg "B") "A"]
+        [(string=? lg "C") "B"]))
+```
+
+## Itemizations
+Finally we have itemization which desribes data that is comprised of 2 or more subclasses where at least one of which is not a distinct item. For example, a data definition that includes both an interval and an enumeration would constitute an itemization.
+
+```racket title="Itemization" showLineNumbers
+; Let's create a data definition that shows if a rocket's descent to Earth 
+; has completed, in motion, or hasn't started.
+; If it is in motion, we want to know how many kilometers the rocket has left on descent.
+
+; Data Definition:
+; RocketDescent is one of:
+; - false
+; - Number(0, 100]
+; - "landed"
+
+; interp.
+; false means the rocket has not started descent
+; Number(0, 100] represents the distance from Earth during descent
+; "landed" represents that the rocket has descented
+
+; Handle each case with examples
+(define FAR false)
+(define START 100) ; Intervals need examples for boundary cases
+(define MIDWAY 50)
+(define LANDED "landed")
+
+#;
+(define (func-for-rocketdescent rd)
+  (cond [(false? rd) (...)]
+        [(number? rd) (...)]
+        [else (...)]))
+
+; Template rules used:
+; RocketDescent is one of: 3 cases
+; - Atomic Distinct: false (b/c false is a unique value as true is not included)
+; - Atomic Non-Distinct: Number(0, 100]
+; - Atomic Distinct: "landed" (b/c distinct number of options, only 1 in this case)
+```
+
+This template that we created now can be used in a function. This function we are creating sends a message based on the rocket's distance.
+
+```racket title="Rocket Messages" showLineNumbers
+; RocketDescent -> String
+; Provides a message of the rocket's distance from earth
+
+#;
+(define (rocket-descent-to-msg rd) "") ; stub
+
+; tests
+(check-expect (rocket-descent-to-msg false) "The rocket still far from descent!")
+(check-expect (rocket-descent-to-msg 100) "Rocket is 100 km from Earth!")
+(check-expect (rocket-descent-to-msg 50) "Rocket is 50 km from Earth!")
+(check-expect (rocket-descent-to-msg "landed") "The rocket has landed!")
+
+; template taken from data definition
+(define (rocket-descent-to-msg rd)
+  (cond [(false? rd) "The rocket is still far from descent!"]
+        [(number? rd)
+         (string-append "Rocket is " (number->string rd) " km from Earth!")]
+        [else "The rocket has landed!"]))
