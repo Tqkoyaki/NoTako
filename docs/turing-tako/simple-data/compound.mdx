@@ -1,0 +1,77 @@
+---
+id: page-5
+title: Compound Data
+sidebar_position: 5
+---
+There are many times when two pieces of data are related to each other. For example, a person's name and their age. We can store these two pieces of data in a single variable using a struct in racket.
+
+### Creating a Struct
+The syntax to define a struct is `(define-struct name (field1 field2 ...))`. The name of the struct is the name of the variable that will hold the struct. The fields are the names of the pieces of data that will be stored in the struct. For example, to create a struct to store a person's name and age, we would use the following code:
+
+```racket title="Creating a Struct" showLineNumbers
+(define-struct person (name age))
+```
+
+A struct can hold as many fields as you want. The goal is to combine data that relate to each other together. The benefit of creating a struct is that it creates new primitives to work with the new struct.
+
+To create a new struct, we use the syntax `(make-name field1 field2 ...)`. This is the constructor for the struct.
+
+```racket title="Creating a Struct" showLineNumbers
+(define-struct person (name age))
+
+(define p1 (make-person "John" 20))
+(define p2 (make-person "Jane" 19))
+```
+
+### Working with Structs
+When a struct is created, we can access each individual field using selectors. The syntax for a selector is `(name-field struct)`. For example, to access the name of a person, we would use `(person-name struct)`. To access the age of a person, we would use `(person-age struct)`.
+
+```racket title="Working with Structs" showLineNumbers
+(define-struct person (name age))
+
+(define p1 (make-person "John" 20))
+
+(person-name p1) ; "John"
+(person-age p1) ; 20
+```
+
+We can also check if a variable is a struct that we created using a predicate. The syntax is `(name? struct)`. For example, to check if a variable is a person, we would use `(person? struct)`.
+
+```racket title="Working with Structs" showLineNumbers
+(define-struct person (name age))
+
+(define p1 (make-person "John" 20))
+(define num 100)
+
+(person? p1) ; true
+(person? num) ; false
+```
+
+### Data Definition
+Due to the fact that structs are a new way to define data, we will create a data definition for it. For the How to Design Worlds recipe, everything is done the same way as before just following the new data definition template for the functions.
+
+```racket title="Data Definition for Player" showLineNumbers
+; Problem: We need to represent a hockey player by storing their first and last name.
+
+(define-struct player (fn ln)) ; Possible structure definition
+
+; Player is (make-player String String)
+; interp. (make-player fn ln) is a hockey player with
+;           fn is the first name of the player
+;           ln is the last name of the player
+
+(define P1 (make-player "Bobby" "Orr"))
+(define P2 (make-player "Wayne" "Gretzky"))
+
+; Template
+(define (fn-for-player p)
+  (... (player-fn p) ; String
+       (player-ln p))) ; String
+
+; Template rules used:
+; - Compound: 2 fields
+```
+
+:::note
+This data definition is for a compound data so we needed to do step 1 of the How to Design Data recipe. This step was to create a possible structure definition which we did not have to do before.
+:::

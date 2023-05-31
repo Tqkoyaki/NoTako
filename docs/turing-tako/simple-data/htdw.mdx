@@ -1,0 +1,315 @@
+---
+id: page-4
+title: How to Design Worlds
+sidebar_position: 4
+---
+import Fig from '@site/src/components/Figure';
+import simpledata1 from '@site/static/img/turing/simple-data/simple-data-1.png';
+
+So far the programs we have built have been simple non-interactive programs. However, by using the How to Design Worlds recipe which builts upon the last two recipes, we will be able to built large and complex programs which are interactive.
+
+## The Recipe
+The recipe is broken down into two parts: The Domain Analysis and building the actual programs.
+
+The steps for this recipe are as follows:
+1. Domain Analysis
+    1. Sketch program scenarios
+    2. Identify constant information
+    3. Identify changing information
+    4. Identify big-bang options
+2. Build the Program
+    1. Establish constants
+    2. Create data definitions using HtDD (How to Design Data) recipe.
+    3. Create functions using the HtDF (How to Design Functions) recipe.
+        1. Create the main function first.
+        2. Create a wish list entry for each big-bang handler.
+    4. Work through the wish list, developing each function as needed.
+
+### Big Bang Mechanism
+Before we can dive deep into the recipe, we need to understand the new big-bang primitive. This is a primitive which allows us to create interactive programs by providing it various functions for its handlers.
+
+The big-bang primitive has the following syntax, `(big-bang <starting-world-state> <big-bang option> <big-bang option> ...)`.
+
+| Big Bang Option | Program needs to... | Signature
+| --------------- | ----------- | --------- |
+| `on-tick` | changes as time goes by | `world-state -> world-state` |
+| `to-draw` | display the world | `world-state -> image` |
+| `on-key` | respond to key presses | `world-state key-event -> world-state` |
+| `on-mouse` | respond to mouse clicks | `world-state mouse-event -> world-state` |
+| `stop-when` | stop when a condition is met | `world-state -> boolean` |
+
+The starting value depends on the data that keeps track of the world state. The big-bang options are functions that are called when certain events occur.
+
+```racket title="Big Bang Example" showLineNumbers
+; This program displays a circle that moves from left to right
+(big-bang 0
+  (on-tick advance-circle)
+  (to-draw render-circle))
+
+; These are functions we create...
+; advance-circle is a function that takes the current state of the world and returns the next state of the world
+; render-circle is a function that takes the current state of the world and returns an image to display
+```
+
+:::note
+The world state in the example above is a number which represents the current x position of the circle. The world state can be any data type which represents some aspect of the world that changes.
+:::
+
+## Domain Analysis
+The domain analysis is the first step in the recipe. The whole point of this step is to understand and break down the problem. This will help us build the program in a more organized and efficient manner.
+
+Let's build a program that displays a circle that moves from left to right and resets its position when the space bar is pressed.
+
+### Sketch Program Scenarios
+The first step is to sketch different moments of our program while it is running.
+
+For our program, we can sketch the following scenarios:
+1. The circle at the starting position 0.
+2. The circle somewhere in the middle of the screen.
+3. The circle at the end of the screen.
+
+<Fig src={simpledata1} caption='All Scenarios in One Image' num={1}/>
+
+### Identify Constant Information
+The next step is to identify the information that does not change. This information is called the constant information.
+
+For our program, the constant information is:
+1. The width of the screen.
+2. The height of the screen.
+3. The y position of the circle.
+4. The image of the circle.
+5. The background of the screen.
+
+### Identify Changing Information
+The next step is to identify the information that changes. This information is called the changing information.
+
+For our program, the changing information is only the x position of the circle.
+
+### Identify Big-Bang Options
+The last step is to identify the big-bang options. This is the most important step as it will help us build the program.
+
+We know for our program, we want to move the circle further as time goes by so we need the `on-tick` option. We also want to display the circle so we need the `to-draw` option. Lastly, we want to reset the circle's position when the space bar is pressed so we need the `on-key` option.
+
+## Build the Program
+Now that the problem is broken down and analysized, it makes it easier to build the program. We will reference the analysis often as we build the program to make sure we are on the right track.
+
+### Establish Constants
+Using the constant information we identified, we can create constants for them.
+
+```racket title="Establish Constants" showLineNumbers
+(require 2htdp/image)
+(require 2htdp/universe)
+
+(define WIDTH 600)
+(define HEIGHT 400)
+(define CTR-Y (/ HEIGHT 2))
+(define CIRCLE (circle 50 "solid" "red"))
+
+; The background is refered to as MTS and this is a white background
+(define MTS (empty-scene WIDTH HEIGHT))
+```
+
+:::note
+`(require 2htdp/universe)` is a new library that we need to use the big-bang primitive. We need it everytime we use the How to Design Worlds recipe. Typically we will also need `(require 2htdp/image)` because we often work with images.
+:::
+
+### Create Data Definitions
+Now we want to use the changing information we identified to create a data definition. The changing information is our world state so we will create a data definition for it.
+
+```racket title="Create Data Definitions" showLineNumbers
+; A Pos is a number
+; interp. the x position of the circle
+
+(define POS 0)
+(define POS (/ WIDTH 2)) ; Middle of screen
+(define POS WIDTH) ; End of screen
+
+(define (fn-for-pos p)
+  (... p))
+
+; Template rules used:
+; - atomic non-distinct: Number
+```
+
+### Create Functions
+This is broken down into two parts: creating the main function and creating the wish list. We are not creating the functions yet, we are just establishing what functions we need to create.
+
+#### Create the Main Function
+The main function is the function that will be called by the big-bang primitive. It will always take one world state as input and return the next world state as output.
+
+```racket title="Create the Main Function" showLineNumbers
+; Pos -> Pos
+; start the world with (main 0)
+
+(define (main p)
+  (big-bang p
+    (on-tick advance-circle) ; Pos -> Pos
+    (to-draw render-circle) ; Pos -> Image
+    (on-key reset-circle))) ; Pos KeyEvent -> Pos
+```
+
+:::note
+Each big bang option used was taken from our analysis. We also named the functions `advance-circle`, `render-circle`, and `reset-circle` even though we haven't created them yet. This is because we will be creating them in the next step. Finally, also note that the main function does not need a purpose or examples instead it needs a starting value like `0` meaning the starting position of the circle is `0`.
+:::
+
+#### Create the Wish List
+Right now our goal is not to create the functions but to create a wish list of what all the functions we need to create and what they should do. This means we only create the purpose, signature, and stub for each function.
+
+The functions we need to create are based on the functions we used in the main function. We need to create `advance-circle`, `render-circle`, and `reset-circle`.
+
+```racket title="Create the Wish List" showLineNumbers
+; Pos -> Pos
+; Provide next position of circle using current position
+(define (advance-circle p) 0) ; Stub
+
+; Pos -> Image
+; Render the circle at the given position
+(define (render-circle p) CIRCLE) ; Stub
+
+; Pos KeyEvent -> Pos
+; Reset the circle's position when the space bar is pressed
+(define (reset-circle p ke) 0) ; Stub
+```
+
+### Working through the Wish List
+All the setup work is done! Now we can start working through each function in the wish list and complete them. This is done by following the How to Design Functions recipe. All functions below are completed using the How to Design Functions recipe.
+
+```racket title="Advance Circle" showLineNumbers
+; Pos -> Pos
+; Provide next position of circle using current position
+#;
+(define (advance-circle p) 0) ; Stub
+
+(check-expect (advance-circle 0) 1)
+(check-expect (advance-circle 100) (+ 100 1))
+(check-expect (advance-circle WIDTH) WIDTH)
+
+(define (advance-circle p)
+  (if (< p WIDTH)
+      (+ p 1)
+      WIDTH))
+```
+    
+```racket title="Render Circle" showLineNumbers
+; Pos -> Image
+; Render the circle at the given position
+#;
+(define (render-circle p) CIRCLE) ; Stub
+
+(check-expect (render-circle 0) (place-image CIRCLE 0 CTR-Y MTS))
+(check-expect (render-circle 100) (place-image CIRCLE 100 CTR-Y MTS))
+(check-expect (render-circle WIDTH) (place-image CIRCLE WIDTH CTR-Y MTS))
+
+(define (render-circle p)
+  (place-image CIRCLE p CTR-Y MTS))
+```
+
+```racket title="Reset Circle" showLineNumbers
+; Pos KeyEvent -> Pos
+; Reset the circle's position when the space bar is pressed
+#;
+(define (reset-circle p ke) 0) ; Stub
+
+(check-expect (reset-circle 0 " ") 0)
+(check-expect (reset-circle 100 " ") 0)
+(check-expect (reset-circle 100 "a") 100)
+(check-expect (reset-circle 0 "a") 0)
+
+(define (reset-circle p ke)
+  (cond [(key=? ke " ") 0]
+        [else p]))
+```
+
+## Everything Together
+The whole program is able to move a red circle across the screen and reset its position when the space bar is pressed. We worked through it in pieces but here is the whole program together.
+
+```racket title="Everything Together" showLineNumbers
+(require 2htdp/image)
+(require 2htdp/universe)
+
+;; ==== CONSTANTS ====
+(define WIDTH 600)
+(define HEIGHT 400)
+(define CTR-Y (/ HEIGHT 2))
+(define CIRCLE (circle 50 "solid" "red"))
+(define MTS (empty-scene WIDTH HEIGHT))
+
+;; ==== DATA DEFINITION ====
+; A Pos is a number
+; interp. the x position of the circle
+
+(define POS1 0)
+(define POS2 (/ WIDTH 2)) ; Middle of screen
+(define POS3 WIDTH) ; End of screen
+
+(define (fn-for-pos p)
+  (... p))
+
+; Template rules used:
+; - atomic non-distinct: Number
+
+;; ==== FUNCTIONS ====
+; Pos -> Pos
+; start the world with (main 0)
+
+(define (main p)
+  (big-bang p
+    (on-tick advance-circle) ; Pos -> Pos
+    (to-draw render-circle) ; Pos -> Image
+    (on-key reset-circle))) ; Pos KeyEvent -> Pos
+
+; Pos -> Pos
+; Provide next position of circle using current position
+#;
+(define (advance-circle p) 0) ; Stub
+
+(check-expect (advance-circle 0) 1)
+(check-expect (advance-circle 100) (+ 100 1))
+(check-expect (advance-circle WIDTH) WIDTH)
+
+(define (advance-circle p)
+  (if (< p WIDTH)
+      (+ p 1)
+      WIDTH))
+
+; Pos -> Image
+; Render the circle at the given position
+#;
+(define (render-circle p) CIRCLE) ; Stub
+
+(check-expect (render-circle 0) (place-image CIRCLE 0 CTR-Y MTS))
+(check-expect (render-circle 100) (place-image CIRCLE 100 CTR-Y MTS))
+(check-expect (render-circle WIDTH) (place-image CIRCLE WIDTH CTR-Y MTS))
+
+(define (render-circle p)
+  (place-image CIRCLE p CTR-Y MTS))
+
+; Pos KeyEvent -> Pos
+; Reset the circle's position when the space bar is pressed
+#;
+(define (reset-circle p ke) 0) ; Stub
+
+(check-expect (reset-circle 0 " ") 0)
+(check-expect (reset-circle 100 " ") 0)
+(check-expect (reset-circle 100 "a") 100)
+
+(define (reset-circle p ke)
+  (cond [(key=? ke " ") 0]
+        [else p]))
+
+(main 0)
+```
+
+:::note
+We called `(main 0)` at the end of the program to start the program. This is because the main function is the function that starts the program.
+:::
+
+
+
+
+
+
+
+
+
+

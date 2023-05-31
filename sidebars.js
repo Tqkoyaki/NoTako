@@ -49,7 +49,7 @@ const sidebars = {
         'turing-tako/intro-to-cs/page-7',
         'turing-tako/intro-to-cs/page-8',
         'turing-tako/intro-to-cs/page-9',
-        'turing-tako/intro-to-cs/page-10'
+        'turing-tako/intro-to-cs/page-10',
       ]
     },
     {
@@ -59,6 +59,8 @@ const sidebars = {
         'turing-tako/simple-data/page-1',
         'turing-tako/simple-data/page-2',
         'turing-tako/simple-data/page-3',
+        'turing-tako/simple-data/page-4',
+        'turing-tako/simple-data/page-5',
       ]
     }
   ],
