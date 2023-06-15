@@ -1,0 +1,99 @@
+---
+id: page-7
+title: Reference
+sidebar_position: 7
+---
+Previously, we worked with self reference where we referenced the function inside of itself. This came in handy when working with lists. For complex data definitions, references just as useful.
+
+## Data Definition
+References are useful when working with complex data definitions like lists of compound data.
+
+Let's begin with a simple data definition for a student.
+
+```racket title="Students" showLineNumbers
+(define-struct student (first-name last-name gpa))
+; A Student is a (make-student String String Number)
+; interp. a student with a first name, last name, and gpa
+
+(define S1 (make-student "John" "Doe" 4))
+(define S2 (make-student "Jane" "Doe" 3))
+
+#;
+(define (fn-for-student s)
+  (... (student-first-name s)   ; String
+       (student-last-name s)    ; String
+       (student-id s)))         ; Number
+
+; Template rules used:
+; - compound: 3 fields
+```
+
+Now we can reference this data definition in another data definition so that we can have a list of students.
+
+```racket title="List of Students" showLineNumbers
+; A ListOfStudent is one of:
+; - empty
+; - (cons Student ListOfStudent)
+; interp. a list of students
+
+(define LOS1 empty)
+(define LOS2 (cons S1 empty))
+(define LOS3 (cons S1 (cons S2 empty)))
+
+#;
+(define (fn-for-los los)
+  (cond [(empty? los) (...)]
+        [else
+         (... (fn-for-student (first los))
+              (fn-for-los (rest los)))]))
+
+; Template rules used:
+; - one of: 2 cases
+; - atomic distinct: empty
+; - compound: (cons Student ListOfStudent)
+; - reference: (first los) is Student
+; - self-reference: (rest los) is ListOfStudent
+```
+
+We referenced the `Student` data definition in the `ListOfStudent` data definition making it possible to create complex data definitions.
+
+## Functions
+These data definitions can be used as usual with the How to Design Functions (HtDF) recipe.
+
+```racket title="Function" showLineNumbers
+; ListOfStudent -> Number
+; produces the number of students with a gpa greater than 3.5
+
+#;
+(define (honors-count los) 0) ; stub
+
+(check-expect (honors-count empty) 0)
+(check-expect (honors-count (cons S1 empty)) 1)
+(check-expect (honors-count (cons S1 (cons S2 empty))) 1)
+
+(define (honors-count los)
+  (cond [(empty? los) 0]
+        [else (if (honors? (first los))
+                  (+ 1 (honors-count (rest los)))
+                  (honors-count (rest los)))]))
+```
+
+Typically, for complex data definitions, we can break the problem down into multiple parts. The template had a `fn-for-student` which refers to a secondary helper function. This helper function is called `honors?` and determines if a student is on the honors list.
+
+```racket title="Helper Function" showLineNumbers
+; Student -> Boolean
+; produces true if the student is on the honors list
+
+#;
+(define (honors? s) false) ; stub
+
+(check-expect (honors? (make-student "John" "Doe" 4)) true)
+(check-expect (honors? (make-student "Jane" "Doe" 3)) false)
+
+(define (honors? s)
+  (> (student-gpa s) 3.5))
+```
+
+:::note
+The helper function will be more complex problems than this dummy exam question. Reference is useful for breaking down complex problems into smaller parts enabling us to solve large and complex problems.
+:::

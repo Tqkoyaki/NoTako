@@ -1,0 +1,320 @@
+---
+id: page-9
+title: Helper Functions
+sidebar_position: 9
+---
+Functions have been getting more and more complex as we go along. A simple way to work with complexity is to break down the problem into smaller pieces. This is where helper functions come in, they help us break down problems into smaller more managable ones that we can solve and then put together to solve the bigger problem.
+
+Let's tackle a problem where we get a list of images and we need to display the images left to right from smallest to largest.
+
+## Data Definition
+Before we can start with any functions, we need a data definition for list of images. We already have images defined when we use the `(require 2htdp/image)` library so we just need to define a list of images.
+
+```racket title="Data Definition" showLineNumbers
+(require 2htdp/image)
+
+; ListOfImage is one of
+; - empty
+; - (cons Image ListOfImage)
+; interp. an arbitrary number of images
+
+(define LOS1 empty)
+(define LOS2 (cons (square 10 "solid" "white") empty))
+(define LOS3 (cons (square 20 "solid" "white") LOS2))
+
+#;
+(define (fn-for-loi loi)
+  (cond [(empty? loi) (...)]
+        [else (... (first loi)
+              (fn-for-loi (rest loi)))]))
+```
+
+## Function Decomposition
+One common time we use helper functions is when the problem can be broken down into distinct parts where each part leads to the next. In this case, we have two distinct problems, one is to sort the list of images and once we have a sorted list, our second problem is to display the images left to right.
+
+```racket title="Function Decomposition" showLineNumbers
+; ListOfImage -> Image
+; Lay out images left to right in increasing order of size
+#;
+(define (arrange-images loi) BLANK) ;stub
+
+(check-expect (arrange-images (cons (rectangle 10 20 "solid" "blue")
+                                    (cons (rectangle 20 30 "solid" "red")
+                                          empty)))
+              (beside (rectangle 10 20 "solid" "blue")
+                      (rectangle 20 30 "solid" "red")
+                      BLANK))
+(check-expect (arrange-images (cons (rectangle 20 30 "solid" "red")
+                                    (cons (rectangle 10 20 "solid" "blue")
+                                          empty)))
+              (beside (rectangle 10 20 "solid" "blue")
+                      (rectangle 20 30 "solid" "red")
+                      BLANK))
+
+(define (arrange-images loi)
+  (layout-images (sort-images loi)))
+
+;; <---- WISHED FOR FUNCTIONS ---->
+
+; ListOfImage -> Image
+; place images beside each other in order of list
+(define (layout-images loi) BLANK) ; stub
+
+; ListOfImage -> ListOfImage
+; sort images in increasing order of size (area)
+(define (sort-images loi) loi) ; stub
+```
+
+:::note
+Notice that we have wished for the functions `layout-images` and `sort-images` but we have not defined them yet. Even though they are not complete, we were able to define the function `arrange-images` because we can assume that the functions we wish for will be able to do what we want them to do.
+:::
+
+## Operating on Lists
+Another common time we use helper functions is when we need to operate on a list like how we need to operate on the list of images in order to sort it. To sort the list, we need to be able to traverse the list and be able to sort each element in the list one at a time. This is where a helper function can make a difference.
+
+To sort the list, we will assume the last element in the list is already sorted and we will work backwards inserting each element into the right place in the sorted list till the whole list is sorted.
+
+```racket title="Sorting List" showLineNumbers
+; ListOfImage -> ListOfImage
+; sort images in increasing order of size (area)
+#;
+(define (sort-images loi) loi) ; stub
+
+(check-expect (sort-images empty) empty)
+(check-expect (sort-images (cons (rectangle 10 20 "solid" "blue")
+                                 (cons (rectangle 20 30 "solid" "red")
+                                       empty)))
+              (cons (rectangle 10 20 "solid" "blue")
+                                 (cons (rectangle 20 30 "solid" "red")
+                                       empty)))
+(check-expect (sort-images (cons (rectangle 20 30 "solid" "red")
+                                 (cons (rectangle 10 20 "solid" "blue")
+                                       empty)))
+              (cons (rectangle 10 20 "solid" "blue")
+                                 (cons (rectangle 20 30 "solid" "red")
+                                       empty)))
+(check-expect (sort-images (cons (rectangle 30 40 "solid" "green")
+                                 (cons (rectangle 20 30 "solid" "blue")
+                                       (cons (rectangle 10 20 "solid" "red")
+                                             empty))))
+              (cons (rectangle 10 20 "solid" "red")
+                    (cons (rectangle 20 30 "solid" "blue")
+                          (cons (rectangle 30 40 "solid" "green")
+                                empty))))
+
+(define (sort-images loi)
+  (cond [(empty? loi) empty] ; empty list is already sorted
+        [else
+         (insert (first loi) ; inserts each element into the right place
+              (sort-images (rest loi)))])) ; sorts the rest of the list
+```
+
+Now we need to create the helper function `insert` that we used in `sort-image`. This function will insert the element into the sorted list.
+
+```racket title="Inserting Element into List" showLineNumbers
+; Image ListOfImage -> ListOfImage
+; insert image into list in increasing order of size (area)
+#;
+(define (insert img loi) loi) ; stub
+
+; Defined this to help with making tests
+(define I1 (rectangle 10 20 "solid" "blue"))
+(define I2 (rectangle 20 30 "solid" "red"))
+(define I3 (rectangle 30 40 "solid" "green"))
+
+(check-expect (insert I1 empty) (cons I1 empty))
+(check-expect (insert I1 (cons I2 (cons I3 empty))) (cons I1 (cons I2 (cons I3 empty))))
+(check-expect (insert I2 (cons I1 (cons I3 empty))) (cons I1 (cons I2 (cons I3 empty))))
+(check-expect (insert I3 (cons I1 (cons I2 empty))) (cons I1 (cons I2 (cons I3 empty))))
+
+(define (insert img loi)
+  (cond [(empty? loi) (cons img empty)] ; if list is empty, insert at front
+        [else (if (larger? img (first loi)) ; if image is larger than first element
+                  (cons (first loi) (insert img (rest loi))) ; insert image into rest of list
+              (cons img loi))])) ; else insert image at front
+```
+
+One function deals with inserting elements while the other deals with going to every element in the list and making sure it is sorted. By breaking this complex task into two simpler tasks, we were able to solve the problem.
+
+## Domain Knowledge Shift
+If you noticed, we used the function `larger?` in `insert` but that function does not exist yet. In fact that is another helper function we will use. This is the third case where we commonly use helper functions. If we are looking to know something about the data that we do not already know, we can create a helper function to help us. In this case we don't know if one image is larger than another so we created a function to help us.
+
+```racket title="Comparing Images" showLineNumbers
+; Image Image -> Boolean
+; is img1 larger than img2
+#;
+(define (larger? img1 img2) false) ; stub
+
+(check-expect (larger? (rectangle 3 4 "solid" "red") (rectangle 2 6 "solid" "red")) false)
+(check-expect (larger? (rectangle 5 4 "solid" "red") (rectangle 2 6 "solid" "red")) true)
+(check-expect (larger? (rectangle 3 5 "solid" "red") (rectangle 2 6 "solid" "red")) true)
+(check-expect (larger? (rectangle 3 4 "solid" "red") (rectangle 5 6 "solid" "red")) false)
+(check-expect (larger? (rectangle 3 4 "solid" "red") (rectangle 2 7 "solid" "red")) false)
+
+(define (larger? img1 img2)
+  (> (* (image-width img1) (image-height img1))
+     (* (image-width img2) (image-height img2))))
+```
+
+## Finishing Up
+Now that we have sorted the list, we just need to finish the function to render the image using the HTDF recipe and we are done.
+
+```racket title="Layout Images" showLineNumbers
+; ListOfImage -> Image
+; place images beside each other in order of list
+#;
+(define (layout-images loi) BLANK) ; stub
+
+(check-expect (layout-images empty) BLANK)
+(check-expect (layout-images (cons (rectangle 10 20 "solid" "blue")
+                                   (cons (rectangle 20 30 "solid" "red")
+                                         empty)))
+              (beside (rectangle 10 20 "solid" "blue")
+                      (rectangle 20 30 "solid" "red")
+                      BLANK))
+
+(define (layout-images loi)
+  (cond [(empty? loi) BLANK]
+        [else (beside (first loi)
+              (layout-images (rest loi)))]))
+```
+
+Now the function `arrange-images` because we were able to break the problem into smaller pieces and solve each piece individually. Any complex problem can be solved using theses techniques.
+
+:::note
+One thing to note is a general rule of thumb besides the three cases we mentioned above is that each function should only do one thing. If you find yourself writing a function that does many things, you should break it up into smaller functions.
+:::
+
+## Complete Program
+Here is the complete program for `arrange-images`.
+
+```racket title="Complete Program" showLineNumbers
+(require 2htdp/image)
+
+; ListOfImage is one of
+; - empty
+; - (cons Image ListOfImage)
+; interp. an arbitrary number of images
+
+(define LOS1 empty)
+(define LOS2 (cons (square 10 "solid" "white") empty))
+(define LOS3 (cons (square 20 "solid" "white") LOS2))
+
+#;
+(define (fn-for-loi loi)
+  (cond [(empty? loi) (...)]
+        [else (... (first loi)
+              (fn-for-loi (rest loi)))]))
+
+; ListOfImage -> Image
+; Lay out images left to right in increasing order of size
+#;
+(define (arrange-images loi) BLANK) ;stub
+
+(check-expect (arrange-images (cons (rectangle 10 20 "solid" "blue")
+                                    (cons (rectangle 20 30 "solid" "red")
+                                          empty)))
+              (beside (rectangle 10 20 "solid" "blue")
+                      (rectangle 20 30 "solid" "red")
+                      BLANK))
+(check-expect (arrange-images (cons (rectangle 20 30 "solid" "red")
+                                    (cons (rectangle 10 20 "solid" "blue")
+                                          empty)))
+              (beside (rectangle 10 20 "solid" "blue")
+                      (rectangle 20 30 "solid" "red")
+                      BLANK))
+
+(define (arrange-images loi)
+  (layout-images (sort-images loi)))
+
+
+; ListOfImage -> ListOfImage
+; sort images in increasing order of size (area)
+#;
+(define (sort-images loi) loi) ; stub
+
+(check-expect (sort-images empty) empty)
+(check-expect (sort-images (cons (rectangle 10 20 "solid" "blue")
+                                 (cons (rectangle 20 30 "solid" "red")
+                                       empty)))
+              (cons (rectangle 10 20 "solid" "blue")
+                                 (cons (rectangle 20 30 "solid" "red")
+                                       empty)))
+(check-expect (sort-images (cons (rectangle 20 30 "solid" "red")
+                                 (cons (rectangle 10 20 "solid" "blue")
+                                       empty)))
+              (cons (rectangle 10 20 "solid" "blue")
+                                 (cons (rectangle 20 30 "solid" "red")
+                                       empty)))
+(check-expect (sort-images (cons (rectangle 30 40 "solid" "green")
+                                 (cons (rectangle 20 30 "solid" "blue")
+                                       (cons (rectangle 10 20 "solid" "red")
+                                             empty))))
+              (cons (rectangle 10 20 "solid" "red")
+                    (cons (rectangle 20 30 "solid" "blue")
+                          (cons (rectangle 30 40 "solid" "green")
+                                empty))))
+
+(define (sort-images loi)
+  (cond [(empty? loi) empty] ; empty list is already sorted
+        [else
+         (insert (first loi) ; inserts each element into the right place
+              (sort-images (rest loi)))])) ; sorts the rest of the list
+
+
+; Image ListOfImage -> ListOfImage
+; insert image into list in increasing order of size (area)
+#;
+(define (insert img loi) loi) ; stub
+
+; Defined this to help with making tests
+(define I1 (rectangle 10 20 "solid" "blue"))
+(define I2 (rectangle 20 30 "solid" "red"))
+(define I3 (rectangle 30 40 "solid" "green"))
+
+(check-expect (insert I1 empty) (cons I1 empty))
+(check-expect (insert I1 (cons I2 (cons I3 empty))) (cons I1 (cons I2 (cons I3 empty))))
+(check-expect (insert I2 (cons I1 (cons I3 empty))) (cons I1 (cons I2 (cons I3 empty))))
+(check-expect (insert I3 (cons I1 (cons I2 empty))) (cons I1 (cons I2 (cons I3 empty))))
+
+(define (insert img loi)
+  (cond [(empty? loi) (cons img empty)] ; if list is empty, insert at front
+        [else (if (larger? img (first loi)) ; if image is larger than first element
+                  (cons (first loi) (insert img (rest loi))) ; insert image into rest of list
+              (cons img loi))])) ; else insert image at front
+
+
+; Image Image -> Boolean
+; is img1 larger than img2
+#;
+(define (larger? img1 img2) false) ; stub
+
+(check-expect (larger? (rectangle 3 4 "solid" "red") (rectangle 2 6 "solid" "red")) false)
+(check-expect (larger? (rectangle 5 4 "solid" "red") (rectangle 2 6 "solid" "red")) true)
+(check-expect (larger? (rectangle 3 5 "solid" "red") (rectangle 2 6 "solid" "red")) true)
+(check-expect (larger? (rectangle 3 4 "solid" "red") (rectangle 5 6 "solid" "red")) false)
+(check-expect (larger? (rectangle 3 4 "solid" "red") (rectangle 2 7 "solid" "red")) false)
+
+(define (larger? img1 img2)
+  (> (* (image-width img1) (image-height img1))
+     (* (image-width img2) (image-height img2))))
+
+
+; ListOfImage -> Image
+; place images beside each other in order of list
+#;
+(define (layout-images loi) BLANK) ; stub
+
+(check-expect (layout-images empty) BLANK)
+(check-expect (layout-images (cons (rectangle 10 20 "solid" "blue")
+                                   (cons (rectangle 20 30 "solid" "red")
+                                         empty)))
+              (beside (rectangle 10 20 "solid" "blue")
+                      (rectangle 20 30 "solid" "red")
+                      BLANK))
+
+(define (layout-images loi)
+  (cond [(empty? loi) BLANK]
+        [else (beside (first loi)
+              (layout-images (rest loi)))]))
+```

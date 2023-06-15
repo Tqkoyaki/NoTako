@@ -1,0 +1,119 @@
+---
+id: page-8
+title: Natural Numbers
+sidebar_position: 8
+---
+Natural numbers are a valuable data type that we use often in our programs so it is valuable to create a template for them.
+
+## Primitives
+Natural numbers have a few primitives that let us create a template similar to the one we created for lists.
+
+```racket title="Add and Subtract" showLineNumbers
+; Add one to a natural number
+(add1 0) ; => 1
+(add1 1) ; => 2
+(add1 2) ; => 3
+
+; Subtract one from a natural number
+(sub1 3) ; => 2
+(sub1 2) ; => 1
+(sub1 1) ; => 0
+
+; Check if a natural number is zero
+(zero? 0) ; => true
+(zero? 1) ; => false
+```
+
+The benefit of these primitives is that it allows us to treat natural numbers like lists which will let us use self-referencing to create functions.
+
+```racket title="Like Lists" showLineNumbers
+; This is like an empty list
+(define N0 0)
+
+; This is like a list with one element
+(define N1 (add1 0))
+
+; This is like a list with two elements
+(define N2 (add1 (add1 0)))
+
+; This acts like our rest function for lists
+(sub1 N2) ; => N1
+```
+
+## Data Definition
+Now that we know we can treat natural numbers like lists, we can create a data definition for them.
+
+```racket title="Natural Numbers" showLineNumbers
+; A Natural is one of:
+; - 0
+; - (add1 Natural)
+; interp. a natural number
+
+(define N0 0) ; 0
+(define N1 (add1 N0)) ; 1
+(define N2 (add1 N1)) ; 2
+
+#;
+(define (fn-for-natural n)
+  (cond [(zero? n) (...)]
+        [else
+         (... n
+              (fn-for-natural (sub1 n)))]))
+
+; Template rules used:
+; - one of: 2 cases
+; - atomic distinct: 0
+; - compound: (add1 Natural)
+; - self-reference: (sub1 n) is Natural
+```
+
+The list and natural templates are very similar where `(zero?)` replaces `(empty?)`, `n` replaces `(first l)` and `(sub1 n)` replaces `(rest l)`.
+
+## Functions
+Now that we have a data definition for natural numbers, we can create functions that use them. Let's create a function that returns `n + (n - 1) + (n - 2) + ... + 0`.
+
+```racket title="Sum" showLineNumbers
+; Natural -> Natural
+; Returns the sum of all natural numbers from n to 0
+#;
+(define (sum n) 0) ; stub
+
+(check-expect (sum 0) 0)
+(check-expect (sum 1) 1)
+(check-expect (sum 3) (+ 3 2 1 0))
+
+(define (sum n)
+  (cond [(zero? n) 0]
+        [else
+         (+ n (sum (sub1 n)))]))
+```
+
+## Anything Can Be a Natural
+Often in our programs we use natural numbers to represent data like we could use 0, 1, 2 to refer to the color of a traffic light. We as programmers have the ability to create new data definitions and give data new representations in our code. This also means we can create any data type from scratch using data definitions including a new way to represent natural numbers.
+
+Let's say natural numbers don't exist natively in Racket and we want to create it, we could find a new representation for them. For us let's use a list of exclamation points where a list of one `!` represents 1, two `!` represents 2, and so on.
+
+```racket title="Natural Numbers" showLineNumbers
+; A Natural is one of:
+; - empty
+; - (cons "!" Natural)
+; interp. a natural number, the number of "!" in the list is the number
+(define N0 empty) ; 0
+(define N1 (cons "!" N0)) ; 1
+(define N2 (cons "!" N1)) ; 2
+
+; We want primitives to make it easier to work with
+(define (ZERO? n) (empty? n)) ; Any -> Boolean
+(define (ADD1 n) (cons "!" n)) ; Natural -> Natural
+(define (SUB1 n) (rest n)) ; Natural[> 0] -> Natural
+
+#;
+(define (fn-for-natural n)
+  (cond [(ZERO? n) (...)]
+        [else
+         (... n
+              (fn-for-natural (SUB1 n)))]))
+```
+
+This new data definition didn't use any numbers but it is still able to represent natural numbers and we can still use the same functions we created earlier the same way. This goes to show how powerful data definitions are and how we can use them to create an infinite number of new data types.
+

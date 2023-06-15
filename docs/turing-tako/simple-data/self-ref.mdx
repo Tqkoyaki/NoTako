@@ -1,0 +1,140 @@
+---
+id: page-6
+title: Self Reference
+sidebar_position: 6
+---
+So far we have worked with variables that hold singular values but there are many situations where being able to store an arbitrary number of values would be useful. One example is being able to store a list of hockey players.
+
+## Arbitrary Sized Data
+To store an arbitrary number of values we need a list. A list is a data structure that can made up of any type of data. We can have lists of numbers, lists of strings, even lists of images.
+
+### Creating a List
+The most basic list we can create is an empty list. We can create an empty list by using the `empty` keyword.
+
+To create any other list we use the primitive `cons`. The syntax is `(cons data1 data2)`. Two arguments are required and that is all you need to create any sized list, seriously!
+
+```racket title="Creating a List" showLineNumbers
+; Empty list
+empty
+
+; A list with one number
+(cons 1 empty)
+
+; A list with two numbers
+(cons 1 (cons 2 empty))
+
+; A list with five numbers
+(cons 1 (cons 2 (cons 3 (cons 4 (cons 5 empty)))))
+
+; Defining a variable to hold the list
+(define my-list (cons 1 (cons 2 empty)))
+```
+
+### Working with Lists
+Now that we have a list we want to be able to play with it. There are three primitives that we can use. The `first` primitive will return the first element in the list. The `rest` primitive will return the rest of the list. Finally, the `empty?` primitive will return true if the list is empty and false if it is not.
+
+```racket title="Working with Lists" showLineNumbers
+(define L1 (cons 1 (cons 2 (cons 3 empty))))
+
+; Get the first element in the list
+(first L1) ; 1 
+
+; Get the rest of the list
+(rest L1) ; (cons 2 (cons 3 empty))
+
+; Check if the list is empty
+(empty? L1) ; false
+(empty? empty) ; true
+```
+
+## Data Definition
+The data definition recipe is the same for lists however there is a new template that we will use.
+
+```racket title="Type Comment and Interpretation" showLineNumbers
+; A ListOfNumber is one of:
+; - empty
+; - (cons Number ListOfNumber)
+; interp. a list of numbers
+```
+
+Before we move on, let's take a look at the type comment. A list is made up of two things, an empty list (which is a distinct value) and a compound cons cell. The `(cons Number ListofNumber)` allows you to create a list of any size.
+
+```
+Let's check if (cons 60 (cons 42 empty)) is a ListOfNumber.
+
+- The list is not empty so we can use the second bullet.
+- It must fit (cons Number ListOfNumber), 60 is the Number so we must check if (cons 42 empty) is a ListOfNumber.
+
+Let's check if (cons 42 empty) is a ListOfNumber.
+
+- The list is not empty so we can use the second bullet.
+- It must fit (cons Number ListOfNumber), 42 is the Number so we must check if empty is a ListOfNumber.
+
+Let's check if empty is a ListOfNumber.
+
+- The list is empty so we can use the first bullet.
+
+Now if we work backwards we see that (cons 42 empty) is a ListOfNumber and therefore (cons 60 (cons 42 empty)) is a ListOfNumber.
+``` 
+
+Using just those two bullets we can create a list of any size. Next we should look at the template...
+
+```racket title="Template" showLineNumbers
+(define (fn-for-lon lon)
+  (cond [(empty? lon) (...)]
+        [else
+         (... (first lon)
+              (fn-for-lon (rest lon)))]))
+```
+
+For lists, we always want to deal with the distinct values first like empty. Once that is done, we can use the second bullet to deal with the compound values. We can only get the first element of the list so we use that and then we feed the rest of the list back into the function essentially making the list smaller every time till we get to the empty list.
+
+Now that we can all the pieces of a data definition for a list together.
+
+```racket title="Data Definition" showLineNumbers
+; A ListOfNumber is one of:
+; - empty
+; - (cons Number ListOfNumber)
+; interp. a list of numbers
+
+(define LON1 empty)
+(define LON2 (cons 1 (cons 2 (cons 3 empty))))
+
+#;
+(define (fn-for-lon lon)
+  (cond [(empty? lon) (...)]
+        [else
+         (... (first lon)
+              (fn-for-lon (rest lon)))]))
+
+; Template rules used:
+; - One of: 2 cases
+; - Atomic distinct: empty
+; - Compound: (cons Number ListOfNumber)
+; - Self-reference: (rest lon) is ListOfNumber
+```
+
+:::note
+Because we are calling the function again with a smaller list we are using self-reference. The idea of self-reference is that you are calling the function inside itself like how `fn-for-lon` is called in the definition of `fn-for-lon`.
+:::
+
+## Functions
+Now that we have a data definition, we can create functions using the template. Let's create a function that will sum up the double of every number in a list. If the list is empty, the sum is 0.
+
+```racket title="Double Sum" showLineNumbers
+; ListOfNumber -> Number
+; Sum the double of every number in the list
+#;
+(define (double-sum lon) 0) ; Stub
+
+(check-expect (double-all empty) 0)
+(check-expect (double-all (cons 60 (cons 42 empty))) (+ (* 2 60) (* 2 42)))
+
+(define (double-sum lon)
+  (cond [(empty? lon) 0]
+        [else
+         (+ (* 2 (first lon))
+            (double-sum (rest lon)))]))
+```
+
+Every function has three parts, the base case, the contribution of first, and the combination of the base and the first. The base case is when the list is empty where we return 0. The contribution of first is what we do with the first element of the list. In this case, we double the value. Finally, the combination of the base and the first is how we combine the base case and the contribution of first. We do this by adding everything together.

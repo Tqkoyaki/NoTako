@@ -61,6 +61,11 @@ const sidebars = {
         'turing-tako/simple-data/page-3',
         'turing-tako/simple-data/page-4',
         'turing-tako/simple-data/page-5',
+        'turing-tako/simple-data/page-6',
+        'turing-tako/simple-data/page-7',
+        'turing-tako/simple-data/page-8',
+        'turing-tako/simple-data/page-9',
+        'turing-tako/simple-data/page-10',
       ]
     }
   ],

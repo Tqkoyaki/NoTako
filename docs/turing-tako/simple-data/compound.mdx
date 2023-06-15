@@ -5,7 +5,7 @@ sidebar_position: 5
 ---
 There are many times when two pieces of data are related to each other. For example, a person's name and their age. We can store these two pieces of data in a single variable using a struct in racket.
 
-### Creating a Struct
+## Creating a Struct
 The syntax to define a struct is `(define-struct name (field1 field2 ...))`. The name of the struct is the name of the variable that will hold the struct. The fields are the names of the pieces of data that will be stored in the struct. For example, to create a struct to store a person's name and age, we would use the following code:
 
 ```racket title="Creating a Struct" showLineNumbers
@@ -23,7 +23,7 @@ To create a new struct, we use the syntax `(make-name field1 field2 ...)`. This 
 (define p2 (make-person "Jane" 19))
 ```
 
-### Working with Structs
+## Working with Structs
 When a struct is created, we can access each individual field using selectors. The syntax for a selector is `(name-field struct)`. For example, to access the name of a person, we would use `(person-name struct)`. To access the age of a person, we would use `(person-age struct)`.
 
 ```racket title="Working with Structs" showLineNumbers
@@ -47,7 +47,7 @@ We can also check if a variable is a struct that we created using a predicate. T
 (person? num) ; false
 ```
 
-### Data Definition
+## Data Definition
 Due to the fact that structs are a new way to define data, we will create a data definition for it. For the How to Design Worlds recipe, everything is done the same way as before just following the new data definition template for the functions.
 
 ```racket title="Data Definition for Player" showLineNumbers
@@ -75,3 +75,118 @@ Due to the fact that structs are a new way to define data, we will create a data
 :::note
 This data definition is for a compound data so we needed to do step 1 of the How to Design Data recipe. This step was to create a possible structure definition which we did not have to do before.
 :::
+
+## How to Design Worlds
+As previously mentioned, the How to Design Worlds recipe is the same as before. The only difference is that we need to use the new data definition template for the functions.
+
+```racket title="How to Design Worlds" showLineNumbers
+; Problem: Pacman goes back and forth across the screen
+
+(require 2htdp/image)
+(require 2htdp/universe)
+
+; Analysis
+; 1. Constants: width, height, ctr-y, mts, pacman images
+; 2. Changing: x coordinate of pacman and x velocity of pacman
+; 3. Options: on-tick, to-draw, on-key
+
+;; =======================
+;; Constants:
+
+(define WIDTH 400)
+(define HEIGHT 200)
+
+(define CTR-Y (/ HEIGHT 2))
+
+(define PAC-R (rotate 30 (wedge 30 300 "solid" "gold")))
+(define PAC-L (rotate 210 (wedge 30 300 "solid" "gold")))
+
+(define MTS (empty-scene WIDTH HEIGHT))
+
+;; ========================
+;; Data Definition
+
+(define-struct pacman (x dx))
+;; Pacman is (make-pacman Natural[0, WIDTH], Integer)
+;; interp. (make-pacman x dx) is a pacman with x coordinate x and velocity dx
+;; the x is the center of the pacman
+;; x is in screen coordinates (pixels)
+;; dx is in pixels per tick
+
+(define P1 (make-pacman 10 3))
+(define P2 (make-pacman 20 -4))
+
+#;
+(define (fn-for-pacman c)
+  (... (pacman-x c) ; Natural[0, WIDTH]
+       (pacman-dx c))) ; Integer
+
+;; Template rules used:
+;; - compound: 2 fields
+
+;; =========================
+;; Functions:
+
+;; Pacman -> Pacman
+;; called to make the pacman go for a walk; start with (main (make-pacman 0 3))
+;; no tests for main function
+(define (main p)
+  (big-bang p
+    (on-tick next-pacman) ; Pacman -> Pacman
+    (to-draw render-pacman))) ; Pacman -> Image
+
+;; Pacman -> Pacman
+;; increase pacman x by dx; bounce off edges
+;; :::
+#;
+(define (next-pacman p) p) ; stub
+
+(check-expect (next-pacman (make-pacman 20 3)) (make-pacman (+ 20 3) 3)) ; middle
+(check-expect (next-pacman (make-pacman 20 -3)) (make-pacman (- 20 3) -3))
+
+(check-expect (next-pacman (make-pacman (- WIDTH 3) 3)) (make-pacman WIDTH 3)) ; reaches edge
+(check-expect (next-pacman (make-pacman 3 -3)) (make-pacman 0 -3))
+
+(check-expect (next-pacman (make-pacman (- WIDTH 2) 3)) (make-pacman WIDTH -3)) ; tries to pass edge
+(check-expect (next-pacman (make-pacman 2 -3)) (make-pacman 0 3))
+
+; took template from Pacman
+(define (next-pacman p)
+  (cond [(> (+ (pacman-x p) (pacman-dx p)) WIDTH) (make-pacman WIDTH (- (pacman-dx p)))]
+        [(< (+ (pacman-x p) (pacman-dx p)) 0) (make-pacman 0 (- (pacman-dx p)))]
+        [else (make-pacman (+ (pacman-x p) (pacman-dx p)) (pacman-dx p))]))
+        
+
+;; Pacman -> Image
+;; place appropriate Pacman image on MTS at (pacman-x p) and CTR-Y
+;; :::
+#;
+(define (render-pacman p) MTS) ; stub
+
+(check-expect (render-pacman (make-pacman 99 3))
+              (place-image PAC-R 99 CTR-Y MTS))
+(check-expect (render-pacman (make-pacman 33 -3))
+              (place-image PAC-L 33 CTR-Y MTS))
+
+; took template from Pacman
+(define (render-pacman p)
+  (place-image (choose-image p) (pacman-x p) CTR-Y MTS))
+
+;; Pacman -> Image
+;; produce PACMAN-R or PACMAN-L depending on direction cow is going
+;; :::
+#;
+(define (choose-image p) PACMAN-L) ; stub
+
+(check-expect (choose-image (make-pacman 10 3)) PAC-R)
+(check-expect (choose-image (make-pacman 11 -3)) PAC-L)
+(check-expect (choose-image (make-pacman 11 0)) PAC-L)
+
+; took template from Pacman
+(define (choose-image p)
+  (if (> (pacman-dx p) 0)
+      PAC-R
+      PAC-L))
+
+(main (make-pacman 0 3))
+```
