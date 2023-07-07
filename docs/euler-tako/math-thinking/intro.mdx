@@ -1,0 +1,112 @@
+---
+id: page-1
+title: Precise Language
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import math1 from '@site/static/img/euler/math-thinking/math-1.png';
+
+Mathematics is much more than just using procedures to solve problems. Modern mathematics has required deeper and deeper levels of understanding which is only achievable through mathematical thinking.
+
+This subject can get extremely abstract past what our imagination can believe. One example of this is the ***Banach-Tarski Paradox*** which states that in theory you can take a sphere and cut it up and reassemble it in a way that you can get two identical spheres that are the same size as the original.
+
+<Fig src={math1} caption='Banach-Tarski Paradox' num={1}/>
+
+Our imagination will not believe such a notation but being able to understand and prove these abstract concepts, we need a precise system of language that we can follow. One that leaves no room for ambiguity and has the same meaning no matter the context. These are things that the Modern English Language fails to achieve.
+
+## Mathematical Statements
+
+As previously stated, math needs to be very precise and this is possible in math because language is used in a highly restricted way. In fact, almost all mathematical statements can be created through the variations of these four sentences...
+
+1. Object $A$ has property $P$.
+    - Ex. $3$ is a prime number.
+2. Every object of type $T$ has property $P$.
+    - Ex. Every polynomial equation has a complex root.
+3. There is an object of type $T$ having property.
+    - Ex. There is a prime number between $20$ and $25$.
+4. If statement $A$, then statement $B$.
+    - Ex. If $P$ is a prime of the form $4n + 1$ then $P$ is a sum of two squares.
+
+Almost all key statements of mathmatics, the axioms, conjectures, hypothesis, and theorems are positive or negative versions of one of these four linquistic forms. To build on this form, math also uses keywords which include: *and, or, not, implies, for all, there exists*.
+
+### Conjunction
+
+Conjuction is equivalent to $and$ in English which enables us to combine two statements which we call the ***conjuncts***. If both the conjuncts are true, then the conjunction is true. If either or both of the conjuncts are false, then the conjunction is false.
+
+In mathematics, we denote conjunction with the symbol $\land$. Let's say our two conjuncts are $\psi$ and $\phi$ then we denote the conjunction with $\psi \land \phi$.
+
+Finally, a ***truth table*** lets us map every possible truth value and see their outcome. We can use truth tables to better understand logic. The truth table for conjunction is...
+
+| $\psi$ | $\phi$ | $\psi \land \phi$ |
+| - | - | - |
+| True | True | True |
+| True | False | False |
+| False | True | False |
+| False | False | False |
+
+### Disjunction
+
+Disjunction is equivalent to $or$ in English where the combined statements are individually called the ***disjuncts***. There are two kinds of $or$ that we must consider. Both types of $or$ are true if either of the disjuncts are true. Inclusive $or$ is also true if both the statements are true. On the other hand, Exclusive $or$ is false if both the statements are true.
+
+In mathematics, it turns out, inclusive $or$ tends to be more commonly used so when thats what $or$ refers to on its own. The symbol we have given to $or$ is $\lor$. Let's say our two conjuncts are $\psi$ and $\phi$ then we can denote the disjunction with $\psi \lor \phi$.
+
+Finally, the truth table for $or$ and Exclusive $or$ is...
+
+| $\psi$ | $\phi$ | $\psi \lor \phi$ | Exclusive or |
+| - | - | - | - |
+| True | True | True | False |
+| True | False | True | True |
+| False | True | True | True |
+| False | False | False | False |
+
+### Negation
+
+The third type we will talk about is negation. This one is applied to a statement opposed to how we needed two statements for the others. Negation is equivalent to $not$ in English and if the statement is true, negation makes it false. Vice versa if the statement is false, negation makes it true.
+
+In mathematics, we denote negation with the symbol $\neg$. If our statement is denoted by $\psi$ then the negation of that statement is $\neg \psi$.
+
+Finally, the truth table for $not$ is...
+
+| $\psi$ | $\neg \psi$ |
+| - | - |
+| True | False |
+| False | True |
+
+## Proofs
+
+Now that we are able to create precise mathematical statements and are able to combine them, we can now look to determine if they are true or false. In mathematics, proofs are the primary means of determining the truth of any claim in mathematics. It is important to note that proofs can both be used to prove a statement true and a statement false. We can now look at two example proofs, one that proves a statement true and another that proves a statement false.
+
+### Euler's Proof
+
+The statement is: There are infinitely many prime numbers.
+
+> To prove this, we show that if we list the primes $p_1, p_2, p_3, ...,$ the list continues forever.
+>
+> Suppose we have reached stage $n$: $p_1, p_2, p_3, ..., p_n$. Can we find another prime to continue the list?
+>
+> Look at the number $N = (p_1 * p_2 * p_3 * ... * p_n) + 1$.
+>
+> If $N$ is prime, we have found a prime bigger than $p_n$, and we can continue the list.
+>
+> If $N$ is not prime, it is divisible by a prime, say $p$. $p$ cannot be any of $p_1, p_2, ..., p_n$ since dividing $N$ by any of those leaves a remainder of $1$.
+>
+> So, $p > p_n$. This means we have found a prime bigger than $p_n$ again hence the list can always be continued.
+
+This proves the statement is true.
+
+### Real Roots Proof
+
+The statement is: for every real number $a$, the equation $x^2 + a = 0$ has a real root.
+
+> We can prove this statement false by finding one case of $a$ where the equation does not have a real root. If one case is incorrect, then the whole statement gets invalidated.
+>
+> Let's take the case where $a$ is $1$. The equation $x^2 + 1 = 0$ does not have a real root because $x = \sqrt{-1}$ is not a real number.
+
+This proves the statement is false.
+
+
+
+
+
+

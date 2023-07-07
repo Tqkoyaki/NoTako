@@ -31,6 +31,16 @@ const config = {
     locales: ['en'],
   },
 
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
+  
   presets: [
     [
       'classic',
@@ -75,6 +85,12 @@ const config = {
             docId: 'turing-tako/turing',
             position: 'left',
             label: 'Computing'
+          },
+          {
+            type: 'doc',
+            docId: 'euler-tako/euler',
+            position: 'left',
+            label: 'Mathematics'
           },
           {
             href: 'https://github.com/Tqkoyaki/NoTako',

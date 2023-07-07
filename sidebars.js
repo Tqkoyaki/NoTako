@@ -19,7 +19,8 @@ const sidebars = {
   // But you can create a sidebar manually
   subjectSidebar: [
     'intro',
-    'turing-tako/turing'
+    'turing-tako/turing',
+    'euler-tako/euler'
   ],
   turingSidebar: [
     'turing-tako/turing',
@@ -69,6 +70,16 @@ const sidebars = {
       ]
     }
   ],
+  eulerSidebar: [
+    'euler-tako/euler',
+    {
+      type: 'category',
+      label: 'Mathematical Thinking',
+      items: [
+        'euler-tako/math-thinking/page-1',
+      ]
+    }
+  ]
 };
 
 module.exports = sidebars;
