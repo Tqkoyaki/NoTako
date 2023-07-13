@@ -1,0 +1,251 @@
+---
+id: page-3
+title: Encapsulation
+sidebar_position: 3
+---
+Encapsulation is a fundemental concept in software engineering because typically software is built by many people. The issue with multiple people coding one large software system is that it is very likely that they are going to want to use the same function names for two different functions. This is problem we will be able to solve using encapsulation.
+
+## Local
+
+To be able to do encapsulation, we have a new primitive called `local`. To form a local expression, we use the syntax: `(local [<definition> ...] <expression>)`.
+
+```racket title="Local" showLineNumbers
+; Adding numbers up together
+(local [(define a 1)
+        (define b 2)]
+    (+ a b))
+```
+
+Local lets us add a and b together but the variable does not exist after `local` is completed. This makes those variables self contained meaning a and b are not defined outside the `local` and another variable could be named a and b outside `local`.
+
+### Lexical Scoping
+
+***Lexical Scoping*** is how variables works with `local` and if we want to use this new primitive well, we need to understand this concept well.
+
+```racket title="Lexical Scoping" showLineNumbers
+(define a 1)
+(define b 2)
+
+(+ a
+    (local [(define b 3)
+            (define c 4)]
+        (+ a b c))
+    b)
+
+(define c 1)
+```
+
+In this case `a` and `b` are defined at the start as `1` and `2` respectively. The first thing we should look at is the `local` where `b` and `c` get defined. In this case `b` is redefined to `3` and it is valid because it is inside the `local`. So inside the local, `a` is still `1`, `b` is `3`, and `c` is `4` so `(+ a b c)` evaluates to `8`. This means the `local` is done, this means the `b` after the local is equal to `2`. The redefinition only exists within the `local`, so `b` is still `2` outside it. This made the final expression `(+ 1 8 2)` and the final result was `10`.
+
+The other thing to note is the `c` that is defined after which is again not going to toss an error because once the `local` was done, those variable definitions disappeared.
+
+When we define the variable outside all locals, it is the top level scope or what we call the ***global scope***. Each local creates a smaller scope and when we are looking for a definition for a variable being used, we look at the innermost `local` and work our way to the top scope till we find a definition and use the first one we find.
+
+### Evaluation
+
+We have one last step to fully grasping how `local` works and that is to look at how it is evaluated. There are three steps that any evaluation of local takes, they include renaming, lifting and replacing.
+
+Lets evaluate the expression...
+
+```racket title="Evaluation" showLineNumbers
+(define b 1)
+
+(+ b
+    (local [(define b 2)]
+        (* b b))
+    b)
+
+;  We can substitute the first variable
+
+(+ 1
+    (local [(define b 2)
+        (* b b)])
+    b)
+```
+
+Now we are up to the first step of `local` where each variable that is defined in the local gets a randomly generated name that is unique to the program. That name is used to rename every occurence of the variable in the local. This step is called `renaming`.
+
+```racket title="Renaming" showLineNumbers
+(define b 1)
+
+(+ 1
+    (local [(define b_0 2)
+        (* b_0 b_0)])
+    b)
+```
+
+Next step is `lifting` where the computer lifts the newly named definition to the global scope.
+
+```racket title="Lifting" showLineNumbers
+(define b 1)
+(define b_0 2)
+
+(+ 1
+   (local []
+     (* b_0 b_0)) 
+   b)
+```
+
+The last step to deal with the `local` is `replacing` where we replace the `local` primitive with the body.
+
+```racket title="Replacing" showLineNumbers
+(define b 1)
+(define b_0 2)
+
+(+ 1
+    (* b_0 b_0)
+    b)
+```
+
+Now that `local` is dealt with, we can evaluate the renaming part of the expression like we normally did.
+
+```racket title="Completing Expression" showLineNumbers
+(+ 1
+    (* 2 2)
+    1)
+
+(+ 1 4 1)
+
+6 ; Solution to expression
+```
+
+## Encapsulation
+
+Now that we deeply understand how to use `local`, we can start working with encapsulation. As shown, we are able to self contain sections of code allowing us to fix the issue where programmers could come up with the same names for variables. Encapsulation is the idea that we can self contain sections of code and only leave a few well defined functions with names everyone can agree with.
+
+Let's look at the function from a previous section...
+
+```racket title="Wayback Machine" showLineNumbers
+; Node -> Integer (For First Function)
+; ListOfNode -> Integer (For Second Function)
+; produce the sum of all the data in element (and its children)
+
+#;
+(define (sum-data--node n) 0) ; stub
+#;
+(define (sum-data--lon lon) 0) ; stub
+
+(check-expect (sum-data--node T1) 1)
+(check-expect (sum-data--lon empty) 0)
+(check-expect (sum-data--node T5) (+ 5 3))
+(check-expect (sum-data--node T4) (+ 4 1 2))
+(check-expect (sum-data--node T6) (+ 6 4 1 2 5 3))
+
+
+(define (sum-data--node n)
+  (+ (node-data n)
+     (sum-data--lon (node-children n))))
+
+(define (sum-data--lon lon)
+  (cond [(empty? lon) 0]
+        [else
+         (+ (sum-data--node (first lon))
+              (sum-data--lon (rest lon)))]))
+```
+
+The functions were named `sum-data--node` and `sum-data--lon` but the user would only need to call `sum-data--node` to use this function. We had to name these functions weirdly due to the fact we needed two to solve functions to solve the problem. Outside the implementation, we should not worry about how it works, so we can encapsulate all this code and give it one well defined function name that we can use later.
+
+```racket title="Encapsulation" showLineNumbers
+(define (sum-data n) 
+    (local [
+        (define (sum-data--node n)
+            (+ (node-data n)
+            (sum-data--lon (node-children n))))
+
+        (define (sum-data--lon lon)
+            (cond [(empty? lon) 0]
+                [else
+                    (+ (sum-data--node (first lon))
+                    (sum-data--lon (rest lon)))]))
+        ]
+        (sum-data--node n)
+    )
+)
+```
+
+By encapsulating the function definition into one `local`, the only function name that globally exists is `sum-data` and we don't need to worry about the implementation once the function is created, only how to use it.
+
+## Performance
+
+Another benefit of `local` are being able to fix performance issues. We always want to keep our programs efficient so finding ways to make them run faster is a good idea. Let's look at another piece of code we did before.
+
+```racket title="Wayback Machine Pt. 2" showLineNumbers
+; String Node -> Integer or false
+; String ListOfNode -> Integer or false
+; search the given tree for a node with the given name, produce data if found; false otherwise
+
+#;
+(define (find--node val n) false) ; stub
+#;
+(define (find--lon val lon) false) ; stub
+
+(check-expect (find--lon "T1" empty) false)
+(check-expect (find--node "T2" T1) false)
+(check-expect (find--node "T3" T3) 3)
+(check-expect (find--node "T4" T4) 4)
+(check-expect (find--lon "T2" (cons T1 (cons T2 empty))) 2)
+(check-expect (find--lon "T3" (cons T1 (cons T2 empty))) false)
+(check-expect (find--node "T3" T4) false)
+(check-expect (find--node "T1" T4) 1)
+(check-expect (find--node "T2" T4) 2)
+(check-expect (find--node "T4" T4) 4)
+(check-expect (find--node "T3" T6) 3)
+
+(define (find--node val n)
+  (if (string=? (node-name n) val)
+      (node-data n)
+      (find--lon val (node-children n))))
+
+(define (find--lon val lon)
+  (cond [(empty? lon) false]
+        [else
+         (if (not (false? (find--node val (first lon))))
+             (find--node val (first lon))
+             (find--lon val (rest lon)))])) 
+```
+
+We can check its performance with the `time` primitive which basically tells us how long it takes for a given primitive to run. The syntax is `(time <expression>)`.
+
+```racket title="Performance Testing" showLineNumbers
+;; Natural -> Element
+;; produce a skinny tree n+1 deep, leaf has name "Y" data 1
+(check-expect (make-skinny 0) (make-elt "Y" 1 empty))
+(check-expect (make-skinny 2) (make-elt "X" 0 (list (make-elt "X" 0 (list (make-elt "Y" 1 empty))))))
+
+(define (make-skinny n)
+  (cond [(zero? n) (make-elt "Y" 1 empty)]
+        [else
+         (make-elt "X" 0 (list (make-skinny (sub1 n))))]))
+
+
+(time (find--node "Y" (make-skinny 10)))
+(time (find--node "Y" (make-skinny 11)))
+(time (find--node "Y" (make-skinny 12)))
+(time (find--node "Y" (make-skinny 13)))
+(time (find--node "Y" (make-skinny 14)))
+(time (find--node "Y" (make-skinny 15)))
+```
+
+We made a function to make big trees because if we run this we notice that as the tree gets one deeper, the time it takes to search exponentially grows. A contributing factor to this slow runtime is that we do `(find--node val (first lon))` twice quite often.
+
+To fix this issue, we can use local and define a variable that holds the result of `(find--node val (first lon))`. This way we only run it once and can use it twice.
+
+```racket title="Performance Fix" showLineNumbers
+(define (find--node val n)
+  (if (string=? (node-name n) val)
+      (node-data n)
+      (find--lon val (node-children n))))
+
+(define (find--lon val lon)
+  (cond [(empty? lon) false]
+        [else
+         (local [(define found (find--node val (first lon)))])
+         (if (not (false? found))
+             found
+             (find--lon val (rest lon)))]))
+```
+
+:::note
+Local is useful in avoiding recomputation which can be a useful tool for making various algorithms run faster.
+:::
+

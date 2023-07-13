@@ -68,6 +68,20 @@ const sidebars = {
         'turing-tako/simple-data/page-9',
         'turing-tako/simple-data/page-10',
       ]
+    },
+    {
+      type: 'category',
+      label: 'How to Code: Complex Data',
+      items: [
+        'turing-tako/complex-data/page-1',
+        'turing-tako/complex-data/page-2',
+        'turing-tako/complex-data/page-3',
+        'turing-tako/complex-data/page-4',
+        'turing-tako/complex-data/page-5',
+        'turing-tako/complex-data/page-6',
+        'turing-tako/complex-data/page-7',
+        'turing-tako/complex-data/page-8',
+      ]
     }
   ],
   eulerSidebar: [
@@ -77,6 +91,7 @@ const sidebars = {
       label: 'Mathematical Thinking',
       items: [
         'euler-tako/math-thinking/page-1',
+        'euler-tako/math-thinking/page-2',
       ]
     }
   ]

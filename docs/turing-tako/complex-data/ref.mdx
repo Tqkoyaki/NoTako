@@ -1,0 +1,143 @@
+---
+id: page-1
+title: Mutual Reference
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import comp1 from '@site/static/img/turing/complex-data/complex-data-1.png';
+
+As data gets more complex, we need better data structures to store and use it. So far we have worked with lists and then built up to binary trees. Binary trees can be as arbitrary in depth as possible but they can only have two children maximum per node. Arbitrary arity tree is an evolution to binary trees where each node can have as many children so the tree has arbitrary size in depth and width.
+
+<Fig src={comp1} caption='Arbitary Arity Tree' num={1}/>
+
+## Data Definition
+
+Arbitrary Arity Trees can have an arbitrary number of children so we need to represent it as a list. The other thing to note is that the data definition needs to be a struct because each node has both data about the node and a list of the children.
+
+```racket title="Node" showLineNumbers
+(define-struct node (name data children))
+; Element is (make-node String Integer ListOfNode)
+; interp. A node in an arbitrary arity tree
+;         name is the name given to the node
+;         data is the data that the node holds
+;         ListOfNode are the children to the node
+```
+
+As we can see, this data definition also needs `ListOfNode` to be defined as well.
+
+```racket title="ListOfNode" showLineNumbers
+; ListOfNode is one of:
+; - empty
+; - (cons Node ListOfNode)
+; interp. a list of nodes in the tree
+```
+
+Now that we have a defined this data, we can create a tree using our definition.
+
+```racket title="Examples" showLineNumbers
+(define T1 (make-node "T1" 1 empty))
+(define T2 (make-node "T2" 2 empty))
+(define T3 (make-node "T3" 3 empty))
+(define T4 (make-node "T4" 4 (list T1 T2)))
+(define T5 (make-node "T5" 5 (list T3)))
+(define T6 (make-node "T6" 6 (list T4 T5)))
+```
+
+The only component left for this data definition are the templates. For our case there are two templates we need to create, one for the `Node` definition and another one for the `ListOfNode` definition.
+
+```racket title="Templates" showLineNumbers
+(define (fn-for-node n)
+  (... (node-name n) ; String
+       (node-data n) ; Integer
+       (fn-for-lon (node-children e))))
+
+(define (fn-for-lon lon)
+  (cond [(empty? lon) (...)]
+        [else
+         (... (fn-for-node (first lon))
+              (fn-for-lon (rest lon)))]))
+```
+
+:::note
+One important thing to note here are the references. Node references `ListOfNode` and `ListOfNode` references both `Node` and `ListOfNode`. Due to the fact that `Node` references `ListOfNode` and `ListOfNode` references `Node`, we call this a mutual reference because they reference each other. Besides a mutual reference there is also a self reference when `ListOfNode` references itself.
+:::
+
+## Functions
+
+To create functions for trees, it is just like with simple data where we follow the templates. What is important here is to trust like recursion will do it's job because there are multiple recursions that occur with the template.
+
+For this case, let's create a program that goes through the whole tree and sums up the data.
+
+```racket title="Functions" showLineNumbers
+; Node -> Integer (For First Function)
+; ListOfNode -> Integer (For Second Function)
+; produce the sum of all the data in element (and its children)
+
+#;
+(define (sum-data--node n) 0) ; stub
+#;
+(define (sum-data--lon lon) 0) ; stub
+
+(check-expect (sum-data--node T1) 1)
+(check-expect (sum-data--lon empty) 0)
+(check-expect (sum-data--node T5) (+ 5 3))
+(check-expect (sum-data--node T4) (+ 4 1 2))
+(check-expect (sum-data--node T6) (+ 6 4 1 2 5 3))
+
+
+(define (sum-data--node n)
+  (+ (node-data n)
+     (sum-data--lon (node-children n))))
+
+(define (sum-data--lon lon)
+  (cond [(empty? lon) 0]
+        [else
+         (+ (sum-data--node (first lon))
+              (sum-data--lon (rest lon)))]))
+```
+
+:::note
+Typically both functions output the same datatype like how both of these functions both output an Integer. This is usually the case but there can be cases where they are not the same.
+:::
+
+## Backtracking Search
+
+A common problem we will tackle is searching for a node in the tree so let's look at an example with the current tree we have.
+
+```racket title="Searching" showLineNumbers
+; String Node -> Integer or false
+; String ListOfNode -> Integer or false
+; search the given tree for a node with the given name, produce data if found; false otherwise
+
+#;
+(define (find--node val n) false) ; stub
+#;
+(define (find--lon val lon) false) ; stub
+
+(check-expect (find--lon "T1" empty) false)
+(check-expect (find--node "T2" T1) false)
+(check-expect (find--node "T3" T3) 3)
+(check-expect (find--node "T4" T4) 4)
+(check-expect (find--lon "T2" (cons T1 (cons T2 empty))) 2)
+(check-expect (find--lon "T3" (cons T1 (cons T2 empty))) false)
+(check-expect (find--node "T3" T4) false)
+(check-expect (find--node "T1" T4) 1)
+(check-expect (find--node "T2" T4) 2)
+(check-expect (find--node "T4" T4) 4)
+(check-expect (find--node "T3" T6) 3)
+
+(define (find--node val n)
+  (if (string=? (node-name n) val)
+      (node-data n)
+      (find--lon val (node-children n))))
+
+(define (find--lon val lon)
+  (cond [(empty? lon) false]
+        [else
+         (if (not (false? (find--node val (first lon))))
+             (find--node val (first lon))
+             (find--lon val (rest lon)))])) 
+```
+
+This function can be referenced and adjusted to solve various search problems with arbitrary arity trees.

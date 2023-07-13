@@ -1,0 +1,113 @@
+---
+id: page-2
+title: Cross Product Table
+sidebar_position: 2
+---
+
+Typically before coding, it is often helpful to create a model which is more abstract and often a non-code representation of the function we are coding. Being able to simplify and design the code at a model level is a valuable skill to have.
+
+## Cross Product Table
+
+Cross Product Tables are a great modeling tool for when we are designing functions with two one-of types as our input. One example of an one-of type we often use are lists. They can be one of: `empty` or `cons`.
+
+Let's see this in action by designing a function that consumes two lists of strings and produces true in the first list is a prefix of the second. In the cross table below, the columns are `List A` and the rows are `List B`.
+
+| | empty | (cons String ListOfString) |
+| - | - | - |
+| **empty** | | |
+| **(cons String ListOfString)** | | |
+
+### Completing the Table
+Let's look at the first case where both `List A` and `List B` are empty, this should mean that the function should produce true because an empty prefix is always met.
+
+| | empty | (cons String ListOfString) |
+| - | - | - |
+| **empty** | True | |
+| **(cons String ListOfString)** | | |
+
+Now let's look at the case where `List A` is not empty `List B` is empty. This means `List A` which is the prefix is longer than the phrase in `List B` meaning the prefix was not found making this statement false.
+
+| | empty | (cons String ListOfString) |
+| - | - | - |
+| **empty** | True | False |
+| **(cons String ListOfString)** | | |
+
+The next situation is when `List B` is not empty but `List A` is empty. Here the prefix is nothing but there are letters left in the phrase so this has to be true as the prefix exists in any statement if its empty.
+
+| | empty | (cons String ListOfString) |
+| - | - | - |
+| **empty** | True | False |
+| **(cons String ListOfString)** | True | |
+
+Finally, the bottom right corner is typically the most complex section in cross product tables and it is also the case here. If both lists are not empty, we need to look at if they are equal and that the rest of the list of string is equal.
+
+| | empty | (cons String ListOfString) |
+| - | - | - |
+| **empty** | True | False |
+| **(cons String ListOfString)** | True | True if equal, go through rest of list |
+
+Now that we have a model, we can code with it.
+
+## Coding With Models
+
+As we can see from the cross product table, there are four conditions we need to look at. We can begin using that to create tests that fit all cases.
+
+```racket title="Product Table Test" showLineNumbers
+; ListOfString ListOfString -> Boolean
+; produce true if lsta is a prefix of lstb
+
+(define (prefix=? lsta lstb) false) ; stub
+
+; List A: empty and List B: empty
+(check-expect (prefix=? empty empty) true)
+
+; List A: (cons String ListOfString) and List B: empty
+(check-expect (prefix=? (list "x") empty) false)
+
+; List A: empty and List B: (cons String ListOfString)
+(check-expect (prefix=? empty (list "x")) true)
+
+; List A: (cons String ListOfString) and List B: (cons String ListOfString)
+(check-expect (prefix=? (list "x") (list "x")) true)
+(check-expect (prefix=? (list "x" "y") (list "x" "y")) true)
+(check-expect (prefix=? (list "x" "x") (list "x" "y")) false)
+(check-expect (prefix=? (list "x") (list "x" "y" "z")) true)
+(check-expect (prefix=? (list "x" "y" "z") (list "x" "y")) false)
+```
+
+The last case has many tests due to the fact it is more complex. Now that we have tests, we can use a cond to solve for each condition.
+
+```racket title="Product Table Function" showLineNumbers
+(define (prefix=? lsta lstb)
+  (cond [(and (empty? lsta) (empty? lstb)) true]
+        [(and (empty? lsta) (cons? lstb)) true]
+        [(and (empty? lstb) (cons? lsta)) false]
+        [else (and (string=? (first lsta)
+                             (first lstb))
+                   (prefix=? (rest lsta)
+                             (rest lstb)))]))
+```
+
+### Simplication
+
+The benefit of working with a model beforehand is simplication. We can look at the model and simplify our function even further to make our code cleaner.
+
+Looking at the function, we notice the `List A: empty` column is all `true` meaning we can elimate both the cells in one go by checking if just `List: A` is `empty`.
+
+| | empty | (cons String ListOfString) |
+| - | - | - |
+| **empty** | *True* | False |
+| **(cons String ListOfString)** | *True* | True if equal, go through rest of list |
+
+After that we are able to eliminate the idea that `List A` can be `empty`. Now if `List B` is `empty` after we check `List A` then the whole function is `False`. After that we only need to worry about the last cell. In this fashion we were able to elimate four conditions to three and were able to simplify each condition.
+
+```racket title="Simplication" showLineNumbers
+(define (prefix=? lsta lstb)
+  (cond [(empty? lsta) true]
+        [(empty? lstb) false]
+        [else (and (string=? (first lsta)
+                             (first lstb))
+                   (prefix=? (rest lsta)
+                             (rest lstb)))]))
+```
+
