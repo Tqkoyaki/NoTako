@@ -1,0 +1,110 @@
+---
+id: page-2
+title: Logical Language
+sidebar_position: 2
+---
+
+As previously stated, mathematics requires precise language and so the language is restricted. To better understand how to read and write in this form of language, we need to continue to evolve our knowledge of it's components.
+
+## Implication
+
+Often we have statements that end up implying something about another statement like $n$ is divisible by $6$ implies that $n$ is an even number. The preceding statement is called the ***antecedent*** and the following statement is called the ***consequent***.
+
+One thing to note about implication is that implication has the conditional (a truth part) and a causation part. Let's say we state $\sqrt{2}$ is irrational $\Rightarrow (0 < 1)$. The antecedent is true and the consequent is also true. But, the two statements are not related so there is no causation. This is important to state due to how $implies$ works but in mathematics we focus on the conditional only which ends up working out well for mathematics.
+
+In mathematics, we denote implication with the symbol $\Rightarrow$. Let's say $\phi$ is our antecedent and $\psi$ is our consequent, our implication is denoted with $\phi \Rightarrow \psi$.
+
+Every keyword has a truth table to keep the language precise and so does the keyword $implies$...
+
+| $\phi$ | $\psi$ | $\phi \Rightarrow \psi$ |
+| - | - | - |
+| True | True | True |
+| True | False | False |
+| False | True | True |
+| False | False | True |
+
+:::note
+The first case is when $\phi$ and $\psi$ are true. If $\phi$ is true and $\phi$ implies $\psi$ then $\psi$ has to be true. On the same note, if $\psi$ turns out to be false, then $\phi$ can't actually imply $\psi$ making the implication false. To prove the final cases, we can work with the negation like we typically do in everyday life. The statement is "$\phi$ does not imply $\psi$" which means even though $\phi$ is true, $\psi$ is nevertheless false. This means in every other case $\phi$ does implies $\psi$ which basically means if $\phi$ is false, the implication is irrelavent because there is no relationship.
+:::
+
+### Language
+In english these phrases commonly refer to implication ($\phi \Rightarrow \psi$)...
+
+1. If $\phi$, then $\psi$.
+2. $\phi$ is sufficent for $\psi$.
+3. $\phi$ only if $\psi$ (not the same as "if $\psi$ then $\phi$").
+4. $\psi$ if $\phi$.
+5. $\psi$ whenever $\phi$.
+6. $\psi$ is necessary for $\phi$.
+
+### Contrapositive
+
+The contrapositive is a logical equivalence to an implication. The implication is $\phi \Rightarrow \psi$, the contrapositive is $(\neg\psi) \Rightarrow (\neg\phi)$. For example, we can say if two rectangles are congruent, they have the same area is the implication. The contrapositive is that if two rectangles do not have the same area, they are not congruent.
+
+We can prove that they are logical equivalences using a truth table...
+
+| $\phi$ | $\psi$ | $\neg \phi$ | $\neg \psi$  | $\phi \Rightarrow \psi$ | $(\neg \psi) \Rightarrow (\neg \phi)$ |
+| - | - | - | - | - | - |
+| True | True | False | False | **True** | **True** |
+| True | False | False | True | **False** | **False** |
+| False | True | True | False | **True** | **True** |
+| False | False | True | True | **True** | **True** |
+
+### Converse
+
+Converse and contrapositive look similar but they are not the same. Where contrapositive is logically equivalent to implication, converse is not. If the implication is $\phi \Rightarrow \psi$, the converse is $\psi \Rightarrow \phi$.
+
+| $\phi$ | $\psi$ | $\neg \phi$ | $\neg \psi$  | $\phi \Rightarrow \psi$ | $(\neg \psi) \Rightarrow (\neg \phi)$ | $\psi \Rightarrow \phi$ |
+| - | - | - | - | - | - | - |
+| True | True | False | False | **True** | **True** | **True** |
+| True | False | False | True | **False** | **False** | **True** |
+| False | True | True | False | **True** | **True** | **False** |
+| False | False | True | True | **True** | **True** | **True** |
+
+As you can see $\phi \Rightarrow \psi$ is equivalent to $(\neg \psi) \Rightarrow (\neg \phi)$ but not equivalent to $\psi \Rightarrow \phi$.
+
+## Biconditional
+
+Biconditional is when implication works in both ways which means that $(\phi \Rightarrow \psi) \land (\psi \Rightarrow \phi)$. The shorthand notation we use for this is $\Leftrightarrow$. So the biconditional for $\phi$ and $\psi$ is $\phi \Leftrightarrow \psi$.
+
+| $\phi$ | $\psi$  | $\phi \Rightarrow \psi$ | $\psi \Rightarrow \phi$ | $\phi \Leftrightarrow \psi$ |
+| - | - | - | - | - |
+| True | True | True | True | **True** |
+| True | False | False | True | **False** |
+| False | True | True | False | **False** |
+| False | False | True | True | **True** |
+
+If both are true or false, the biconditional is true.
+
+### Language
+
+In english these phrases commonly refer to biconditional $(\psi \Leftrightarrow \phi)$...
+
+1. $\phi$ is necessary and sufficent for $\psi$.
+2. $\phi$ if and only if $\psi$ (abbreviation "iff" which is used often).
+
+## Tautology
+
+Tautology refers to logical validity meaning all truth values end up being true. There are many cases of tautology and one example is $(\phi \Rightarrow \psi) \Leftrightarrow (\neg \phi \lor \psi)$.
+
+| $\phi$ | $\psi$ | $\phi \Rightarrow \psi$ | $\neg \phi \lor \psi$ | $(\phi \Rightarrow \psi) \Leftrightarrow (\neg \phi \lor \psi)$ |
+| - | - | - | - | - |
+| True | True | True | True | **True** |
+| True | False | False | False | **True** |
+| False | True | True | True | **True** |
+| False | False | True | True | **True** |
+
+As you can see all the cases of $\phi$ and $\psi$ lead to true.
+
+## Modus Ponens
+
+The final concept we need to look at is modus ponens which is a basic rule of reasoning that is used often for mathematical statements. The idea is that lets say we are working with two statements called $\phi$ and $\psi$. If we know $\phi$ and $\phi \Rightarrow \psi$, then you can conclude $\psi$.
+
+| $\phi$ | $\psi$ | $\phi \Rightarrow \psi$ | $\phi \land (\phi \Rightarrow \psi)$ | $[\phi \land (\phi \Rightarrow \psi)] \Rightarrow \psi$ |
+| - | - | - | - | - |
+| True | True | True | True | **True** |
+| True | False | False | False | **True** |
+| False | True | True | False | **True** |
+| False | False | True | False | **True** |
+
+This tautology shows us that if we know the antecedent and that the antecedent implies the consequent, then we know the consequent.
