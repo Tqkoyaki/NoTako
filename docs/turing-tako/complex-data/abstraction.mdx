@@ -3,3 +3,266 @@ id: page-4
 title: Abstraction
 sidebar_position: 4
 ---
+
+Another technique commonly used in programming is ***abstraction***, which is a technique that allows us to remove many pieces of repetitive code and refactoring out the identical parts. This kind of ability is useful for managing complexity in programs by making programs smaller.
+
+## Parameterization
+
+One way to ***abstract*** away repetitive code is to find functions that are similar and turn their differences into parameters keeping the internal logic mostly the same.
+
+```racket title="Simple Parameterization" showLineNumbers
+; Getting the area of a circle
+(* pi (sqr 4))
+(* pi (sqr 6))
+(* pi (sqr 12))
+
+; Making the difference a parameter
+(define (area r)
+    (* pi (sqr r)))
+
+; New way to obtain area
+(area 4)
+(area 6)
+(area 12)
+```
+
+The example above was a simple case where we wanted the area of various circles with different radius but the expression was mostly similar so we abstracted away the logic of area into a function and made the only thing different which was the radius into a parameter.
+
+We can look at another example of functions that are similar. In this next case, we have two functions that are both searching for a string in a length. We can abstract the logic away.
+
+```racket title="Similar Functions" showLineNumbers
+;; ListOfString -> Boolean
+;; produce true if los includes "Italy"
+#;
+(define (contains-italy? los) false) ; stub
+
+
+(define (contains-italy? los) (contains? "Italy" los))
+  (cond [(empty? los) false]
+        [else
+         (if (string=? (first los) "Italy")
+             true
+             (contains-italy? (rest los)))])
+
+;; ListOfString -> Boolean
+;; produce true if los includes "Germany"
+#;
+(define (contains-germany? los) false) ; stub
+
+
+(define (contains-germany? los) (contains? "germany" los))
+  (cond [(empty? los) false]
+        [else
+         (if (string=? (first los) "germany")
+             true
+             (contains-italy? (rest los)))])
+```
+
+In both cases, the only thing different about the functions is the string that is being checked so we can make it a parameter and redefine these functions.
+
+```racket title="Parameterization" showLineNumbers
+;; String (listof String) -> Boolean
+;; produce true if los includes s
+
+(define (contains? s los)
+  (cond [(empty? los) false]
+        [else
+         (if (string=? (first los) s)
+             true
+             (contains? s (rest los)))]))
+
+; More concise definitions
+(define (contains-italy? los) (contains? "Italy" los))
+(define (contains-germany? los) (contains? "Germany" los))
+```
+
+:::note
+On the note of abstraction, we can also abstract the data definition of lists. We can use a capital alphabetical letter to represent any data type. We can have a `(listof X)` which refers to `ListOfX` which is one of `empty` and `(cons X (listof X))`. This allows us to use lists using one global and abstract definition that fits any datatype we want to use for our lists.
+:::
+
+### Higher Order Function
+
+What is cool about abstraction is that we can pass more than data as parameters. We can pass functions as well. If our function consumes or produces a different function, we call it a ***higher order function***.
+
+```racket title="Similar Functions" showLineNumbers
+;; (listof Number) -> (listof Number)
+;; produce list of sqr of every number in lon
+#;
+(define (squares lon) empty) ; stub
+
+(check-expect (squares empty) empty)
+(check-expect (squares (list 3 4)) (list 9 16))
+
+(define (squares lon)
+    (cond [(empty? lon) empty]
+    [else
+        (cons (sqr (first lon))
+            (squares (rest lon)))]))
+
+
+;; (listof Number) -> (listof Number)
+;; produce list of sqrt of every number in lon
+#;
+(define (square-roots lon) empty) ; stub
+
+(check-expect (square-roots empty) empty)
+(check-expect (square-roots (list 9 16)) (list 3 4))
+
+(define (square-roots lon)
+    (cond [(empty? lon) empty]
+    [else
+        (cons (sqrt (first lon))
+            (square-roots (rest lon)))]))
+```
+
+Both those functions are very similar in functionality expect for the fact that one function uses the `sqr` function on `(first lon)` and the other uses `sqrt`. If we can pass these functions, the rest of the logic can stay the same.
+
+```racket title="Higher Order Function" showLineNumbers
+;; (X -> Y) (listof X) -> (listof Y)
+;; given fn and (list n0 n1 ...) produce (list (fn n0) (fn n1) ...)
+
+(define (map2 fn lon)
+  (cond [(empty? lon) empty]
+        [else
+         (cons (fn (first lon))
+               (map2 fn (rest lon)))]))
+```
+
+:::note
+We used capital alphabetical letters to signify that any datatype works for this case. The other thing to note is that in the signature there is another function signature, that refers to the signature of the function we are passing in. `X -> Y` because the datatype consumed can be the same or different from the one produced in this case.
+:::
+
+Now that we have the higher order function, we can use it to simply our first two functions `squares` and `square-roots`.
+
+```racket title="Simplification with Higher Order" showLineNumbers
+(define (squares lon)
+    (map2 sqr lon))
+
+(define (square-roots lon)
+    (map2 sqrt lon))
+```
+
+In the signature of the abstract function called `map2` we identified that the datatype that is consumed and produced can be anything showing it's flexibility.
+
+```racket title="Flexible Code" showLineNumbers
+;; (listof String) -> (listof Number)
+;; produces the lengths of all the strings in the list
+
+(define (lengths los)
+    (map2 string-length los))
+
+(lengths (list "a" "bc" "def")) ; produces (list 1 2 3)
+```
+
+### Built-in Function
+
+Flexible functions like `map2` allow us to write concise and clean code. It is great that there are already built in functions including `map` which does the same thing as our function `map2`. These built in functions include...
+
+| Function Name | Signature | Purpose |
+| - | - | - |
+| map | (X -> Y) (listof X) -> (listof Y) | produces a list by applying f to each item on (listof x) |
+| build-list | Natural (Natural -> X) -> (listof X) | produces (list (f 0) ... (f (- n 1))) |
+| filter | (X -> boolean) (listof X) -> (listof X) | produces a list from all items where (X -> boolean) produces true |
+| andmap | (X -> boolean) (listof X) -> Boolean | produces true if every element in list is true using (X -> boolean)
+| ormap | (X -> boolean) (listof X) -> Boolean | produces true if one element in list is true using (X -> boolean)
+| foldr | (X Y -> Y) Y (listof X) -> Y | (foldr f base (list x-1 ... x-n)) = (f x-1 ... (f x-n base)) |
+| foldl | (X Y -> Y) Y (listof X) -> Y | (foldr f base (list x-1 ... x-n)) = (f x-n ... (f x-1 base)) |
+
+These functions are abstract so they are flexible in various situations. The examples below are only a few examples of these functions and their power.
+
+```racket title="Example of Filter" showLineNumbers
+(define (filter-neg lon)
+    (filter negative? lon))
+
+(filter-neg (list 1 -2 3 -4)) ; produces (list -2 -4)
+```
+```racket title="Example of Foldr" showLineNumbers
+(define (sum lon)
+    (foldr + 0 lon))
+
+(sum (list 1 2 3)) ; produces (+ 1 2 3 0)
+```
+```racket title="Example of Build List" showLineNumbers
+(define (sqrd-list n)
+    (build-list n sqr))
+
+(sqrd-list 4) ; produces (list 0 1 4 9)
+```
+
+```racket title="Another Example of Build List" showLineNumbers
+(define (seq n)
+    (build-list n identity))
+
+(seq 6) ; produces (list 0 1 2 3 4 5)
+```
+
+:::note
+We used a function called `identity` when creating `seq` and it produces the value it consumes. For example `(identity 3)` produces `3` and `(identity "Dog")` produces `"Dog"`. This helps with `seq` because the list is built using `(list (f 0) ... (f (- n 1)))` so this creates `(list (identity 0) ... (identity (- n 1)))` which in turn creates `(list 0 ... (- n 1))`.
+:::
+
+## Closures
+
+Sometimes the function we want to pass needs to be coded but we only create it to pass it into an abstract function. This is where `local` comes in handy, we can define the function in `local` and then pass it into the abstract function.
+
+```racket title="Local" showLineNumbers
+;; (listof Image) -> (listof Image)
+;; produces list of only those images that have width >= height
+#;
+(define (wide-only loi) empty) ; stub
+
+(check-expect (wide-only (list I1 I2 I3 I4 I5)) (list I2 I4))
+
+(define (wide-only loi)
+  (local [(define (wide? i)
+            (> (image-width i)
+               (image-height i)))]
+    (filter wide? loi)))
+```
+
+We can also use `local` for ***closures*** which is used when you want to pass a function whose body refers to a parameter that is in an outer function.
+
+```racket title="Closures" showLineNumbers
+(define (wider-than-only w loi)
+  (local [(define (wider-than? i)
+            (> (image-width i) w))]
+    (filter wider-than? loi)))
+```
+
+The parameter `w` is in the outer function and can only be used in the abstract function `filter` which does not take `w` as a parameter. By using `local` we are able to create a temporary function with `w` that we can use in `filter`. This is the power of closures!
+
+## Fold Function
+
+A ***fold function*** is an abstract function that is based directly on the template (or templates like with mutual references) from the data definition.
+
+```racket title="Data Definition" showLineNumbers
+;; ListOfX also known as (listof X)
+;; - empty
+;; - (cons X (listof X))
+;; interp. a list of x
+
+;; the template is:
+(define (fn-for-lox lox)
+  (cond [(empty? lox) (...)]
+        [else
+         (... (first lox)
+              (fn-for-lox (rest lox)))]))
+```
+
+Templates are great for creating abstract functions because we immediately know our parameters because every `...` is a place we can replace with a parameter.
+
+```racket title="Fold Function" showLineNumbers
+;; (X Y -> Y) Y (listof X) -> Y
+;; the abstract fold function for (listof X)
+
+(check-expect (fold + 0 (list 1 2 3)) 6)
+(check-expect (fold * 1 (list 1 2 3)) 6)
+(check-expect (fold string-append "" (list "a" "bc" "def")) "abcdef")
+
+(define (fold fn b lox)
+  (cond [(empty? lox) b]
+        [else
+         (fn (first lox)
+              (fold fn b (rest lox)))]))
+```
+
+This function is directly based on the template and can be used for every function that uses this datatype. So in case, this can be used for any list.
