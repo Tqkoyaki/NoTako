@@ -1,0 +1,59 @@
+---
+id: page-6
+title: Lambda
+sidebar_position: 6
+---
+
+We often look for shortcuts we can use in code to make it faster and cleaner to write code and one such shortcut can be found using the `lambda` primitive. This allows us to write simple functions in one expression.
+
+## Uses of Lambda
+
+The syntax for lambda is `(lambda (args ...) (body...))`. The first parameter asks us to state all the parameters needed for this function and body is the expression that uses the parameters stated.
+
+```racket title="Simple Function" showLineNumbers
+;; Number (listof Number) -> (listof Number)
+;; produce only elements of lon > threshold
+
+(define (only-bigger threshold lon)
+  (local [(define (pred n) 
+            (> n threshold))]
+    (filter pred lon)))
+```
+
+We want to use a `lambda` primitive to write the `pred` function which will allow us to remove the `local` argument all together making it easier to read.
+
+```racket title="Lambda Version" showLineNumbers
+(define (only-bigger threshold lon)
+    (filter (lambda (n) (> n threshold)) lon))
+```
+
+As you can see this makes the function a lot cleaner as it only takes two lines. Let's look at one more example where it cleans up code significantly.
+
+```racket title="Quick Sort" showLineNumbers
+;; (listof Number)  ->  (listof Number)
+;; produce list of numbers sorted in ASCENDING order
+;; ASSUMPTION: lon contains no duplicates
+
+(define (qsort lon)
+  (if (empty? lon) 
+      empty
+      (local [(define p (first lon))
+              (define (<p? n) (< n p))
+              (define (>p? n) (> n p))]
+        (append (qsort (filter <p? lon))
+                (list p) 
+                (qsort (filter >p? lon))))))
+
+
+;; Lambda Version
+(define (qsort lon)
+  (if (empty? lon)
+      empty
+      (append (qsort (filter (lambda (n) (< n (first lon))) lon))
+              (list (first lon))
+              (qsort (filter (lambda (n) (> n (first lon))) lon)))))
+```
+
+## When to Use?
+
+This new primitive is very useful but it should not be used for every situation. `Lambda` should be used when a locally defined function is only used in one place and the body is so easily understood that naming the function doesn't make the code easier to understand.

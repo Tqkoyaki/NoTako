@@ -81,6 +81,7 @@ const sidebars = {
         'turing-tako/complex-data/page-6',
         'turing-tako/complex-data/page-7',
         'turing-tako/complex-data/page-8',
+        'turing-tako/complex-data/page-9',
       ]
     }
   ],
