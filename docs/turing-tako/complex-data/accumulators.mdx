@@ -3,3 +3,198 @@ id: page-8
 title: Accumulators
 sidebar_position: 8
 ---
+
+Structural recursion allow us to traverse complex data structures however it has its own limitation. Our functions are able to traverse data structures one at a time but they do not know what has been traversed or what is still left to be traversed. We basically know where we are, but we don't know where we've been or where we still need to go.
+
+This is where accumulators come in. Accumulators are a way to keep track of where we've been and where we still need to go. They are a way to keep track of the context of our traversal.
+
+## Design Recipe
+
+Before we can look at the different types of accumulators, we need to update our How to Design Functions recipe specifically the templating step.
+
+```md title="How to Design Functions" showLineNumbers
+1. Signature, purpose, stub
+2. Define examples, wrap each in check-expect
+3. Template and inventory
+   a. Template normally according to the rules for structural recursion
+   b. Encapsulate the template in an outer function using local
+   c. Add an accumulator parameter to the inner function
+4. Code the function body
+5. Test and debug until correct
+```
+
+The only difference from the original recipe is the addition of the steps when templating a function. It is important to focus on this step to structure the function properly to make coding the body a lot easier.
+
+## Context Preserving
+
+There are three types of accumulators with the first being a context preserving accumulator. A context preserving accumulator allows us to keep track of information between recursive calls.
+
+Let's create a function that will take a list of elements and skip every other positioned element to create a new list.
+
+```racket title="Skipping Elements" showLineNumbers
+;; (listof X) -> (listof X)
+;; produce list consisting of only the 1st, 3rd, 5th... elements of lox
+#;
+(define (skip1 lox) empty) ; stub
+
+(check-expect (skip1 (list "a" "b" "c" "d")) (list "a" "c"))
+(check-expect (skip1 (list 1 2 3 4 5 6)) (list 1 3 5))
+
+; Templating without an accumulator
+(define (skip1 lox)
+  (cond [(empty? lox) (...)]
+        [else
+         (... (first lox)
+              (skip1 (rest lox)))]))
+
+; Encapsulate the template in an outer function using local
+(define (skip1 lox0)
+    (local [(define (skip1 lox)
+              (cond [(empty? lox) (...)]
+                    [else
+                     (... (first lox)
+                          (skip1 (rest lox)))]))]
+      (skip1 lox0)))
+
+; Add an accumulator parameter to the inner function
+(define (skip1 lox0)
+    (local [(define (skip1 lox acc)
+              (cond [(empty? lox) (...)]
+                    [else
+                     (... (first lox)
+                          (skip1 (rest lox) (...)))]))]
+      (skip1 lox0 ...)))
+```
+
+Now that the template is complete, we can start figuring out how to use the accumulator. To skip every odd positioned element we need to know what position we are currently at. Normally, recursion doesn't know where it is at in the list, but with an accumulator we can keep track of the position.
+
+```racket title="Finishing Context Accumulator" showLineNumbers
+; Add examples of the accumulator
+(define (skip1 lox0)
+    ;; acc: Natural; 1-based position of (first lox) in lox0
+    ;;
+    ;; (skip1 (list "a" "b" "c") 1)
+    ;; (skip1 (list     "b" "c") 2)
+    ;; (skip1 (list         "c") 3)
+    (local [(define (skip1 lox acc)
+              (cond [(empty? lox) (...)]
+                    [else
+                     (... (first lox)
+                          (skip1 (rest lox) (...)))]))]
+      (skip1 lox0 ...)))
+
+; Finish the function body
+(define (skip1 lox0)
+  ;; acc: Natural; 1-based position of (first lox) in lox0
+  ;;
+  ;; (skip1 (list "a" "b" "c") 1)
+  ;; (skip1 (list     "b" "c") 2)
+  ;; (skip1 (list         "c") 3)
+  (local [(define (skip1 lox acc)
+            (cond [(empty? lox) empty]
+                  [else
+                   (if (odd? acc)
+                        (cons (first lox)
+                              (skip1 (rest lox)
+                                     (add1 acc)))
+                        (skip1 (rest lox)
+                               (add1 acc)))]))]
+    (skip1 lox0 1)))
+```
+
+The accumulator allowed us to keep track of the position of the element in the list which allowed us to determine if we should add the element to the new list or not. This would not be possible without the accumulator.
+
+## Tail Recursion
+
+Tail recursion is a special type of function where every recursive call is in tail position. Tail position is where the recursive call is the last call in the function. This is important because it allows the function to be optimized by reducing the amount of stack frames needed to execute the function.
+
+Let's create a function that sums up all the numbers in a list.
+
+```racket title="Summing a List" showLineNumbers
+;; (listof Number) -> Number
+;; sum up all the numbers in lon
+#;
+(define (sum lon) 0) ; stub
+
+(check-expect (sum empty) 0)
+(check-expect (sum (list 2 4 5)) 11)
+
+; This solution is not tail recursive
+(define (sum lon)
+  (cond [(empty? lon) 0]
+        [else
+         (+ (first lon)
+            (sum (rest lon)))]))
+```
+
+With the solution above, we don't use accumulators and the recursive call at the end is not in tail position meaning this function can be optimized further. We know `(+ (first lon) (sum (rest lon)))` is not in tail position because we are adding the result of the recursive call to the first element in the list. To be in tail position, the recursive call must be the last call in the function.
+
+```racket title="Tail Recursive Sum" showLineNumbers
+(define (sum lon0)
+  ;; acc: Number; the sum of the elements of lon0 seen so far
+  ;; (sum (list 2 4 5))
+  ;; (sum (list 2 4 5) 0)
+  ;; (sum (list   4 5) 2)
+  ;; (sum (list     5) 6)
+  ;; (sum (list      ) 11)
+  (local [(define (sum lon acc)
+            (cond [(empty? lon) acc]
+                  [else
+                   (sum (rest lon)
+                        (+ acc (first lon)))]))] ; adding up on the way in instead of the way back out
+    (sum lon0 0)))
+```
+
+The new solution uses `(sum (rest lon) (+ acc (first lon)))` which is in tail position because the recursive call is the last call in the function and nothing is operating on the result of the recursive call.
+
+## Worklist
+
+The last type of accumulator is a worklist accumulator which can be useful for creating tail recursive solutions for problems that don't have a natural accumulator. A worklist accumulator is a list of elements that need to be processed. The accumulator is used to keep track of the work that needs to be done.
+
+Let's create a function that will takes a key and a binary tree and returns true if the key is in the tree and false otherwise.
+
+```racket title="Searching a Binary Tree" showLineNumbers
+(define-struct node (k v l r))
+;; BT is one of:
+;;  - false
+;;  - (make-node Integer String BT BT)
+;; Interp. A binary tree, each node has a key, value and 2 children
+(define BT1 false)
+(define BT2 (make-node 1 "a"
+                       (make-node 6 "f"
+                                  (make-node 4 "d" false false)
+                                  false)
+                       (make-node 7 "g" false false)))
+
+
+;; Integer BT -> Boolean
+;; Produce true if the tree contains the given key
+(check-expect (contains? 1 BT1) false)
+(check-expect (contains? 1 BT2) true)
+(check-expect (contains? 3 BT2) false)
+(check-expect (contains? 7 BT2) true)
+
+(define (contains? k bt)
+  ;; todo: (listof BT); the list of so far univisited subtrees
+  (local [(define (contains/one? bt todo)
+            (cond [(false? bt) (contains/list? todo)]
+                  [else
+                   (if (= (node-k bt) k)
+                       true
+                       (contains/list? (cons (node-l bt)
+                                            (cons (node-r bt)
+                                                  todo))))]))
+          
+          (define (contains/list? todo)
+            (cond [(empty? todo) false]
+                  [else
+                   (contains/one? (first todo) (rest todo))]))]
+    
+    (contains/one? bt empty)))
+```
+
+Here each node is placed into a worklist called `todo` and is worked through one at a time. This allows us to process the tree in a tail recursive manner.
+
+:::note
+One thing to note is when we are adding an accumulator to mutually recursive functions, we need add it to all the function.
+:::
