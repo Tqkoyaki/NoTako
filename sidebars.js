@@ -83,6 +83,16 @@ const sidebars = {
         'turing-tako/complex-data/page-8',
         'turing-tako/complex-data/page-9',
       ]
+    },
+    {
+      type: 'category',
+      label: 'Programming Languages: Part A',
+      items: [
+        'turing-tako/prog-lang-a/page-1',
+        'turing-tako/prog-lang-a/page-2',
+        'turing-tako/prog-lang-a/page-3',
+        'turing-tako/prog-lang-a/page-4',
+      ]
     }
   ],
   eulerSidebar: [

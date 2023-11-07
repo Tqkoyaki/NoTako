@@ -1,0 +1,389 @@
+---
+id: page-1
+title: Programming in ML
+sidebar_position: 1
+---
+
+ML is a functional programming language which means it emphasizes immutable data and functions that take and return other functions. This style of programming is powerful and allows us to do things object-oriented languages can't.
+
+## Bindings
+
+A program in ML is built up of a ***sequence of bindings***. Each binding follows two steps during evaluation:
+
+1. It firstly gets ***type-checked*** by the compiler. The binding depended on a ***static environment*** (also refered to as the ***context***) which holds the types of all the preceding bindings in the file. A new static environment is then created with this new binding added.
+2. The second step is to actually ***evaluate*** the binding. This is done using a ***dynamic environment*** (also refered to as the ***environment***) which holds all the evaluated values of the preceding bindings in the file. A new dynamic environment is then created with this new binding added.
+
+### Variable Bindings
+
+There are several types of bindings in ML. The first type is a ***variable binding*** which is used to bind a value to a variable name. The syntax for a variable binding is:
+
+```sml title="Variable Binding" showLineNumbers=true
+val x = e;
+```
+
+where `val` is a keyword to indicate it is a variable binding, `x` is a variable name and `e` is an expression. The expression `e` is type-checked and the type of the expression is bound to the variable name. The expression is then evaluated to the point it becomes a ***value*** which is an expression that cannot be evaluated any further. This value is then bound to the variable name in the dynamic environment.
+
+:::note
+The semi-colon `;` is optional in a file but required in the REPL (Read-Eval-Print-Loop). This is because the REPL needs to know when to evaluate the expression as it is typed in. This also means that you can seperate a binding into multiple lines in a REPL as long as you end it with a semi-colon.
+:::
+
+Bindings in ML are ***immutable***  which means a variable will always bound to the same value. Let's say `x` maps to `17` in the dynamic environment, it will always map to `17`. We can still have another binding later in the file called `val x = 19;` but as previously mentioned, a new dynamic environment is created for each binding. So `x` maps to `19` in the new dynamic environment but still maps to `17` in the old dynamic environment. This is reffered to as ***shadowing*** because we aren't actually changing the value of `x` in the old dynamic environment, we are just creating a new binding with the same name.
+
+### Constants
+
+All constants are values which means they evaluate to themselves in any dynamic environment. Some examples of constants are:
+1. **Integer Constants:** A sequence of digits such as `17` or `0`. It has the type `int` in the static environment.
+2. **Real Constants:** A sequence of digits with a decimal point such as `3.14` or `0.0`. It has the type `real` in the static environment.
+3. **Boolean Constants:** The keywords `true` and `false`. It has the type `bool` in the static environment.
+4. **String Constants:** A sequence of characters surrounded by double quotes such as `"Hello World!"`. It has the type `string` in the static environment.
+
+### Arthemetic Expressions
+
+In ML addition, subtraction, and multiplication are the same for both integers and reals. Both expressions have to be either of these types and they need to have the same type.
+
+```sml title="Addition, Subtraction, Multiplication" showLineNumbers=true
+(* Addition *)
+val add_int = 17 + 3; (* 20 *)
+val add_real = 12.0 + 7.0; (* 19.0 *)
+
+(* Subtraction *)
+val sub_int = 16 - 7; (* 9 *)
+val sub_real = 12.0 - 3.0; (* 9.0 *)
+
+(* Multiplication *)
+val mul_int = 3 * 5; (* 15 *)
+val mul_real = 2.0 * 3.0; (* 6.0 *)
+```
+
+:::note
+As shown above, comments in ML are surrounded by `(*` and `*)` and can span multiple lines. These are ignored by the compiler.
+:::
+
+The division operator is different because dividing two integers and two reals are different operations. The division operator `/` is used for reals and is the division we are typically used to. The division operator `div` is used for integers and is ***integer division*** which means it rounds down to the nearest integer.
+
+```sml title="Division" showLineNumbers=true
+(* Real Division *)
+val div_real = 17.0 / 3.0; (* 5.666666666666667 *)
+
+(* Integer Division *)
+val div_int = 17 div 3; (* 5 *)
+```
+
+Due to the fact that integer division rounds down, there is a remainder operator `mod` which returns the remainder of the division.
+
+```sml title="Modulus" showLineNumbers=true
+val mod_int = 17 mod 3; (* 2 *)
+```
+
+### Boolean Expressions
+
+Boolean expressions are expressions that will always evaluate to either `true` or `false`. For equality, the two expressions must be of the same type but can be any of the four types mentioned earlier.
+
+```sml title="Equality" showLineNumbers=true
+(* Equality *)
+val eq_int = 17 = 17; (* true *)
+val eq_real = 3.14 = 3.14; (* true *)
+val eq_bool = true = false; (* false *)
+val eq_string = "Hello" = "World"; (* false *)
+
+(* Inequality *)
+val neq_int = 17 <> 17; (* false *)
+val neq_real = 3.14 <> 3.14; (* false *)
+val neq_bool = true <> false; (* true *)
+val neq_string = "Hello" <> "World"; (* true *)
+```
+
+Some other boolean operators are greater than `>`, less than `<`, greater than or equal to `>=`, and less than or equal to `<=`. These operators can only be used with numbers (integers and reals).
+
+```sml title="Comparisons" showLineNumbers=true
+(* Greater Than *)
+val gt_int = 17 > 3; (* true *)
+val gt_real = 3.14 > 3.0; (* true *)
+
+(* Less Than *)
+val lt_int = 17 < 3; (* false *)
+val lt_real = 3.14 < 3.0; (* false *)
+
+(* Greater Than or Equal To *)
+val gte_int = 17 >= 3; (* true *)
+val gte_real = 3.14 >= 3.0; (* true *)
+
+(* Less Than or Equal To *)
+val lte_int = 17 <= 3; (* false *)
+val lte_real = 3.14 <= 3.0; (* false *)
+```
+
+The last few boolean operators allow us to combine boolean expressions. The first operator is `andalso` which is true if both expressions are true. The second operator is `orelse` which is true if either expression is true. The last operator only applies to one boolean expression and is `not` which is `true` if the expression is `false` and `false` if the expression is `true`.
+
+```sml title="Boolean Operators" showLineNumbers=true
+(* And *)
+val andalso_true = true andalso true; (* true *)
+val andalso_false = true andalso false; (* false *)
+
+(* Or *)
+val orelse_true = true orelse false; (* true *)
+val orelse_false = false orelse false; (* false *)
+
+(* Not *)
+val not_true = not false; (* true *)
+val not_false = not true; (* false *)
+```
+
+Finally, we can use all these boolean operators in conditional expressions. A conditional expression is an expression that evaluates to one of two values depending on the value of a boolean expression. The syntax for a conditional expression is:
+
+```sml title="Conditional Expression" showLineNumbers=true
+val x = if e1 then e2 else e3
+```
+
+where `e1` is a boolean expression and both `e2` and `e3` are expressions of the same type. The whole expression has the same type as `e2` and `e3`. The boolean expression `e1` is evaluated and if it is `true` then `e2` is evaluated and returned. If `e1` is `false` then `e3` is evaluated and returned.
+
+```sml title="Conditional Expression" showLineNumbers=true
+val x = if 17 > 3 then 17 else 3; (* 17 *)
+
+val y = if 17 < 3 then 17 else 3; (* 3 *)
+```
+
+### String Expressions
+
+When we are working with strings, it is convenient to be able to combine two strings together. This is called ***string concatenation*** and is done using the `^` operator. The two expressions must be of type `string` and the result is also of type `string`.
+
+```sml title="String Concatenation" showLineNumbers=true
+val x = "Hello" ^ "World"; (* "HelloWorld" *)
+```
+
+It can also be useful to convert a integer to a string which is done using the `Int.toString` function.
+
+```sml title="Integer to String" showLineNumbers=true
+val x = Int.toString 17; (* "17" *)
+```
+
+### Function Bindings
+
+Another type of binding is a ***function binding*** which is used to bind a function to a function name. A function in ML is similar to a method in Java because it is called with arguments and has a body that produces a result. The syntax for a function binding is:
+
+```sml title="Function Binding" showLineNumbers=true
+fun x0 (x1 : t1, ..., xn : tn) = e;
+
+(* Example of a function binding *)
+fun pow (x: int, y: int) = (* correct only for y >= 0 *)
+    if y = 0
+    then 1
+    else x * pow(x, y - 1);
+```
+
+where `fun` is a keyword to indicate it is a function binding, `x0` is a function name, `x1` to `xn` are argument names, `t1` to `tn` are argument types, and `e` is an expression. The reason for `x1` to `xn` is to signify that a function can have as many arguments as you want, you just need to specify the types of each argument.
+
+In order to type-check a function binding, we type-check the body of the expression `e` using a static environment that maps the argument names to their types. The type of the expression `e` is then bound to the function name in the static environment. In terms of evaluation, a function is a value which means we simply add `x0` to the dynamic environment as a function that we can call later.
+
+For function bindings, we need to also look at the syntax for calling a function. The syntax is:
+
+```sml title="Calling a Function" showLineNumbers=true
+e0 (e1, ..., en);
+
+(* Example of calling a function *)
+val ans = pow(2, 3); (* 8 *)
+```
+
+where `e0` is the name of the function we would like to call and `e1` to `en` are the arguments we would like to pass to the functions. These arguments must have the same type as the argument types specified in the function binding and the order of the arguments must match the order of the argument names. To evaluate a function call, we extend the environments by adding bindings for the argument names to the argument values and then once the body of the function is evaluated, we go back to the environment before the function call.
+
+:::tip
+If the function call only has one argument, then the parentheses are optional.
+:::
+
+## Using Files
+
+Sometimes we want to use bindings from other files in our current file. We can use the `use` keyword to do this. The syntax for using a file is:
+
+```sml title="Using a File" showLineNumbers=true
+use "filename.sml";
+```
+
+where `filename.sml` is the name of the file we would like to use. The file must be in the same directory as the file we are using it in. The file is then type-checked and evaluated in the current file.
+
+## Compound Data
+
+Sometimes constants are not enough to represent the data we want to work with. For example, we might want to represent a point in 2D space or a person with a name and age. In order to do this, we need to use compound data which is data that is made up of other data.
+
+### Tuples
+
+The first type of compound data is a ***tuple*** which is a sequence of values which can be of different types. The syntax for a tuple is:
+    
+```sml title="Tuple" showLineNumbers=true
+val x = (e1, ..., en);
+
+(* Example of tuples *)
+val point = (3, 4); (* (3, 4) *)
+val person = ("John", 21, true); (* ("John", 21, true) *)
+```
+
+The type of a tuple is a sequence of the types of the values in the tuple seperated by `*`. For example, the type of `point` is `int * int` and the type of `person` is `string * int * bool`.
+
+We can access the values in a tuple using the `#` operator. The syntax for accessing a value in a tuple is:
+
+```sml title="Accessing a Tuple" showLineNumbers=true
+val person = ("John", 21, true);
+
+val name = #1 person; (* "John" *)
+val age = #2 person; (* 21 *)
+val isMale = #3 person; (* true *)
+```
+
+The number after the `#` operator is the index of the value we want to access. The index starts at `1` and goes up to the number of values in the tuple. The type of value we get back is the type of the value at that index.
+
+:::note
+You can nest tuples inside of tuples. For example, `((1, 2), (3, 4))` is a tuple of two tuples. The type of this tuple is `(int * int) * (int * int)`.
+:::
+
+### Lists
+
+The second type of compound data is a ***list***. It is similar to a tuple because it is a sequence of values but all the values must be of the same type. The benefits of a list is that it can be of any length so we don't need to know how many values we want to store in the list. The syntax for a list is:
+
+```sml title="List" showLineNumbers=true
+val x = [e1, ..., en];
+
+(* Example of lists *)
+val numbers = [1, 2, 3, 4, 5]; (* [1, 2, 3, 4, 5] *)
+val names = ["John", "Jane", "Jack"]; (* ["John", "Jane", "Jack"] *)
+```
+
+The type of a list is the type of the values in the list followed by a `list`. For example, the type of `numbers` is `int list` and the type of `names` is `string list`. If the list is empty, then it can be any type which ML denotes using `'a list` (pronounced "alpha list").
+
+We can also add an element to the front of a list using the `::` operator. The first operand must be a value of the same type as the values in the list and the second operand must be the list we are adding to. The syntax for adding an element to the front of a list is:
+
+```sml title="Adding to a List" showLineNumbers=true
+val x = e :: l;
+
+(* Example of adding to a list *)
+val numbers = 1 :: [2, 3, 4, 5]; (* [1, 2, 3, 4, 5] *)
+val names = "John" :: ["Jane", "Jack"]; (* ["John", "Jane", "Jack"] *)
+```
+
+Another operator we can use with lists is the `@` operator which allows us to combine two lists together. The syntax for combining two lists is:
+
+```sml title="Combining Lists" showLineNumbers=true
+val x = l1 @ l2;
+
+(* Example of combining lists *)
+val numbers = [1, 2, 3] @ [4, 5]; (* [1, 2, 3, 4, 5] *)
+```
+
+Finally, there are also three functions in ML that we commonly use when working with lists. These functions are:
+1. **`hd`**: Returns the first element of a list. An error is thrown if the list is empty.
+2. **`tl`**: Returns the list without the first element. An error is thrown if the list is empty.
+3. **`null`**: Returns `true` if the list is empty and `false` otherwise.
+
+It is important to note that these functions allow us to work with lists using recursive functions. We can break down the list and work with the head of the list one at a time. We then can pass the tail of the list to the recursive function and repeat till we reach the base case which is when the list is empty.
+
+```sml title="Working with Lists" showLineNumbers=true
+fun sum_list (l: int list) =
+    if null l
+    then 0
+    else hd l + sum_list (tl l);
+
+fun append (xs : int list, ys : int list) = 
+    if null xs
+    then ys
+    else hd xs :: append (tl xs, ys);
+
+fun countdown (x: int) = 
+    if x = 0
+    then []
+    else x :: countdown (x - 1);
+```
+
+:::note
+We can have a list of tuples or a tuple of lists. For example, `[(1, 2), (3, 4)]` is a list of tuples and `([1, 2], [3, 4])` is a tuple of lists. The type of the list of tuples is `(int * int) list` and the type of the tuple of lists is `int list * int list`.
+:::
+
+### Lack of Mutation
+
+In many languages, we can pass around mutable data structures and mutate (change) the data it is holding as we please. We can have multiple variables pointing to the same data structure (called ***aliasing***) and if we change the data in one variable, it will change the data in the other variable. This can be useful but it can also lead to bugs that are hard to find because it is hard to keep track of all the variables that are pointing to the same data structure. What is nice about ML is that there is no mutation so when we pass around data structures, we are not actually passing around the data structure, we are passing around a copy of the data structure. We never actually change any data, we just create new data structures with the changes we want.
+
+## Let Expressions
+
+Let expressions are another type of expression which can be used anywhere we can use a typical expression. The syntax for a let expression is:
+
+```sml title="Let Expression" showLineNumbers=true
+let b1 b2 ... bn in e end;
+
+(* Example of a let expression *)
+val y = 16;
+val x = let
+            val y = 17
+            val z = 3
+        in
+            y + z
+        end; (* 20 *)
+val z = y; (* 16 *)
+```
+
+It allows us to create a larger enviornment which holds the bindings in the `let` expression which we can use in the expression. After the expression ends, we go back to the environment before the `let` expression. This ability to have scope and local variables allows us to write more complex functions.
+
+Having local variables can be useful in writing clean and efficient code. Recursive functions can sometimes take a lot of computation espically if the function is repeated. We can stop these repeated computations by using local variables to store the result of the function. This is called ***memoization*** and is a common technique in functional programming.
+
+```sml title="Without Memoization" showLineNumbers=true
+fun bad_max (xs: int list) =
+    if null xs
+    then 0
+    else if null (tl xs)
+    then hd xs
+    else if hd xs > bad_max (tl xs)
+    then hd xs
+    else bad_max (tl xs);
+```
+
+Above we can see we are calling `bad_max (tl xs)` twice if `bad_max (tl xs) >= hd xs`. This can get extremely expensive espically in large lists. We can fix this with memoization:
+
+```sml title="With Memoization" showLineNumbers=true
+fun good_max (xs : int list) =
+    if null xs
+    then 0
+    else if null (tl xs)
+    then hd xs
+    else
+        let val tl_ans = good_max(tl xs)
+        in
+            if hd xs > tl_ans
+            then hd xs
+            else tl_ans
+        end;
+```
+
+The result of `good_max (tl xs)` gets stored in a local variable `tl_ans` so we don't need to call `good_max (tl xs)` twice.
+
+## Options
+
+The `good_max` function still has one issue and that is if we give the function a list of negative numbers. It will state that the maximum is `0` which is not true. It is not the greatest to return if we are given an empty list. We can instead return `NONE` which means nothing using an ***option***. An option is a type that can either be `SOME` value or `NONE`. Now due to the fact that options can be `NONE`, we have some functions to help us work with them:
+1. **`valOf`**: Returns the value of an option. An error is thrown if the option is `NONE`.
+2. **`isSome`**: Returns `true` if the option is `SOME` and `false` if the option is `NONE`.
+
+Using these functions, we can rewrite the `good_max` function to return an option.
+
+```sml title="Good Max with Options" showLineNumbers=true
+fun better_max (xs : int list) =
+    if null xs
+    then NONE
+    else let (* fine to assume argument nonempty because it is local *)
+        fun max_nonempty (xs : int list) =
+            if null (tl xs) (* xs must not be [] *)
+            then hd xs
+            else let val tl_ans = max_nonempty(tl xs)
+                in
+                    if hd xs > tl_ans
+                    then hd xs
+                    else tl_ans
+                end;
+```
+
+Through the use of let expressions, options, and recursion, we were able to write a complex function cleanly and efficiently.
+
+## Pieces of a Language
+
+For any programming language there are five questions we need to ask to better understand the language:
+1. **Syntax:** How do you write parts of the language?
+2. **Semantics:** What do the parts of the language mean?
+3. **Idioms:** What are common ways to use the language?
+4. **Libraries:** What libraries are available to make programming easier?
+5. **Tools:** What tools are available to make programming easier?
+
+Even though libraries and tools are not required to write a program, they are still important to becoming a better programmer in that language.
