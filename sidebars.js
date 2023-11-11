@@ -103,6 +103,7 @@ const sidebars = {
       items: [
         'euler-tako/math-thinking/page-1',
         'euler-tako/math-thinking/page-2',
+        'euler-tako/math-thinking/page-3',
       ]
     }
   ]

@@ -1,0 +1,87 @@
+---
+id: page-3
+title: Quantifiers
+sidebar_position: 3
+---
+
+Quantifiers are used to express the two extremes "there exists" and "for all" in mathematical statements. Almost all of the mathematical statements that interest us will contain quantifiers.
+
+## Existential
+
+The first kind of quanifier we will look at is the ***existential quantifier*** which refers to the phrase "there exists". The symbol for this quanifier is denoted using the symbol $\exists$.
+
+An example of a statement that uses the existential quantifier is the following: There exists a real number $x$ such that $x^2 + 2x + 1 = 0$. Using the symbol $\exists$, we can write this statement as $\exists x[x^2 + 2x + 1 = 0]$.
+
+:::note
+We can make the statement more specific by including the domain of the variable $x$. The statement above can be rewritten as $(\exists x \in \mathbb{R})[x^2 + 2x + 1 = 0]$. The symbol $\in$ means "is an element of" and the symbol $\mathbb{R}$ refers to the set of real numbers. This means x is an element of the set of real numbers. Another useful symbol is $\mathbb{N}$ which refers to the set of natural numbers
+:::
+
+## Universal
+
+The second kind of quantifier is the ***universal quantifier*** which refers to the phrase "for all". The symbol for this quanifier is denoted using the symbol $\forall$.
+
+An example of a statement that uses the universal quantifier is the following: The square of any real number is greater than or equal to zero. Using the symbol $\forall$, we can write this statement as $(\forall x \in \mathbb{R})[x^2 \geq 0]$.
+
+### Negation
+
+Quantifiers are the two extremes of mathematical statements and so when we negate one of them, we get the other. In other words, $\neg \exists$ is equivalent to $\forall$ and $\neg \forall$ is equivalent to $\exists$.
+
+Let's look at the first case where we negate a existential quantifier. Suppose we have the statement $(\exists x \in \mathbb{R}) [x^2 + 2x + 1 = 0]$. The negation of this statement is $(\forall x \in \mathbb{R}) [x^2 + 2x + 1 \neq 0]$. This is equivalent to saying that for all real numbers $x$, $x^2 + 2x + 1$ is not equal to zero.
+
+The other case is where we negate a universal quantifier. Suppose we have the statement $(\forall x \in \mathbb{R}) [x^2 + 2x + 1 \neq 0]$. The negation of this statement is $(\exists x \in \mathbb{R}) [x^2 + 2x + 1 = 0]$. This is equivalent to saying that there exists a real number $x$ such that $x^2 + 2x + 1$ is equal to zero.
+
+### Unique Existence
+
+Another useful quantifier is the ***unique existence quantifier*** which refers to the phrase "there exists a unique". The symbol for this quanifier is denoted using the symbol $\exists!$.
+
+This is not a new quantifier but rather a combination of the existential and universal quantifiers. We can express $\exists!$ as $\exists x [\phi (x) \land  (\forall y)[\phi (y) \Rightarrow (x = y)]]$. So, this new quantifier is just a useful shortcut to expressing unique existence statements.
+
+An example of a statement that uses the unique existence quantifier is the following: There exists a unique real number $x$ such that $x^2 = 0$. Using the symbol $\exists!$, we can write this statement as $\exists! x[x^2 = 0]$.
+
+## Proofs
+
+To prove an existential statement, we need to find one case where the statement is true. To prove a universal statement, we need to show that the statement is true for all cases. On the other hand, to disprove an existential statement, we need to show that the statement is false for all cases. To disprove a universal statement, we need to find one case where the statement is false.
+
+Let's prove the statement $(\exists x \in \mathbb{R}) [x^2 + 2x + 1 = 0]$. We can do this by finding a real number $x$ such that $x^2 + 2x + 1 = 0$. We can see that $x = -1$ satisfies this equation and so the statement is true.
+
+### Indirect
+
+We can also prove statements indirectly meaning we don't have to find a specific case where the statement is true to prove it. 
+
+Let's prove the statement $(\forall x \in \mathbb{R}) [x^2 + 3x + 1 = 0]$.
+> The function $x^2 + 3x + 1$ is a continuous function.
+> 
+> If $x = -1$, this curve has the value $y = 3$.
+> 
+> If $x = +1$, this curve has the value $y = 5$.
+>
+> So, the curve lies below the $x$-axis for $x = -1$ and above the $x$-axis for $x = +1$. This means the function crosses the x-axis at some point meaning there exists a real number $x$ such that $x^2 + 3x + 1 = 0$. So, the statement is true.
+
+We never actually found the value of $x$ that satisfies the equation but we proved that it exists. This is an example of an indirect proof.
+
+## Order of Quantifiers
+
+We can have multiple quantifiers in a statement and we need to be careful about the order of these quantifiers as they can change the meaning of the statement.
+
+Let's express the statement "There is no largest natural number". This can be expressed as $(\forall m \in \mathbb{N})(\exists n \in \mathbb{N})[n > m]$. This means that for all natural numbers $m$, there exists a natural number $n$ such that $n$ is greater than $m$. We know this statement is true because for any natural number $m$, we can always find a natural number $n$ that is greater than $m$.
+
+If we change the order of the quantifiers, we get $(\exists n \in \mathbb{N})(\forall m \in \mathbb{N})[n > m]$. This means that there exists a natural number $n$ such that for all natural numbers $m$, $n$ is greater than $m$. This boils down to the idea that there is a natural number bigger than all other natural numbers which is false.
+
+## Binding Precedence
+
+Just like order of operations, quantifiers have a binding precedence. The order of precedence is as follows:
+
+1. Quantifiers bind whatever follows them. These include $(\forall L)(...)$ and $(\exists L)(...)$.
+2. Next comes negation. This includes $\neg(...)$.
+3. Next priority is conjunction. This includes $(...) \land (...)$.
+4. Finally, we have disjunction and implication. These include $(...) \lor (...)$ and $(...) \Rightarrow (...)$.
+
+## Mathematical Statements
+
+Finally, many statements that we encounter following these patterns and are considered strong statements. These include the following:
+1. For every $x$, if $P(x)$ then $Q(x)$. This is written as ($\forall x)[P(x) \Rightarrow Q(x)]$.
+2. There is an $x$ for which $P(x)$ and $Q(x)$. This is written as $(\exists x)[P(x) \land Q(x)]$.
+
+:::note
+The statement $(\forall x)[P(x) \land Q(x)]$ is also strong but it is redundant. This is because if $P(x)$ and $Q(x)$ are true for all $x$ then $P(x)$ is true for all $x$ and $Q(x)$ is true for all $x$. We also don't encounter the statement $(\exists x)[P(x) \Rightarrow Q(x)]$ because it is not a strong statement. It just doesn't mean anything important useful usually.
+:::
