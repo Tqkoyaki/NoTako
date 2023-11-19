@@ -4,39 +4,103 @@ title: Quantifiers
 sidebar_position: 3
 ---
 
-Quantifiers are used to express the two extremes "there exists" and "for all" in mathematical statements. Almost all of the mathematical statements that interest us will contain quantifiers.
+Quantifiers are used to express the two extremes "there exists" and "for all" in mathematical statements. In fact, almost all of the mathematical statements that interest us will contain quantifiers making them a vital part of mathematics.
 
 ## Existential
 
-The first kind of quanifier we will look at is the ***existential quantifier*** which refers to the phrase "there exists". The symbol for this quanifier is denoted using the symbol $\exists$.
+The first kind of quantifier we will look at is the ***existential quantifier*** which refers to the phrase "there exists". The symbol used to denote this quantifier in mathematics is $\exists$.
 
 An example of a statement that uses the existential quantifier is the following: There exists a real number $x$ such that $x^2 + 2x + 1 = 0$. Using the symbol $\exists$, we can write this statement as $\exists x[x^2 + 2x + 1 = 0]$.
 
 :::note
-We can make the statement more specific by including the domain of the variable $x$. The statement above can be rewritten as $(\exists x \in \mathbb{R})[x^2 + 2x + 1 = 0]$. The symbol $\in$ means "is an element of" and the symbol $\mathbb{R}$ refers to the set of real numbers. This means x is an element of the set of real numbers. Another useful symbol is $\mathbb{N}$ which refers to the set of natural numbers
+We can make the statement more specific by including the domain of the variable $x$. The statement above can be rewritten as ($\exists x \in \mathbb{R})[x^2 + 2x + 1 = 0]$. By including ($\exists x \in \mathbb{R})$, we are saying that $x$ is an element of the set of real numbers. We call this set the domain of quantification which we will further discuss later.
 :::
 
 ## Universal
 
-The second kind of quantifier is the ***universal quantifier*** which refers to the phrase "for all". The symbol for this quanifier is denoted using the symbol $\forall$.
+The second kind of quantifier is the ***universal quantifier*** which refers to the phrase "for all". The symbol for this quanifier is denoted using $\forall$.
 
 An example of a statement that uses the universal quantifier is the following: The square of any real number is greater than or equal to zero. Using the symbol $\forall$, we can write this statement as $(\forall x \in \mathbb{R})[x^2 \geq 0]$.
 
-### Negation
-
-Quantifiers are the two extremes of mathematical statements and so when we negate one of them, we get the other. In other words, $\neg \exists$ is equivalent to $\forall$ and $\neg \forall$ is equivalent to $\exists$.
-
-Let's look at the first case where we negate a existential quantifier. Suppose we have the statement $(\exists x \in \mathbb{R}) [x^2 + 2x + 1 = 0]$. The negation of this statement is $(\forall x \in \mathbb{R}) [x^2 + 2x + 1 \neq 0]$. This is equivalent to saying that for all real numbers $x$, $x^2 + 2x + 1$ is not equal to zero.
-
-The other case is where we negate a universal quantifier. Suppose we have the statement $(\forall x \in \mathbb{R}) [x^2 + 2x + 1 \neq 0]$. The negation of this statement is $(\exists x \in \mathbb{R}) [x^2 + 2x + 1 = 0]$. This is equivalent to saying that there exists a real number $x$ such that $x^2 + 2x + 1$ is equal to zero.
-
 ### Unique Existence
 
-Another useful quantifier is the ***unique existence quantifier*** which refers to the phrase "there exists a unique". The symbol for this quanifier is denoted using the symbol $\exists!$.
+Another useful quantifier is the ***unique existence quantifier*** which refers to the phrase "there exists a unique". This quantifier is denoted using the symbol $\exists!$.
 
-This is not a new quantifier but rather a combination of the existential and universal quantifiers. We can express $\exists!$ as $\exists x [\phi (x) \land  (\forall y)[\phi (y) \Rightarrow (x = y)]]$. So, this new quantifier is just a useful shortcut to expressing unique existence statements.
+This is not a new quantifier but rather a combination of the existential and universal quantifiers. We can express $\exists!$ as $\exists x [\phi (x) \land  (\forall y)[\phi (y) \Rightarrow (x = y)]]$. This larger statement is obviously cumbersome to write when we want to express unique existence. This is why we use the shorthand $\exists!$.
 
 An example of a statement that uses the unique existence quantifier is the following: There exists a unique real number $x$ such that $x^2 = 0$. Using the symbol $\exists!$, we can write this statement as $\exists! x[x^2 = 0]$.
+
+## Properties of Quantifiers
+
+As previously suggested, quantifiers are vital to mathematical statements and so we need to deeply grasp their properties. These properties allow us to manipulate quantifiers making them a powerful tool in mathematics.
+
+### Negation
+
+Often when we are trying to prove statements, we need the positive form of the statement. A positive statement is one that does not contain a negation symbol, or else one in which any negation symbols are far inside the statement such that the expression is not cumbersome to work with. So, if we want to effectively work with quantifiers, we need to know how to convert a negated quantifier into a positive one.
+
+As stated before, quantifiers are the extremes of mathematical statements and so logically if we negate one extreme, we get the other. This means that $\neg \exists$ is equivalent to $\forall$ and $\neg \forall$ is equivalent to $\exists$. However, we can't just negate the quantifier and leave the rest of the statement as is. We need to negate the statement that the quantifier is quantifying as well.
+
+Let's prove this idea by showing that $\neg [\forall A(x)]$ is equivalent to $\exists [\neg A(x)]$ where $A(x)$ is a statement that depends on $x$.
+
+> Assume $\neg [\forall A(x)]$. 
+>
+> If it is not the case that for all $x$, $A(x)$ then at least one $x$ must fail to satisfy $A(x)$. 
+>
+> So, for at least one $x$, $\neg A(x)$ is true.
+>
+> If we write this symbolically, we get $\exists [\neg A(x)]$.
+
+We can prove this the other way around as well.
+
+> Assume $\exists [\neg A(x)]$.
+>
+> Then there is an $x$ for which $A(x)$ is false. 
+>
+> Then $A(x)$ cannot be true for all $x$. In other words, $\forall x A(x)$ must be false.
+>
+> If we write this symbolically, we get $\neg [\forall A(x)]$.
+
+Before we move on, let's look at some practical examples of negating a quantifier. Suppose we have the statement $(\exists x \in \mathbb{R}) [x^2 + 2x + 1 = 0]$. The negation of this statement is $(\forall x \in \mathbb{R}) [x^2 + 2x + 1 \neq 0]$. This is equivalent to saying that for all real numbers $x$, $x^2 + 2x + 1$ is not equal to zero.
+
+Finally, in this last example, suppose we have the statement $(\forall x \in \mathbb{R}) [x^2 \geq 0]$. The negation of this statement is $(\exists x \in \mathbb{R}) [x^2 < 0]$. This is equivalent to saying that there exists a real number $x$ such that $x^2$ is less than zero.
+
+### Domain of Quantification
+
+Like previously shown, to be more specific and literal with our statements, we can include the domain of quantification. This is the set of values that the variable in the quantifier can take. We express the domain of quantification using the symbol $\in$ which means "is an element of" followed by the set of values that the variable can take. There are a few common sets that we use in mathematics. These include the following:
+
+1. $\mathbb{N}$ which is the set of natural numbers.
+2. $\mathbb{Z}$ which is the set of integers.
+3. $\mathbb{Q}$ which is the set of rational numbers.
+4. $\mathbb{R}$ which is the set of real numbers.
+
+:::note
+It is good practice to keep the domain the same throughout the whole statement. Introduce subdomains only if it's necessary. For example, if the domain is real numbers $\mathbb{R}$, then it is not good to introduce subdomains such as integers $\mathbb{Z}$ or natural numbers $\mathbb{N}$. It makes more sense to use these the domain of quantification was all numbers because it makes sense to use subdomains of quantification if they are natural subdomains. The reason for this practice is that the idea of a domain of quantification is that it tells us what it is that we are quantifying over and subdomains make things confusing.
+:::
+
+### Implicit Quantification
+
+Due to common conventions in mathematics, we can sometimes omit the quantifier in a statement. This is because we can assume that the quantifier is either universal or existential depending on the context of the statement. 
+
+For example, if we have the statement $x^2 + 2x + 1 = 0$, we can assume that the quantifier is existential because we are saying that there exists a real number $x$ such that $x^2 + 2x + 1 = 0$. On the other hand, if we have the statement $x^2 \geq 0$, we can assume that the quantifier is universal because we are saying that for all real numbers $x$, $x^2 \geq 0$. 
+
+This concept of omitting the quantifier is called ***implicit quantification***. It is a convention that we will commonly come across in mathematics and so it is important to be aware of it.
+
+### Order of Quantifiers
+
+We can have multiple quantifiers in a statement and we need to be careful about the order of these quantifiers as they can change the meaning of the statement.
+
+Let's express the statement "There is no largest natural number". This can be expressed as $(\forall m \in \mathbb{N})(\exists n \in \mathbb{N})[n > m]$. This means that for all natural numbers $m$, there exists a natural number $n$ such that $n$ is greater than $m$. We know this statement is true because for any natural number $m$, we can always find a natural number $n$ that is greater than $m$.
+
+If we change the order of the quantifiers, we get $(\exists n \in \mathbb{N})(\forall m \in \mathbb{N})[n > m]$. This means that there exists a natural number $n$ such that for all natural numbers $m$, $n$ is greater than $m$. This boils down to the idea that there is a natural number bigger than all other natural numbers which is false.
+
+### Binding Precedence
+
+Just like order of operations, quantifiers also have a binding precedence. The order of precedence is as follows:
+
+1. Quantifiers bind whatever follows them. These include $(\forall L)(...)$ and $(\exists L)(...)$.
+2. Next comes negation. This includes $\neg(...)$.
+3. Next priority is conjunction. This includes $(...) \land (...)$.
+4. Finally, we have disjunction and implication. These include $(...) \lor (...)$ and $(...) \Rightarrow (...)$.
 
 ## Proofs
 
@@ -49,6 +113,7 @@ Let's prove the statement $(\exists x \in \mathbb{R}) [x^2 + 2x + 1 = 0]$. We ca
 We can also prove statements indirectly meaning we don't have to find a specific case where the statement is true to prove it. 
 
 Let's prove the statement $(\forall x \in \mathbb{R}) [x^2 + 3x + 1 = 0]$.
+
 > The function $x^2 + 3x + 1$ is a continuous function.
 > 
 > If $x = -1$, this curve has the value $y = 3$.
@@ -58,23 +123,6 @@ Let's prove the statement $(\forall x \in \mathbb{R}) [x^2 + 3x + 1 = 0]$.
 > So, the curve lies below the $x$-axis for $x = -1$ and above the $x$-axis for $x = +1$. This means the function crosses the x-axis at some point meaning there exists a real number $x$ such that $x^2 + 3x + 1 = 0$. So, the statement is true.
 
 We never actually found the value of $x$ that satisfies the equation but we proved that it exists. This is an example of an indirect proof.
-
-## Order of Quantifiers
-
-We can have multiple quantifiers in a statement and we need to be careful about the order of these quantifiers as they can change the meaning of the statement.
-
-Let's express the statement "There is no largest natural number". This can be expressed as $(\forall m \in \mathbb{N})(\exists n \in \mathbb{N})[n > m]$. This means that for all natural numbers $m$, there exists a natural number $n$ such that $n$ is greater than $m$. We know this statement is true because for any natural number $m$, we can always find a natural number $n$ that is greater than $m$.
-
-If we change the order of the quantifiers, we get $(\exists n \in \mathbb{N})(\forall m \in \mathbb{N})[n > m]$. This means that there exists a natural number $n$ such that for all natural numbers $m$, $n$ is greater than $m$. This boils down to the idea that there is a natural number bigger than all other natural numbers which is false.
-
-## Binding Precedence
-
-Just like order of operations, quantifiers have a binding precedence. The order of precedence is as follows:
-
-1. Quantifiers bind whatever follows them. These include $(\forall L)(...)$ and $(\exists L)(...)$.
-2. Next comes negation. This includes $\neg(...)$.
-3. Next priority is conjunction. This includes $(...) \land (...)$.
-4. Finally, we have disjunction and implication. These include $(...) \lor (...)$ and $(...) \Rightarrow (...)$.
 
 ## Mathematical Statements
 
