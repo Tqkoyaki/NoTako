@@ -1,0 +1,584 @@
+---
+id: page-2
+title: Compound Types
+sidebar_position: 2
+---
+
+Programming languages have ***base types*** like `int`, `bool`, and `unit` which are the simplest types in the language. They are types that cannot be broken down into smaller types. All other types in the language use other types in their definition which are called ***compound types***. By using compound types, the language can contain fairly small number of base types and still be able to represent a wide variety of data.
+
+We can categorize compound types into three building blocks that are used to build them:
+
+1. **"Each-of"** is a compound type `t` which contains values of type `t1`, `t2`, ..., and `tn`. Tuples are an example of this type because you can have a tuple which contains multiple values in one type.
+2. **"One-of"** is a compound type `t` which contains values of type `t1`, `t2`, ..., or `tn`. Options are an example of this type because it can either be `None` or `Some t` but not both.
+3. **"Self-Reference"** is a compound type `t` which may refer to itself in its definition to describe a recursive data structure. Lists are an example of this type because how a list is defined is that it is either `[]` or contains a value (which is the head of the list) and another list (which is the tail of the list). Due to the fact it contains another list, it is self-referential.
+
+:::note
+These three building blocks are not mutually exclusive. In fact, a list is a combination of all three building blocks. It uses "each-of" because it contains a value **and** another list. It uses "one-of" because it can either be `[]` or contain a value and another list. Finally, it uses "self-reference" because it contains another list in its definition.
+:::
+
+## Records
+
+Records are a new "each-of" type where each value in the type is labeled with a name. The syntax for records is:
+
+```sml title="Record Syntax" showLineNumbers="true"
+(* Creating a Record *)
+{field1 = value1, field2 = value2, ..., fieldn = valuen}
+
+(* Accessing a Record *)
+#field record
+```
+
+where `field1`, `field2`, ..., and `fieldn` are the non-repeating names of the fields and `value1`, `value2`, ..., and `valuen` are the values of the fields. The fields can be in any order and the values can be any type. We can also access the values of the fields in a record using the `#` operator. In this case, `field` is the name of the field and `record` is the record. With these syntaxes, we can work with records in SML. We can see an example of this below:
+
+```sml title="Record Example" showLineNumbers="true"
+(* Creating a Record *)
+val person = {name = "John", age = 20, height = 5.8}
+
+(* Accessing a Record *)
+val name = #name person
+val age = #age person
+val height = #height person
+```
+
+### Redefining Tuples
+
+As you have already noticed, there are similarities between records and tuples. In fact, tuples are just a special case of records. We can redefine tuples using records as follows:
+
+```sml title="Tuple Redefinition" showLineNumbers="true"
+(* Tuple Syntax *)
+tuple = (v1, v2, ..., vn)
+
+(* Tuple as Record *)
+tuple_record = {1 = v1, 2 = v2, ..., n = vn}
+
+(* Accessing Both *)
+#1 tuple (* v1 *)
+#1 tuple_record (* v1 *)
+```
+
+where `v1`, `v2`, ..., and `vn` are the values of the tuple. As you can see, all the behaviors of tuples are preserved in this new definition. In fact, a tuple was made to be convenient way to write down and use records. When a construct in a language can be defined in terms of another construct, it is called ***syntactic sugar***. In this case, tuples are syntactic sugar for records. As we can see with tuples, this concept is a great way to keep the key ideas in a language small while giving programmers convenient ways to use them.
+
+:::note
+Often when designing a language construct or choosing which one to use, we come across the question whether we should store and access the values by name or by position. In this case, records store and access the values by name while tuples store and access the values by position.
+
+Typically, by position is simplier for a small number of components, but for larger compound types it becomes too difficult to remember which position corresponds to which value and so it is better to use names in that case.
+:::
+
+## Datatype Bindings
+
+We can also create our own "one-of" types using the new `datatype` keyword. This keyword lets us create a new type that contains multiple constructors which are the different options of the type. An example of this is:
+
+```sml title="Datatypes" showLineNumbers="true"
+(* Defining a New Datatype *)
+datatype rank = Jack |
+                Queen |
+                King |
+                Ace |
+                Num of int
+
+(* Creating a Value of the Datatype *)
+val card_1 = Jack
+val card_2 = Ace
+val card_3 = Num 8 
+```
+
+where a new type `rank` is created which has five constructors (options) that represent the different ranks of a card. The last constructor `Num` uses a new keyword `of` which allows us to store a value of another type in the constructor. In this case, the `Num` constructor stores an `int` which represents the number of the card. 
+
+We are able to create values of this new type by using the constructors and if the constructor can store a value, we can provide it as an argument to the constructor. The precise syntax for a datatype is:
+
+```sml title="Datatype Syntax" showLineNumbers="true"
+(* Defining a New Datatype *)
+datatype t = C1 of t1 | C2 of t2 | ... | Cn of tn
+
+(* Creating a Value of the Datatype *)
+val v = C1 v1
+val v = C1 (* if of is omitted *)
+```
+
+where `t` is the name of the datatype, `C1`, `C2`, ..., and `Cn` are the names of the constructors, and `t1`, `t2`, ..., and `tn` are the types of the values that the constructors can store. We can also omit the `of` keyword which indicates that the variant of the datatype "carries nothing".
+
+Finally, due to the fact that constructors can store values of any type, we can combine "one-of" with "self-reference" by referring to the datatype itself in the definition of the datatype. This allows us to create recursive data structures. An example of this is:
+
+```sml title="Recursive Datatype" showLineNumbers="true"
+datatype exp = Constant of int
+             | Negate of exp
+             | Add of exp * exp
+             | Multiply of exp * exp
+```
+
+where the `exp` datatype is referenced in the constructs `Negate`, `Add`, and `Multiply`. This allows us to create expressions like `Add (Constant 1, Multiply (Constant 2, Constant 3))` which represents the expression `1 + 2 * 3`.
+
+### Case Expressions
+
+When working with datatypes, we need to be able to write code that handles all variants of the datatype as well as extract the values stored in the constructors. Thankfully, SML provides a way to do both of these things using `case` expressions.
+
+```sml title="Case Expressions" showLineNumbers="true"
+(* Case Expression Syntax *)
+case e of p1 => e1 | p2 => e2 | ... | pn => en
+
+(* Case Expression Example *)
+(* Converts a Card Rank to a String *)
+case card_rank of
+    Jack => "Jack"
+    | Queen => "Queen"
+    | King => "King"
+    | Ace => "Ace"
+    | Num n => Int.toString n
+```
+
+where `e` is the expression we are matching on, `p1`, `p2`, ..., and `pn` are the patterns we are matching against, and `e1`, `e2`, ..., and `en` are the expressions of the same type that are evaluated and returned if the pattern matches. In the case of the example, all the expressions are strings.
+
+A pattern is a construct we have not seen before. Patterns look like expressions but instead are used to match against the result of evaluating `e`. This idea is called ***pattern matching***. The patterns used in the case expression are the various constructors that are matched against the result of evaluating `e`. In the case of `Num n`, If the constructor `Num` is matched, then the value stored in the constructor is bound to the variable `n` which can be used in the expression `Int.toString n`.
+
+```sml title="More Examples" showLineNumbers="true"
+(* Case Expression Example *)
+(* Evaluates the exp Datatype *)
+fun eval e =
+    case e of
+        Constant n => n
+        | Negate e => ~ (eval e)
+        | Add (e1, e2) => (eval e1) + (eval e2)
+        | Multiply (e1, e2) => (eval e1) * (eval e2)
+
+eval (Add (Constant 1, Multiply (Constant 2, Constant 3))) (* 7 *)
+eval (Negate (Add (Constant 1, Multiply (Constant 2, Constant 3)))) (* ~7 *)
+```
+
+:::note
+If a constructor stores a tuple, we can use a pattern to seperate the values of the tuple into variables like `Add (e1, e2)` and `Multiply (e1, e2)` in the example above.
+:::
+
+This idea of pattern matching and case expressions is very powerful because...
+1. It makes sure we handled all the cases of a datatype (the complier will warn us if we don't).
+2. It prevents us from repeating variants (The complier will warn us if we do).
+3. It allows us to extract the values stored in the constructors.
+4. It is general enough to allow us to write complex code in a simple way.
+
+### Lists and Options
+
+Datatypes and case expressions are very powerful and general enough to allow us to create many different types. In fact, lists and options are just datatypes that are defined in the SML library and we can redefine them ourselves.
+
+```sml title="List and Option Redefined" showLineNumbers="true"
+(* List Datatype *)
+datatype int_list = Empty |
+                    Cons of int * int_list
+
+val empty_list = Empty (* [] *)
+val list_1 = Cons (1, Cons (2, Cons (3, Empty))) (* [1, 2, 3] *)
+
+(* Option Datatype *)
+datatype int_option = None | Some of int
+
+val none = None (* NONE *)
+val some_1 = Some 1 (* SOME 1 *)
+```
+
+We can even redefine functions like `append` to work with our new list datatype. Those functions as well are those datatypes are defined for the programmer's convenience but do not impact the core constructs required to build the language.
+
+```sml title="Append Function" showLineNumbers="true"
+(* Appends Two Lists *)
+fun append (l1, l2) =
+    case l1 of
+        Empty => l2
+        | Cons (x, xs) => Cons (x, append (xs, l2))
+```
+
+### Polymorphic Datatypes
+
+The problem with our new list and option datatypes is that they only work with the `int` type while the original ones work with any type. We can fix this by making our datatypes ***polymorphic*** or in other words, generic. We accomplish this by adding a type variable to the definition of the datatype.
+
+```sml title="Polymorphic Datatypes" showLineNumbers="true"
+(* List Datatype *)
+datatype 'a list = Empty |
+                   Cons of 'a * 'a list
+
+(* Option Datatype *)
+datatype 'a option = None | Some of 'a
+
+(* Tree Datatype *)
+datatype ('a, 'b) tree = Node of 'a * ('a, 'b) tree * ('a, 'b) tree |
+                         Leaf of 'b
+```
+
+The type variable can be any name and is used to represent any type. If we wanted an `int list`, the `'a` variable would represent `int` and if we wanted a `string list`, the `'a` variable would represent `string`. The variable will always represent the same type during the entire definition of the datatype but multiple type variables can be used in the same definition as seen with the tree where nodes can store a value of type `'a` and leaves can store a value of type `'b`.
+
+:::note
+The types `'a` and `'b` can be the same type making `('a, 'b) tree` more generic than `'a tree`.
+:::
+
+## Type Synonyms
+
+Our final new keyword that lets us manipulate types is `type`. This keyword allows us to create a new name for an existing type which allows us to use it interchangeably with the original type. This is useful when we want to make the type more readable or when we want to make the type more generic.
+
+```sml title="Type Synonyms" showLineNumbers="true"
+datatype suit = Clubs | Diamonds | Hearts | Spades
+
+(* Type Synonym *)
+type card = suit * rank
+
+(* Creating a Value of the Type Synonym *)
+val card_1 = (Clubs, Jack)
+```
+
+Instead of always writing `suit * rank` when we are referring to a card, we can use the type synonym `card` which makes our code more readable.
+
+:::caution
+Type synonyms are also used interchangeably by the REPL. It is completely okay to have it print out the original type instead of the type synonym.
+:::
+
+## Pattern Matching
+
+So far we have been able to use pattern matching to retrieve the values from a custom datatype which is very useful. However, as previously mentioned, pattern matching is powerful because it is general and so we can use it in other places as well. In fact, we can replace the functions `hd`, `tl`, and `null` with pattern matching.
+
+```sml title="Pattern Matching Lists" showLineNumbers="true"
+(* Previous Approach to Appending *)
+fun append (l1, l2) =
+    if null l1
+    then l2
+    else hd l1 :: append (tl l1, l2)
+
+(* Pattern Matching Approach to Appending *)
+fun append (l1, l2) =
+    case l1 of
+        [] => l2
+        | x :: xs => x :: append (xs, l2)
+```
+
+In this case, `[]` can be used to match against the empty list and `x :: xs` can be used to match against a list that contains at least one element where `x` is the head of the list and `xs` is the tail of the list. Case expressions allowed us to seperate the head from the tail of the list without having to use the `hd` and `tl` functions. It also made sure we never got the head or tail of an empty list which would cause an error. This is a great example of why pattern matching is so powerful and it is better to use it instead of functions like `hd` and `tl`.
+
+:::note
+The variables `x` and `xs` can be any name and are not special. They are used to represent the head and tail of the list only. The `::` operator is a constructor that stores the head and tail of the list and is what we are matching against.
+:::
+
+Furthermore, functions like `isSome` and `valOf` can be replaced with pattern matching as well.
+
+```sml title="Pattern Matching Options" showLineNumbers="true"
+(* Previous Approach to inc_or_zero *)
+fun inc_or_zero opt = 
+    if isSome opt
+    then valOf opt + 1
+    else 0
+
+(* Pattern Matching Approach to inc_or_zero *)
+fun inc_or_zero opt =
+    case opt of
+        NONE => 0
+      | SOME i => i + 1
+```
+
+In this case `NONE` and `SOME` are the constructors of the option datatype. Just like before, by using pattern matching, we prevent ourselves from using the value of `NONE`  in a `valOf` function which would cause an error and the complier helps us make sure we handled all the cases of the option datatype.
+
+### Type Inference
+
+We can also use pattern matching to extract the values from tuples and records instead of using the `#` operator.
+
+```sml title="Pattern Matching Tuples and Records" showLineNumbers="true"
+fun sum_triple (triple: int * int * int) =
+    case triple of
+        (x, y, z) => x + y + z
+
+fun full_name (r: {first: string, middle: string, last: string}) =
+    case r of
+        {first = f, middle = m, last = l} => f ^ " " ^ m ^ " " ^ l
+```
+
+In both cases, instead of using the `#` operator, the pattern seperated each value of the tuple or record into variables in one go which then we could use in the expression. This approach is better than using `#` because it makes it to where it is no longer necessary to write types for our function definitions. This is because the `#` operator does not give enough information to type-check the function because the type-checker does not know what other fields the record is supposed to have, but the patterns introduced provide this information.
+
+```sml title="Type Inference" showLineNumbers="true"
+fun sum_triple triple =
+    case triple of
+        (x, y, z) => x + y + z
+
+fun full_name r =
+    case r of
+        {first = f, middle = m, last = l} => f ^ " " ^ m ^ " " ^ l
+```
+
+### Variable Bindings
+
+Pattern matching has already been shown to be powerful with various applications but we are not done yet. We can also use patterns in variable bindings with the syntax `val p = e` where `p` is a pattern and `e` is an expression. This allows us to bind the values of an expression to variables in one go.
+
+```sml title="Variable Bindings" showLineNumbers="true"
+fun sum_triple triple =
+    let val (x, y, z) = triple
+    in 
+        x + y + z
+    end
+
+fun full_name r =
+    let val {first = f, middle = m, last = l} = r
+    in
+        f ^ " " ^ m ^ " " ^ l
+    end
+```
+
+We can take this idea even further because function arguments are variable bindings as well. This means we can use patterns in function arguments to make the functions `sum_triple` and `full_name` even more concise, readable, and clean.
+
+```sml title="Better Variable Bindings" showLineNumbers="true"
+fun sum_triple (x, y, z) = 
+    x + y + z
+
+fun full_name {first = f, middle = m, last = l} = 
+    f ^ " " ^ m ^ " " ^ l
+```
+
+:::note
+Notice how the new `sum_triple` function is using pattern matching to bind three variables to three pieces for the function to use but it looks exactly as a function that takes three arguments of type `int`. It turns out every function in ML takes exactly one argument. A multi argument function is really just one argument that takes a tuple and then pattern matches on the tuple to bind the values to variables.
+
+Even when we are creating zero-argument functions, we are really just creating a function that takes in a unit value `()` which refers to nothing. Every function in ML takes exactly one argument.
+:::
+
+This flexibility that pattern matching has provided can be sometimes useful. One valuable example is the fact that we can have one function compute the results and pass it to another multi argument function immediately which is not possible in other languages keeping our code concise and clean.
+
+```sml title="Flexible Computing" showLineNumbers="true"
+fun rotate_left (x, y, z) = (y, z, x) (* Multi Argument Function *)
+fun rotate_right triple = rotate_left triple (* Passes Immediately to this Function *)
+```
+
+## Polymorphism
+
+By removing explicit type annonations from our functions and opting to use pattern matching instead, we rely on the type-checker to infer the types of our functions. This is great practice but it is important to understand that the type-checker will always infer the most general type possible.
+
+```sml title="Type Inference" showLineNumbers="true"
+(* Takes a Triple of Ints and Sum First and Third *)
+fun partial_sum (x, y, z) = x + z
+```
+
+We were creating a function of the type `int * int * int -> int` but the type-checker will infer the type `int * 'a * int -> int` because you only need `x` and `z` to be `int` to compute the result of `x + z`. The variable `y` can be an `int` as intended but it can also be any other type with no impact on the result of the function. This is called ***polymorphism*** because it indicates that `int * 'a * int -> int` is a more general type than `int * int * int -> int` because it can be used in more situations including the one we intended.
+
+The REPL will sometimes use type variables with two leading apostrophes like `''a` instead of `'a` to indicate that the type variable is an ***equality type***. This means that the type can be any type as long as it can be compared for equality.
+
+```sml title="Equality Types" showLineNumbers="true"
+fun same_thing (x, y) = if x = y then "yes" else "no"
+fun is_three x = if x = 3 then "yes" else "no"
+```
+
+The function `same_thing` has the type `''a * ''a -> string` which indicates that both `x` and `y` must be the same type and that type must be able to be compared using the `=` operator. On the other hand, the function `is_three` has the type `int -> string` instead of `''a -> string` because `x` must be an `int` for the `=` operator to compare it to `3`.
+
+:::note
+If the type was `'a * 'b` for `(x, y)`, then `x` and `y` could be different types or the same type. Another interesting case is if the type was `'a -> 'a` for `x` because `x` could be any type and the result of the function will return the same type it was given.
+:::
+
+### Nested Patterns
+
+In general, pattern matching is about taking a value and a pattern and deciding whether the pattern matches the value (the value has the same "shape" as the pattern). If it does, then the variables bind to the right values. Some key parts of the definition of pattern matching are:
+
+1. A variable pattern `x` matches any value `v` and introduces one binding from `x` to `v`.
+2. The pattern `C` matches the value `C`, if `C` is a constructor that carries nothing.
+3. The pattern `C p` where `C` is a constructor and `p` is a pattern matches the value `C v` if the constructors are the same and `p` matches `v`. If `p` does match `v`, then it introduces the bindings from `p` matching `v`.
+4. The pattern `(p1, p2, ..., pn)` matches a tuple value `(v1, v2, ..., vn)` if `p1` matches `v1`, `p2` matches `v2`, ..., and `pn` matches `vn`. All the bindings from each pattern matching is introduced. A similar idea applies for record patterns where `{f1 = p1, ..., fn = pn}` matches a record value `{f1 = v1, ..., fn = vn}`.
+
+:::note
+This is a recursive definition because there are instances like in the third and fourth cases where an inner pattern is in the outer pattern that needs to be matched first before the entire pattern can be matched. Patterns can nest inside other patterns allowing us to match complex values. This flexibility is what makes pattern matching so powerful.
+:::
+
+We can see the flexibility of nested patterns when we are working with lists. We can use nested patterns to get a list with a specific number of elements from a list which was difficult to do before.
+
+1. `a :: (b :: (c :: d))` matches a list with at least three elements and binds `a` to the first element, `b` to the second element, `c` to the third element, and `d` to the rest of the list.
+2. `a :: (b :: (c :: []))` matches a list with exactly three elements and binds `a` to the first element, `b` to the second element, and `c` to the third element.
+3. `(a, b, c) :: d` matches any non empty list whose first element is a tuple of three elements and binds `a` to the first element of the tuple, `b` to the second element of the tuple, `c` to the third element of the tuple, and `d` to the rest of the list.
+
+We can see a pratical example of this below:
+
+```sml title="Nested Patterns" showLineNumbers="true"
+(* Checking if a list of integers is sorted without nested patterns *)
+fun nondecreasing intlist = 
+    case intlist of
+        [] => true
+        | x :: xs => case xs of
+                        [] => true
+                        | y :: ys => x <= y andalso nondecreasing xs
+
+(* Checking if a list of integers is sorted with nested patterns *)
+fun nondecreasing intlist =
+    case intlist of
+        [] => true
+        | _ :: [] => true
+        | head :: (neck :: tail) => head <= neck andalso nondecreasing (neck :: tail)
+```
+
+:::note
+The `_` symbol is a wildcard pattern which means it matches any value `v` but does not introduce any bindings. It is good practice to use it when we do not care about the value of a pattern. This way a useless binding is not added to the static environment.
+:::
+
+ 
+## Multi Case Functions
+
+We often come across functions that have multiple case expressions as their body like with the `nondecreasing` function above. This is a common pattern in ML and so the language provides another way to write these functions.
+
+```sml title="Multi Case Functions" showLineNumbers="true"
+(* Syntax Without Multi Case *)
+fun f x =
+    case x of
+        p1 => e1
+        | p2 => e2
+        | ...
+        | pn => en
+
+(* Example Without Multi Case Syntax *)
+fun eval e =
+    case e of
+        Constant n => n
+        | Negate e => ~ (eval e)
+        | Add (e1, e2) => (eval e1) + (eval e2)
+        | Multiply (e1, e2) => (eval e1) * (eval e2)
+
+(* Syntax With Multi Case *)
+fun f p1 = e1
+  | f p2 = e2
+  | ...
+  | f pn = en
+
+(* Example With Multi Case Syntax *)
+fun eval (Constant i) = i
+  | eval (Negate e) = ~ (eval e)
+  | eval (Add (e1, e2)) = (eval e1) + (eval e2)
+  | eval (Multiply (e1, e2)) = (eval e1) * (eval e2)
+```
+
+The syntax for multi case functions is just ***syntactic sugar*** because it does not add any new constructs that are fundemental to the language instead it just provides a more convenient way to write functions with multiple case expressions.
+
+:::caution
+Both syntaxes are considered good practice and it is up to the programmer to decide which one they prefer to use.
+:::
+
+## Exceptions
+
+Like most languages, ML has built-in constructs for working with exceptions (errors). We can use the syntax `raise e` where `e` is an exception.
+
+```sml title="Raise Exceptions" showLineNumbers="true"
+fun hd xs =
+    case xs of
+        [] => raise List.Empty
+        | x :: _  => x
+```
+
+In this case, we are raising the exception `List.Empty` which is an exception defined in the standard library of ML that indicates that the list is empty. We do this because the `hd` function can only work on non-empty lists. 
+
+Instead of using exceptions that are already defined, ML also allows us to define our own exceptions using the syntax `exception e` where `e` is the constructor of the exception. This means that `e` can be followed by an `of` keyword and a type to store a value in the exception just like with constructors found in datatypes.
+
+```sml title="Define Exceptions" showLineNumbers="true"
+exception MyFirstException
+exception MySecondException of int * int
+```
+
+All these constructors return a value of type `exn` which is the type of all exceptions. This means the exception `MyFirstException` has the type `exn`. On the other hand, the exception `MySecondException` has the type `int * int -> exn` because it takes in two `int` values to construct the exception. The fact that exceptions have their own type means we can take them as arguments for a function.
+
+```sml title="Exception Arguments" showLineNumbers="true"
+fun hd (xs, ex) =
+    case xs of
+        [] => raise ex
+        | x :: _ => x
+```
+
+In this new version of the `hd` function, we are taking in an exception alongside the list so that if the list is empty, we can raise the exception that was passed in. The exception is only raised when the `raise` keyword is used.
+
+We are now able to cause an exception to be raised but we also need a way to handle exceptions if they are raised so that our program does not crash. We can use the syntax `e1 handle p => e2` where `e1` and `e2` are expressions and `p` is a pattern to handle exceptions. If `e1` raises an exception and the exception matches the pattern `p`, then `e2` is evaluated and returned instead of the exception being raised.
+
+```sml title="Handle Exceptions" showLineNumbers="true"
+(* Raises List.Empty if the List is Empty *)
+fun hd xs =
+    case xs of
+        [] => raise List.Empty
+        | x :: _ => x
+
+(* Return 0 if the List is Empty *)
+fun safe_hd xs = 
+    hd xs handle List.Empty => 0
+```
+
+:::note
+Like with case-expressions, we can use the `|` symbol to have multiple branches in our exception handling. This syntax is `e handle p1 => e1 | p2 => e2 | ... | pn => en` where `e` is the expression that may raise an exception, `p1`, `p2`, ..., and `pn` are the patterns to match against the exception, and `e1`, `e2`, ..., and `en` are the expressions to evaluate and return if the pattern matches the exception.
+:::
+
+## Tail Recursion
+
+***Tail recursion*** is a new programming idiom (not a new language construct) that helps with writing efficient recursive functions using ***accumulators*** which are variables that store the result of recursive calls.
+
+```sml title="Tail Recursion" showLineNumbers="true"
+(* Without Tail Recursion *)
+fun sum1 xs =
+    case xs of
+        [] => 0
+        | x :: xs' => x + sum1 xs'
+
+(* With Tail Recursion *)
+fun sum2 xs =
+    let fun f (xs, acc) =
+        case xs of
+            [] => acc
+            | x :: xs' => f (xs', x + acc)
+    in
+        f (xs, 0)
+    end
+```
+
+In this case, the function `sum1` is not tail recursive and the function `sum2` is. Even though `sum2` is more complicated, it is more efficient than `sum1` because it takes up less space on the ***call stack***. This is a data structure with push and pop operations that stores one element for each function call made (often called a ***stack-frame***). When a function is called, a new element is pushed onto the call stack and when the function is completed the element is popped off the call stack.
+
+In the case of `sum1 [1, 2, 3]`, the following happens:
+
+> 1. `sum1 [1, 2, 3]` is called and a new element is pushed onto the call stack.
+> 2. We reach the expression `1 + sum1 [2, 3]` which cannot be evaluated until `sum1 [2, 3]` is evaluated.
+> 3. `sum1 [2, 3]` is called and a new element is pushed onto the call stack.
+> 4. We reach the expression `2 + sum1 [3]` which cannot be evaluated until `sum1 [3]` is evaluated.
+> 5. `sum1 [3]` is called and a new element is pushed onto the call stack.
+> 6. We reach the expression `3 + sum1 []` which cannot be evaluated until `sum1 []` is evaluated.
+> 7. `sum1 []` is called and a new element is pushed onto the call stack.
+> 8. We reach the expression `0` which can be evaluated. Due to the fact that the expression provided a value, the call `sum1 []` is popped off the call stack.
+> 9. The expression `3 + 0` is evaluated to `3` and the call `sum1 [3]` is popped off the call stack.
+> 10. The expression `2 + 3` is evaluated to `5` and the call `sum1 [2, 3]` is popped off the call stack.
+> 11. The expression `1 + 5` is evaluated to `6` and the call `sum1 [1, 2, 3]` is popped off the call stack.
+> 12. The recursive calls are complete and the final result is `6`.
+
+For a small list like `[1, 2, 3]`, this is not as big of a deal but for a large lists, a lot of space is used on the call stack which can cause the program to crash if the call stack runs out of space. This is where tail recursion comes in because unlike `sum1`, `sum2` does not wait for the recursive call to be evaluated before evaluating the expression. Instead, it keeps track of the result using an accumulator.
+
+In the case of `sum2 [1, 2, 3]`, the following happens:
+> 1. `sum2 [1, 2, 3]` is called and a new element is pushed onto the call stack.
+> 2. We reach the expression `f ([1, 2, 3], 0)` which evaluates to `f ([2, 3], 1)`.
+> 3. We reach the expression `f ([2, 3], 1)` which evaluates to `f ([3], 3)`.
+> 4. We reach the expression `f ([3], 3)` which evaluates to `f ([], 6)`.
+> 5. The function call `f ([], 6)` is evaluated and returns `6`.
+
+In this case the recursive call just returns the result of the next recursive call and has nothing else to evaluate. This means there is nothing more for the caller to do after the callee returns except return the callee's result. This idea is called a ***tail call*** and functional languages like ML optimize these calls. When a call is a tail call, the caller's stack-frame is popped before the call essentially replacing the callee's stack-frame with the caller's stack-frame. This basically means you only need one stack-frame for the entire recursive call no matter how many recursive calls are made.
+
+### Efficiency
+
+A more interesting case of efficiency is when we are trying to reverse a list without tail recursion.
+
+```sml title="Reverse Without Tail Recursion" showLineNumbers="true"
+fun rev1 lst =
+    case lst of
+        [] => []
+        | x :: xs => rev1 xs @ [x]
+```
+
+In this case, we always have to wait for `rev1 xs` to be evaluated before we can evaluate `rev1 xs @ [x]`. This algorithm is simple but it takes $n^2$ operations to reverse a list of size $n$. We get $n^2$ because appending two lists takes time proportional to the length of the first list (it has to traverse the first list). Over all the recursive calls, we call `@` operator with the first list being length $n - 1, n - 2, ..., 1$ and the sum of these integers from $1$ to $n - 1$ is $n * (n - 1) / 2$ which is $n^2$.
+
+```sml title="Reverse With Tail Recursion" showLineNumbers="true"
+fun rev2 lst =
+    let fun f (lst, acc) =
+        case lst of
+            [] => acc
+          | x :: xs => f (xs, x :: acc)
+    in
+        f (lst, [])
+    end
+```
+
+In `rev2` the accumulator is the reversed list so far and due to the fact we are keeping track of the list we can use the `::` operator over the `@` operator. The `::` operator is more efficient because it does not have to traverse any list and so it takes constant time no matter the length of the list. This means the algorithm takes $n$ operations to reverse a list of size $n$ instead of `rev1` which takes $n^2$ operations.
+
+### Tail Position
+
+The most common pattern of tail recursion is where the base case of our helper function returns the accumulator and the value passed for the outermost function call is the old base case. However, it is important to note that tail recursive functions can be written in many different ways as well with the only requirement being that the recursive call is in ***tail position*** which means it is the last thing to be evaluated in the function and the result of the recursive call is the result of the function.
+
+The precise definition of tail position can be defined recursively and is different for each expression:
+1. In `fun f(x) = e`, `e` is in tail position.
+2. If an expression `e` is not in tail position, then none of its subexpressions are in tail position.
+3. The expression `if e1 then e2 else e3` is in tail position if both `e2` and `e3` are in tail position. The expression `e1` does not have to be in tail position for this case.
+4. Case expressions are similar to if statements where the expression `case e of p1 => e1 | p2 => e2 | ... | pn => en` is in tail position if all the expressions `e1`, `e2`, ..., and `en` are in tail position. However, the expression `e` does not have to be in tail position.
+5. The expression `let b1 ... bn in e` is only in tail position if `e` is in tail position. This means none of the bindings have to be in tail position.
+6. Function call arguments are not in tail position.
+
+:::note
+All these pieces all have the same underlying idea that the expression that needs to be in tail position is the expression that is returned by the outermost expression. These expressions all have to be the last thing to be evaluated in the function and should not rely on a different expression to be evaluated first in order to arrive at the result.
+:::
