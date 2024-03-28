@@ -1,0 +1,101 @@
+---
+id: page-5
+title: Number Theory
+sidebar_position: 5
+---
+
+Number theory is a part of mathematics that examines the abstract properties of numbers.
+
+## Division Theorem
+
+Division is one of the four basic mathematical operations which allows us to split numbers into equal amounts. The theorem that defines how division works is the ***division theorem***. This theorem states: *Let $a$, $b$ be integers, $b > 0$. Then there are unique integers $q$, $r$ such that $a = q \cdot b + r$ and $0 \leq r < b$*.
+
+> **Theorem:** The Division Theorem
+>
+> **Proof:** In order to prove this theorem, we will prove existence first, then uniqueness.
+>
+> To prove existence, we need to look at all non-negative integers of the form $a - kb$, where $k$ is an integer, and show that one of them is less than $b$. Such integers do exist.
+>
+> Take $k = -|a|$. Then, since $b \geq 1$, $a - kb = a + |a|b \geq a + |a| \geq 0$.
+>
+> Let $r$ be the smallest such integer. Let $q$ be the value of $k$ for which it occurs, i.e. $r = a - qb$. To complete the proof, we show that $r < b$.
+>
+> Suppose, on the contrary, that $r \geq b$ then $a - (q + 1) b = a - qb - b = r - b \geq 0$. Thus $a - (q + 1) b$ is a non-negative integer of the form $a - kb$.
+>
+> But $r$ is the smallest such, and yet $a - (q + 1) b < a - qb = r$. This is a contradiction. Hence $r < b$. That proves existence.
+>
+> To prove uniqueness, we need to show that if there are two representations of $a$, $a = qb + r = q^{\prime}b + r^{\prime}$, $0 \leq r$, $r^{\prime} < b$, then $r = r^{\prime}$ and $q = q^{\prime}$.
+>
+> Rearranging the above equations: $r^{\prime} - r = b (q - q^{\prime})$.
+>
+> Taking absolute values: $|r^{\prime} - r| = b |q = qr|$.
+>
+> But $-b < -r \leq 0$ and $0 \leq r^{\prime} < b$, so $-b < r^{\prime} - r < b$ meaning $|r^{\prime} - r| < b$. 
+>
+> So due to $|r^{\prime} - r| = b |q = qr|$, $b |q - q^{\prime}| < b$. Hence $|q - q^{\prime}| < 1$ which means $q = q^{\prime}$. Then due to $r^{\prime} - r = b (q - q^{\prime})$, $r = r^{\prime}$. That proves uniqueness.
+
+
+### General Theorem
+
+The issue with the division theorem we stated above is that it only covers the cases where $b > 0$. The ***General Division Theorem*** states: *Let $a$, $b$ be integers, $b \neq 0$. Then there are unique integers $q$, $r$ such that $a = qb + r$ and $0 \leq r \leq |b|$*.
+
+> **Theorem:** The General Division Theorem
+>
+> **Proof:** We have proved the result in the case $b > 0$, so assume $b < 0$.
+>
+> Then, since $|b| > 0$, the previous theorem tells us there are unique integers $q^{\prime}$, $r^{\prime}$ such that $a = q^{\prime} \cdot |b| + r^{\prime}$ and $0 \leq r^{\prime} < |b|$.
+>
+> Let $q = -q^{\prime}$, $r = r^{\prime}$. Then, since $|b| = -b$, we got $a = qb + r$, $0 \leq r \leq |b|$.
+
+:::note
+In the division theorem, The variable $q$ refers to the ***quotient*** of $a$ by $b$, and $r$ is the ***remainder***.
+
+Also note this theorem does not work for $b = 0$ because we cannot divide by zero.
+:::
+
+## Divisibility
+
+If division of $a$ by $b$ produces a remainder $r = 0$, we say $a$ is ***divisible*** by $b$. Hence, $a$ is divisible by $b$ iff there is an integer $q$ such that $a = b \cdot q$. For example, $45$ is divisible by $9$ because $45 = 9 \cdot 5$ but $44$ is not divisible by $9$ because $44 = 9 \cdot 4 + 8$.
+
+We denote divisibility by $b|a$ which means $a$ is divisible by $b$. $b|a$ is not the same as $b/a$ because $b|a$ refers to the relationship between $a$ and $b$ which is either true or false. On the other hand $b/a$ denotes a rational number which is the result of dividing $b$ by $a$.
+
+:::note
+We can redefine prime numbers in terms of divisibility. A prime number is an integer $p > 1$ that is divisible by $1$ and $p$.
+:::
+
+We can better understand divisibility and use it for proofs by understanding its basic properties:
+1. $a|0$, $a|a$.
+2. $a|1$ iff $a = \pm 1$.
+3. If $a|b$ and $c|d$ then $ac|bd$.
+4. If $a|b$ and $b|c$, then $a|c$ (for $b \neq 0$).
+5. [$a|b$ and $b|a$] iff $a = \pm b$.
+6. If $a|b$ and $b \neq 0$, then $|a| \leq |b|$ iff $a \neq \pm b$.
+7. If $a|b$ and $a|c$, then $a|(bx + cy)$ for any integers $x$, $y$.
+
+## Fundemental Theorem of Arithmetic
+
+Finally, the ***Fundemental Theorem of Arithmetic*** states that *every natural number greater than $1$ is either prime or can be expressed as a product of primes in a way that is unique except for the order in which they are written*. The expression of a number as a product of primes is called its ***prime decomposition***.
+
+:::note
+In order to proof uniqueness for this theorem, we need ***Euclid's Lemma*** which states *If a prime $p$ divides a product $ab$, then $p$ divides at least one of $a$, $b$*.
+:::
+
+> **Theorem:** The Fundemental Theorem of Arithmetic
+>
+> **Proof:** In order to prove this theorem, we will prove existence first, then uniqueness.
+>
+> We will prove existence using proof by contradiction.
+>
+> Suppose there were a composite number (i.e. non prime) that could not be written as a product of primes. Then there must be a smallest such number. Call it $n$. Since $n$ is not prime, there are numbers $a$, $b$ with $1 < a, b < n$ such that $n = ab$.
+>
+> If $a$, $b$ are primes, then $n = ab$ is a prime decomposition of $n$ and we have a contradiction. 
+>
+> If either of $a$, $b$ is composite, then because it is less than $n$, it must be a product of primes, so by replacing one or both $a$, $b$ by its prime decomposition in $n = ab$, we get a prime decomposition of $n$, and again we have a contradiction. That proves existence.
+>
+> Now we can prove uniqueness. The prime decomposition of any natural number $n > 1$ is unique not including the order the primes. We can prove this by contradiction.
+>
+> Assume there is a number $n > 1$ that has two (or more) different prime decompositions. Let $n$ be the smallest such number.
+>
+> Let $n = p_1, p_2, ..., p_r = q_1, q_2, ..., q_s$ be two different prime decompositions of $n$. Since $p_1$ divides $(q_1)(q_2 ... q_s)$, by Euclid's Lemma, either $p_1|q_1$ or $p_1|(q_2 ... q_s)$.
+>
+> Hence, either $p_1 = q_1$ or else $p_1 = q_i$ for some $i$ between $2$ and $s$. But then we can delete $p_1$ and $q_i$ from $n = p_1, p_2, ..., p_r = q_1, q_2, ..., q_s$, which gives us a number smaller than $n$ that has two different prime decompositions, contrary to the choice of $n$ as the smallest such. That proves uniqueness.

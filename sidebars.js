@@ -105,6 +105,8 @@ const sidebars = {
         'euler-tako/math-thinking/page-2',
         'euler-tako/math-thinking/page-3',
         'euler-tako/math-thinking/page-4',
+        'euler-tako/math-thinking/page-5',
+        'euler-tako/math-thinking/page-6',
       ]
     }
   ]
