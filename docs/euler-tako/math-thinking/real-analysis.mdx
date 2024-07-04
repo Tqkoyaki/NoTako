@@ -3,3 +3,105 @@ id: page-6
 title: Real Analysis
 sidebar_position: 6
 ---
+
+There are two types of numbers: discrete in which the set of numbers are finite and continuous where the set of numbers are infinite. There are various continuous sets we use often in math. These sets include natural numbers ($\mathbb{N}$), integers ($\mathbb{Z}$), rational numbers ($\mathbb{Q}$), and real numbers ($\mathbb{R}$). The focus of real analysis revolves around the set of real numbers.
+
+## Types of Numbers
+
+Not all infinite sets are created equal because $\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$ meaning $\mathbb{R}$ encompasses more numbers than $\mathbb{Q}$ and so on. 
+
+We can use these subsets to define a bigger set of numbers. For example, integers can be defined using natural numbers, rational numbers can be defined using integers, and so on.
+
+### Rational Numbers
+
+With integers being a subset of rational numbers, we are able to define rational numbers and their properties using integers. A rational number is any number that can be expressed as $p / q$ where $p, q \in \mathbb{Z}$.
+
+Rational numbers are considered dense because if we take any two numbers on the rational line, we can always find a new number on the rational line which falls in between the first two numbers we picked on the line. We can see this through the following proof:
+
+> **Theorem:** If $r, s \in \mathbb{Q}$ and $r < s$, then there exists a rational $t$ such that $r < t < s$.
+>
+> **Proof:** Let $t = \frac{1}{2} (r + s)$. Clearly $r < t < s$.
+>
+> But, is $t \in \mathbb{Q}$?
+>
+> Let $r = \frac{m}{n}, s = \frac{p}{q}$, where $m, n, p, q \in \mathbb{Z}$.
+>
+> Then $t = \frac{1}{2} (\frac{m}{n} + \frac{p}{q}) = \frac{mq + np}{2nq}$.
+>
+> So $mq + np$, $2np \in \mathbb{Z}$ which means $t \in \mathbb{Q}$. Q.E.D.
+
+### Real Numbers
+
+As we have proven, rational numbers are dense. However, this does not prevent holes in the rational line. The line is dense but also full of holes like $\sqrt{2}$.
+
+> Let $A = {x \in \mathbb{Q} \mid x \leq 0 \lor x^2 < 2}$, and $B = {x \in \mathbb{Q} \mid x > 0 \land x^2 \geq 2}$.
+>
+> Clearly, $A \cup B = \mathbb{Q}$.
+>
+> But, $A$ has no greatest member and B has no smallest member. Hence, the rationals are inadequate to solve mathematics.
+>
+> In $\mathbb{Q}$, we cannot solve the equation $x^2 - 2 = 0$.
+
+These holes are why we have real numbers. Real numbers include all rational numbers and the holes in the rational line as well. This make this number set perfect for many mathematical and scientific uses.
+
+## Intervals
+
+Intervals are simplier notations for defining a set of numbers within a range. For example, $(3, 5]$ is equivalent to stating $\{ x \in \mathbb{R} \mid 3 < x \leq 5 \}$.
+
+There are two different types of intervals: open intervals and closed intervals. Let $a, b \in \mathbb{R}$ and $a < b$. The open interval $(a, b)$ is the set $(a, b) = \{ x \in \mathbb{R} \mid a < x < b \}$. Finally, the closed interval $[a, b]$ is the set $[a, b] = \{ x \in \mathbb{R} \mid a \leq x \leq b \}$.
+
+There are variants to these intervals which involve half open or half closed intervals:
+1. $[a, b) = \{ x \in \mathbb{R} \mid a \leq x < b \}$
+2. $(a, b] = \{ x \in \mathbb{R} \mid a < x \leq b \}$
+3. $(-\infty, a) = \{ x \in \mathbb{R} \mid x < a \}$
+4. $(-\infty, a] = \{ x \in \mathbb{R} \mid x \leq a \}$
+5. $(a, \infty) = \{ x \in \mathbb{R} \mid x > a \}$
+6. $[a, \infty) = \{ x \in \mathbb{R} \mid x \geq a \}$
+
+:::note
+We don't have $(a, \infty]$ and $[-\infty, a)$ because we cannot include infinity in a set as infinity is not a real number.
+:::
+
+## Completeness Property
+
+The idea of real numbers filling the holes in the rational line is expressed through the completeness property. Before we can look at this property, we must look at the definition of a least upper bound. Given a set of $A \in \mathbb{R}$, a number $b$ such that $(\forall a \in A)[a \leq b]$ is said to be the upper bound of $A$. We say $b$ is a least upper bound of $A$ if, in addition, for any upper bound $c$ of $A$, we have $b \leq c$.
+
+The completeness property of the real number system says that every nonempty set of reals that has an upper bound, has a least upper bound in $\mathbb{R}$. Using this property, we can show that the rational line is not complete.
+
+> **Theorem:** If $A \subset R$ has an upper bound then it has a least upper bound, in $\mathbb{R}$.
+>
+> **Proof:** Let $A = \{ r \in \mathbb{Q} \mid r \geq 0 \land r^2 < 2 \}$. $A$ is bounded above.
+>
+> Let's show that $A$ has no least upper bound. Let $x \in \mathbb{Q}$ be any upper bound of $\mathbb{A}$, and show there is a smaller one (in $\mathbb{Q}$).
+>
+> Let $x = \frac{p}{q}$, where $p, q \in \mathbb{N}$. 
+>
+> Suppose $x^2 < 2$. Then $2q^2 > p^2$. As $n$ gets larger, $\frac{n^2}{2n + 1}$ increases without bound, so we can pick an $n$ large enough such that $\frac{n^2}{2n + 1} > \frac{p^2}{2q^2 - p^2}$, i.e. $2n^2q^2 > (n + 1)^2p^2$.
+>
+> Hence $(\frac{n + 1}{n})^2\frac{p^2}{q^2} < 2$. Let $y = (\frac{n + 1}{n})\frac{p}{q}$. Thus $y \in \mathbb{Q}$ and $y^2 < 2$. So $y \in A$. But, $y > x$.
+>
+> Contradiction, since $x$ is an upper bound of $A$. So, $x^2 > 2$. Hence, $x^2 > 2$. Thus $p^2 > 2q^2$.
+>
+> Pick $n$ so large that: $\frac{n^2}{2n + 1} > \frac{2q^2}{p^2 - q^2}$, i.e., $p^2n^2 > 2q^2(n + 1)$, i.e., $\frac{p^2}{q^2}(\frac{n}{n + 1})^2 > 2$.
+>
+> Let $y = (\frac{n}{n + 1})\frac{p}{q}$. Then $y \in \mathbb{Q}$ and $y^2 > 2$. Since, $\frac{n}{n + 1} < 1$, $y < x$. But, for any $a \in A$, $a^2 < 2 < y^2$, so $a < y$.
+>
+> Hence $y$ is an upper bound of $A$, smaller than $x$. Thus $A$ does not have a least upper bound. Q.E.D.
+
+## Sequences
+
+We can define a list of $a_1, a_2, a_3, ...$ as $\{ a_n \}^{\infty}_{n = 1}$. Both of these denote an infinite series. An example of an infinite sequence is $\{ \frac{1}{n} \}^{\infty}_{n = 1}$ which equals $1, \frac{1}{2}, \frac{1}{3}, \frac{1}{4}, ...$.
+
+Sometimes numbers in an infinite sequence get arbitrarily closer to some fixed number $a$, we say $\{ a_n \}^{\infty}_{n = 1}$ tends to the limit $a$, and write $a_n \rightarrow a$ as $n \rightarrow \infty$ or $lim_{n \rightarrow \infty} a_n = a$. In the case of $\{ \frac{1}{n} \}^{\infty}_{n = 1}$, it tends towards $0$.
+
+The formal definition is $a_n \rightarrow a$ as $n \rightarrow \infty$ iff $(\forall \epsilon > 0)(\exists n \in \mathbb{N})(\forall m \geq n)[|a_n - a| < \epsilon]$ when we refer to limits. We can use this to prove any limit for any series.
+
+> **Theorem:** $\{ \frac{n}{n + 1} \}^{\infty}_{n = 1} = \frac{1}{2}$, $\frac{2}{3}$, $\frac{3}{4}$, $\frac{4}{5}$, $...$.
+>
+> **Proof:** We need to prove $\frac{n}{m + 1} \rightarrow 1$ as $n \rightarrow \infty$.
+>
+> Let $\epsilon > 0$ be given. We need to find an $n$ such that for all $m \geq n$: $|\frac{m}{m + 1} - 1| < \epsilon$.
+>
+> Pick $n$ so large that $n > \frac{1}{\epsilon}$. Then for any $m \geq n$: $|\frac{m}{m + 1} - 1| = |\frac{-1}{m + 1}| = \frac{1}{m + 1} < \frac{1}{m} \leq \frac{1}{n} < \epsilon$. Q.E.D.
+
+
