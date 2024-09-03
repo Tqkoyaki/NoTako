@@ -20,7 +20,8 @@ const sidebars = {
   subjectSidebar: [
     'intro',
     'turing-tako/turing',
-    'euler-tako/euler'
+    'euler-tako/euler',
+    'lee-tako/lee'
   ],
   turingSidebar: [
     'turing-tako/turing',
@@ -107,6 +108,48 @@ const sidebars = {
         'euler-tako/math-thinking/page-4',
         'euler-tako/math-thinking/page-5',
         'euler-tako/math-thinking/page-6',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Algebra and Trigonometry',
+      items: [
+        {
+          type: 'category',
+          label: 'PreAlgebra',
+          items: [
+            'euler-tako/algebra-trig/pre-alg/page-1',
+            'euler-tako/algebra-trig/pre-alg/page-2',
+            'euler-tako/algebra-trig/pre-alg/page-3',
+            'euler-tako/algebra-trig/pre-alg/page-4',
+            'euler-tako/algebra-trig/pre-alg/page-5',
+            'euler-tako/algebra-trig/pre-alg/page-6',
+          ]
+        },
+      ]
+    }
+  ],
+  leeSidebar: [
+    'lee-tako/lee',
+    {
+      type: 'category',
+      label: 'CompTIA A+ 1101',
+      items: [
+        'lee-tako/comptia-a-1101/page-1',
+        'lee-tako/comptia-a-1101/page-2',
+        'lee-tako/comptia-a-1101/page-3',
+        'lee-tako/comptia-a-1101/page-4',
+        'lee-tako/comptia-a-1101/page-5',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'CompTIA A+ 1102',
+      items: [
+        'lee-tako/comptia-a-1102/page-1',
+        'lee-tako/comptia-a-1102/page-2',
+        'lee-tako/comptia-a-1102/page-3',
+        'lee-tako/comptia-a-1102/page-4',
       ]
     }
   ]

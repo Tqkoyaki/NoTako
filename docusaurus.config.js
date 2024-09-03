@@ -93,6 +93,12 @@ const config = {
             label: 'Mathematics'
           },
           {
+            type: 'doc',
+            docId: 'lee-tako/lee',
+            position: 'left',
+            label: 'Technology'
+          },
+          {
             href: 'https://github.com/Tqkoyaki/NoTako',
             label: 'GitHub',
             position: 'right',

@@ -1,0 +1,74 @@
+---
+id: page-5
+title: Factoring Polynomials
+sidebar_position: 5
+---
+
+Factoring is a method applied to polynomials which allows us to simplify them. This often can make manipulating and analyzing these expressions vastly easier.
+
+## Greatest Common Factor
+
+The **greatest common factor (GCF)** of polynomials is the largest polynomial that divides evenly into the polynomials.
+
+To find the GCF of an expression, we first identify the GCF of the coefficients and then of the variables. Once we find the GCFs, we combine them to get the GCF of the expression. For example, the GCF of $$12$$ and $$20$$ is $$4$$ and the GCF of $$x^2$$ and $$x$$ is $$x$$. Using these facts, we can conclude that the GCF of $$12x^2$$ and $$20x$$ is $$4x$$.
+
+We can factor using the GCF by dividing each term in the polynomial by the GCF. The factored expression is the product of the GCF and the expression obtained by dividing. For example, the polynomial $$12x^2 + 20x$$ has as GCF of $$4x$$. This means the factored expression is $$4x(3x + 5)$$.
+
+## Factoring Trinomials
+
+A trinomial of the form $$x^2 + bx + c$$ (has a leading coefficient of $$1$$) can be written in factored form as $$(x + p)(x + q)$$ where $$pq = c$$ and $$p + q = b$$.
+
+> $$\underline{Example}$$
+>
+> $$x^2 - 3x - 10$$
+>
+> Let $$p = 2$$ and $$q = -5$$, then $$pq = -10$$ and $$p + q = -3$$.
+>
+> $$(x + p)(x + q) = (x + 2)(x - 5)$$
+
+:::note
+Some polynomials cannot be factored. These polynomials are considered to be prime.
+:::
+
+### Factor by Grouping
+
+To factor a trinomial in the form $$ax^2 + bx + c$$ by grouping, we need to find two numbers with a product of $$ac$$ and a sum of $$b$$. We can use these numbers to seperate $$bx$$ into a sum of two terms and can factor each portion of the binomial seperately using GCF.
+
+> $$\underline{Example}$$
+>
+> $$7x^2 + 48x - 7$$ where $$a = 7$$, $$b = 48$$, $$c = -7$$
+>
+> $$ac = -49 = 49 \times -1$$ and $$b = 48 = 49 - 1$$
+>
+> $$7x^2 + 49x - x - 7$$
+>
+> $$7x(x + 7) - 1(x + 7)$$ 
+>
+> Both expressions have a common GCF of $$(x + 7)$$. There will always be a common GCF like this.
+>
+> $$(7x - 1)(x + 7)$$
+
+## Common Patterns
+
+| Name of Pattern | Definition |
+| - | - |
+| Perfect Square Trinomials | $$a^2 + 2ab + b^2 = (a + b)^2$$ |
+| Difference of Squares | $$a^2 - b^2 = (a + b)(a - b)$$
+| Sum of Cubes | $$a^3 + b^3 = (a + b)(a^2 - ab + b^2)$$ |
+| Difference of Cubes | $$(a^3 - b^3) = (a - b)(a^2 + ab + b^2)$$ |
+
+## Exponents
+
+Even fractional or negative exponents can be factored by pulling out the GCF and factoring with it.
+
+> $$\underline{Example}$$
+>
+> $$3x(x + 2)^{\frac{-1}{3}} + 4(x + 2)^{\frac{2}{3}}$$
+>
+> The GCF is $$(x + 2)^{-\frac{1}{3}}$$.
+>
+> $$3x(x + 2)^{-\frac{1}{3}}$$ divided by the GCF is $$3x$$ and $$4(x + 2)^{\frac{2}{3}}$$ divided by the GCF is $$4(x + 2)$$.
+>
+> Factoring this gives us $$(x + 2)^{-\frac{1}{3}}(3x + 4(x + 2))$$.
+>
+> Finally, simplifying gives us $$(x + 2)^{-\frac{1}{3}}(7x + 8)$$.
