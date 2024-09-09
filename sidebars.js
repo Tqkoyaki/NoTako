@@ -126,6 +126,13 @@ const sidebars = {
             'euler-tako/algebra-trig/pre-alg/page-6',
           ]
         },
+        {
+          type: 'category',
+          label: 'Equations and Inequalities',
+          items: [
+            'euler-tako/algebra-trig/equations/page-1',
+          ]
+        }
       ]
     }
   ],
