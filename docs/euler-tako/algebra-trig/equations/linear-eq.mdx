@@ -1,0 +1,136 @@
+---
+id: page-2
+title: Linear Equations
+sidebar_position: 2
+---
+import Fig from '@site/src/components/Figure';
+
+A **linear equation** is an equation of a straight line that is written in one variable which means the degree of this equation is always $$1$$.
+
+## Single Variable Equations
+
+To solve a linear equation, we need to find the **solution set** which consists of all the values that can be substituted into the variable which make the equation true. We can classify equations using the type of solution sets we may encounter...
+
+1. An **identity equation** is an equation which is true for any value substituted into the variable $$(ex.\:5x = 9x - 4x$$ which is equal to $$5x = 5x)$$.
+2. A **conditional equation** is an equation which is true for only some values of the variable. $$(ex.\:2x + 3 = 7$$ which is equal to $$x = 4)$$.
+3. An **inconsistent equation** is an equation which is true for no possible value of the variable. It has no solution. $$(ex.\:2x + 3 = 2x + 5$$ which is equal to $$3 = 5$$ and this is not a true statement$$)$$.
+
+:::note
+A linear equation in one variable can be always written in the form $$ax + b = 0$$ where $$a$$ and $$b$$ are real numbers, $$a \neq 0$$. This means only conditional equations can be linear equations.
+:::
+
+We can solve a linear equation by manipulating the equation in order to isolate the unknown operation. We are able to apply any operation to the equation as long as its applied to both sides in order to isolate the unknown variable.
+
+> $$\underline{Example}$$
+>
+> $$-2(3x - 1) + x = 14 - x$$
+>
+> $$-6x + 2 + x = 14 - x \:\:\: Distributive\:Property$$
+>
+> $$-5x + 2 = 14 - x \:\:\: Simplifying\:Both\:Sides$$
+>
+> $$-5x + 2 - 2 = 14 - x - 2 \:\:\: Isolating\:Variable\:on\:One\:Side$$
+>
+> $$-5x = 12 - x$$
+>
+> $$-5x + x = 12 - x + x \:\:\: Isolating\:Variable\:from\:Constants$$
+>
+> $$-4x = 12$$
+>
+> $$\frac{-4x}{-4} = \frac{12}{-4} \:\:\: Isolating\:Variable$$
+>
+> $$x = -3$$
+
+
+## Rational Equations
+
+**Rational equations** are equations that contain at least one rational expression and these equations after some manipulation can result in a linear equation.
+
+One method to solving rational equations is to find the **least common denominator (LCD)** which is the smallest term which is divisible by all the denominators. By multiplying both sides by the LCD, we can cancel out all the denominators and then solve the resulting equation.
+
+> $$\underline{Example}$$
+>
+> $$\frac{7}{2x} - \frac{5}{3x} = \frac{22}{3}$$
+>
+> The LCD of $$2x$$, $$3x$$, and $$3$$ is $$6x$$ because $$6x$$ can be factored into $$3(2x)$$, $$2(3x)$$, and $$2x(3)$$.
+>
+> $$(6x)(\frac{7}{2x} - \frac{5}{3x}) = (6x)(\frac{22}{3})$$
+>
+> $$(6x)(\frac{7}{2x}) - (6x)(\frac{5}{3x}) = (6x)(\frac{22}{3})$$
+>
+> $$(3)(7) - (2)(5) = (2x)(22)$$
+>
+> $$21 - 10 = 44x$$
+>
+> $$11 = 44x$$
+>
+> $$\frac{11}{44} = x$$
+>
+> $$x = \frac{1}{4}$$
+
+The second method can be done without finding the LCD. If the rational equation is in the form of a proportion where $$\frac{a}{b} = \frac{c}{d}$$ then we can cross multiply to get $$a(d) = b(c)$$. Regardless of how we achieve it, the primary goal in all the methods is to eliminate the denominators from the equation.
+
+> $$\underline{Example}$$
+>
+> $$\frac{2}{3x} = \frac{1}{3}$$
+>
+> $$2(3) = 1(3x)$$
+>
+> $$6 = 3x$$
+>
+> $$x = 2$$
+
+:::note
+A solution for a rational equation is not valid if if makes any denominator in the original expression equal zero.
+::: 
+
+## Finding Linear Equations
+
+The most used form of a linear equation is the **slope-intercept form**. This form is written as $$y = mx + b$$, where $$m$$ is the slope and $$b$$ is the y-intercept.
+
+The **slope** of a line is the ratio of the vertical change in $$y$$ over the horizontal change in $$x$$ between any two points on a line. This change is often described by rise over run and indicates both the steepness of the line and its direction. If the slope is negative then $$y$$ decreases as $$x$$ increases. If the slope is positive then $$y$$ increases as $$x$$ increases.
+
+
+Given any two points on the line, $$(x_1, y_1)$$ and $$(x_2, y_2)$$, we can find the slope using $$m = \frac{y_2 - y_1}{x_2 - x_1}$$.
+
+:::note
+If we have any point and the slope of a line, we can find the y-intercept by substituting for $$x$$, $$y$$, and $$m$$ in the slope-intercept form in order to solve for $$b$$.
+:::
+
+### Point-Slope Form
+
+If we have the slope and one point on a line, we can find the equation of a line using **point-slope form**. The form is $$y - y_1 = m(x - x_1)$$ where the point is $$(x_1, y_1)$$ and the slope is $$m$$.
+
+### Standard Form
+
+The equation of a line can also be written in **standard form**. This form is written as $$Ax + By = C$$ where $$A$$, $$B$$, and $$C$$ are integers meaning no fractions are allowed.
+
+> $$\underline{Example}$$
+>
+> Find the equation of a line in standard form with slope $$m = -\frac{1}{3}$$ and passing through the point $$(1, \frac{1}{3})$$.
+>
+> $$(y - \frac{1}{3}) = -\frac{1}{3}(x - 1) \:\:\: Point\:Slope\:Form$$
+>
+> $$y - \frac{1}{3} = -\frac{1}{3}x + \frac{1}{3}$$
+>
+> $$3(y - \frac{1}{3}) = 3(-\frac{1}{3}x + \frac{1}{3}) \:\:\: Removing\:Rationals$$
+>
+> $$3y - 1 = -x + 1$$
+>
+> $$3y = -x + 2$$
+>
+> $$x + 3y = 2$$
+
+### Horizontal & Vertical Lines
+
+The equation of a vertical line is $$x = c$$ where $$c$$ is a constant. For these lines, the slope is undefined and regardless of the $$y$$-value of any point, $$x$$ will always equal $$c$$.
+
+The equation of a horizontal line is $$y = c$$ where $$c$$ is a constant. For these lines, the slope is $$0$$ and regardless of the $$x$$-value of any point, $$y$$ will always equal $$c$$.
+
+## Parallel and Perpendicular
+
+Parallel lines are lines that have the same slope but different $$y$$-intercepts. This means that these lines will never intersect.
+
+Perpendicular lines are lines that intersect to form a $$90^{\circ}$$ angle. The slope of one line is the negative reciprocalof the other. In order words, if $$m_1 = a$$ then $$m_2 = -\frac{1}{a}$$. We can show two lines are perpendicular if the product of the two slopes equal -1 as $$m_1 \times m_2 = -1$$.
+
+We can find a parallel or perpendicular line passing through a given point by first finding the new slope and then using the slope and point to find the new equation.

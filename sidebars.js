@@ -131,6 +131,8 @@ const sidebars = {
           label: 'Equations and Inequalities',
           items: [
             'euler-tako/algebra-trig/equations/page-1',
+            'euler-tako/algebra-trig/equations/page-2',
+            'euler-tako/algebra-trig/equations/page-3',
           ]
         }
       ]
