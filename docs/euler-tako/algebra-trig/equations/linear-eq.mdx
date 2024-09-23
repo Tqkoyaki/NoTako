@@ -5,6 +5,10 @@ sidebar_position: 2
 ---
 import Fig from '@site/src/components/Figure';
 
+import alg1 from '@site/static/img/euler/algebra-trig/alg-5.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-6.png';
+
+
 A **linear equation** is an equation of a straight line that is written in one variable which means the degree of this equation is always $$1$$.
 
 ## Single Variable Equations
@@ -90,6 +94,8 @@ The most used form of a linear equation is the **slope-intercept form**. This fo
 
 The **slope** of a line is the ratio of the vertical change in $$y$$ over the horizontal change in $$x$$ between any two points on a line. This change is often described by rise over run and indicates both the steepness of the line and its direction. If the slope is negative then $$y$$ decreases as $$x$$ increases. If the slope is positive then $$y$$ increases as $$x$$ increases.
 
+<Fig src={alg1} caption='Slope: Rise vs Run' num={1}/>
+
 
 Given any two points on the line, $$(x_1, y_1)$$ and $$(x_2, y_2)$$, we can find the slope using $$m = \frac{y_2 - y_1}{x_2 - x_1}$$.
 
@@ -132,5 +138,7 @@ The equation of a horizontal line is $$y = c$$ where $$c$$ is a constant. For th
 Parallel lines are lines that have the same slope but different $$y$$-intercepts. This means that these lines will never intersect.
 
 Perpendicular lines are lines that intersect to form a $$90^{\circ}$$ angle. The slope of one line is the negative reciprocalof the other. In order words, if $$m_1 = a$$ then $$m_2 = -\frac{1}{a}$$. We can show two lines are perpendicular if the product of the two slopes equal -1 as $$m_1 \times m_2 = -1$$.
+
+<Fig src={alg2} caption='Parallel vs Perpendicular' num={2}/>
 
 We can find a parallel or perpendicular line passing through a given point by first finding the new slope and then using the slope and point to find the new equation.

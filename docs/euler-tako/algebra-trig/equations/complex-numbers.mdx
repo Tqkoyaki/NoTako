@@ -1,0 +1,104 @@
+---
+id: page-4
+title: Complex Numbers
+sidebar_position: 4
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-7.png';
+
+The study of mathematics builds upon itself by filling voids still left in the subject. For example, negative numbers filled the void left by positive numbers. Just like this, imaginary numbers fill the void left by real numbers.
+
+## Imaginary and Complex Numbers
+
+The square root of any negative number is not real as squaring any number makes it positive. If the value in the radicand is negative, the root is said to be an **imaginary number**. The imaginary number $i$ is equivalent to $$\sqrt{-1}$$.
+
+We can simplify the square root of any negative number by converting it into a multiple of $$i$$. This means the simpliest form for $$\sqrt{-a}$$ is $$\sqrt{a}i$$.
+
+> $$\underline{Example}$$
+>
+> $$\sqrt{-81} = \sqrt{81 \times -1} = \sqrt{81}\sqrt{-1} = 9i$$
+
+A **complex number** is a number of the form $$a + bi$$ where $$a$$ is a real number and $$bi$$ is the imaginary number. If $$b = 0$$ then the number is just a real number. Also note if $$a = 0$$ and $$b \neq 0$$ then the number is just a pure imaginary number.
+
+:::note
+The complex number form is the standard form used to express imaginary numbers. So, $$4i$$ in standard form would be $$0 + 4i$$.
+:::
+
+## Complex Plane
+
+We cannot plot complex number on the number line like we would with real numbers due to complex numbers containing imaginary numbers. Instead, we can use the **complex plane**, which is a coordinate system in which the horizontal axis represents the real component and the vertical axis represents the imaginary component. For example, the complex number $$3 - 2i$$ would be expressed using the ordered pair $$(3, -2)$$.
+
+<Fig src={alg1} caption='Plotting 3 - 2i' num={1}/>
+
+## Addition and Subtraction
+
+To add complex numbers, we add the real numbers together and the imaginary numbers together. After that we add both these terms together. Mathematically we can define this as $$(a + bi) + (c + di) = (a + c) + (b + d)i$$.
+
+To subtract complex numbers, we subtract the real numbers together and the imaginary numbers together. After that we add both these terms together. Mathematically we can define this as $$(a + bi) - (c + di) = (a - c) + (b - d)i$$.
+
+## Multiplication
+
+We can multiply complex numbers by treating them like binomials. The only difference is we work with the real and imaginary parts seperately.
+
+We can multiply a complex number with a real number using the foil method where $$a(b + ci) = ab + aci$$.
+
+Finally, we can multiply a complex number with another complex number using the FOIL method...
+
+> $$(a + bi)(c + di)$$
+>
+> $$= ac + adi + bci + bdi^2$$
+>
+> $$= ac + adi + bci - bd\:\:\:\:\: because\:i^2 = -1$$
+>
+> $$= (ac - bd) + (ad - bc)i$$
+
+### Division
+
+Division is a more complicated than the other operations because we cannot divide by an imaginary number meaning the denominator must be a real number.
+
+In order to eliminate the imaginary portion of the denominator, we need to use the **complex conjugate** which can be found by changing the sign of the imaginary portion of the complex number. For example, the complex conjugate of $$a + bi$$ is $$a - bi$$ and the complex conjugate of $$a - bi$$ is $$a + bi$$. Once we have the complex conjugate, we can multiply the numerator and denominator with it to eliminate the imaginary number.
+
+We can now divide complex numbers...
+
+> $$\frac{c + di}{a + bi} \:where\: a \neq 0 \:and\: b \neq 0$$
+>
+> $$\frac{(c + di)}{(a + bi)} \times \frac{(a - bi)}{(a - bi)} = \frac{(c + di)(a - bi)}{(a + bi)(a - bi)}$$
+>
+> $$=\frac{ca - cbi + adi - bdi^2}{a^2 - abi + abi - b^2i^2}$$
+>
+> $$=\frac{ca - cbi + adi - bd(-1)}{a^2 - abi + abi - b^2(-1)}$$
+>
+> $$=\frac{(ca + bd) + (ad - cb)i}{a^2 + b^2}$$
+
+:::note
+When we add or multiply a complex number by its complex conjugate, the result is always a real number.
+:::
+
+## Simplication
+
+The powers of $$i$$ are cyclic where the cycle is $$i$$, $$-1$$, $$-i$$, $$1$$, every four powers. We can see this through the first few powers...
+
+> $$i^1 = \boxed{i}$$
+>
+> $$i^2 = (\sqrt{-1})^2 = \boxed{-1}$$
+>
+> $$i^3 = i^2 \times i = -1 \times i = \boxed{-i}$$
+>
+> $$i^4 = i^3 \times i = -i \times i = -i^2 = -(-1) = \boxed{1}$$
+>
+> $$i^5 = i^4 \times i = 1 \times i = \boxed{i}$$
+>
+> $$i^6 = i^5 \times i = i \times i = i^2 = \boxed{-1}$$
+>
+> $$i^7 = i^6 \times i = -1 \times i = \boxed{-i}$$
+>
+> $$i^8 = i^7 \times i = -i \times i = -i^2 = -(-1) = \boxed{1}$$
+>
+> $$i^9 = i^8 \times i = 1 \times i = \boxed{i}$$
+
+Knowing that any multiple of $$4$$ in the exponent of $$i$$ will cause it to equal $$1$$ can be used to simplify the power of any $$i$$.
+
+> $$\underline{Example}$$
+>
+> $$i^{34} = i^{4 \times 8 + 2} = i^{4 \times 8} \times i^2 = (i^4)^8 \times i^2 = (1)^8 \times i^2 = 1 \times i^2 = i^2 = \boxed{-1}$$
