@@ -1,0 +1,142 @@
+---
+id: page-5
+title: Quadratic Equations
+sidebar_position: 5
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-8.png';
+
+A **quadratic equation** is an equation containing a second-degree polynomial. An example of a quadratic equation is $$x^2 + 3x + 1 = 0$$. Finally note, $$ax^2 + bx + c = 0$$ where $$a$$, $$b$$, and $$c$$ are real numbers, and if $$a \neq 0$$, means the equation is in standard form.
+
+## Square Root Property
+
+We are able to solve quadratic equations using the square root property if there is no $$x$$ term present and we can isolate the $$x^2$$. With the $$x^2$$ term isolated, the **square root property** states that if $$x^2 = k$$, then $$x = \pm\sqrt{k}$$ where $$k$$ is a nonzero real number.
+
+> $$\underline{Example}$$
+>
+> $$4x^2 + 1 = 7$$
+>
+> $$4x^2 = 6$$
+>
+> $$x^2 = \frac{3}{2}$$
+>
+> $$x = \pm\sqrt{\frac{3}{2}}$$
+
+## Solving By Factoring
+
+We can solve most quadratic equations through factoring due to the **zero-product property** which states that if $$a \times b = 0$$, then $$a = 0$$ and/or $$b = 0$$, where $$a$$ and $$b$$ are real numbers or algebraic expressions.
+
+If we factor a quadratic equation which is in standard form, we will get a product of two or more expressions that equal 0. We can set each individual expression in the multiplication to 0 to get a resulting value of $$x$$ which is our solution.
+
+> $$\underline{Example}$$
+>
+> $$x^2 - 5x - 6 = 0$$
+>
+> $$x^2 - 6x + x - 6 = 0$$
+>
+> $$x(x - 6) + 1(x - 6) = 0$$
+>
+> $$(x + 1)(x - 6) = 0$$
+>
+> $$x + 1 = 0 \to x = -1$$
+>
+> $$x - 6 = 0 \to x = 6$$
+>
+> $$x = -1, 6$$
+
+## Completing the Square
+
+Not all equations can be factored or solved using the square root property. For cases like this, we can use the method of completing the square where we add or subtract terms on both sides of the equation in order to obtain a perfect square trinomial.
+
+The steps to solving using completing the square include...
+1. If $$a \neq 1$$, divide the entire equation by $$a$$.
+2. Seperate the terms with variables on one side of the equation and the constant term on the other side of the equation.
+3. Multiply $$b$$ by $$\frac{1}{2}$$ and square it. This results in $$(\frac{1}{2}b)^2$$.
+4. Add $$(\frac{1}{2}b)^2$$ on both sides of the equation. This gives us a perfect square trinomial on one side of the equation.
+5. Factor the perfect square trinomial into a perfect square.
+6. Use the square root property to solve the equation.
+
+This put into practice gives us...
+> $$\underline{Example}$$
+>
+> $$x^2 - 6x - 13 = 0$$
+>
+> $$x^2 - 6x = 13$$
+>
+> $$(\frac{1}{2}b)^2 = (\frac{1}{2} \times 6)^2 = 3^2 = 9$$
+>
+> $$x^2 - 6x + 9 = 13 + 9$$
+>
+> $$(x - 3)^2 = 22$$
+>
+> $$x - 3 = \pm\sqrt{22}$$
+>
+> $$x = 3 \pm \sqrt{22}$$
+
+## Quadratic Formula
+
+The quadratic formula is a method of solving a quadratic equation where we substitute for $$a$$, $$b$$, and $$c$$ in the formula and simplify to get our solution. This method works for all quadratic equations.
+
+We can derive the quadratic formula from the standard form of a quadratic equation...
+> $$ax^2 + bx + c = 0$$
+>
+> $$ax^2 + bx = -c$$
+>
+> $$x^2 + \frac{b}{a}x = -\frac{c}{a}$$
+>
+> $$(\frac{1}{2}\frac{b}{a})^2 = \frac{b^2}{4a^2}$$
+>
+> $$x^2 + \frac{b}{a}x + \frac{b^2}{4a^2} = \frac{b^2}{4a^2} - \frac{c}{a}$$
+>
+> $$(x + \frac{b}{2a})^2 = \frac{b^2 - 4ac}{4a^2}$$
+>
+> $$x + \frac{b}{2a} = \pm\sqrt{\frac{b^2 - 4ac}{4a^2}}$$
+>
+> $$x + \frac{b}{2a} = \frac{\pm\sqrt{b^2 - 4ac}}{2a}$$
+>
+> $$x = \frac{\pm\sqrt{b^2 - 4ac}}{2a} - \frac{b}{2a}$$
+>
+> $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+So, any quadratic equation written in standard form, $$ax^2 + bx + c = 0$$ can be solved using the **quadratic formula** which is $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$ where $$a$$, $$b$$, and $$c$$ are real numbers and $$a \neq 0$$.
+
+An example using the quadratic formula is...
+> $$\underline{Example}$$
+>
+> $$9x^2 + 3x - 2 = 0$$
+>
+> $$a = 9$$, $$b = 3$$, and $$c = -2$$
+>
+> $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+>
+> $$x = \frac{-(3) \pm \sqrt{(3)^2 - 4(9)(-2)}}{2(9)}$$
+>
+> $$x = \frac{-3 \pm \sqrt{9 + 72}}{18}$$
+>
+> $$x = \frac{-3 \pm \sqrt{81}}{18}$$
+>
+> $$x = \frac{-3 \pm 9}{18}$$
+>
+> $$x = \frac{-3 + 9}{18} \to x = \frac{6}{18} \to x = \frac{1}{3}$$
+>
+> $$x = \frac{-3 - 9}{18} \to x = \frac{-12}{18} \to x = -\frac{2}{3}$$
+>
+> $$x = -\frac{2}{3}, \frac{1}{3}$$
+
+### Discriminant
+
+The **discriminant** is the expression under the radical in the quadratic formula: $$b^2 - 4ac$$ which tells us the nature of the solutions for any quadratic equation in standard form. It tells how many solutions to expect as well as telling us if the solutions are real numbers or complex numbers.
+
+| Value of Discriminant | Information |
+| - | - |
+| $$b^2 - 4ac = 0$$ | One rational solution |
+| $$b^2 - 4ac > 0$$, perfect square | Two rational solutions |
+| $$b^2 - 4ac > 0$$, not a perfect square | Two irrational solutions |
+| $$b^2 - 4ac < 0$$ | Two complex solutions (No real solution) |
+
+## Pythagorean Theorem
+
+The **pythagorean theorem** is based on a right triangle and states the relationship among the lengths of the sides. The relationship of the sides is $$a^2 + b^2 = c^2$$ where $$a$$ and $$b$$ refer to the legs of a right triangle adjacent to $$90\degree$$, and $$c$$ refers to the hypotenuse.
+
+<Fig src={alg1} caption='Right Triangle' num={1}/>
