@@ -136,6 +136,7 @@ const sidebars = {
             'euler-tako/algebra-trig/equations/page-4',
             'euler-tako/algebra-trig/equations/page-5',
             'euler-tako/algebra-trig/equations/page-6',
+            'euler-tako/algebra-trig/equations/page-7',
           ]
         }
       ]
