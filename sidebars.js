@@ -138,7 +138,14 @@ const sidebars = {
             'euler-tako/algebra-trig/equations/page-6',
             'euler-tako/algebra-trig/equations/page-7',
           ]
-        }
+        },
+        {
+          type: 'category',
+          label: 'Functions',
+          items: [
+            'euler-tako/algebra-trig/functions/page-1',
+          ]
+        },
       ]
     }
   ],
