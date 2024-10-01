@@ -1,0 +1,107 @@
+---
+id: page-2
+title: Domain and Range
+sidebar_position: 2
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-22.jpg';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-23.png';
+
+The domain is a set of numbers that determine what are the input values we can use in an equation. The range on the other hand is the set of output values that we could possibly get.
+
+## Expressing Domain and Range
+
+Often when expressing the domain and range of functions in the form of equations, we use interval notation and set-builder notation. To review...
+1. **Set-builder notation** is a method where you specify a set of elements that satisfy a certain condition. It takes the form $\{x \mid statement\:about\:x\}$ which is read as, "the set of all $x$ such that the statement about $x$ is true." An example of this notation is $\{x | x > 15\}$ which is a set of numbers greater than $15$.
+2. **Interval notation** is a method where you describe a set using a lower limit and upper limit. The endpoint values are listed between brackets or paranthesis. A square bracket indicates inclusion in the set, and a parathesis indicates exclusion from the set. An example of this notation is $(-\infty, 5]$ which is a set of numbers less than or equal to $5$.
+
+## Finding Domain and Range
+
+Functions in algebraic form do not always have a domain which includes the set of all real numbers because there are restrictions in algebra like getting an even root of a negative number or dividing by zero.
+
+Oftentimes, in order to find the domain of a function, we need to look at three cases...
+1. If a function has no denominator, has a odd root or no root at all then the domain could be the set of all real numbers.
+2. If the function has a denominator, then we need to exclude values in the denominator that force the denominator to be zero.
+3. If there is an even root, then we need to exclude values that would make the radicand negative.
+
+> $$\underline{Example}$$
+>
+> Find the domain of the function $f(x) = \frac{x + 1}{2 - x}$.
+>
+> There is a denominator in this function so we need to verify that it does not equal zero.
+>
+> $$2 - x = 0$$
+>
+> $$-x = -2$$
+>
+> $x = 2$ which means that the domain cannot contain $2$.
+>
+> Interval Notation: $(-\infty, 2) \cup (2, \infty)$.
+>
+> Set-Builder Notation: $\{x \mid x \neq 2\}$.
+
+## Using Graphs
+
+When using a graph, we must note that the domain of a graph consists of all the input values shown on the x-axis. On this other hand, the set of possible output values which are shown on the y-axis. If there is a open dot on the graph then we exclude that value from the function and so we exclude it from the domain and range. If there is a shaded dot anywhere in the graph, we also include it in the function meaning we add it to the domain and range of the function.
+
+<Fig src={alg1} caption='Graph using Open Dot' num={1}/>
+
+> $$\underline{Example}$$
+>
+> The graph in figure dot does not go to infinity because it has endpoints. The endpoints are $(-3, -5)$ and $(2, 0)$.
+>
+> We want to include $(-3, -5)$ in the domain and range because it has a closed dot but we do not want to include $(2, 0)$ because it has an open dot. This means the domain is $[-3, 2)$.
+>
+> The greatest y-value is $4$ and the smallest y-value is $-5$ on the graph. This means the range is $[-5, 4]$.
+>
+> Domain: $[-3, -2)$ and Range: $[-5, 4]$.
+
+## Common Functions
+
+The domain and range of the basic functions are...
+
+| Name | Function | Domain | Range |
+| - | - | - | - |
+| Constant | $f(x) = c$ | $(-\infty, \infty)$ | $[c, c]$ |
+| Identity | $f(x) = x$ | $(-\infty, \infty)$ | $(-\infty, \infty)$ |
+| Absolute Value | $f(x) = \:\mid x \mid$ | $(-\infty, \infty)$ | $[0, \infty)$ |
+| Quadratic | $f(x) = x^2$ | $(-\infty, \infty)$ | $[0, \infty)$ |
+| Cubic | $f(x) = x^3$ | $(-\infty, \infty)$ | $(-\infty, \infty)$ |
+| Reciprocal | $f(x) = \frac{1}{x}$ | $(-\infty, 0) \cup (0, \infty)$ | $(-\infty, 0) \cup (0, \infty)$ |
+| Reciprocal Squared | $f(x) = \frac{1}{x^2}$ | $(-\infty, 0) \cup (0, \infty)$ | $(0, \infty)$ |
+| Square Root | $f(x) = \sqrt{x}$ | $[0, \infty)$ | $[0, \infty)$ |
+| Cube Root | $f(x) = \sqrt[3]{x}$ | $(-\infty, \infty)$ | $(-\infty, \infty)$ |
+
+## Piecewise Functions
+
+A **piecewise function** is a function in which more than one formula is used to define the output over different pieces of the domain. The notation of this idea is...
+
+$$f(x) = \begin{cases}
+\text{formula 1} & \text{if } x \:\text{is in domain 1}\\
+\text{formula 2} & \text{if } x \:\text{is in domain 2}\\
+\text{formula 3} & \text{if } x \:\text{is in domain 3}
+\end{cases}$$
+
+An example of a piecewise function is the absolute value function. The absolute value function written in piecewise form is...
+
+$$\mid x \mid\: = \begin{cases}
+x & \text{if } x \geq 0\\
+-x & \text{if } x < 0
+\end{cases}$$
+
+When graphing a piecewise function, we need to indicate on the $x$-axis the boundaries defined by the intervals on each piece of the domain. For each piece of the domain, we need to graph on that interval using the corresponding equation pertaining to that piece.
+
+> $$\underline{Example}$$
+>
+> Given the piecewise function:
+>
+> $$f(x) = \begin{cases}
+> x^2 & \text{if } x \leq 1\\
+> 3 & \text{if } 1 < x \leq 2\\
+> x & \text{if } x > 2
+> \end{cases}$$
+>
+> Ignore the dashed lines in figure $2$ as they are there to just indicate each piece of the domain. The graph of the function is...
+>
+> <Fig src={alg2} caption='Graph of Piecewise Function' num={2}/>
