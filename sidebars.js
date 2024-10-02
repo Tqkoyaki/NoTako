@@ -145,6 +145,7 @@ const sidebars = {
           items: [
             'euler-tako/algebra-trig/functions/page-1',
             'euler-tako/algebra-trig/functions/page-2',
+            'euler-tako/algebra-trig/functions/page-3',
           ]
         },
       ]
