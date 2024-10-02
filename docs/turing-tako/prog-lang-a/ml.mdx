@@ -10,7 +10,7 @@ ML is a functional programming language which means it emphasizes immutable data
 
 A program in ML is built up of a ***sequence of bindings***. Each binding follows two steps during evaluation:
 
-1. It firstly gets ***type-checked*** by the compiler. The binding depended on a ***static environment*** (also refered to as the ***context***) which holds the types of all the preceding bindings in the file. A new static environment is then created with this new binding added.
+1. It firstly gets ***type-checked*** by the compiler. The binding depends on the ***static environment*** (also refered to as the ***context***) which holds the types of all the preceding bindings in the file. A new static environment is then created with this new binding added.
 2. The second step is to actually ***evaluate*** the binding. This is done using a ***dynamic environment*** (also refered to as the ***environment***) which holds all the evaluated values of the preceding bindings in the file. A new dynamic environment is then created with this new binding added.
 
 ### Variable Bindings
@@ -27,7 +27,7 @@ where `val` is a keyword to indicate it is a variable binding, `x` is a variable
 The semi-colon `;` is optional in a file but required in the REPL (Read-Eval-Print-Loop). This is because the REPL needs to know when to evaluate the expression as it is typed in. This also means that you can seperate a binding into multiple lines in a REPL as long as you end it with a semi-colon.
 :::
 
-Bindings in ML are ***immutable***  which means a variable will always bound to the same value. Let's say `x` maps to `17` in the dynamic environment, it will always map to `17`. We can still have another binding later in the file called `val x = 19;` but as previously mentioned, a new dynamic environment is created for each binding. So `x` maps to `19` in the new dynamic environment but still maps to `17` in the old dynamic environment. This is reffered to as ***shadowing*** because we aren't actually changing the value of `x` in the old dynamic environment, we are just creating a new binding with the same name.
+Bindings in ML are ***immutable***  which means a variable will always bound to the same value. Let's say `x` maps to `17` in the dynamic environment, it will always map to `17`. We can still have another binding later in the file called `val x = 19;` but as previously mentioned, a new dynamic environment is created for each binding. So `x` maps to `19` in the new dynamic environment but still maps to `17` in the old dynamic environment. This is referred to as ***shadowing*** because we aren't actually changing the value of `x` in the old dynamic environment, we are just creating a new binding with the same name.
 
 ### Constants
 
@@ -298,6 +298,10 @@ We can have a list of tuples or a tuple of lists. For example, `[(1, 2), (3, 4)]
 ### Lack of Mutation
 
 In many languages, we can pass around mutable data structures and mutate (change) the data it is holding as we please. We can have multiple variables pointing to the same data structure (called ***aliasing***) and if we change the data in one variable, it will change the data in the other variable. This can be useful but it can also lead to bugs that are hard to find because it is hard to keep track of all the variables that are pointing to the same data structure. What is nice about ML is that there is no mutation so when we pass around data structures, we are not actually passing around the data structure, we are passing around a copy of the data structure. We never actually change any data, we just create new data structures with the changes we want.
+
+:::note
+ML still does aliasing in order to save space in memory however as programmers we do not need to worry as much because it will not ever change the data of a previous binding due to aliasing
+:::
 
 ## Let Expressions
 
