@@ -1,0 +1,47 @@
+---
+id: page-6
+title: Absolute Value Functions
+sidebar_position: 6
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-29.png';
+
+The basic form of an absolute value function is $f(x) = \:\mid x \mid$ which is positive for all input values. If we were to write this as a piecewise function, we get...
+
+$$f(x) = \:\mid x \mid\: = \begin{cases}
+x & \text{if } x \geq 0\\
+-x & \text{if } x < 0
+\end{cases}$$
+
+## Graphing
+
+The most significant feature of an absolute value graph is the corner point at which the graph changes direction. We can apply all the transformations to the basic absolute value function and use the corner point to graph any absolute value function.
+
+<Fig src={alg1} caption='Graph of |2x - 3| + 1' num={1}/>
+
+:::note
+Absolute value functions will always intersect the vertical axis but will not always intersect the horizontal axis.
+:::
+
+## Solving Algebraically
+
+In other to solve an absolute value function, we isolate the absolute value bars to one side of the equation and then split it into two equations where the other side is positive and negative.
+
+:::note
+For real numbers $A$ and $B$, an equation of the form $|A| = B$, with $B \geq 0$, will have solutions when $A = B$ or $A = -B$. If $B < 0$, the equation $|A| = B$ has no solution.
+:::
+
+Finally, in order to find the horizontal intercepts of an absolute value function, we need to isolate the absolute value term. Then we use $|A| = B$ to write $A = B$ or $-A = B$, assuming $B > 0$. After this we just solve for $x$ to get our horizontal intercepts.
+
+> $$\underline{Example}$$
+>
+> $$\mid 4x + 1 \mid - \:7$$
+>
+> $$\mid 4x + 1 \mid\:=7$$
+>
+> $$-4x - 1 = 7 \to -4x = 8 \to x = -2$$
+>
+> $$4x + 1 = 7 \to 4x = 6 \to x = \frac{3}{2}$$
+>
+> The two horizontal intercepts are $(-2, 0)$ and $(\frac{3}{2}, 0)$.
