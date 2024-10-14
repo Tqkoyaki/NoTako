@@ -149,9 +149,16 @@ const sidebars = {
             'euler-tako/algebra-trig/functions/page-4',
             'euler-tako/algebra-trig/functions/page-5',
             'euler-tako/algebra-trig/functions/page-6',
-            'euler-tako/algebra-trig/functions/page-7'
+            'euler-tako/algebra-trig/functions/page-7',
           ]
         },
+        {
+          type: 'category',
+          label: 'Linear Functions',
+          items: [
+            'euler-tako/algebra-trig/linear/page-1',
+          ]
+        }
       ]
     }
   ],
