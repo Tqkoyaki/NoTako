@@ -157,6 +157,7 @@ const sidebars = {
           label: 'Linear Functions',
           items: [
             'euler-tako/algebra-trig/linear/page-1',
+            'euler-tako/algebra-trig/linear/page-2',
           ]
         }
       ]
