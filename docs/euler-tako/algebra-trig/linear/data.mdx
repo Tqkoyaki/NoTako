@@ -1,0 +1,59 @@
+---
+id: page-3
+title: Linear Regression
+sidebar_position: 3
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-35.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-36.png';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-37.png';
+import alg4 from '@site/static/img/euler/algebra-trig/alg-38.png';
+
+A **scatter plot** is a graph that represents a relationship between two variables in a dataset by plotting all the points onto the graph. If the relationship is from a linear model, or a model that is nearly linear, then we can use our knowledge of linear functions to draw conclusions.
+
+<Fig src={alg1} caption='Scatter Plot' num={1}/>
+
+:::note
+Not all scatter plots indicate a linear relationship.
+:::
+
+## Line of Best Fit
+
+The **line of best fit** is a linear function that best fits our data. This is a linear function we can then use to make predictions about the data. We can always "eyeball" a line that seems to fit or we can use the formula for **least squares regression** to obtain a line of best fit.
+
+Given a set of $(x, y)$ points where $x$ is the set of inputs, $y$ is the set of outputs, and $N$ is the number of points, we can calculate the slope using...
+
+$$\begin{align*}
+   m &= \frac{N\sum{(xy)} \:-\: \sum{x}\sum{y}}{N\sum{x^2} \:-\: (\sum{x})^2}
+\end{align*}$$
+
+Using the slope, which is the value of $m$, we can calculate the $y$-intercept using...
+
+$$\begin{align*}
+   b &= \frac{\sum{y} \:-\: m\sum{x}}{N}
+\end{align*}$$
+
+Finally, using the values of $m$ and $b$ we have acquired, we can create the line of best fit using $y = mx + b$.
+
+<Fig src={alg2} caption='Line of Best Fit' num={2}/>
+
+### Interpolation vs Extrapolation
+
+Now that we have a linear function we can use to make predictions, we need to understand its limitations. When we predict a value using a function, we use two processes. The process known as **interpolation** is when we predict a value inside the domain and range of the data. On the other hand, the process known as **extrapolation** is used when we predict a value outside the domain and range of the data. This distinction is important when making predictions because of **model breakdown** which is a certain point where our model no longer works. Outside the domain and range of the data, we do not know how the data will change and we need to be aware of that fact. At the end of the day, we are just making predictions.
+
+<Fig src={alg3} caption='Interpolation vs Extrapolation' num={3}/>
+
+## Correlation Coefficient
+
+Not all lines of best fit are created equal. Some data exhibit stronger linear trends than others and so their linear models are more accurate because the data is less scattered. We need a way to quantify how strong the linear trends are and we can measure this using the **correlation coefficient**. 
+
+The **correlation coefficient** is a value, $r$, between $-1$ and $1$ which suggests the strength and direction of a linear relationship. If $r > 0$, then we have a positive (increasing) relationship and if $r < 0$, then we have a negative (decreasing) relationship. Also note, if $r$ is closer to $0$ then the data is more scattered and if $r$ is closer to $1$ or $-1$ then the data is less scattered. The less scattered the data is, the stronger the linear relationship is.
+
+<Fig src={alg4} caption='Correlation Coefficient' num={4}/>
+
+Given a set of $(x, y)$ points, where $x_i$ and $y_i$ are the data points, $\bar{x}$ is the mean of the set of $x$, and $\bar{y}$ is the mean of the set of $y$, we can calculate the correlation coefficient using... 
+
+$$\begin{align*}
+   r &= \frac{\sum{(x_i \:-\: \bar{x})(y_i \:-\: \bar{y})}}{\sqrt{\sum{(x_i \:-\: \bar{x})^2}\sum{(y_i \:-\: \bar{y})^2}}}
+\end{align*}$$

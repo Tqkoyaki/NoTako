@@ -158,6 +158,7 @@ const sidebars = {
           items: [
             'euler-tako/algebra-trig/linear/page-1',
             'euler-tako/algebra-trig/linear/page-2',
+            'euler-tako/algebra-trig/linear/page-3',
           ]
         }
       ]
