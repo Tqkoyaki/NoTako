@@ -1,0 +1,443 @@
+---
+id: page-3
+title: Functions
+sidebar_position: 3
+---
+
+An important concept that functional programming languages share are ***first-class functions*** which are functions that can be computed, passed, stored, and more exactly like values. For example, we can pass functions as arguments to other functions, return them from other functions, put them in tuples, and more.
+
+With this characteristic, we can now better define ***functional programming*** which is general and is used to refer to several distinct concepts. Two concepts that appear in nearly all functional programming languages include:
+
+1. The language avoids mutable data in most or all cases.
+2. The language uses functions as values.
+
+There are also other common characteristic related to programming languages:
+
+1. The language encourages recursion and recursive data structures.
+2. The syntax or style of the language is closer to traditional mathematical definitions of functions.
+
+## Functions as Arguments
+
+As we have already discussed, functional languages like SML employ the concept of first class functions which allow functions to be passed as values. This means we can pass functions as arguments to other functions.
+
+```sml title="Functions as Arguments" showLineNumbers="true"
+(* f is a function taken as an argument*)
+fun n_times (f, n, x) =
+    if n = 0
+    then x
+    else f (n_times (f, n - 1, x))
+
+(* Uses of n_times *)
+fun double x = 2 * x
+val n_1 = n_times (double, 4, 7) (* 112 *)
+val n_2 = n_times (tl, 2, [4,8,12,16]) (* [12,16] *)
+```
+
+The function `n_times` takes `f` as an argument and then computes `f(f(...(f(x))))` where the number of calls to `f` is `n`. When we call `n_times (double, 4, 7)` we are essentially calling `double(double(double(double 7)))`. On the other hand, when we call `n_times (tl, 2, [4,8,12,16])` we are essentially calling `tl(tl [4,8,12,16])`.
+
+As we can see, we can take patterns that are common in many functions and abstract them away to get a more general and powerful functions that we can use to write other functions faster and cleaner.
+
+:::note
+When functions either take functions as arguments or return other functions, we refer to them as ***higher-order functions***.
+:::
+
+### Polymorphic Types
+
+SML employs a concept referred to ***parametric polymorphic*** or also ***generic types***. This is a concept which allows to create functions that take arguments of any type making them polymorphic. An example of this is `n_times` which has the type `('a -> 'a) * int * 'a -> 'a`. We were able to call it using the function `double` which made the type `(int -> int) * int * int -> int` and we were able to call it using the function `tl` which made the call `(int list * int list) * int * int list -> int list`.
+
+:::note
+Not all functions that take functions have polymorphic types. Vice versa there are functions with polymorphic types that do not take functions. Parametric polymorphic functions are just a special case of functions that take function and also are polymorphic.
+:::
+
+## Anonymous Functions
+
+Sometimes we create functions like `double` for the sole purpose of passing them into other functions. The issue is that there is no reason to create the function at top level as it will only be used once. We could use let expressions to achieve this but SML has a better approach through the use of ***anonymous functions*** which are functions that have no name.
+
+```sml title="Anonymous Functions" showLineNumbers="true"
+(* Both double functions are equivalent *)
+fun double_1 x = 2 * x
+val double_2 = (fn x => 2 * x)
+
+val n_1 = n_times ((fn x => 2 * x), 4, 7) (* 112 *)
+```
+
+The syntax for creating an anonymous function is `fn x => e` where `x` is the argument and `e` is the function expression using the argument. Note that the anonymous function is an expression and so we use val bindings instead of function bindings.
+
+:::note
+Anonymous functions would be syntactic sugar for function bindings however as anonymous functions have no name, we are unable to call them inside themselves. This means anonymous functions cannot do recursion but function bindings can.
+:::
+
+### Unnecessary Function Wrapping
+
+There is a common poor idiom used with anonymous functions that should be avoid. Given a function `g`, we could create an anonymous function `fn x => g x` which takes an input and calls `g` with it. This works perfectly fine but is equivalent to just writing `g`.
+
+```sml title="Unnessary Function Wrapping" showLineNumbers="true"
+(* poor style *)
+val n_1 = n_times ((fn x => tl x), 2, [4,8,12,16]) (* [12,16] *)
+
+(* good style *)
+val n_2 = n_times (tl, 2, [4,8,12,16]) (* [12,16] *)
+```
+
+## Hall of Fame Functions
+
+There are quite a few higher-order functions that are incredibly important idioms that we often use in many programming languages. The `map` function takes a list and a function `f` and applies the function to every element of the list.
+
+```sml title="Map" showLineNumbers="true"
+(* Type: ('a -> 'b) * 'a list -> 'b list *)
+fun map (f, xs) = 
+    case xs of
+        [] => []
+      | x::xs' => (f x)::(map(f, xs'))
+
+(* Examples *)
+val x1 = map(hd, [[1,2],[3,4],[5,6,7]]) (* [1,3,5] *)
+val x2 = map(fn x => x + 1, [4,8,12,16]) (* [5,9,13,17] *)
+```
+
+As we can see map can change the type of the resulting expression based on what the function `f` outputs. The next function is `filter` which takes a function that returns a `bool` and it creates a new list with only the elements that make the function `true`. This essentially lets us filter elements out of a list.
+
+```sml title="Filter" showLineNumbers="true"
+(* Type: ('a -> bool) * 'a list -> 'a list  *)
+fun filter (f, xs) =
+    case xs of
+        [] => []
+      | x::xs' => if f x
+                  then x::(filter(f, xs'))
+                  else filter(f, xs')
+
+(* Examples *)
+val x1 = filter((fn v => v > 5), [2,3,4,5,6,7]) (* [6,7] *)
+val x2 = filter((fn v => v mod 2 = 0), [2,3,4,5,6,7]) (* [2,4,6] *)
+```
+
+The next function is `fold` which takes an initial answer `acc` and uses `f` to combine `acc` by folding over it. Essentially, given a function `f` and a list `[x1, x2, ..., xn]`, we get the result of `f(xn, ..., f(x2, f(x1, init))...)`.
+
+```sml title="Fold" showLineNumbers="true"
+(* Type: ('a * 'b -> 'b) * 'b * 'a list -> 'b *)
+fun fold (f, acc, xs) =
+    case xs of
+        [] => acc
+      | x::xs' => fold(f, f(acc,x), xs')
+
+(* Examples *)
+(* Sum of list *)
+val x1 = fold((fn (x, y) => x + y), 0, [1,2,3,4,5]) (* 15 *)
+
+(* Strings shorter than 3*)
+val x2 = fold((fn (x, y) => x andalso String.size y < 3), true, ["hi", "bye"]) (* false *)
+```
+
+The final function we will look at is `exists` which returns `true` if a function at any point returns `true`.
+
+```sml title="Exists" showLineNumbers="true"
+(* Type: ('a -> bool) * 'a list -> bool *)
+fun exists (f, xs) =
+    case xs of
+        [] => false
+      | x::xs' => (f x) orelse (exists (f, xs'))
+
+(* Examples *)
+val x1 = exists ((fn x => x = 1), [5,4,3,2,1]) (* true *)
+val x2 = exists ((fn x => x mod 2 = 0), [1,3,5,7,9]) (* false *)
+```
+
+There are more common higher-order functions like `reduce` and `inject` but the idea is the same with all these functions. We essentially divide the work of any function into two parts: the ***implementer*** knows how to traverse a data structure while the ***client*** knows what to do do with the data there. The four functions (`map`, `filter`, `fold`, and `exists`) are all implementers that any client can use with their data.
+
+## Returning Functions
+
+We have created higher-order functions that take functions as arguments but we can also return functions as well.
+
+```sml title="Returning Functions" showLineNumbers="true"
+(* Type: (int -> bool) -> (int -> int) *)
+fun double_or_triple f =
+    if f ~1
+    then fn x => 2 * x
+    else fn y => 3 * x
+```
+
+When ML prints the type of `double_or_triple`, it prints `(int -> bool) -> int -> int` because `->` associates to the right in ML. So, `tl -> (t2 -> (t3 -> t4))` is equivalent to `t1 -> t2 -> t3 -> t4` making the paranthesis unnecessary.
+
+### First-Class Functions
+
+As previously stated, first-class functions mean that functions can be treated as values. This means all constructs that use values can take in functions.
+
+```sml title="First-Class Functions" showLineNumbers="true"
+datatype exp = Constant of int
+             | Negate of exp
+             | Add of exp * exp
+             | Multiply of exp * exp
+
+fun true_of_all_constants(f, e) =
+    case e of
+        Constant i => f i
+      | Negate e1 => true_of_all_constants(f,e1)
+      | Add(e1,e2) => true_of_all_constants(f,e1) andalso true_of_all_constants(f,e2)
+      | Multiply(e1,e2) => true_of_all_constants(f,e1) andalso true_of_all_constants(f,e2)
+
+fun all_even e = true_of_all_constants(fn x => x mod 2 = 0, e)
+```
+
+In this case, `true_of_all_constants` is also a higher-order function because it takes in a function `f`.
+
+## Closures
+
+Functions are able to use any bindings that are in scope and by combing this with higher-order functions is very powerful. As previously discussed, due to lexical scope, the body of a function is evaluated in the environment where the function is defined, not where the function is called. This means the value of a function has two parts, the code of the function and the environment that was current when we created the function.
+
+A ***function closure*** or just ***closure*** is the pair of code and environment of any given function. The closure carries with it an environment that provides all the bindings for the function and so the closure overall has everything it needs to produce a function result given a function argument.
+
+```sml title="Closures" showLineNumbers="true"
+fun allGreaterThan (xs, n) = filter (fn x => x > n, xs)
+
+fun allShorterThan(xs, s) =
+    let
+        val i = String.size s
+    in
+        filter(fn x => String.size x < i, xs)
+    end
+```
+
+In both `allGreaterThan` and `allShorterThan`, we introduce new bindings that we can use in functions we are passing into higher-order functions allowing us to create more general functions. This is only possible due to closures.
+
+### Lexical Scope
+
+Lexical scope means that the function uses the environment during the creation of the function. However, ***dynamic scope*** uses the environment during the calling of the function.
+
+```sml title="Scope" showLineNumbers="true"
+val x = 0
+
+fun f y = x + y
+
+val x = 5
+f(3)
+```
+
+When we call `f(3)` we get `3` due to lexical scope. If it was dynamic scope, the result would be `8` because we changed the value of `x` to `5` before we called `f(3)`. The issue with dynamic scope is that we have to be more worried the names of variables in all levels of scope which is why most programming languages use lexical scope for things like variables.
+
+There are compelling uses for dynamic scope for certain idioms and so some languages do have support for dynamic scope. In fact, exceptions in ML behave more like dynamic scope than lexical scope because when an exception is raised, the evaluation looks for which handle expression to evaluate by using the dynamic call stack which chooses the handle expression closest to the call with no regard to the lexical structure of the program.
+
+## Combining Function
+
+Often when we are programming, it is useful to create new functions that are a combination of other functions. The composition of the functions `f` and `g` is `f(g(x))`.
+
+```sml title="Function Composition" showLineNumbers="true"
+fun compose (f,g) = fn x => f (g x)
+```
+
+The type of `compose` is `('a -> 'b) * ('c -> 'a) -> 'c -> 'b` because our resulting function is the input type of `g` and the output type of `f`.
+
+There are two operators that SML provides us in order to combine function. The first infix operator is `o` (lowercase o) which allows us to combine functions without using paranthesis. The other operator is the pipeline operator which we define using the `infix` keyword. We often use `infix |>` or `infix !>` which works just like `o` but in reverse.
+
+```sml title="Composition Operators" showLineNumbers="true"
+(* All the following bindings are equivalent *)
+fun sqrt_of_abs i = Math.sqrt(Real.fromInt(abs i))
+
+fun sqrt_of_abs i = (Math.sqrt o Real.fromInt o abs) i
+
+val sqrt_of_abs = Math.sqrt o Real.fromInt o abs
+
+infix |>
+
+fun sqrt_of_abs i = i |> abs |> Real.fromInt |> Math.sqrt
+
+val sqrt_of_abs = abs |> Real.fromInt |> Math.sqrt
+```
+
+:::caution
+There is often an error when using `|>` on Emacs but is fine if we use `infix !>` and `!>` instead.
+:::
+
+## Currying
+
+So far for multi-argument functions, we have been passing a tuple into the function. However, another clever and often convenient approach is to have a function take the first conceptual argument and return another function that takes the second conceptual argument and so on. This technique is called ***currying*** and is named after Haskell Curry who studied related ideas to this.
+
+```sml title="Currying" showLineNumbers="true"
+(* Type: int -> int -> int -> bool *)
+val sorted_3_curry = fn x => fn y => fn z => z >= y andalso y >= x
+
+(* Type: (int * int * int) -> bool *)
+fun sorted_3_tupled (x,y,z) = z >= y andalso y >= x
+
+(* Calling these functions *)
+val x1 = sorted_3_curry 4 5 6 (* true *)
+val x2 = sorted_3_tupled (4,5,6) (* true *)
+```
+
+The function `sorted_3_curry` is a function that returns an argument that takes `x` and returns a function that takes `y` which returns a function that takes `z`. Note that we can create curried functions with any number of arguments.
+
+When we are calling a curried function, we seperate each argument using a space instead of putting them all in a tuple. This distinction is important because we are essentially calling each function seperately with its own argument. In general, the syntax `e1 e2 e3 e4 ...` is implicitly the nested function calls `((((e1 e2) e3) e4) ...)` and this choice was made because it makes using a curried function more pleasant.
+
+ML encourages curried function so there is syntactic sugar which makes writing curried functions easier...
+
+```sml title="Curried Function Syntactic Sugar" showLineNumbers="true"
+(* The following two functions are equivalent *)
+(* Type: ('a * 'b -> 'b) -> 'b -> 'a list -> 'b *)
+fun fold f = fn acc => fn xs =>
+    case xs of
+        [] => acc
+      | x::xs' => fold f (f(acc,x)) xs'
+
+fun fold f acc xs =
+    case xs of
+        [] => acc
+      | x::xs' => fold f (f(acc,x)) xs'
+```
+
+By seperating each argument using spaces allows us to create curried functions more conveniently.
+
+### Partial Application
+
+The biggest benefit of using curried functions is ***partial application*** which is when we only provide a subset of the conceptual arguments to get an argument that only needs the remaining arguments. This makes these higher-order functions more flexible and is only possible due to closures.
+
+```sml title="Partial Application" showLineNumbers="true"
+(* Type: int -> int -> int list *)
+fun range i j = if i > j then [] else i :: range (i+1) j
+
+(* Type: int -> int list *)
+val countup = range 1
+```
+
+To create `countup`, we only provide the `i` argument so this new function only takes in `j` and counts up from `1`. This is only possible due to currying. Due to this convenient feature of currying, ML implements most functions like `map`, `filter`, `exists`, and `fold` (which is written as `foldl`) in curried form.
+
+:::note
+In terms of efficiency between currying and tupling, they are nearly equivalent so it doesn't really matter. They work proportionally to the number of conceptual arguments which is typically small.
+
+However, for ML tupling seems to be slightly faster. On the other hand, programming languages like OCaml, Haskell, and F#, curried functions seem to be faster. It is essentially depended on the programming language but for most case its barely a difference.
+:::
+
+### Uncurrying
+
+We are able to combine functions to take a function from curried form to tupled form and from tupled form to curried form.
+
+```sml title="Uncurrying" showLineNumbers="true"
+(* Swaps the order of the arguments *)
+(* Type: ('a -> 'b -> 'c) -> 'b -> 'a -> 'c *)
+fun swap_arguments f x y = f y x
+
+(* Changes between forms *)
+(* Type: ('a * 'b -> 'c) -> 'a -> 'b -> 'c *)
+fun curry f x y = f (x, y)
+
+(* Type: ('a -> 'b -> 'c) -> 'a * 'b -> 'c *)
+fun uncurry f (x, y) = f x y
+```
+
+Looking at the types, if we consider `->` as `implies` and `*` as `and`, then the types of all these functions are logical tautologies. 
+
+### Value Restriction
+
+There are still limitations with currying and partial applications. We can try to use it to create a polymorphic function but certains uses of this will not work in ML. Theoretically, they should but we end up getting a ***value restriction*** error.
+
+```sml title="Value Restriction" showLineNumbers="true"
+(* Both these functions raise Value Restriction *)
+(* turns [v1, ..., vn] into [SOME v1, ..., SOME vn] *)
+val mapSome = List.map SOME
+
+(* turns [v1, ..., vn] into [(v1, v2), ..., (vn, vn)] *)
+val pairIt = List.map (fn x => (x, x))
+```
+
+Value restriction is essentially because without it the type-checker might allow some code to break the type system. This can only happen with code that is using mutation and even though the code above does not do that, the type-checker does not known this fact. To fix this issue, we can replace the `val` binding with a `fun` binding or add a restriction to the types.
+
+```sml title="Value Restriction Solution" showLineNumbers="true"
+(* Both these functions work *)
+(* Turned into a fun binding to fix *)
+fun mapSome xs = List.map SOME xs
+
+(* Restricted types to fix *)
+val pairIt: int list -> (int * int) list = List.map (fn x => (x, x))
+```
+## Mutation
+
+Mutation is not the default for ML and functional programs in general but ML does provide support for mutation. Even with all the drawbacks with mutation, it is useful in some situations. One situation in functional programming is to use mutation only when "updating the state of something so all users of that state can see a change has occurred".
+
+Most things in ML cannot be mutated so we need to create a ***reference*** which is a container whose contents can be changed.
+
+1. To create a ref we use `ref e` and give us `t ref` where `t` is the type of `e`.
+2. To get the contents inside the container, we use `!r` where `r` is the reference. The type of `r` is `t ref` and `!r` is `t`.
+3. To update the contains of `r` we use `r := e`
+
+```sml title="Mutation" showLineNumbers="true"
+(* Type: int ref *)
+val x = ref 0
+
+(* Type: int ref *)
+val y = x
+
+(* Type: int *)
+val z = !x
+
+(* Changes the contents of x *)
+x := 5
+
+ans = (!y) + 2 (* 7 *)
+```
+
+The result of `ans` is `7` instead of `2` because due to mutation `x` and `y` refer to the same container. So when we changed the value in `x`, we essentially changed `y`.
+
+### Callbacks
+
+***Callbacks*** are a powerful idiom used in many libraries. Consider a library that detects when "events" occur like a user pressing a key, a user moving their mouse, data arriving from a network interface, and etc. When such an event occurs, the library informs its clients that have previously "registered" their interest in these events which is done when a client provides a ***callback*** which is a function that gets called when the event occurs. Note that these libraries allow multiple clients to register callbacks.
+
+```sml title="Callback Example" showLineNumbers="true"
+(* Holds a list of callbacks *)
+val cbs : (int -> unit) list ref = ref []
+
+(* Clients call this to register their callback *)
+fun onKeyEvent f = cbs := f::(!cbs)
+
+(* The function is called when a key is pressed *)
+(* The int value is a code for what key is pressed *)
+fun onEvent i =
+    let fun loop fs =
+        case fs of
+            [] => ()
+          | f::fs' => (f i; loop fs')
+    in loop (!cbs) end
+
+(* Function to register callbacks *)
+fun printIfPressed i =
+    onKeyEvent (fn j => if i = j
+                        then print ("you pressed " ^ Int.toString i ^ "\n")
+                        else ())
+
+(* Registers a callback for when the key associated with 4 is pressed *)
+val _ = printIfPressed 4
+
+(* Registers a callback for when the key associated with 11 is pressed *)
+val _ = printIfPressed 11
+```
+
+In the example above, the `onEvent` is the function that gets called when a key is pressed and so it essentially detects the event. The expression inside the event calls all the callbacks stored in `cbs`. Finally, we created a function called `printIfPressed` which took in a key value and registed a callback to `onKeyEvent` which prints a statement if the key is pressed. We were able to use this function to register two callbacks that printed a statement if `4` or `11` were pressed.
+
+:::note
+When we use `e1;e2` like with `f i; loop fs'`, ML evaluates `e1` then throws away the result and then does `e2` and returns that result.
+
+Also, when we do `val _ = e` like with `val _ = printIfPressed 4`, ML evalutes `e` but it does not bind to any variable.
+:::
+
+## Standard-Library Documentation
+
+Many languages like ML have a ***standard library*** which is a collection of predefined functions that the users of the programming language can use. Typically these standard libraries serve two purposes...
+
+1. The standard library lets us interface with the "outside world" to provide features like opening a file or setting a timer which would otherwise be impossible to implement. 
+2. The standary library implements super common and useful functions like concatenating two strings, mapping over a list, etc.
+
+Standard libraries are typically extremely large so programmers should seek out the documentation over memorizing the entire library. The programmer can use this documentation to find functions that may be useful to use in their code. For ML, the documentation can be found at (https://www.standardml.org/Basis/manpages.html).
+
+To use a function in ML, you use the syntax `structure.function` where `structure` is the module where the function is located like `List` and `String` while `function` is the name of the function. Examples of this include `List.map`, `List.filter`, and `Char.isUpper`.
+
+Finally, we can list all the function names and their types for a given structure in the REPL by following the example below:
+
+```sml title="REPL Example" showLineNumbers="true"
+(* We want to know about the List structure *)
+structure X = List;
+
+(* The REPL prints this out *)
+structure X : LIST
+
+(* We write LIST because that is what the REPL stated *)
+signature X = LIST;
+
+(* The REPL prints a list of all the functions in List *)
+```
