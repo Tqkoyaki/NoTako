@@ -93,7 +93,14 @@ const sidebars = {
         'turing-tako/prog-lang-a/page-3',
         'turing-tako/prog-lang-a/page-4',
       ]
-    }
+    },
+    {
+      type: 'category',
+      label: 'Engineering Ethics',
+      items: [
+        'turing-tako/ethics/page-1',
+      ],
+    },
   ],
   eulerSidebar: [
     'euler-tako/euler',
