@@ -166,6 +166,13 @@ const sidebars = {
             'euler-tako/algebra-trig/linear/page-2',
             'euler-tako/algebra-trig/linear/page-3',
           ]
+        },
+        {
+          type: 'category',
+          label: 'Polynomial and Rational Functions',
+          items: [
+            'euler-tako/algebra-trig/polynomials/page-1',
+          ]
         }
       ]
     }

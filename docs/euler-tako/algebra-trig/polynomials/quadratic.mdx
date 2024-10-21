@@ -1,0 +1,103 @@
+---
+id: page-1
+title: Quadratic Functions
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-39.jpg';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-40.png';
+
+A quadratic function is a polynomial with a degree of $2$. These functions are useful because they allow us to model problems like area and projectile motion among other things.
+
+## Characteristics
+
+The graph of a quadratic function is a U-shaped curve which is called a **parabola**. An important feature due to this is that every parabola has an extreme point called the **vertex**. If the parabola opens up, then the vertex represents the minimum value of the function. On the other hand, if the parabola opens down, then the vertex represents the maximum value of the function. Regardless of the case, the vertex is always the turning point of the graph meaning it changes direction from this point.
+
+Another feature of the parabola is that if we draw a vertical line that intersect the vertex then the parabola is symmetrical on both sides of the line. We call this vertical line the **axis of symmetry**.
+
+<Fig src={alg1} caption='Characteristics of a Parabola' num={1}/>
+
+Finally, the **y-intercept** is the point where the parabola crosses the $y$-axis which can be found by substituting all $x$ values for $0$. On the other hand, the **x-intercepts** are the points at which the parabola crosses the $x$-axis. If they exist, we call the x-intercepts the **zeros** or **roots** of the quadratic function and can be found by substituting $y = 0$ and then solving for $x$. Unlike a linear function that has one $x$-intercept, a parabola can have up to $2$ roots.
+
+> $$\underline{Example}$$
+>
+> Find the $x$ and $y$ intercepts of $f(x) = x^2 - 5x + 6$.
+>
+> $$f(x) = (0)^2 - 5(0) - 6 = 0 - 0 + 6 = 6$$
+>
+> $$0 = x^2 - 5x + 6$$
+>
+> $$0 = x^2 - 3x - 2x + 6$$
+>
+> $$0 = x(x - 3) - 2(x - 3)$$
+>
+> $$0 = (x - 2)(x - 3)$$
+>
+> $$x = 2, 3$$
+>
+> The $x$-intercepts are $(2, 0)$ and $(3, 0)$. The $y$-intercept is $(0, 6)$.
+
+:::note
+If $a$ is positive then the vertex is the minimum of the function. On the other hand, if $a$ is negative then the vertex is the maximum of the function.
+:::
+
+## Graphing
+
+The **general form** of a quadratic function is $f(x) = ax^2 + bx + c$ where $a$, $b$, and $c$ are real numbers and $a \neq 0$. To graph a quadratic function we need to evaluate the following components using the general form...
+1. Axis of Symmetry: It is equivalent to the function $x = -\frac{b}{2a}$.
+2. Vertex: It is the point $(-\frac{b}{2a}, f(-\frac{b}{2a}))$.
+3. Zeros: It can be found using $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ which is the quadratic formula. Note that if there are two zeros, then $x = -\frac{b}{2a}$ is halfway between the two zeros.
+4. Direction: If $a > 0$ then the parabola opens upwards and if $a < 0$ then the parabola opens downwards.
+
+We can start by plotting the axis of symmetry using a dashed line. After this we plot the vertex and zeros onto the graph. Finally, we connect the points in the direction of the parabola. The resulting graph should be symmetrical about the axis of symmetry.
+
+> $$\underline{Example}$$
+>
+> Graph the function $f(x) = x^2 - 5x + 6$.
+>
+> From the previous example we know that the $x$ intercepts are $(2, 0)$ and $(3, 0)$.
+>
+> The axis of symmetry is $x = -\frac{b}{2a} = -\frac{-5}{2(1)} = \frac{5}{2}$
+>
+> To find the vertex, we need to find $f(\frac{5}{2})$.
+>
+> $$f(\frac{5}{2}) = (\frac{5}{2})^2 - 5(\frac{5}{2}) + 6$$
+>
+> $$f(\frac{5}{2}) = (\frac{25}{4}) - (\frac{25}{2}) + 6$$
+>
+> $$f(\frac{5}{2}) = \frac{25}{4} - \frac{50}{4} + \frac{24}{4}$$
+>
+> $$f(\frac{5}{2}) = -\frac{1}{4}$$
+>
+> The vertex is $(\frac{5}{2}, -\frac{1}{4})$.
+>
+> Finally, the graph opens upwards because $a > 0$. With all this information, we get the graph...
+>
+> <Fig src={alg2} caption='Graph of f(x)' num={2}/>
+
+### Standard Form
+
+The **standard form** of a quadratic function is $f(x) = a(x - h)^2 + k$ where $(h, k)$ is the vertex. To graph this function, we can use the vertex, axis of symmetry ($x = h$), zeros, and direction like before. We can also graph using transformations on $f(x) = x^2$ where we shift $h$ units horizontally and $k$ units vertically. Next, we vertically stretch or compress $a$ units. Finally, we reflect about the $x$-axis if $a$ is negative.
+
+Also note that we can interchange between the standard form and the general form because they are equivalent. An example of this is...
+
+> $$\underline{{Example}}$$
+>
+> $$f(x) = x^2 - 5x + 6$$
+>
+> $$f(x) = x^2 - 5x + \frac{25}{4} - \frac{25}{4} + 6$$ which is found doing the perfect square on $ax^2 + bx$.
+>
+> $$f(x) = (x - \frac{5}{2})^2 - \frac{25}{4} + \frac{24}{4}$$
+>
+> $$f(x) = (x - \frac{5}{2})^2  -\frac{1}{4}$$
+>
+> We could do this in reverse by expanding the vertex form.
+
+## Domain and Range
+
+The domain of any quadratic function is all real numbers unless the function presents restrictions in some way.
+
+Let the quadratic function be in general form: $f(x) = ax^2 + bx + c$. If $a$ is positive then the range is $f(x) \geq f(-\frac{b}{2a})$ or $[f(-\frac{b}{2a}), \infty)$. If $a$ is negative then the range is $f(x) \leq f(-\frac{b}{2a})$ or $(-\infty, f(-\frac{b}{2a})]$.
+
+Let the quadratic function be in standard form: $f(x) = a(x - h)^2 + k$. If $a$ is positive then the range is $f(x) \geq k$ or $[k, \infty)$. If $a$ is negative then the range is $f(x) \leq k$ or $(-\infty, k]$.
