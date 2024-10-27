@@ -172,6 +172,7 @@ const sidebars = {
           label: 'Polynomial and Rational Functions',
           items: [
             'euler-tako/algebra-trig/polynomials/page-1',
+            'euler-tako/algebra-trig/polynomials/page-2',
           ]
         }
       ]
