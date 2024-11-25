@@ -1,0 +1,176 @@
+---
+id: page-4
+title: Dividing Polynomials
+sidebar_position: 4
+---
+
+The four elemetary operations we apply to numbers are addition, subtraction, multiplication, and division. These operations can also be applied to polynomials giving us flexible tools to manipulate them. We already know how to add, subtract, and multiply polynomials together and now we can look at how to divide them.
+
+## Division Algorithm
+
+The **division algorithm** states that given a polynomial dividend $f(x)$ and a non-zero polynomial divisor $d(x)$ where the degree of $d(x)$ is less than or equal to the degree of $f(x)$, there exists unique polynomials $q(x)$ and $r(x)$ such that $f(x) = d(x)q(x) + r(x)$ where $q(x)$ is the quotient and $r(x)$ is the remainder. The remainder is either equal to zero or has a degree strictly less than $d(x)$.
+
+If $r(x) = 0$, then $d(x)$ divides evenly into $f(x)$ which means that both $d(x)$ and $q(x)$ are factors of $f(x)$ because $f(x) = d(x)q(x)$.
+
+:::note
+The **dividend** is the polynomial being divided and the **divisor** is the polynomial by which the dividend is divided. Finally, the result is the **quotient** and the **remainder** is the polynomial left over after dividing.
+:::
+
+## Long Division
+
+We can use long division just like with numbers to divide a given polynomial by a binomial. We can use the following steps to use the long division method...
+
+1. Set up the division problem in the form $d(x) {\overline{\smash{\big)}\,f(x)}}$ where $f(x)$ is the dividend and $d(x)$ is the divisor.
+2. Determine the first term of the quotient by dividing the leading term of the dividend by the leading term of the divisor.
+3. Multiply the answer by the divisor and write it below the like terms of the dividend.
+4. Subtract the bottom binomial from the top binomial.
+5. Bring down the next term of the dividend.
+6. Repeat steps $2$ to $5$ until reaching the last term of the dividend.
+7. If the remainder is non-zero, express as a fraction using the divisor as the denominator.
+
+An example of this in practice is...
+
+> $$\underline{Example}$$
+>
+> Divide $16x^3 - 12x^2 + 20x - 3$ by $4x + 5$.
+>
+> $$\text{Set up the problem...}$$
+> $$\begin{array}{r}
+    4x + 5 {\overline{\smash{\big)}\,16x^3 - 12x^2 + 20x - 3}}
+    \end{array}$$
+>
+> $$16x^3 \: \text{divided by} \: 4x \: \text{is} \: 4x^2\text{...}$$
+> $$\begin{array}{r}
+    4x^2 \phantom{+ 20x - 3} \\
+    4x + 5 {\overline{\smash{\big)}\,16x^3 - 12x^2 + 20x - 3}}
+    \end{array}$$
+>
+> $$\text{Multiply} \: 4x + 5 \: \text{by} \: 4x^2. \: \text{Then subtract and bring down the next term...}$$
+> $$\begin{array}{r}
+    4x^2 \phantom{+ 20x - 3} \\
+    4x + 5 {\overline{\smash{\big)}\,16x^3 - 12x^2 + 20x - 3}} \\
+    \underline{-(16x^3 + 20x^2) \phantom{+0x - 3}} \\
+    -32x^2 + 20x \phantom{-3} \\
+    \end{array}$$
+>
+> $$-32x^2 \: \text{divided by} \: 4x \: \text{is} \: {-8x} \text{...}$$
+> $$\begin{array}{r}
+    4x^2 - 8x \phantom{- 3} \\
+    4x + 5 {\overline{\smash{\big)}\,16x^3 - 12x^2 + 20x - 3}} \\
+    \underline{-(16x^3 + 20x^2) \phantom{+0x - 3}} \\
+    -32x^2 + 20x \phantom{-3} \\
+    \end{array}$$
+>
+> $$\text{Multiply} \: 4x + 5 \: \text{by} \: {-8x}. \: \text{Then subtract and bring down the next term...}$$
+> $$\begin{array}{r}
+    4x^2 - 8x \phantom{- 3} \\
+    4x + 5 {\overline{\smash{\big)}\,16x^3 - 12x^2 + 20x - 3}} \\
+    \underline{-(16x^3 + 20x^2) \phantom{+0x - 3}} \\
+    -32x^2 + 20x \phantom{-3} \\
+    \underline{-(32x^2 - 40x) \phantom{33}} \\
+    60x - 3
+    \end{array}$$
+>
+> $$60x \: \text{divided by} \: 4x \: \text{is} \: 15 \text{...}$$
+> $$\begin{array}{r}
+    4x^2 - 8x + 15 \\
+    4x + 5 {\overline{\smash{\big)}\,16x^3 - 12x^2 + 20x - 3}} \\
+    \underline{-(16x^3 + 20x^2) \phantom{+0x - 3}} \\
+    -32x^2 + 20x \phantom{-3} \\
+    \underline{-(32x^2 - 40x) \phantom{33}} \\
+    60x - 3
+    \end{array}$$
+>
+> $$\text{Multiply} \: 4x + 5 \: \text{by} \: 15. \: \text{Then subtract and the remainder should remain...}$$
+> $$\begin{array}{r}
+    4x^2 - 8x + 15 \\
+    4x + 5 {\overline{\smash{\big)}\,16x^3 - 12x^2 + 20x - 3}} \\
+    \underline{-(16x^3 + 20x^2) \phantom{+0x - 3}} \\
+    -32x^2 + 20x \phantom{-3} \\
+    \underline{-(32x^2 - 40x) \phantom{33}} \\
+    60x - 3 \\
+    \underline{-(60x + 75)} \\
+    -78
+    \end{array}$$
+>
+> $$\text{We can express the result as...}$$
+> $$\begin{array}{r}
+    \dfrac{16x^3 - 12x^2 + 20x - 3}{4x + 5} = 4x^2 - 8x + 15 - \dfrac{78}{4x + 5}
+    \end{array}$$
+
+## Synthetic Division
+
+Long divison of polynomials can involve many steps and can be quite cumbersome. An alternative to long division is **synthetic division** which is a shorthand method of dividing polynomials for the special case of dividing by a binomial whose leading coefficient is $1$. In this method, we remove the use of variables and only use the coefficients in the division process. The steps we use to utilize this method is as follows...
+
+1. Let the divisor be in the form $x - k$ where $k$ is a real number. Write $k$ for the divisor.
+2. Write the coefficients of the dividend.
+3. Bring the lead coefficient down.
+4. Multiply the lead coefficient by $k$. Write the product in the next column,
+5. Add the terms of the next column.
+6. Multiply the result by $k$. Write the product in the next column.
+7. Repeat steps $5$ and $6$ for the remaining columns.
+8. Use the bottom numbers to write the quotient. The number in the last column is the remainder. The next number from the right has degree $0$, the next number has degree $1$, and so on.
+
+Before using synthetic division, lets look at an example done using long division and then synthetic division in order to compare...
+
+> $$\underline{Example}$$
+>
+> Divide $3x^4 + 18x^3 - 3x + 40$ by $x + 7$.
+>
+> $$\text{Using long division...}$$
+> $$\begin{array}{r}
+    3x^3 - 3x^2 + 21x - 150 \\
+    x + 7 {\overline{\smash{\big)}\,3x^4 + 18x^3 + 0x^2 - 3x + 40}} \\
+    \underline{-(3x^4 + 21x^3) \phantom{+x^2 - 3x + 40}} \\
+    -3x^3 + 0x^2 \phantom{- 33x + 40} \\
+    \underline{-(-3x^3 - 21x^2) \phantom{33x + 40}} \\
+    21x^2 - 3x \phantom{+440} \\
+    \underline{-(221x + 147x)} \phantom{+ 40} \\
+    -150x + 40 \\
+    \underline{-(-150x - 1050)} \\
+    1090
+    \end{array}$$
+>
+> $$\text{Set up the synthetic division using} \: k \text{...}$$
+> $$\begin{array}{c|rrrr}
+    -7 & \phantom{3 \:\:\:\: 18 \:\:\:\: 0 \:\:\:\: -3 \:\:\:\: 40} \\
+    \: & \\
+    \hline
+    & \\
+    \end{array}$$
+>
+> $$\text{Write the coefficients of the dividend...}$$
+> $$\begin{array}{c|rrrr}
+    -7 & 3 & 18 & 0 & -3 & 40 \\
+    \: & \\
+    \hline
+    & \\
+    \end{array}$$
+>
+> $$\text{Bring down the lead coefficient. Multiply the lead coefficient by} \: k \text{...}$$
+> $$\begin{array}{c|rrrr}
+    -7 & 3 & 18 & 0 & -3 & 40 \\
+    \: & & -21 \\
+    \hline
+    & 3\\
+    \end{array}$$
+>
+> $$\text{Add the numbers in the next column. Multiply the resulting number by} \: k \text{...}$$
+> $$\begin{array}{c|rrrr}
+    -7 & 3 & 18 & 0 & -3 & 40 \\
+    \: & & -21 & 21\\
+    \hline
+    & 3 & -3\\
+    \end{array}$$
+> $$\text{Repeat process for remaining columns...}$$
+> $$\begin{array}{c|rrrr}
+    -7 & 3 & 18 & 0 & -3 & 40 \\
+    \: & & -21 & 21 & -147 & 1050\\
+    \hline
+    & 3 & -3 & 21 & -150 & 1090\\
+    \end{array}$$
+>
+> $$\text{We can express the result as...}$$
+> $$\begin{array}{r}
+    \dfrac{3x^4 + 18x^3 - 3x + 40}{x + 7} = 3x^3 - 3x^2 + 21x - 150 + \dfrac{1090}{x + 7}
+    \end{array}$$
