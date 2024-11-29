@@ -1,0 +1,195 @@
+---
+id: page-5
+title: Zeros of Polynomial Functions
+sidebar_position: 5
+---
+
+We have methods to find the zeros of linear and quadratic functions. We can take this a step further with methods that use polynomial division and allow us to find the zeros of any polynomial function regardless of the degree.
+
+## Remainder Theorem
+
+The **Remainder Theorem** states that if a polynomial $f(x)$ is divided by $x - k$, then the remainder is the value $f(k)$.
+
+> $$\underline{Example}$$
+>
+> Use the Remainder Theorem to evaluate $f(x) = 2x^5 - 3x^4 - 9x^3 + 8x^2 + 2$ at $x = -3$.
+>
+> Divide $2x^5 - 3x^4 - 9x^3 + 8x^2 + 2$ by $x + 3$ because $k = -3$ using synthetic division...
+> $$\begin{array}{c|rrrrrr}
+    -3 & 2 & -3 & -9 & 8 & 0 & 2 \\
+    \: & & -6 & 27 & -54 & 138 & -414 \\
+    \hline
+    & 2 & -9 & 18 & -46 & 138 & -412 \\
+    \end{array}$$
+>
+> The remainder is $-412$ and so $f(3) = -412$. We can verify this...
+>
+> $$\begin{array}{l}
+    f(-3) = 2(-3)^5 - 3(-3)^4 - 9(-3)^3 + 8(-3)^2 + 2 \\
+    \phantom{f(-3)} = 2(-243) - 3(81) - 9(-27) + 8(9) + 2 \\
+    \phantom{f(-3)} = -486 - 243 + 243 + 72 + 2 \\
+    \phantom{f(-3)} = -412
+    \end{array}$$
+
+:::note
+We can arrive at the remainder theorem from the division theorem. The division algorithm states that given a polynomial dividend $f(x)$ and a non-zero polynomial divisor $d(x)$, there exist unique polynomials $q(x)$ and $r(x)$ such that $f(x) = d(x)q(x) + r(x)$ and $r(x)$ is less than the degree of $d(x)$. If we divide by the linear factor $x - k$ then we get $f(x) = (x - k)q(x) + r$ where $r$ is a constant because $r(x)$ must be a degree less than $1$ as $x - k$ is linear. Finally, if we solve for $k$, we get $f(k) = (k - k)q(k) + r = 0q(k) + r = r$ which shows that $f(k)$ equals the remainder of $f(x)$ divided by $x - k$.
+:::
+
+### Factor Theorem
+
+The **Factor Theorem** states that $k$ is a zero of $f(x)$ if and only if $(x - k)$ is a factor of $f(x)$. This means that if $f(x)$ divided by $(x - k)$ results in a remainder of $0$ then $k$ is a zero of $f(x)$.
+
+> $$\underline{Example}$$
+>
+> Use the Factor Theorem to find the zeros of $f(x) = x^3 + 4x^2 - 4x - 16$ given that $(x - 2)$ is a factor of the polynomial.
+>
+> We can verify that $(x - 2)$ is a factor of $f(x)$...
+> $$\begin{array}{c|rrrrrr}
+    2 & 1 & 4 & -4 & -16 \\
+    \: & & 2 & 12 & 16 \\
+    \hline
+    & 1 & 6 & 8 & 0 \\
+    \end{array}$$
+>
+> This means that $q(x) = x^2 + 6x + 8$ and $f(x) = (x^2 + 6x + 8)(x - 2)$. We can find the remaining linear factors by factoring $x^2 + 6x + 8$...
+> $$\begin{array}{l}
+    q(x) = x^2 + 6x + 8 \\
+    \phantom{q(x)} = x^2 + 4x + 2x + 8 \\
+    \phantom{q(x)} = x(x + 4) + 2(x + 4) \\
+    \phantom{q(x)} = (x + 2)(x + 4)
+    \end{array}$$
+>
+> This means that $f(x) = (x + 2)(x + 4)(x - 2)$ which means the zeros of $f(x)$ are $-4, -2, 2$.
+
+### Rational Zero Theorem
+
+The **Rational Zero Theorem** states that, if the polynomial $f(x) = a_nx^n + a_{n - 1}x^{n - 1} + ... + a_1x + a_0$ has integer coefficients and $a_n \neq 0$, then every rational zero of $f(x)$ has the form $\frac{p}{q}$ where $p$ is a factor of the constant term $a_0$ and $q$ is a factor of the leading coefficient $a_n$. This means we can determine all the possible zeros of $f(x)$ by finding all the possible values of $\frac{p}{q}$.
+
+> $$\underline{Example}$$
+>
+> Use the Rational Zero Theorem to find the rational zeros of $f(x) = 2x^3 + x^2 - 4x + 1$.
+>
+> The factors of the leading coefficient are $\pm 1$ and $\pm 2$ and the only factor of the constant term is $\pm 1$.
+>
+> This means $\frac{p}{q} = \pm \frac{1}{1}, \pm \frac{1}{2}$. The possible zeros are $-1$, $-\frac{1}{2}$, $\frac{1}{2}$ and $1$.
+>
+> We can determine the actual zeros by substituting these possible zeros into the function.
+> $$\begin{array}{l}
+    f(-1) = 2(-1)^3 + (-1)^2 - 4(-1) + 1 = 4 \\
+    f(-\frac{1}{2}) = 2(-\frac{1}{2})^3 + (-\frac{1}{2})^2 - 4(-\frac{1}{2}) + 1 = 3 \\
+    f(\frac{1}{2}) = 2(\frac{1}{2})^3 + (\frac{1}{2})^2 - 4(\frac{1}{2}) + 1 = -\frac{1}{2} \\
+    f(1) = 2(1)^3 + (1)^2 - 4(1) + 1 = 0
+    \end{array}$$
+>
+> The only zero is $1$.
+
+:::note
+Both the Factor Theorem and the Rational Zero Theorem are theorems built on the concepts of the Remainder Theorem.
+:::
+
+### Zeros of Polynomial Functions
+
+Given a polynomial function $f$, we can find the zeros using the following steps...
+
+1. Use the Rational Zero Theorem to list all possible rational zeros of $f$.
+2. Use synthetic division to evaluate a given possible zero by dividing the candidate into the polynomial. If the remainder is $0$, the candidate is a zero. If the remainder is not a $0$, discard the candidate.
+3. Repeat step two using the quotient found with synthetic division. Repeat till the quotient is a quadratic.
+4. Find the zeros of the quadratic function.
+
+> $$\underline{Example}$$
+>
+> Find the zeros of $f(x) = 4x^3 - 3x - 1$
+>
+> The factors of the leading coefficient are $\pm 1$, $\pm 2$, and $\pm 4$. The only factor of the constant is $\pm 1$. This means $\frac{p}{q} = \pm\frac{1}{1}$, $\pm\frac{1}{2}$ and $\pm\frac{1}{4}$.
+>
+> Lets test $x = -1$ by dividing $f(x)$ by $(x + 1)$...
+> $$\begin{array}{c|rrrrrr}
+    -1 & 4 & 0 & -3 & -1 \\
+    \: & & -4 & 4 & -1 \\
+    \hline
+    & 4 & -4 & 1 & -2 \\
+    \end{array}$$
+>
+> We figured out that $x = 1$ is not a zero. So, we need to try another possible zero. Lets test $x = 1$ by dividing $f(x)$ by $(x - 1)$...
+> $$\begin{array}{c|rrrrrr}
+    1 & 4 & 0 & -3 & -1 \\
+    \: & & 4 & 4 & 1 \\
+    \hline
+    & 4 & 4 & 1 & 0 \\
+    \end{array}$$
+>
+> Due to the fact we got a remainder of $0$, $x = 1$ is a zero of $f(x)$. We are now left with $4x^2 + 4x + 1$ which is a quadratic function. If it was not a quadratic function, we would continue using synthetic division to find more zeros using this quotient.
+>
+> We can find the remaining zeros using the quadratic function...
+>
+> $$\begin{array}{l}
+    f(x) = 4x^2 + 4x + 1 \\
+    \phantom{f(x)} = 4x^2 + 2x + 2x + 1 \\
+    \phantom{f(x)} = 2x(2x + 1) + 1(2x + 1) \\
+    \phantom{f(x)} = (2x + 1)(2x + 1) \\
+    \phantom{f(x)} = (2x + 1)^2
+    \end{array}$$
+>
+> The zeros of $4x^3 - 4x - 1$ are $x = -\frac{1}{2}$ and $x = 1$.
+
+## Fundemental Theorem of Algebra
+
+The **Fundemental Theorem of Algebra** states that, if $f(x)$ is a polynomial of degree $n > 0$, then $f(x)$ has at least one complex zero. This theorem can be used to also argue that, if $f(x)$ is a polynomial of degree $n > 0$, and $a$ is a non-zero real number, then $f(x)$ has exactly $n$ linear factors and $f(x) = a(x - c_1)(x - c_2)...(x - c_n)$ where $c_1$, $c_2$, ..., $c_n$ are complex numbers. Therefore, $f(x)$ has $n$ roots if we allow for multiplicities.
+
+:::note
+All real numbers are a subset of complex numbers and that means a real number can be the complex zero for a given function. However, remember that not all complex numbers are real numbers.
+:::
+
+### Complex Conjugate Theorem
+
+The **Linear Factorization Theorem** states that a polynomial function will have the same number of factors as its degree, and each factor will be in the form $(x - c)$, where $c$ is a complex number. Building from this, the **Complex Conjugate Theorem** states that if the polynomial function $f$ has real coefficients and a complex zero in the form $a + bi$, then the complex conjugate of the zero, $a - bi$, is also a zero.
+
+> $$\underline{Example}$$
+>
+> Find a third degree polynomial with real coefficients that has zeros of $5$ and $-2i$ such that $f(1) = 10$.
+>
+> Based on the complex conjugate theorem, we know that the complex conjugate of $-2i$ must also be a zero. The complex conjugate of $-2i$ is $2i$ and so the zeros are $5$, $-2i$, and $2i$.
+>
+> A polynomial of the third degree has at most $3$ zeros and we have found them all so we can use them to create the linear factors. We get the function...
+> $$\begin{array}{l}
+    f(x) = a(x - 5)(x - 2i)(x + 2i) \\
+    \phantom{f(x)} = a(x - 5)(x^2 + 4) \\
+    \phantom{f(x)} = a(x^3 - 5x^2 + 4x - 20) \\
+    \end{array}$$
+>
+> We can use the fact that $f(1) = 10$ to find $a$...
+> $$\begin{array}{l}
+    f(x) = a(x^3 - 5x^2 + 4x - 20) \\
+    \phantom{()}10 = a((1)^3 - 5(1)^2 + 4(1) - 20) \\
+    \phantom{()}10 = a(1 - 5(1) + 4(1) - 20) \\
+    \phantom{()}10 = a(1 - 5 + 4 - 20) \\
+    \phantom{()}10 = -20a \\
+    \phantom{()0}a = -\frac{1}{2}
+    \end{array}$$
+>
+> We can simplify our polynomial with the value of $a$.
+> $$\begin{array}{l}
+    f(x) = a(x^3 - 5x^2 + 4x - 20) \\
+    \phantom{f(x)} = -\frac{1}{2}(x^3 - 5x^2 + 4x - 20) \\
+    \phantom{f(x)} = -\frac{1}{2}x^3 + \frac{5}{2}x^2 - 2x + 10
+    \end{array}$$
+
+## Descartes' Rule of Signs
+
+The **Descartes' Rule of Signs** is a method used to determine the possible numbers of positive and negative real zeros for any polynomial function. According to this rule, if we let $f(x) = a_nx^n + a_{n - 1}x^{n - 1} + ... + a_1x + a_0$ be a polynomial function with real coefficients:
+1. The number of positive real zeros is either equal to the number of sign changes of $f(x)$ or is less than the number of sign changes by an even integer.
+2. The number of negative real zeros is either equal to the number of sign changes of $f(-x)$ or is less than the number of sign changes by an even integer.
+
+> $$\underline{Example}$$
+>
+> Use Descartes' Rule of Signs to determine the maximum possible numbers of positive and negative real zeros for $f(x) = 2x^4 - 10x^3 + 11x^2 - 15x + 12$.
+>
+> There are $4$ sign changes for $f(x)$ which means there can only be $4$, $2$, or $0$ positive real zeros.
+>
+> To find the negative real zeros, we need to solve for $f(-x)$ first...
+> $$\begin{array}{l}
+    f(-x) = 2(-x)^4 - 10(-x)^3 + 11(-x)^2 - 15(-x) + 12 \\
+    \phantom{f(-x)} = 2x^4 + 10x^3 + 11x^2 + 15x + 12
+    \end{array}$$
+>
+> There are no sign changes in $f(-x)$ which means there can only be $0$ negative real zeros.

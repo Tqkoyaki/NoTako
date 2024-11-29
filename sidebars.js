@@ -175,6 +175,7 @@ const sidebars = {
             'euler-tako/algebra-trig/polynomials/page-2',
             'euler-tako/algebra-trig/polynomials/page-3',
             'euler-tako/algebra-trig/polynomials/page-4',
+            'euler-tako/algebra-trig/polynomials/page-5',
           ]
         }
       ]
