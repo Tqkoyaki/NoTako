@@ -1,0 +1,115 @@
+---
+id: page-7
+title: Inverse Functions
+sidebar_position: 7
+---
+
+There are various instances where we have functions that we want to use but we have information about the output and we want to find the input. This is where **inverse functions** come in. They allow us to rewrite a function in terms of its output rather than its input.
+
+## Inverse Functions
+
+Given the functions $f$ and $g$, they are inverses of each other if every coordinate $(a, b)$ on the graph of $f$ cooresponds to the coordinate $(b, a)$ on the graph of $g$. Note that not all functions have inverses because only functions that are one-to-one have inverses. If the function $f$ is not one-to-one, then the function $g$ would not be a function as it would have multiple outputs for a single input.
+
+We can find the inverse of any one-to-one function by following these steps...
+1. Replace $f(x)$ with $y$
+2. Interchange $x$ and $y$
+3. Solve for $y$, and rename the function $f^{-1}(x)$
+
+> $$\underline{Example}$$
+>
+> Find the inverse of the function $f(x) = 2x + 3$
+>
+> Replacing $f(x)$ with $y$ and interchanging $x$ and $y$ gives us $x = 2y + 3$. We can now solve for $y$...
+> $$\begin{array}{l}
+    \phantom{2}x = 2y + 3 \\
+    2y = x - 3 \\
+    \phantom{2}y = \frac{1}{2}x - \frac{3}{2}
+    \end{array}$$
+>
+> The inverse of $f(x)$ is $f^{-1}(x) = \frac{1}{2}x - \frac{3}{2}$.
+
+### Domain
+
+The domain of a function is the set of all possible inputs that the function can take. The domain of the inverse function is the range of the original function. This fact gives us the following properties...
+1. $f^-1(f(x)) = x$ for all $x$ in the domain of $f$.
+2. $f(f^{-1}(x)) = x$ for all $x$ in the domain of $f^{-1}$.
+
+We can use these properties to verify if two functions are inverses of each other because if these properties hold true for any two functions, then they are inverses of each other.
+
+> $$\underline{Example}$$
+>
+> Show that $f(x) = \frac{x + 5}{3} and f^{-1}(x) = 3x - 5 are inverses.
+>
+> To verify this fact, we need to show that $f(f^{-1}(x)) = x$ and $f^{-1}(f(x)) = x$.
+>
+> Starting with $f(f^{-1}(x))$...
+> $$\begin{array}{l}
+    f(f^{-1}(x)) = f(3x - 5) \\
+    \phantom{f(f^{-1}(x))} = \frac{(3x - 5) + 5}{3} \\
+    \phantom{f(f^{-1}(x))} = \frac{3x}{3} \\
+    \phantom{f(f^{-1}(x))} = x
+    \end{array}$$
+>
+> Next, lets find $f^{-1}(f(x))$...
+> $$\begin{array}{l}
+    f^{-1}(f(x)) = f^{-1}(\frac{x + 5}{3}) \\
+    \phantom{f^{-1}(f(x))} = 3(\frac{x + 5}{3}) - 5 \\
+    \phantom{f^{-1}(f(x))} = x + 5 - 5 \\
+    \phantom{f^{-1}(f(x))} = x
+    \end{array}$$
+>
+> Both $f(f^{-1}(x))$ and $f^{-1}(f(x))$ are equal to $x$, so $f(x)$ and $f^{-1}(x)$ are inverses.
+
+### Domain Restrictions
+
+As previously stated, for a function to have an inverse, it must be one-to-one. A function that has an inverse is called an **invertible function**.
+
+There are functions like $f(x) = x^2$ that are not invertible but can be made invertible by restricting the domain. For the case of $f(x) = x^2$, we can restrict the domain to $$x \geq 0$$ or $$x \leq 0$$ to make the function invertible.
+
+> $$\underline{Example}$$
+>
+> Find the inverse of the function $f(x) = (x - 4)^2$ where $x \geq 4$.
+>
+> The domain of $f(x)$ makes it invertible because it restricts the quadratic function to only the right side of the axis of symmetry.
+>
+> Replacing $f(x)$ with $y$ and interchanging $x$ and $y$ gives us $x = (y - 4)^2$. We can now solve for $y$...
+>
+> $$x = (y - 4)^2 \to \sqrt{x} = y - 4 \to y = \sqrt{x} + 4$$
+>
+> Note that we ignored $-\sqrt{x} + 4$ because of our domain restriction. So the inverse of $f(x)$ is $f^{-1}(x) = \sqrt{x} + 4$.
+
+## Radical Functions
+
+Often times, the function we want to find the inverse of is a radical function. To find the inverse of a radical function, we can follow the same steps as before. However, after solving for $y$, we need to restrict the domain of the inverse function to the range of the original function.
+
+> $$\underline{Example}$$
+>
+> Restrict the domain and then find the inverse of the function $$f(x) = \sqrt{2x + 3}$$.
+>
+> The domain of $f(x)$ is $x \geq -\frac{3}{2}$ because the $x$-intercept of the function is $-\frac{3}{2}$ and the graph of $\sqrt{x}$ tends towards positive infinity.
+>
+> Replacing $f(x)$ with $y$ and interchanging $x$ and $y$ gives us $x = \sqrt{2y + 3}$. We can now solve for $y$...
+>
+> $$x = \sqrt{2y + 3} \to x^2 = 2y + 3 \to 2y = x^2 - 3 \to y = \frac{1}{2}x^2 - \frac{3}{2}$$
+>
+> For $y = \frac{1}{2}x^2 - \frac{3}{2}$ to be the inverse of $f(x)$, we need to restrict the domain. The domain of $f^{-1}(x)$ is the range of $f(x)$. The range of $f(x)$ is $y \geq 0$ because the graph of $\sqrt{x}$ is always positive. So the domain of $f^{-1}(x)$ is $x \geq 0$.
+>
+> The inverse of $f(x)$ is $f^{-1}(x) = \frac{1}{2}x^2 - \frac{3}{2}$ where $x \geq 0$.
+
+## Rational Functions
+
+When finding the inverse of rational functions, we often have multiple instances of $x$ variables in the equation which we interchange with $y$. To solve for $y$ in these situations, we need to use the distributive property to isolate $y$...
+
+> $$\underline{Example}$$
+>
+> Find the inverse of the function $$f(x) = \frac{x + 3}{x - 2}$$.
+>
+> Replacing $f(x)$ with $y$ and interchanging $x$ and $y$ gives us $x = \frac{y + 3}{y - 2}$. We can now solve for $y$...
+>
+> $$x = \frac{y + 3}{y - 2} \to x(y - 2) = y + 3 \to xy - 2x = y + 3$$
+>
+> From here, we want to isolate $y$ so we can use the distributive property...
+>
+> $$xy - 2x = y + 3 \to xy - y = 2x + 3 \to y(x - 1) = 2x + 3 \to y = \frac{2x + 3}{x - 1}$$
+>
+> The inverse of $f(x)$ is $f^{-1}(x) = \frac{2x + 3}{x - 1}$.
