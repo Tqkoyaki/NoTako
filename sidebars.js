@@ -178,6 +178,7 @@ const sidebars = {
             'euler-tako/algebra-trig/polynomials/page-5',
             'euler-tako/algebra-trig/polynomials/page-6',
             'euler-tako/algebra-trig/polynomials/page-7',
+            'euler-tako/algebra-trig/polynomials/page-8',
           ]
         }
       ]
