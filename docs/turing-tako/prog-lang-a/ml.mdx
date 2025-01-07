@@ -376,7 +376,10 @@ fun better_max (xs : int list) =
                     if hd xs > tl_ans
                     then hd xs
                     else tl_ans
-                end;
+                end
+            in
+                SOME (max_nonempty xs)
+            end;
 ```
 
 Through the use of let expressions, options, and recursion, we were able to write a complex function cleanly and efficiently.
