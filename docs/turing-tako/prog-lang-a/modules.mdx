@@ -1,0 +1,397 @@
+---
+id: page-4
+title: Module System
+sidebar_position: 4
+---
+
+So far we have been coding smaller programs in ML but as we start to build larger programs, we need new tools that allow us to organize and manage the complexity of our code. Many programming languages have systems similar to the ***module system*** that programmers can use to organize and structure their code.
+
+ML also has a type-checking system that is more sophisticated than most other languages which is invaluable to understand when building larger programs. This system is called ***type inference*** and it is a powerful tool that allows us to write code without writing down the types of every binding.
+
+## Type Inference
+
+Similar to Java and C, ML is a ***statically typed language*** which means every binding has a type that is determined at complie time i.e. before the program is run. There is a type-checker built into the compiler that only allows programs that use types correctly to compile. By contrast, languages like Racket, Python, and Ruby are ***dynamically typed languages*** which means that the type of a binding is determined while the program is running.
+
+Even though ML is statically typed like Java and C, it defers from them because ML is ***implicitly typed*** meaning programmers rarely need to write down the types of bindings. In languages like Java and C, programmers must write down the types of all bindings and this concept is called ***explicit typing***.
+
+Due to the fact that ML is implicitly typed, the type-checker must be more sophisticated as it must infer what the type annotations would have been if the programmer had written all of them down. In principle, type inference and type checking are two seperate processes but in practice, they are often merged together meaning a correct program must find a solution to what all the types should be whenever such a solution exists, else the program is rejected. An overview of ML's type inference is as follows:
+
+1. The types of bindings are determined in order where the types of earlier bindings are used to determine the types of later ones.
+2. For each `val` or `fun` binding, the type-checker analyzes the binding to determine necessary facts about its type.
+3. Afterward, the type-checker uses type variables such as `'a`, `'b`, etc. for any unconstrained types in function arguments or results.
+4. Enforces the value restriction where only variables and values can be polymorphic types.
+
+```sml title="ML Type Inference" showLineNumbers="true"
+fun sum xs =
+    case xs of
+        [] => 0
+      | x::xs' => x + sum xs'
+```
+
+We can infer the type of the code above using the following logic:
+
+1. Looking at the first line, we can determine that `f` must have type `T1 -> T2` for some types `T1` and `T2` and the argument `xs` must have type `T1`.
+2. Looking at the case-expression, `xs` must have a type compatible with all of the patterns. Since `[]` and `x::xs'` are both patterns for a list, `xs` must have type `T3 list` for some type `T3`. Also since `xs` is equal to `T1`, `T1 = T3 list`.
+3. Looking at the first branch of the case-expression, we are returning `0` which is an integer. Therefore, `T2 = int`.
+4. Looking at the second branch of the case-expression, `x` has type `T3` and `xs'` has type `T3 list`. Since we are adding `x` to the result of `sum xs'`, `x` must be an integer and the result of `sum xs'` must be an integer. Therefore, `T3 = int` and `T1 = int list`.
+5. Putting everything together, the type of `sum` is `int list -> int`. This also type-checks because the types are consistently used throughout the function.
+
+### Polymorphic Types
+
+ML's type checker is even more sophisticated because it is interwined with ***parametric polymorphism*** where the inferencer determines a function's argument or result could be anything. In these cases, the resulting type uses `'a`, `'b`, etc. to represent the unknown types. However, it is important to note that type inference and polymorphism are entirely seperate concepts meaning a language can have one or the other. For example, Java has generics which are a form of polymorphism but it does not have type inference as it uses explicit typing.
+
+An example of polymorphic types is as follows:
+
+```sml title="Polymorphic Function" showLineNumbers="true"
+fun length xs =
+    case xs of
+        [] => 0
+      | x::xs' => 1 + length xs'
+```
+
+We can infer the type of the code using the following logic:
+
+1. The function `length` must have type `T1 -> T2` for some types `T1` and `T2` and the argument `xs` must have type `T1`.
+2. Due to the patterns in the case expression being `[]` and `x::xs'`, `xs` must have type `T3 list` for some type `T3`. Also since `xs` is equal to `T1`, `T1 = T3 list`.
+3. The first branch returns `0` which means `T2 = int`.
+4. In the second branch `x` has type `T3` and `xs'` has type `T3 list`.
+5. The recursive call to `length` in the second branch type checks because `xs'` has type `T3 list` which is equal to the argument of `length` which in this case is `T1`. We can also add the results together because `T2 = int` meaning the result of `length` is `int`.
+6. The type of `length` is `T3 list -> int` where `T3` is unconstrained. This means the final type of `length` is `'a list -> int`.
+
+Another example of polymorphic types is as follows:
+
+```sml title="Fully Polymorphic Function" showLineNumbers="true"
+fun compose (f, g) = fn x => f (g x)
+```
+
+We can infer the type of the code using the following logic:
+
+1. The function `compose` must have type `T1 * T2 -> T3` for some types `T1`, `T2`, and `T3`. Also note that `f` has type `T1` and `g` has type `T2`.
+2. Since `compose` returns a function, `T3 = T4 -> T5` for some types `T4` and `T5` where `x` has type `T4` in the function's body.
+3. So `g` must have type `T4 -> T6` for some `T6` because it takes `x` as an argument. Also note that because `g` has type `T2`, `T2 = T4 -> T6`.
+4. Since `f` takes the result of `g x` as an argument, `f` must have the type `T6 -> T7` for some `T7`. Also note that because `f` has type `T1`, `T1 = T6 -> T7`.
+5. The result of `f` is the result of the function returned by `compose` which means `T5 = T7`.
+6. The three facts we know are `T1 = T6 -> T5`, `T2 = T4 -> T6`, and `T3 = T4 -> T5`. Putting it all together, the type of `compose` is `(T6 -> T5) * (T4 -> T6) -> (T4 -> T5)`.
+7. There is nothing else left to constrain, so if we replace all the types consistently we get `('a -> 'b) * ('c -> 'a) -> ('c -> 'b)` as the final type of `compose`.
+
+:::note
+Type inference in ML would have been more difficult if ML had subtyping like if every triple could be a pair because we would not be able to conclude things like `T3 = T1 * T2` since the equals would be overly restrictive. We would instead need constraints indicating that `T3` is a tuple with at least two fields.
+
+Type inference in ML would also be more difficult if it did not have parametric polymorphism since we would have to pick some type for functions like `length` and `compose` and that could depend on how they are used. 
+:::
+
+### Value Restriction
+
+There is still a problem with the ML type system because it can accept programs that when run could have values of the wrong types, such as putting an `int` where we expect a `string`. This problem results from a combination of polymorphic types and mutable references.
+
+```sml title="Value Restriction" showLineNumbers="true"
+val r = ref NONE (* 'a option ref *)
+val _ = r := SOME "hi" (* instantiate 'a with string *)
+val i = 1 + valOf(!r) (* instantiate 'a with int *)
+```
+
+If we use the rules for type checking/inference, we end up adding `1` to `"hi"` even though everything seems to type-check given the types of the functions/operators: `ref ('a -> 'a ref)`, `:= ('a ref * 'a -> unit)`, and `! ('a ref -> 'a)`. 
+
+To fix this issue, we need a stricter type system and ML does this by preventing the first line from having a polymorphic type. In general, ML will give a variable in a val-binding a polymorphic type only if the expression in the val-binding is a value or a variable. This is called a ***value restriction***. So, in our example, `ref NONE` is a call to the function `ref` and function calls are not variables or values. So, we get a warning and `r` is given a type `?X1 option ref` where `?X1` is a "dummy type" and not a type variable.
+
+## Mutual Recursion
+
+***Mutual recursion*** is when two or more functions call each other recursively in their bodies. This concept can be useful but ML's rule that bindings can only use earlier bindings makes it more difficult as we do not know which function should come first. It turns out ML has special support for mutual recursion using the keyword `and` which we use to replace the `fun` keyword expect the first `fun` keyword in a sequence of mutually recursive functions. By doing this, all the functions in the sequence are treated as if they were defined at the same time.
+
+```sml title="Mutual Recursion" showLineNumbers="true"
+(* True if the list strictly alternates between 1 and 2 and ends with 2 *)
+fun match xs =
+    let fun need_one xs = (* State of 1 *)
+            case xs of
+                [] => true
+            | 1::xs' => need_two xs'
+            | _ => false
+        and need_two xs = (* State of 2 *)
+            case xs of
+                [] => false
+            | 2::xs' => need_one xs'
+            | _ => false
+        in
+            need_one xs
+        end
+```
+
+The solution to the problem above like many problems in computer science can be modeled using ***finite state machines*** and mutually recursive functions where there is a function for each state. In the example above, the function `need_one` is the state of `1` and the function `need_two` is the state of `2`.
+
+:::note
+The `and` keyword in ML can also be used to have mutually recursive datatype bindings.
+:::
+
+Also note that `and` is nice feature of ML but we can still do mutual recursion even if a language does not have special support for it as long as we can pass functions as arguments to other functions:
+
+```sml title="Mutual Recursion Without Support" showLineNumbers="true"
+fun match xs =
+    let fun need_one xs f = (* State of 1 *)
+            case xs of
+                [] => true
+            | 1::xs' => f xs'
+            | _ => false
+
+        fun need_two xs = (* State of 2 *)
+            case xs of
+                [] => false
+            | 2::xs' => need_one xs' need_two
+            | _ => false
+        in
+            need_one xs need_two
+        end
+```
+
+## Modules
+
+ML modules can be used to seperate bindings into different namespaces which is useful for larger programs where we want to organize our code with more structure. In ML, we can use `structures` to define ***modules*** which are a collection of bindings. 
+
+To create a module, we write `structure Name = struct bindings end` where `Name` is the name of the module and `bindings` are the bindings in the module. Outside the structure, we can reference a binding `b`, using `Name.b` where `Name` is the name of the module. Also note, the `Name` of the module is often capitalized as a convention to distinguish it from other bindings.
+
+```sml title="Module Example" showLineNumbers="true
+(* Creating a module *)
+structure MyMathLib = 
+    struct 
+    fun fact x =
+        if x = 0
+        then 1
+        else x * fact (x - 1)
+    
+    val half_pi = Math.pi / 2.0
+
+    fun doubler y = y + y
+    end
+
+(* Using bindings in the module *)
+val x = MyMathLib.fact 5
+```
+
+Finally, with modules, we have to specify the structures name before we use bindings in the structure. However, we can use the `open` keyword to make the bindings in a module directly. If we used `open MyMathLib` in the example above, we could use `fact 5` instead of `MyMathLib.fact 5`. A common use of this is to write succinct testing code for a module outside the module itself. Other uses of `open` are often frowned upon as it may introduce unexpected shadowing.
+
+### Signatures
+
+Structures so far are providing just ***namespace management*** which is a way to avoid different bindings in different parts of the program from shadowing each other. Namespace management is useful but structures can do so much more when given ***signatures*** which essentially provides strict interfaces that code outside the module must obey.
+
+When we give a structure a signature, the structure must have all the bindings in the signature and the types of the bindings must match the types in the signature. If the structure does not have all the bindings in the signature or the types do not match, the program will not compile. This is useful because it allows us to enforce a contract between the structure and the rest of the program.
+
+So, to create a signature, we write `signature Name = sig bindings end` where `Name` is the name of the signature and `bindings` are the type bindings in the signature. We can then give structure a signature by writing `structure StructureName :> SignatureName = ...` where `StructureName` is the name of the structure and `SignatureName` is the name of the signature.
+
+```sml title="Signature Example" showLineNumbers="true
+(* Creating a signature *)
+signature MathLib =
+    sig
+    val fact : int -> int
+    val half_pi : real
+    val doubler : int -> int
+    end
+
+(* Creating a structure with a signature *)
+structure MyMathLib :> MathLib = 
+    struct 
+    fun fact x =
+        if x = 0
+        then 1
+        else x * fact (x - 1)
+    
+    val half_pi = Math.pi / 2.0
+
+    fun doubler y = y + y
+    end
+```
+
+### Hiding Implementation
+
+A major benefit of using signatures is that we can seperate an interface from an implementation which is fundemental for building correct, robust, and reusable programs. Before we use signatures to hide the implementation of a module, we must first note that we have already been hiding implementation using functions. Functions can implemented in many ways but the client of the function would have no way to tell if we replaced one of the functions with a different one as long as the inputs and outputs are the same.
+
+```sml title="Hiding Implementation Using Functions" showLineNumbers="true"
+(* Clients cannot tell if we replace any of these functions with another *)
+fun doubler x = x + x
+fun doubler x = x * 2
+val y = 2
+fun doubler x = x * y
+```
+
+We can hide implementation using signatures as well by hiding bindings we do not want the client to see. If the signature does not include a binding that is in the module, then the client cannot use that binding.
+
+```sml title="Hiding Implementation Using Signatures" showLineNumbers="true"
+(* Signature for MyMathLib *)
+signature MathLib =
+    sig
+    val fact : int -> int
+    val half_pi : real
+    end
+```
+
+If we use the signature above for the module `MyMathLib`, the client of the module would not be able to use the `doubler` function because it is not in the signature.
+
+## Modules in Action
+
+When creating a module for a real library, we must consider two things, the ***invariants*** and the ***properties***. The ***invariants*** are properties that all the functions in the module both assume to be true and guarantee to keep true. The ***properties*** are the properties that the function in the module guarantees to be true for the client of the module. The difference between the two is that the invariants are internal while the properties are externally visible.
+
+Lets create a module for a rational number library which intends to prevent denominators of zero, keep fractions in reduced form, and lets clients create, add, or turn fractions into strings:
+
+```sml title="Rational Library" showLineNumbers="true"
+(* Signature for Rational *)
+signature Rational_A =
+sig
+    datatype rational = Whole of int | Frac of int * int
+    exception BadFrac
+    val make_frac : int * int -> rational
+    val add : rational * rational -> rational
+    val toString : rational -> string
+end
+
+(* Structure for Rational *)
+structure Rational :> Rational_A =
+    struct
+    (*  Invariant 1: all denominators > 0
+        Invariant 2: rationals kept in reduced form, 
+            including that a Frac never has a denominator of 1 *)
+        datatype rational = Whole of int | Frac of int * int
+        exception BadFrac
+
+        (* gcd and reduce are helper functions *)
+        (* gcd assumes x and y are non-negative *)
+        fun gcd (x, y) = 
+            if x = y
+            then x
+            else if x < y
+            then gcd (x, y - x)
+            else gcd (y, x)
+        
+        fun reduce r =
+            case r of
+                Whole _ => r
+              | Frac (x, y) =>
+                    if x = 0
+                    then Whole 0
+                    else let val d = gcd (abs x, y) in
+                        if d = y
+                        then Whole (x div y)
+                        else Frac (x div d, y div d)
+        
+        (* when making a frac, we ban zero denominators *)
+        fun make_frac (x, y) =
+            if y = 0
+            then raise BadFrac
+            else if y < 0
+            then reduce (Frac (~x, ~y))
+            else reduce (Frac (x, y))
+        
+        (* using math properties assuming invariants are true *)
+        fun add (r1, r2) =
+            case (r1, r2) of
+                (Whole x, Whole y) => Whole (x + y)
+              | (Whole x, Frac (a, b)) => Frac (x * b + a, b)
+              | (Frac (a, b), Whole x) => Frac (x * b + a, b)
+              | (Frac (a, b), Frac (c, d)) => reduce (Frac (a * d + c * b, b * d))
+        
+        (* given invariant, prints in reduced form *)
+        fun toString r =
+            case r of
+                Whole x => Int.toString x
+              | Frac (a, b) => (Int.toString a) ^ "/" ^ (Int.toString b)
+    end
+```
+
+This library promises the following properties to the client:
+1. `toString` always returns a string that represents the fraction in reduced form.
+2. No code goes into an infinite loop.
+3. No code divides by zero.
+4. There are no fractions with denominators of $$0$$.
+
+### Abstract Types
+
+Currently with the signature that `Rational` uses, the client cam see the `rational` datatype definition and due to this fact, the client can create a `rational` value without using the `make_frac` function. This is a problem because the client could create a `rational` value that does not satisfy the invariants of the module causing the module to break. 
+
+To solve this, we want to hide the implementation of the `rational` datatype from the client and only let the client know that `rational` is a type. This concept of ***abstract types*** allows us to define operations over a type without revealing the implementation of that type. In ML, we achieve this using type synonyms in the signature which means we use the keyword `type` and the name of the type in the signature but do not give the type a definition.
+
+```sml title="Abstract Types" showLineNumbers="true"
+(* New Signature for Rational *)
+signature Rational_B =
+sig
+    type rational
+    exception BadFrac
+    val make_frac : int * int -> rational
+    val add : rational * rational -> rational
+    val toString : rational -> string
+end
+```
+
+We can make this library a bit more sophisticated by allowing the client to still be able to create whole numbers without `make_frac` because it would not break the invariants of the module. We can do this by exposing the `Whole` constructor in the signature but not the `Frac` constructor. This means we do not need to change the structure at all while only exposing part of the `datatype` in the signature.
+
+```sml title="Abstract Types with Exposed Constructors" showLineNumbers="true"
+(* New Signature for Rational *)
+signature Rational_C =
+sig
+    type rational
+    exception BadFrac
+    val make_frac : int * int -> rational
+    val add : rational * rational -> rational
+    val toString : rational -> string
+    val Whole : int -> rational
+end
+``` 
+
+### Signature Matching
+
+So far, we know informally that the structure `Rational` satisfies all the various signatures in the examples above. However, we need more formal rules to determine if a structure satisfies a signature. Given a structure `Struct` and a signature `Sig` we say that `Struct` matches `Sig` if:
+1. For every val-binding in `Sig`, `Struct` must have a binding with that type or a more general type i.e. an implementation can be polymorphic even if the signature is not. This binding could be provided via a val-binding, a fun-binding, or a datatype-binding.
+2. For every non-abstract type-binding in `Sig`, `Struct` must have a type-binding with the same name.
+3. For every abstract type-binding in `Sig`, `Struct` must have some binding that creates that type (either a datatype-binding or a type-binding).
+
+:::note
+Notice that `struct` can have any additional bindings that are not in the signature.
+:::
+
+### Module Typing
+
+We can define multiple different structures with the same signature but that does not mean that the bindings from different structures can be used with each other. For example, lets say we have two structures `RationalA` and `RationalB` that are defined the same way as our `Rational` structure. We could try `RationalA.toString (RationalB.Whole 5)` but this would not type-check because `RationalA` and `RationalB` are different structures and so their types are different.
+
+## Equivalence
+
+The idea that one piece of code is equivalent to another piece of code is fundemental to programming and computer science. We think of this idea informally in many situations:
+1. Code Maintenance: Can you simplify, clean up, or reorganize code without changing how the rest of the program behaves?
+2. Backward Compatibility: Can you add new features without changing how any of the existing features work?
+3. Optimization: Can you replace code with a faster or more space-efficient implementation?
+4. Abstraction: Can an external client tell if I make this change to my code?
+
+We have a general idea of what equivalent code means but we need a more formal definition to be able to reason about it. To be more precise, we need that the two functions when given the same argument in the same environment:
+1. Produce the same result (if they produce a result).
+2. Have the same (non)termination behavior i.e. if one runs forever, the other must run forever.
+3. Mutate the same (visible-to-clients) memory in the same way.
+4. Do the same input/output.
+5. Raise the same exceptions.
+
+If all these requirements are met, we could replace one function with the other anywhere in the program and the program would still behave the same. This is the concept of ***equivalence*** and it is a very powerful concept in programming.
+
+:::note
+This also works with structures if every binding in the structure is equivalent to the corresponding binding in the signature. This is useful because it allows us to replace one structure with another as long as they have the same signature.
+:::
+
+### Side-Effect Free Programming
+
+Side effects in programming include mutating references, doing input/output, and more. These can make it difficult to reason about equivalence because the same function can have side-effects that are hard to reason. A solution to this is to avoid side-effects completely and that is exactly what functional languages like ML encourage. In ML, you can have a function body with mutation but this is generally bad-style. If you "stay functional" by not doing mutation, printing, etc. in function bodies as a matter of policy, then callers can assume lots of equivalences they cannot otherwise.
+
+```sml title="Side-Effect" showLineNumbers="true"
+(* Bad Style *)
+fun badStyle1 x =
+    let val r = ref 0 in
+        r := x;
+        !r
+    end
+
+fun badstyle2 x = (print "Hello"; x)
+```
+
+:::note
+When we are using functions passed as arguments, we cannot assume that the function is side-effect free. The function could be a function that mutates a reference or does input/output. This is something we need to consider when reasoning about equivalence in ML.
+:::
+
+### Types of Equivalence
+
+Our current definition of equivalence ignores how much time or space a function takes to evaluate. This means two functions that equivalent even if one takes a nanosecond to complete and the other takes a year. This is still a good definition as we can replace the year function with the nanosecond function and the program would still behave the same. However, this definition is just a tool and we have other definitions of equivalence that are useful in different situations.
+
+1. ***Observational Equivalence***: Our current definition of equivalence is a form of observational equivalence where we only care about the inputs and outputs of the function.
+2. ***Asymptotic Complexity Equivalence***: This definition of equivalence ignores "constant-factor overheads" and figures out how fast one algorithm is from another. By ignoring the constant factors, it treats two algorithms that are do the same thing in "about the same time" as equivalent.
+3. ***Performance Equivalence***: This definition of equivalence is the most strict as it requires that two functions take the same amount of time and space to evaluate. This is useful when we need to know exactly how long a function will take to run.
