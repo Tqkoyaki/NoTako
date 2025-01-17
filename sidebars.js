@@ -180,7 +180,14 @@ const sidebars = {
             'euler-tako/algebra-trig/polynomials/page-7',
             'euler-tako/algebra-trig/polynomials/page-8',
           ]
-        }
+        },
+        {
+          type: 'category',
+          label: 'Exponential and Logarithmic Functions',
+          items: [
+            'euler-tako/algebra-trig/exp-log/page-1',
+          ]
+        },
       ]
     }
   ],
