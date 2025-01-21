@@ -186,6 +186,7 @@ const sidebars = {
           label: 'Exponential and Logarithmic Functions',
           items: [
             'euler-tako/algebra-trig/exp-log/page-1',
+            'euler-tako/algebra-trig/exp-log/page-2',
           ]
         },
       ]
