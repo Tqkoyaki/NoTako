@@ -188,6 +188,7 @@ const sidebars = {
             'euler-tako/algebra-trig/exp-log/page-1',
             'euler-tako/algebra-trig/exp-log/page-2',
             'euler-tako/algebra-trig/exp-log/page-3',
+            'euler-tako/algebra-trig/exp-log/page-4',
           ]
         },
       ]
