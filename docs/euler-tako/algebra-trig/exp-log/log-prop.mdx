@@ -1,0 +1,112 @@
+---
+id: page-5
+title: Logarithmic Properties
+sidebar_position: 5
+---
+
+There are various properties of logarithmic functions that are useful in manipulating them. They enable us to simplify expressions and solve equations involving logarithms.
+
+## Product Rule
+
+The **product rule for logarithms** states that the logarithm of a product is the sum of the logarithms of the factors. This means that $$\log_b(MN) = \log_b(M) + \log_b(N)$$ for $$b > 0$$. 
+
+Given the logarithm of a product, we can write an equivalent sum of logarithms through the following steps...
+1. Factor the argument of the logarithm completely, expressing each whole number factor as a product of primes.
+2. Write the equivalent expression by summing the logarithms of each factor.
+
+> $$\underline{Example}$$
+>
+> Expand $$\log_b(8k)$$.
+>
+> The argument of the logarithm is $$8k$$ which can be factored into $$8$$ and $$k$$. There is a whole number $$8$$ which we can factorize till we only have prime numbers. This gives us $$8 = 2 * 2 * 2$$.
+>
+> All the factors include $$2$$, $$2$$, $$2$$, and $$k$$. The product rule states that logarithm of the product is the sum of the logarithms of the factors which means that $$\log_b(8k) = \log_b(2) + \log_b(2) + \log_b(2) + \log_b(k) = 3\log_b(2) + \log_b(k)$$.
+
+## Quotient Rule
+
+The **quotient rule for logarithms** states that the logarithm of a quotient is the difference of individual logarithms. This means that $$\log_b(\frac{M}{N}) = \log_b(M) - \log_b(N)$$.
+
+Given the logarithm of a quotient, we can write an equivalent difference of logarithms through the following steps...
+1. Express the argument in lowest terms by factoring the numerator and denominator and canceling common terms.
+2. Write the equivalent expression by subtracting the logarithm of the denominator from the logarithm of the numerator.
+3. Check to see that each term is fully expanded. If not, apply the product rule for logarithms to expand completely.
+
+> $$\underline{Example}$$
+>
+> Expand $$\log_3(\frac{7x^2 + 21x}{7x(x - 1)(x - 2)})$$.
+>
+> We can factor the numerator further to get $$7x^2 + 21x = 7x(x + 3)$$. However, the denominator is already factored. This gives us the fraction $$\frac{7x(x + 3)}{7x(x - 1)(x - 2)}$$. In order to simplify the fraction, we can cancel out the common terms in the numerator and denominator to get $$\frac{x + 3}{(x - 1)(x - 2)}$$. This is the argument in lowest terms.
+>
+> The quotient rule states that the logarithm of a quotient is the difference of the logarithms of the numerator and denominator. This means that $$\log_3(\frac{x + 3}{(x - 1)(x - 2)}) = \log_3(x + 3) - \log_3((x - 1)(x - 2))$$.
+>
+> We can expand the logarithm even further by applying the product rule for $$\log_3((x - 1)(x - 2))$$ to get $$\log_3(x + 3) - (\log_3(x - 1) + \log_3(x - 2)) = \log_3(x + 3) - \log_3(x - 1) - \log_3(x - 2)$$.
+>
+> When fully expanded, the logarithm of the given expression is $$\log_3(x + 3) - \log_3(x - 1) - \log_3(x - 2)$$.
+
+## Power Rule
+
+The **power rule for logarithms** states that the logarithm of a power is the product of the exponent and the logarithm of the base. This means that $$\log_b(M^n) = n\log_b(M)$$.
+
+Given the logarithm of a power, we can write an equivalent product of a factor and a logarithm through the following steps...
+1. Express the argument as a power, if needed.
+2. Write the equivalent expression by multiplying the exponent times the logarithm of the base.
+
+> $$\underline{Example}$$
+>
+> Expand $$\log_3(25)$$ using the power rule for logs.
+>
+> We can rewrite $$25$$ as $$5^2$$. The power rule states that the logarithm of a power is the product of the exponent and the logarithm of the base. This means that $$\log_3(25) = \log_3(5^2) = 2\log_3(5)$$.
+
+## Law of Logs
+
+Taken together, the product, quotient, and power rules are often called the **law of logs** and there are many cases where we use them together to simplify expressions.
+
+> $$\underline{Example}$$
+>
+> Expand $$\ln(\frac{x^4y}{7})$$
+>
+> Applying the quotient rule, we get $$\ln(x^4y) - \ln(7)$$.
+>
+> We can further expand $$\ln(x^4y)$$ using the product rule to get $$\ln(x^4) + \ln(y)$$.
+>
+> Finally, we can expand $$\ln(x^4)$$ using the power rule to get $$4\ln(x)$$.
+>
+> Putting it all together, we get $$4\ln(x) + \ln(y) - \ln(7)$$.
+
+We can also work backwards to combine logarithms using the properties of logarithms. Given a sum, difference, or product of logarithms with the same base, we can write an equivalent expression as a single logarithm using the following steps...
+1. Apply the power property first. Identify terms that are products of factors and a logarithm, and rewrite each as the logarithm of a power.
+2. Next apply the product property. Rewrite sums of logarithms as the logarithm of a product.
+3. Finally, apply the quotient property. Rewrite differences of logarithms as the logarithm of a quotient. Note that addition and subtraction of logarithms are condensed from left to right.
+
+> $$\underline{Example}$$
+>
+> Condense $$\log(5) + 0.5\log(x) - \log(7x - 1) + 3\log(x - 1)$$ as a single logarithm.
+>
+> We can begin by applying the power property to rewrite $$0.5\log(x)$$ as $$\log(x^{0.5}) = \log(\sqrt{x})$$. We can also rewrite $$3\log(x - 1)$$ as $$\log((x - 1)^3)$$ which together gives us $$\log(5) + \log(\sqrt{x}) - \log(7x - 1) + \log((x - 1)^3)$$.
+>
+> Now that we only have sums and differences of logarithms, we can start simplifying the expression left to right. We can rewrite $$\log(5) + \log(\sqrt{x})$$ as $$\log(5\sqrt{x})$$ which gives us $$\log(5\sqrt{x}) - \log(7x - 1) + \log((x - 1)^3)$$.
+>
+> Next, we can rewrite $$\log(5\sqrt{x}) - \log(7x - 1)$$ as $$\log(\frac{5\sqrt{x}}{7x - 1})$$ which gives us $$\log(\frac{5\sqrt{x}}{7x - 1}) + \log((x - 1)^3)$$.
+>
+> Finally, we can rewrite $$\log(\frac{5\sqrt{x}}{7x - 1}) + \log((x - 1)^3)$$ as $$\log(\frac{5(x - 1)^3\sqrt{x}}{7x - 1})$$.
+>
+> Our final condensed expression is $$\log(\frac{5(x - 1)^3\sqrt{x}}{7x - 1})$$.
+
+## Change of Base Formula
+
+Most calculators and computer software can only compute logarithms with base $$10$$ or base $$e$$. However, we can use the **change-of-base formula** to rewrite any logarithm as the quotient of logarithms of any other base. Given any positive real numbers $$M$$, $$b$$, and $$n$$, where $$n \neq 1$$ and $$b \neq 1$$, $$\log_b(M) = \frac{\log_n(M)}{\log_n(b)}$$.
+
+We can derive the change-of-base formula by using the definition and properties of logarithms. Let $$y = \log_b(M)$$, we can rewrite this as $$b^y = M$$. Using this we get...
+$$\begin{array}{llllllllll}
+    b^y &=& M \\
+    \log_n(b^y) &=& \log_n(M) \\
+    y\log_n(b) &=& \log_n(M) \\
+    y &=& \frac{\log_n(M)}{\log_n(b)} \\
+    \log_b(M) &=& \frac{\log_n(M)}{\log_n(b)} \\
+    \end{array}$$
+
+> $$\underline{Example}$$
+>
+> Change $$\log_{0.5}(8)$$ to a quotient of natural logarithms.
+>
+> Using the change-of-base formula, we can rewrite $$\log_{0.5}(8) = \frac{\ln(8)}{\ln(0.5)}$$. We can further simplify this to get $$\frac{\ln(8)}{\ln(0.5)} = \frac{\ln(2^3)}{\ln(2^{-1})} = \frac{3\ln(2)}{-1\ln(2)} = -3$$.
