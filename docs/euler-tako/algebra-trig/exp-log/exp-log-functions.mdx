@@ -1,0 +1,213 @@
+---
+id: page-6
+title: Exponential and Logarithmic Functions
+sidebar_position: 6
+---
+
+Exponential and Logarithmic functions are able to model a wide variety of real-world phenomena and help us solve for unknown variables in a variety of situations. We can use the definitions and laws of exponents and logarithms to solve and manipulate all sorts of equations.
+
+## Exponential Functions
+
+Exponential functions are any functions which have a variable in the exponent. Oftentimes, complexity arises when there are multiple terms with variables as exponents. We can use the laws of exponents to simplify these expressions and solve for unknown variables.
+
+### Common Bases
+
+For any algebraic expressions $S$ and $T$, and any positive real number $$b \neq 1$$, $$b^S = b^T$$ if and only if $$S = T$$. In other words, when the bases are the same between two exponential expressions, the exponents must be equal in order for the expressions to be equal. This property is called the **One-to-One Property of Exponents**.
+
+If we have an exponential equation that can be written in the form $$b^S = b^T$$, where $S$ and $T$ are algebraic expressions, we can solve for the unknowns by first writing the equation in this form. After this, we can use the one to one property to eliminate the bases and rewrite the equation as $$S = T$$. Finally, we can solve for the unknowns by solving the resulting equation.
+
+> $$\underline{Example}$$
+>
+> Solve $$5^{2x} = 5^{x + 3}$$.
+>
+> The equation already has the same base and is in the form $$b^S = b^T$$. We can use the one-to-one property of exponents to eliminate the bases and solve for $x$...
+>
+> $$\begin{array}{llllllllll}
+    5^{2x} &=& 5^{x + 3} \\
+    2x &=& x + 3 \\
+    x &=& 3 \\
+    \end{array}$$
+>
+> The solution to the equation is $x = 3$.
+
+Even when the bases are not the same, we can still solve for the unknowns by using the properties of exponents to rewrite the equation in a form where the bases are the same. Once each side of the equation has the same base, we can use our previous method to solve for the unknowns.
+
+> $$\underline{Example}$$
+>
+> Solve for $$5^{5x} = \sqrt{5}$$
+>
+> We can rewrite $$\sqrt{5}$$ as $$5^{\frac{1}{2}}$$ to give us a base of $$5$$ on both sides of the equations. We can use the one-to-one property of exponents to eliminate the bases and solve for $x...
+>
+> $$\begin{array}{llllllllll}
+    5^{5x} &=& \sqrt{5} \\
+    5^{5x} &=& 5^{\frac{1}{2}} \\
+    5x &=& \frac{1}{2} \\
+    x &=& \frac{1}{10} \\
+    \end{array}$$
+>
+> The solution to the equation is $x = \frac{1}{10}$.
+
+### Different Bases
+
+Sometimes the terms cannot be rewritten with the same base. In these caeses, we can solve by taking the logarithm on each side of the equation since $$\log(a) = \log(b)$$ is equivalent to $$a = b$$. Applying the logarithm to both sides of the equation is useful as it allows us to use the power rule to seperate the exponents from the bases making it easier to solve for the unknowns.
+
+Given an exponential equation in which a common base cannot be found, we can solve for the unknowns by first applying the logarithm to both sides of the equation. If one of the terms has base $10$, we use the common logarithm. If none of the terms in the equation has base $10$, we use the natural logarithm. Next, we use the rules of logarithms to simplify the equation and solve for the unknowns.
+
+> $$\underline{Example}$$
+>
+> Solve for $$2^x = 3^{x + 1}$$.
+>
+> Since the bases are different and neither bases are $10$, we can use the natural logarithm to solve for $x$...
+>
+> $$\begin{array}{llllllllll}
+    2^x &=& 3^{x + 1} \\
+    \ln(2^x) &=& \ln(3^{x + 1}) \\
+    x\ln(2) &=& (x + 1)\ln(3) \\
+    x\ln(2) &=& x\ln(3) + \ln(3) \\
+    x\ln(2) - x\ln(3) &=& \ln(3) \\
+    x(\ln(2) - \ln(3)) &=& \ln(3) \\
+    x &=& \frac{\ln(3)}{\ln(2) - \ln(3)} \\
+    x &=& \frac{\ln(3)}{\ln(\frac{2}{3})} \\
+    \end{array}$$
+>
+> The solution to the equation is $x = \frac{\ln(3)}{\ln(\frac{2}{3})}$.
+
+### Natural Bases
+
+One common type of exponential equations we use involve the natural base, $e$, and come in the form of $$y = Ae^{kt}$$. These equations constantly appear in nature, in mathematics, in science, in engineering, and in finance. Given an equation of the form $$y = Ae^kt$$, we can solve for $t$ through the following steps...
+1. Divide both sides of the equation by $A$.
+2. Apply the natural logarithm of both sides to both sides of the equation.
+3. Divide both sides of the equation by $k$.
+
+> $$\underline{Example}$$
+>
+> Solve for $t$ in the equation $$3e^{0.5t} = 11$$.
+>
+> We can solve for $t$ by dividing both sides by $3$ and then applying the natural logarithm to both sides...
+>
+> $$\begin{array}{llllllllll}
+    3e^{0.5t} &=& 11 \\
+    e^{0.5t} &=& \frac{11}{3} \\
+    \ln(e^{0.5t}) &=& \ln(\frac{11}{3}) \\
+    0.5t &=& \ln(\frac{11}{3}) \\
+    t &=& 2\ln(\frac{11}{3}) \\
+    \end{array}$$
+>
+> The solution to the equation is $t = 2\ln(\frac{11}{3})$.
+
+### Extraneous Solutions
+
+There are countless methods in mathematics that are used to solve equations but they introduce **extraneous solutions** which are solutions that are correct algebraically but do not satisfy the conditions of the original equation. One such situation arises when the logarithm is taken on both sides of the equation. In such cases, we must note that the argument of the logarithm must be positive and so if the number we are evaluating in a logarithm function is negative, there is no output.
+
+> $$\underline{Example}$$
+>
+> Solve $$e^{2x} = e^x + 2$$.
+>
+> Let's solve for $x$...
+>
+> $$\begin{array}{llllllllll}
+    e^{2x} &=& e^x + 2 \\
+    e^{2x} - e^x - 2 &=& 0 \\
+    e^{2x} - 2e^x + e^x - 2 &=& 0 \\
+    e^x(e^x - 2) + 1(e^x - 2) &=& 0 \\
+    (e^x - 2)(e^x + 1) &=& 0 \\
+    \end{array}$$
+>
+> We can solve for $$(e^x - 2) = 0$$ first...
+>
+> $$\begin{array}{llllllllll}
+    e^x - 2 &=& 0 \\
+    e^x &=& 2 \\
+    \ln(e^x) &=& \ln(2) \\
+    x &=& \ln(2) \\
+    \end{array}$$
+>
+> Next, we can solve for $$(e^x + 1) = 0$$...
+>
+> $$\begin{array}{llllllllll}
+    e^x + 1 &=& 0 \\
+    e^x &=& -1 \\
+    \end{array}$$
+>
+> We have to ignore $$(e^x + 1) = 0$$ because the argument of the logarithm is negative. The solution would have been $$\ln(-1)$$ which is not a real solution making this an extraneous solution.
+>
+> The solution to the equation is $x = \ln(2)$. 
+
+## Logarithmic Functions
+
+The inverse of an exponential function is a logarithmic function and we need to be able to solve and manipulate logarithmic equations as much as we do exponential equations. We can use the definition and properties of logarithms to simplify and solve logarithmic equations.
+
+### Definition of a Logarithm
+
+We typically see logarithmic equations in the form $$\log_b(x)  = y$$ which is equivalent to the exponential equation $$b^y = x$$. We can make many of these logarithmic equations easier to solve by rewriting the equation in exponential form. For any algebraic expression $S$ and real numbers $b$ and $c$, where $b > 0$, $b \neq 1$, $\log_b(S) = c$ if and only if $b^c = S$.
+
+> $$\underline{Example}$$
+>
+> Solve for $$2\ln(x + 1) = 10$$.
+>
+> This equation is not in the form $$\log_b(x) = y$$ but we can manipulate it to be that form. We can divide both sides by $2$ to get $$\ln(x + 1) = 5$$ and then rewrite the equation in exponential form to get $$e^5 = x + 1$$...
+>
+> $$\begin{array}{llllllllll}
+    \ln(x + 1) &=& 5 \\
+    e^5 &=& x + 1 \\
+    x &=& e^5 - 1 \\
+    \end{array}$$
+>
+> The solution to the equation is $x = e^5 - 1$.
+
+### One to One Functions
+
+Just like with exponential functions, logarithmic functions are one-to-one functions. The **one-to-one property of logarithms** states that for any real numbers $$x > 0$$, $$S > 0$$, $$T > 0$$, and any positive real number $b$, where $$b \neq 1$$, $$\log_b(S) = log_b(T)$$ if and only if $$S = T$$. This means that when the bases are the same between two logarithmic expressions, the arguments must be equal in order for the expressions to be equal.
+
+Given a logarithmic equation in the form $$\log_b(S) = \log_b(T)$$, we can solve for the unknowns by first writing the equation in this form. After this, we can use the one to one property to eliminate the bases and rewrite the equation as $$S = T$$. Finally, we can solve for the unknowns by solving the resulting equation.
+
+> $$\underline{Example}$$
+>
+> Solve for $$\ln(x^2) = ln(1)$$.
+>
+> The equation is already in the form $$\log_b(S) = \log_b(T)$$ so we can use the one-to-one property to eliminate the bases and solve for $x$...
+>
+> $$\begin{array}{llllllllll}
+    \ln(x^2) &=& \ln(1) \\
+    x^2 &=& 1 \\
+    x &=& \pm 1 \\
+    \end{array}$$
+>
+> The solution to the equation is $x = \pm 1$.
+
+## Half Life
+
+As previously mentioned, exponential functions and logarithmic functions can be used to model real-world phenomena. One such application is in the field of science where we can model the decay of a radioactive substance. The **half-life** of a substance is the time it takes for half of the unstable material in a sample of a radioactive substance to decay. We can use the following equivalent equations to solve for the half-life of a substance...
+
+$$\begin{array}{llllllllll}
+    A(t) &=& A_0e^{\frac{\ln(0.5)}{T}t} \\
+    A(t) &=& A_0e^{\ln(0.5)\frac{t}{T}} \\
+    A(t) &=& A_0(e^{\ln(0.5)})^{\frac{t}{T}} \\
+    A(t) &=& A_0(\frac{1}{2})^{\frac{t}{T}} \\
+    \end{array}$$
+
+where 
+- $A(t)$ is the amount of the substance present at time $t$,
+- $A_0$ is the initial amount of the substance,
+- $T$ is the half-life of the substance,
+- $t$ is the time elapsed.
+
+> $$\underline{Example}$$
+>
+> Given that the half-life of uranium-235 is $703.8$ million years, how long will it take before $20\%$ of a 1000-gram sample of uranium-235 has decayed?
+>
+> We can use the information we know to obtain values for some of our variables. The initial amount of uranium-235 is 1000-grams so $A_0 = 1000$. The half-life of uranium-235 is $703.8$ million years so $T = 703.8$. We also are looking for the time it takes for $20\%$ of the sample to decay so $A(t) = (1 - 0.2)A_0 = 800$. Finally, we are solving for $t$.
+>
+> Putting all of this information into our equation, $$A(t) = A_0(\frac{1}{2})^{\frac{t}{T}}$$, we get $$800 = 1000(\frac{1}{2})^{\frac{t}{703.8}}$$ which we can use to solve for $t$...
+>
+> $$\begin{array}{llllllllll}
+    800 &=& 1000(0.5)^{\frac{t}{703.8}} \\
+    0.8 &=& (0.5)^{\frac{t}{703.8}} \\
+    \ln(0.8) &=& \ln((0.5)^{\frac{t}{703.8}}) \\
+    \ln(0.8) &=& \frac{t}{703.8}\ln(0.5) \\
+    703.8\ln(0.8) &=& t\ln(0.5) \\
+    t &=& \frac{703.8\ln(0.8)}{\ln(0.5)} \\
+    t &\approx& 226.57 \\
+    \end{array}$$
+>
+> Note that the unit for $T$ is in million years so the unit for $t$ is also in million years. The time it takes for $20\%$ of the sample to decay is approximately $226.57$ million years.

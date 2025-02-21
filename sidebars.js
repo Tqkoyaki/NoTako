@@ -190,6 +190,7 @@ const sidebars = {
             'euler-tako/algebra-trig/exp-log/page-3',
             'euler-tako/algebra-trig/exp-log/page-4',
             'euler-tako/algebra-trig/exp-log/page-5',
+            'euler-tako/algebra-trig/exp-log/page-6',
           ]
         },
       ]
