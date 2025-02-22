@@ -1,0 +1,39 @@
+---
+id: page-8
+title: Fitting Exponential Data
+sidebar_position: 8
+---
+
+When modeling data, we often use a technique called **regression analysis** to find a curve that models data collected from read-world observations. With regression analysis, we don't expect all the points to lie perfectly on the curve. The idea is to find a model that best fits the data. Then we use the model to make predictions about the future events. We typically use a graphical utility or a computer program to find the best-fitting curve.
+
+As part of the results, we also get a **correlation coefficient** labeled by the variable $r$, or $r^2$. These are values which are indication of the "goodness of fit" of the regression equation to the data. We commonly use the value of $r^2$ over $r$, but the closer either value is to $1$, the better the regression equation approximates the data.
+
+## Exponential Regression
+
+**Exponential regression** is used to model situations in which growth begins slowly and then accelerates rapidly without bound, or where decay begins rapidly and then slows down as it gets closer to zero. The equation is in the form of $$y = ab^x$$ and $b$ must be non-negative where $b > 1$ represents growth and $0 < b < 1$ represents decay.
+
+Given a set of data and a graphing utility, we can use the following steps to perform exponential regression...
+1. Use the $\textbf{STAT}$ then $\textbf{EDIT}$ menu to enter given data. List the input values in the first column and the output values in the second column.
+2. Graph and observe a scatter plot of the data using the $\textbf{STATPLOT}$ feature. Verify that the data appears to be exponential.
+3. Find the equation that models the data by selecting $\textbf{ExpReg}$ from the $\textbf{STAT}$ then $\textbf{CALC}$ menu. Use the values returned for $a$ and $b$ to record the model, $$y = ab^x$$.
+4. Graph the model on the same axes as the scatter plot to verify that the model fits the data.
+
+## Logarithmic Regression
+
+**Logarithmic regression** is used to model situations where growth or decay accelerates rapidly at first and then slows over time. The equation is in the form of $$y = a + b\ln(x)$$ where all input values, $x$, must be positive. When $b > 0$, the model is increasing and when $b < 0$, the model is decreasing.
+
+Given a set of data and a graphing utility, we can use the following steps to perform logarithmic regression...
+1. Use the $\textbf{STAT}$ then $\textbf{EDIT}$ menu to enter given data. List the input values in the first column and the output values in the second column.
+2. Graph and observe a scatter plot of the data using the $\textbf{STATPLOT}$ feature. Verify that the data appears to be logarithmic.
+3. Find the equation that models the data by selecting $\textbf{LnReg}$ from the $\textbf{STAT}$ then $\textbf{CALC}$ menu. Use the values returned for $a$ and $b$ to record the model, $$y = a + b\ln(x)$$.
+4. Graph the model on the same axes as the scatter plot to verify that the model fits the data.
+
+## Logistic Regression
+
+**Logistic regression** is used to model situations where growth accelerates rapidly at first and then steadily slows to an upper limit. The equation is in the form of $$y = \dfrac{c}{1 + ae^{-bx}}$$ where the initial value of the model is $$\frac{c}{1 + a}$$ and the output values for the model grow closer and closer to $$y = c$$ as $x$ increases.
+
+Given a set of data and a graphing utility, we can use the following steps to perform logistic regression...
+1. Use the $\textbf{STAT}$ then $\textbf{EDIT}$ menu to enter given data. List the input values in the first column and the output values in the second column.
+2. Graph and observe a scatter plot of the data using the $\textbf{STATPLOT}$ feature. Verify that the data appears to be logistic.
+3. Find the equation that models the data by selecting $\textbf{Logistic}$ from the $\textbf{STAT}$ then $\textbf{CALC}$ menu. Use the values returned for $a$, $b$, and $c$ to record the model, $$y = \dfrac{c}{1 + ae^{-bx}}$$.
+4. Graph the model on the same axes as the scatter plot to verify that the model fits the data.
