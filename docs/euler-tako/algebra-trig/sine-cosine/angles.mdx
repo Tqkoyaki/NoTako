@@ -1,0 +1,220 @@
+---
+id: page-1
+title: Angles
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-70.jpg';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-71.png';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-72.jpg';
+import alg4 from '@site/static/img/euler/algebra-trig/alg-73.jpeg';
+import alg5 from '@site/static/img/euler/algebra-trig/alg-74.png';
+import alg6 from '@site/static/img/euler/algebra-trig/alg-75.png';
+import alg7 from '@site/static/img/euler/algebra-trig/alg-76.png';
+
+Angles are a fundemental concept in mathematics that appear in engineering, science, and everyday life. It is important to define them and understand their properties. By doing so, we will have a powerful tool to solve problems and understand the world around us.
+
+## Defining Angles
+
+Before we can define an angle, we must first define a ray. A **ray** is a directed line segment. It consists of one point on the line referred to as the **endpoint** and all points extending in one direction from that point. Finally, We can reference a ray by its endpoint and any other point on the ray. For example, we can refer to the ray with endpoint $A$ and passing through point $B$ as $\overrightarrow{AB}$.
+
+<Fig src={alg1} caption='Ray' num={1}/>
+
+:::note
+The rays $\overrightarrow{AB}$ and $\overrightarrow{BA}$ are different because they have two different endpoints and thus point in different directions. The first letter in the notation of a ray is always the endpoint.
+:::
+
+Now that we have defined a ray, we can define an angle. An **angle** is the union of two rays that share a common endpoint which is called the **vertex** of the angle. Angles are named using a point on each ray and the vertex. For example, the angle formed by rays $\overrightarrow{AB}$ and $\overrightarrow{AC}$ is denoted as $\angle BAC$ where the vertex is $A$.
+
+<Fig src={alg2} caption='Angle' num={2}/>
+
+When creating an angle, we typically start with two rays lying on top of each other. We leave one ray fixed and this is called the **initial side** of the angle. We then rotate the other ray which is called the **terminal side** in order to create the angle.
+
+The amount we rotate the terminal side from the initial side is called the **measure of an angle**. There are various units to measure angles and one of the most common units is degrees. One **degree** is defined as $\frac{1}{360}$ of a full circular rotation. This means a complete circular rotation contains $360$ degrees. Finally, to denote an angle in degrees, we use the symbol $\degree$. For example, an angle of $45\degree$ means we have rotated the terminal side $45$ degrees from the initial side.
+
+:::note
+Greek letters are often used to denote angles. The most common letters used are $\theta$ (theta), $\phi$ (phi), $\alpha$ (alpha), $\beta$ (beta), and $\gamma$ (gamma).
+:::
+
+### Coordinate Plane
+
+To formalize drawing angles, we can use the $x$-$y$ coordinate plane. We can draw angles anywhere on the plane but to be able to properly compare between angles, we need to define a standard position. An angle is in **standard position** if its vertex is located at the origin, and its initial side extends along the positive $x$-axis.
+
+If the angle is measured in the counterclockwise direction from the initial side to the terminal side, then the angle is positive. On the other hand, if the angle is measured in the clockwise direction from the initial side to the terminal side, then the angle is negative.
+
+Given an angle measure in degrees, we can draw the angle in standard position by...
+1. Expressing the angle measure as a fraction of $360\degree$.
+2. Reducing the fraction to simplest form.
+3. Drawing an angle that contains the same fraction of the circle, beginning on the positive $x$-axis and rotating counterclockwise if the angle is positive or clockwise if the angle is negative.
+
+> $$\underline{Example}$$
+>
+> Show an angle of $240 \degree$ in standard position.
+>
+> Let's begin by expressing the angle as a fraction of $360\degree$. This gives us $\frac{240}{360}$ which we can simplify to $\frac{2}{3}$. Now, we draw an angle that contains $\frac{2}{3}$ of the circle starting from the positive $x$-axis. Due to the fact that the angle is positive, we rotate the terminal side counterclockwise. This gives us the sketch...
+>
+> <Fig src={alg3} caption='Angle in standard position' num={3}/>
+
+:::note
+Due to the fact that we define angles in standard position, there are a special type of angles that exist called the **quadrantal angles**. These angles are formed when the terminal side of the angle lies on one of the axes. The quadrantal angles are $0\degree$, $90\degree$, $180\degree$, $270\degree$, and $360\degree$.
+:::
+
+## Radians
+
+Dividing a circle into $360$ is arbitrary choice that is used for degrees. It is convenient as it is divisible by many numbers but it is not the only way to measure angles.
+
+We can also measure angles less arbitarily by using **radians**. Before we can define radians, we must first define an **arc** which may be a portion of a full circle, a full circle, or more than a full circle, represented by more than one full rotation. An **arc length** is the length of an arc and the arc length of a full circle is called the **circumference**.
+
+The circumference of a circle is $$C = 2\pi r$$ where $r$ is the radius of the circle. If we divide both sides by $r$, we get the ratio of the circumference to the radius which is $2\pi$. This means that regardless of the size of the circle, the ratio of the circumference to the radius is always $2\pi$. The unit **radians** uses the $2\pi$ as a reference point to measure angles.
+
+### Arc Length
+
+As stated before, **arc length** is the length of an arc. Just as the full circumference of a circle always has a constant ratio to the radius, the arc length produced by any given angle also has a constant relation to the radius, regardless of the length of the radius. This ratio is called the **radian measure** and it allows us to define arc length $s$ as $s = r\theta$ or $\theta = \frac{s}{r}$ where $\theta$ is the angle in radians and $r$ is the radius.
+
+If we let the arc length $s$ be equal to $r$, then the angle $\theta$ is equal to $1$ radian. This means that an angle of $1$ radian is the angle that produces an arc length equal to the radius of the circle. With this property, we can define **radians** as the angle that produces an arc length equal to the radius of the circle.
+
+:::note
+A full circle is $2\pi$ radians or $360\degree$. This means a half circle is $\pi$ radians or $180\degree$ and a quarter circle is $\frac{\pi}{2}$ radians or $90\degree$. Finally, a single radian is equal to $\frac{180}{\pi}\degree$ which is approximately $57.3\degree$.
+:::
+
+## Special Angles
+
+Due to the fact that radian measure is the ratio of two lengths, it is a unitless measure as the units cancel out. For example, if the unit is in meters, then the arc length is in meters and the radius is in meters which means when we divide the two, the meters cancel out. This makes radians a powerful tool to measure angles as it is independent of the units used.
+
+There are quite a few angles that occur frequently that is often good to memorize. There angles are...
+
+| **Radians**   | $0$ | $\frac{\pi}{6}$ | $\frac{\pi}{4}$ | $\frac{\pi}{3}$ | $\frac{\pi}{2}$ |  $\frac{2\pi}{3}$ | $\frac{3\pi}{4}$ | $\frac{5\pi}{6}$ | $\pi$ |
+| ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
+| **Degrees**   | $0\degree$ | $30\degree$ | $45\degree$ | $60\degree$ | $90\degree$ | $120\degree$ | $135\degree$ | $150\degree$ | $180\degree$ |
+
+| **Radians**   | $\frac{7\pi}{6}$ | $\frac{5\pi}{4}$ | $\frac{4\pi}{3}$ | $\frac{3\pi}{2}$ | $\frac{5\pi}{3}$ | $\frac{7\pi}{4}$ | $\frac{11\pi}{6}$ | $2\pi$ |
+| ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
+| **Degrees**   | $210\degree$ | $225\degree$ | $240\degree$ | $270\degree$ | $300\degree$ | $315\degree$ | $330\degree$ | $360\degree$ |
+
+<Fig src={alg4} caption='Special Angles' num={4}/>
+
+## Converting Units
+
+Due to the fact degrees and radians both measure angles, we need to be able to convert between them. We are able to do this using the proportions $\dfrac{\theta}{360} = \dfrac{\theta_R}{2\pi}$ or $\dfrac{\theta}{180} = \dfrac{\theta_R}{\pi}$ where $\theta$ is the angle in degrees and $\theta_R$ is the angle in radians.
+
+> $$\underline{Example}$$
+>
+> Convert $-\frac{3\pi}{4}$ radians to degrees.
+>
+> We are given the angle in radians so we can substitute $\theta_R = -\frac{3\pi}{4}$ into the proportion and solve for $\theta$...
+>
+> $$\begin{array}{llllll}
+        \dfrac{\theta}{180} = \dfrac{\theta_R}{\pi} \\[1em]
+        \dfrac{\theta}{180} = \dfrac{-3\pi / 4}{\pi} \\[1em]
+        \dfrac{\theta}{180} = -\dfrac{3\pi}{4\pi} \\[1em]
+        \dfrac{\theta}{180} = -\dfrac{3}{4} \\[1em]
+        \theta = -\dfrac{3}{4} \times 180 \\[1em]
+        \theta = -135\degree \\
+    \end{array}$$
+>
+> The angle $-\frac{3\pi}{4}$ radians is equal to $-135\degree$.
+
+## Coterminal Angles
+
+Working with angles positive or negative outside the range of $0\degree$ to $360\degree$ or $0$ to $2\pi$ can be cumbersome. It would be easier if we were to replace out-of-range angles with a corresponding angle within the range of a single revolution.
+
+We are essentially finding the angle that is coterminal with the given angle. **Coterminal angles** are two angles in standard position that have the same terminal side. For example, the angles $30\degree$ and $390\degree$ are coterminal because when we draw them in standard position, they have the same terminal side.
+
+<Fig src={alg5} caption='Coterminal Angles' num={5}/>
+
+:::note
+Any angle has infinetely many coterminal angles because each time we add or subtract a full revolution of $360\degree$ or $2\pi$ radians, we get a new coterminal angle.
+:::
+
+Given an angle $\theta$, we can find a coterminal angle between $0\degree$ and $360\degree$ using the following steps...
+1. Verify if $\theta$ is not between $0\degree$ and $360\degree$. If it is, then we are done.
+2. Subtract $360\degree$ from $\theta$ if $\theta$ is greater than $360\degree$. 
+3. Add $360\degree$ to $\theta$ if $\theta$ is less than $0\degree$.
+4. Repeat steps 2 and 3 until $\theta$ is between $0\degree$ and $360\degree$.
+5. The final angle is the coterminal angle.
+
+We can use the same steps to find a coterminal angle between $0$ and $2\pi$ radians. We just need to replace $0\degree$ with $0$ and $360\degree$ with $2\pi$.
+
+> $$\underline{Example}$$
+>
+> Find an angle of measure $\theta$ that is coterminal with an angle of measure $-\frac{17\pi}{6}$.
+>
+> The angle $-\frac{17\pi}{6}$ is not between $0$ and $2\pi$ so we need to find a coterminal angle. We also can note that $-\frac{17\pi}{6}$ is less than $0$ so we need to add $2\pi$ to the angle until it is between $0$ and $2\pi$...
+>
+> $$\begin{array}{lllll}
+        -\dfrac{17\pi}{6} = -\dfrac{17\pi}{6} + 2\pi \\[1em]
+        \phantom{-\dfrac{17\pi}{6}} = -\dfrac{5\pi}{6} + 2\pi \\[1em]
+        \phantom{-\dfrac{17\pi}{6}} = \dfrac{7\pi}{6} \\[1em]
+    \end{array}$$
+>
+> The angle $-\frac{17\pi}{6}$ is coterminal with $\frac{7\pi}{6}$.
+
+### Reference Angles
+
+An angle's **reference angle** is the measure of the smallest possible acute angle $t'$ that can be formed by the terminal side of the angle $t$ and the horizontal axis. This means that the reference angle always lies in the first quadrant and can be used as models for angles in other quadrants.
+
+We can use the following formulas to find the reference angle of an angle $t$...
+
+| Quadrant | Degree Range | Radian Range | Reference Angle |
+| -------- | ------------ | ------------ | --------------- |
+| I        | $$0\degree < t < 90\degree$$ | $$0 < t < \frac{\pi}{2}$$ | $$t' = t$$ |
+| II       | $$90\degree < t < 180\degree$$ | $$\frac{\pi}{2} < t < \pi$$ | $$t' = 180\degree - t = \pi - t$$ |
+| III      | $$180\degree < t < 270\degree$$ | $$\pi < t < \frac{3\pi}{2}$$ | $$t' = t - 180\degree = t - \pi$$ |
+| IV       | $$270\degree < t < 360\degree$$ | $$\frac{3\pi}{2} < t < 2\pi$$ | $$t' = 360\degree - t = 2\pi - t$$ |
+
+<Fig src={alg6} caption='Reference Angles' num={6}/>
+
+## Area of a Sector
+
+In addition to arc length, we can also use angles to find the area of a sector of a circle. A **sector** is a region of a circle bounded by two radii and the intercepted arc. Recall that to find the area of a circle, we use the formula $$A = \pi r^2$$ where $r$ is the radius of the circle. A sector is a part of a circle so if the two radii form an angle $\theta$, then $\frac{\theta}{2\pi}$ is the ratio of the angle measure to the measure of a full rotation. The **area of a sector** is the fraction $$\frac{\theta}{2\pi}$$ multiplied by the area of the circle where $r$ is the radius of the circle and $\theta$ is the angle in radians. The formula of the area of a sector is $$\text{Area of sector} = (\dfrac{\theta}{2\pi}) \: \pi r^2 = \dfrac{\theta \pi r^2}{2\pi} = \dfrac{1}{2} \theta r^2$$.
+
+<Fig src={alg7} caption='Sector of a Circle' num={7}/>
+
+> $$\underline{Example}$$
+>
+> Find the area of a sector of a circle with a radius of $5$ meters and an angle of $60\degree$.
+>
+> To be able to use the formula, we need to convert the angle to radians...
+>
+> $$\begin{array}{llllll}
+        \theta = \dfrac{60\degree}{180\degree} \times \pi \\[1em]
+        \phantom{\theta} = \dfrac{1}{3} \pi \\[1em]
+        \phantom{\theta} = \dfrac{\pi}{3}
+    \end{array}$$
+>
+> Now we can use the formula to find the area of the sector by substituting $r = 5$ and $\theta = \frac{\pi}{3}$...
+>
+> $$\begin{array}{lllll}
+        \text{Area of sector} = \dfrac{1}{2} \theta r^2 \\[1em]
+        \phantom{\text{Area of sector}} = \dfrac{1}{2} \times \dfrac{\pi}{3} \times 5^2 \\[1em]
+        \phantom{\text{Area of sector}} = \dfrac{1}{2} \times \dfrac{\pi}{3} \times 25 \\[1em]
+        \phantom{\text{Area of sector}} = \dfrac{25\pi}{6} \text{ square meters} \\[1em]
+    \end{array}$$
+>
+> The area of the sector is $\dfrac{25\pi}{6}$ square meters.
+
+## Linear and Angular Speed
+
+Other than using angles to find the area of a sector, we can use angles to describe the speed of a moving object. The **linear speed** is speed along a straight path and can be determined by the distance it moves along the path in a given time interval. In mathematical terms, the linear speed is $$v = \dfrac{s}{t}$$ where $v$ is the linear speed, $s$ is displacement, and $t$ is time.
+
+In contrast, the **angular speed** is the speed resulting from an object moving along a circular path. This speed can be determined by the angle through which a point rotates in a given time interval. In mathematical terms, the angular speed is $$\omega = \dfrac{\theta}{t}$$ where $\omega$ is the angular speed, $\theta$ is the angle, and $t$ is time.
+
+We can combine the definition of angular speed with the arc length equation, $s = r\theta$, to find a relationship between angular and linear speeds. We can take the angular speed equation, $$\omega = \dfrac{\theta}{t}$$ and solve for $\theta$ to get $$\theta = \omega t$$. We can then substitute for $\theta$ in the arc length equation to get $$s = r\omega t$$. Finally, we can substitute for $s$ in the linear speed equation, $$v = \dfrac{s}{t}$$, to get $$v = \dfrac{r\omega t}{t} = r \omega$$.
+
+This means that the linear speed of an object moving along a circular path is equal to the radius of the circle multiplied by the angular speed of an object. The formula for the linear speed of an object moving along a circular path is $$v = r \omega$$ where $v$ is the linear speed, $r$ is the radius of the circle, and $\omega$ is the angular speed.
+
+> $$\underline{Example}$$
+>
+> A satellite is rotating around Earth at $0.25$ radian per hour at an altitude of $242$ km above Earth. If the radius of Earth is $6378$ kilometers, find the linear speed of the satellite in kilometers per hour.
+>
+> We are given the angular speed of the satellite, $\omega = 0.25$ radian per hour. The satellite is $242$ km above Earth which has a radius of $6378$ km. This means the radius is $242 + 6378$ km. So, we can use the formula $v = r \omega$ to find the linear speed of the satellite...
+>
+> $$\begin{array}{lllll}
+        v = r \omega \\[1em]
+        v = (242 + 6378) \times 0.25  \\[1em]
+        v = 6620 \times 0.25 \\[1em]
+        v = 1655 \text{ kilometers per hour} \\
+    \end{array}$$
+>
+> The linear speed of the satellite is $1655$ kilometers per hour.

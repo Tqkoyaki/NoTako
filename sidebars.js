@@ -195,6 +195,13 @@ const sidebars = {
             'euler-tako/algebra-trig/exp-log/page-8',
           ]
         },
+        {
+          type: 'category',
+          label: 'Sine and Cosine Functions',
+          items: [
+            'euler-tako/algebra-trig/sine-cosine/page-1',
+          ]
+        },
       ]
     }
   ],
