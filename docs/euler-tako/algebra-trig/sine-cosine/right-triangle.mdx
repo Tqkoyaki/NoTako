@@ -1,0 +1,140 @@
+---
+id: page-2
+title: Right Triangle Trigonometry
+sidebar_position: 2
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-77.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-78.jpg';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-79.jpg';
+import alg4 from '@site/static/img/euler/algebra-trig/alg-80.jpg';
+import alg5 from '@site/static/img/euler/algebra-trig/alg-81.jpg';
+import alg6 from '@site/static/img/euler/algebra-trig/alg-82.jpg';
+
+**Trigonometry** is the branch of mathematics that deals with the relationship between the sides and angles of triangles. In particular, there are various properties of right triangles that we can use to solve real world problems.
+
+## Trigonometric Functions
+
+Given a right triangle, we can define the trigonometric functions in terms of an angle $\theta$ and the lengths of the sides of the triangle. The **adjacent side** is the side that is closest to the angle $\theta$. On the other hand, the **opposite side** is the side across from the angle $\theta$. Finally, the **hypotenuse** is the side opposite the right angle.
+
+<Fig src={alg1} caption='Right Triangle' num={1}/>
+
+Given a right triangle with an acute angle of $\theta$ (not the right angle), the first three trigonometric functions are defined as follows...
+
+$$\begin{array}{lllll}
+\text{Sine:} & \sin(\theta) = \dfrac{\text{opposite}}{\text{hypotenuse}} \\[1em]
+\text{Cosine:} & \cos(\theta) = \dfrac{\text{adjacent}}{\text{hypotenuse}} \\[1em]
+\text{Tangent:} & \tan(\theta) = \dfrac{\text{opposite}}{\text{adjacent}} \\[1em]
+\end{array}$$
+
+> $$\underline{Example}$$
+>
+> Given the triangle shown below, find the value of $\sin t$.
+> <Fig src={alg2} caption='Trigonometric Function Example' num={2}/>
+>
+> The adjacent side is equivalent to $24$ units, the opposite side is equivalent to $7$ units, and the hypotenuse is equivalent to $25$ units. We can use the definition of the sine function to find the value of $\sin t$...
+>
+> $$\sin t = \dfrac{\text{opposite}}{\text{hypotenuse}} = \dfrac{7}{25}$$
+>
+> Therefore, the value of $\sin t$ is $\frac{7}{25}$.
+
+### Reciprocal Functions
+
+Along with the sine, cosine, and tangent functions, there exist three more functions that we can define using angle $\theta$ and the sides of the right triangle...
+
+$$\begin{array}{lllll}
+\text{Cosecant:} & \csc(\theta) = \dfrac{\text{hypotenuse}}{\text{opposite}} \\[1em]
+\text{Secant:} & \sec(\theta) = \dfrac{\text{hypotenuse}}{\text{adjacent}} \\[1em]
+\text{Cotangent:} & \cot(\theta) = \dfrac{\text{adjacent}}{\text{opposite}} \\[1em]
+\end{array}$$
+
+These functions are the reciprocal of the first three functions and so we can define them using each other...
+
+$$\begin{array}{lllll}
+\sin(\theta) = \dfrac{1}{\csc(\theta)} &&& \csc(\theta) = \dfrac{1}{\sin(\theta)} \\[1em]
+\cos(\theta) = \dfrac{1}{\sec(\theta)} &&& \sec(\theta) = \dfrac{1}{\cos(\theta)} \\[1em]
+\tan(\theta) = \dfrac{1}{\cot(\theta)} &&& \cot(\theta) = \dfrac{1}{\tan(\theta)} \\[1em]
+\end{array}$$
+
+These functions give us multiple ways to solve problems involving right triangles and trigonometric functions depending on the information given.
+
+## Cofunction Identities
+
+Every right triangle has two acute angles which are complemantary to each other as they add up to $90\degree$. The **cofunction identities** are a set of trigonometric identities that relate the trigonometric functions of complementary angles. For example, the sine of an angle is equal to the cosine of the complementary angle.
+
+<Fig src={alg3} caption='Cofunction Identity' num={3}/>
+
+All the cofunction identities are as follows...
+
+$$\begin{array}{lllll}
+\sin(\theta) = \cos(\frac{\pi}{2} - \theta) &&& \cos(\theta) = \sin(\frac{\pi}{2} - \theta) \\[1em]
+\tan(\theta) = \cot(\frac{\pi}{2} - \theta) &&& \cot(\theta) = \tan(\frac{\pi}{2} - \theta) \\[1em]
+\sec(\theta) = \csc(\frac{\pi}{2} - \theta) &&& \csc(\theta) = \sec(\frac{\pi}{2} - \theta) \\[1em]
+\end{array}$$
+
+:::note
+We can find the other complemantary angle by subtracting the given angle from $\frac{\pi}{2}$ or $90\degree$ because the sum of the two angles is $90\degree$.
+:::
+
+## Special Angles
+
+We can evaluate the trigonometric functions of special angles which are multiples of $30\degree$, $45\degree$, and $60\degree$. Using these special angles, we can create two different triangles...
+
+1. A $30\degree$ $60\degree$ $90\degree$ triangle (also known as $\dfrac{\pi}{6}$ $\dfrac{\pi}{3}$ $\dfrac{\pi}{2}$ triangle) has sides in the ratio $s$-$\sqrt{3}s$-$2s$. $\\[1em]$
+2. A $45\degree$ $45\degree$ $90\degree$ triangle (also known as $\dfrac{\pi}{4}$ $\dfrac{\pi}{4}$ $\dfrac{\pi}{2}$ triangle) has sides in the ratio $s$-$s$-$\sqrt{2}s$.
+
+<Fig src={alg4} caption='Special Triangles' num={4}/>
+
+No matter the length of the sides, the ratio of the sides will always be the same for these special triangles. This allows us to easily find the values of the trigonometric functions for these special angles. For example, $\sin 30\degree = \frac{s}{2s} = \frac{1}{2}$ and $\cos 30\degree = \frac{\sqrt{3}s}{2s} = \frac{\sqrt{3}}{2}$.
+:::note
+When dealing with right triangles, we are limited to angles between $0\degree$ and $90\degree$.
+:::
+
+## Using Trigonometric Functions
+
+Oftentimes when we are tackling problems, we know an angle but do not know all the sides of a right triangle but with right-triangle trigonometry those problems become solvable. Given a right triangle, the length of one side, and the measure of one acute angle, we can find the remaining sides using the following steps...
+
+1. For each side, determine the trigonometric function that has the unknown side and the known side in its ratio.
+2. Write an equation setting the function value of the known angle equal to the ratio of the cooresponding sides.
+3. Using the value of the trigonometric function and the known side length to solve for the unknown side length.
+
+> $$\underline{Example}$$
+>
+> A right triangle has one angle of $\frac{\pi}{3}$ and a hypotenuse of $20$. Find the adjacent side of the triangle.
+>
+> The known side is the hypotenuse and the unknown side is the adjacent side. We need to find a trigonometric function that has the hypotenuse and the unknown side in its ratio.
+>
+> Firstly, the cosine function has the adjacent side and the hypotenuse in its ratio. This gives us the equation $\cos(\dfrac{\pi}{3}) = \dfrac{\text{adjacent}}{\text{hypotenuse}}$ = $\dfrac{1}{2} = \dfrac{\text{adjacent}}{20}$.
+>
+> Before we can solve for the adjacent side, we need to simplify $\cos(\dfrac{\pi}{3})$. This is a special angle and we can use the ratio $\dfrac{s}{2s}$ to get $\cos(\dfrac{\pi}{3}) = \dfrac{1}{2}$.
+>
+> With the value of the cosine function and the hypotenuse, we can solve for the adjacent side...
+>
+> $$\dfrac{1}{2} = \dfrac{\text{adj}}{20} \to 2(\text{adj}) = 20 \to \text{adj} = 10$$
+>
+> Therefore, the adjacent side of the triangle is $10$.
+
+### Applied Problems
+
+Right-triangle trigonometry has many practical applications. For example, it allows us to compute the height of a tall object without having to measure it directly. This is done by measuring the distance from the base of an object to a point on the ground some distance away, where we can look up to the top of the tall object at an angle.
+
+When working with applied problems, we come across two types of angles. The **angle of elevation** of an object above an observer relative to the observer is the angle between the horizonal and the line from the object to the observer's eye. Similarly, the **angle of depression** of an object below an observer relative to the observer is the angle between the horizontal and the line from the object to the observer's eye.
+
+<Fig src={alg5} caption='Angle of Elevation and Depression' num={5}/>
+
+> $$\underline{Example}$$
+>
+> To find the height of a tree, a person walks to a point $30$ feet from the base of the tree. She measures an angle of $57\degree$ between a line of sight to the top of the tree and the ground. Find the height of the tree.
+>
+> <Fig src={alg6} caption='Applied Problem Example' num={6}/>
+>
+> Using the sketch, we can see that the known side is the adjacent side and the unknown height of the tree is the opposite side. We can use the tangent function to find the height of the tree...
+>
+> $$\tan(57\degree) = \dfrac{\text{opposite}}{\text{adjacent}} = \dfrac{x}{30}$$.
+>
+> The value of the tangent function is $\tan(57\degree) \approx 1.5399$ which is found using a calculator. We can now solve for the height of the tree...
+>
+> $$1.5399 = \dfrac{x}{30} \to 1.5399(30) = x \to x \approx 46.196$$
+>
+> Therefore, the height of the tree is approximately $46$ feet.

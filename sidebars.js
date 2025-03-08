@@ -200,6 +200,7 @@ const sidebars = {
           label: 'Sine and Cosine Functions',
           items: [
             'euler-tako/algebra-trig/sine-cosine/page-1',
+            'euler-tako/algebra-trig/sine-cosine/page-2',
           ]
         },
       ]
