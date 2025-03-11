@@ -1,0 +1,186 @@
+---
+id: page-3
+title: Unit Circle
+sidebar_position: 3
+---
+
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-83.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-84.jpg';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-85.jpg';
+import alg4 from '@site/static/img/euler/algebra-trig/alg-86.jpg';
+import alg5 from '@site/static/img/euler/algebra-trig/alg-87.jpg';
+import alg6 from '@site/static/img/euler/algebra-trig/alg-88.png';
+import alg7 from '@site/static/img/euler/algebra-trig/alg-89.png';
+
+Now that we have defined the trigonometric functions in terms of right triangles, we are ready to redefine them in terms of a unit circle. A **unit circle** is a circle centered at the origin with a radius of $1$. It is divided into four quadrants using the $x$ and $y$ axes and labeled quadrants I, II, III, and IV in a counterclockwise direction.
+
+The benefit of using unit circles is that for any angle $\theta$, we can label the intersection of the terminal side and the unit circle by its coordinates $(x, y)$ where the $x$-coordinate is always equal to $\cos \theta$ and the $y$-coordinate is always equal to $\sin \theta$.
+
+<Fig src={alg1} caption='Unit Circle' num={1}/>
+
+:::note
+Given that we can find arc length using the formula $s = r \theta$, there is an interesting property of the unit circle that states the arc length of a unit circle is equal to the radian measure of the angle. This is because the radius of the unit circle is $1$ and so $s = 1 \times \theta = \theta$.
+:::
+
+## Sine and Cosine
+
+As mentioned, the sine function of an angle $\theta$ is equal to the $y$-coordinate of the point where the corresponding angle intercepts the unit circle. Similarly, the cosine function of an angle $\theta$ is equal to the $x$-coordinate of the point where the corresponding angle intercepts the unit circle. This means if $\theta$ is a real number and a point $(x, y)$ on the unit circle corresponds to a central angle $\theta$, then $\sin \theta = y$ and $\cos \theta = x$.
+
+> $$\underline{Example}$$
+>
+> Find $\cos(90\degree)$ and $\sin(90\degree)$.
+>
+> All angles in the unit circle are measured in radians so we need to convert $90\degree$ to radians. Since $180\degree = \pi$ radians, we can find that $90\degree = \frac{\pi}{2}$ radians.
+>
+> Since $\frac{\pi}{2}$ radians divided by $2\pi$ is $\frac{1}{4}$, we can see that $\frac{\pi}{2}$ is equivalent to $\frac{1}{4}$ of the unit circle. If we move counterclockwise a quarter of the way from the positive $x$-axis (the point $(1, 0)$), we will reach the point $(0, 1)$.
+>
+> <Fig src={alg2} caption='Unit Circle Example' num={2}/>
+>
+> Since the $x$-coordinate of $(0, 1)$ is $0$, we can say that $\cos \frac{\pi}{2} = 0$. Similarly, since the $y$-coordinate of $(0, 1)$ is $1$, we can say that $\sin \frac{\pi}{2} = 1$.
+>
+> Therefore, $\cos 90\degree = 0$ and $\sin 90\degree = 1$.
+
+:::note
+The domain of the sine and cosine functions are all real numbers because angles smaller than $0$ and larger than $2\pi$ can still be graphed on the unit circle. However, the range of the sine and cosine functions are $[-1, 1]$ because the $x$ and $y$ bounds of the unit circle are $-1$ and $1$ due to the radius being $1$.
+:::
+
+### Pythagorean Identity
+
+Now that we have defined the sine and cosine functions in terms of the unit circle, we are able to study its characteristics. Recall that the formula for a circle is $x^2 + y^2 = r^2$ and since the radius of the unit circle is $1$, we can substitute $r^2$ with $1$ to get $x^2 + y^2 = 1$. If we substitute $x = \cos \theta$ and $y = \sin \theta$, we get the **Pythagorean Identity** which states that $\cos^2 \theta + \sin^2 \theta = 1$.
+
+This function allows us to find the cosine of an angle if we know the sine of the angle and vice versa. However, due to the power of $2$ in the Pythagorean Identity, we get both a positive and negative version of a solution even though we can only have one solution. So, we decide on the correct sign based on the quadrant in which the angle lies. For example, if the solution is in the first quadrant, then the sine and cosine functions are both positive because both the $x$ and $y$ coordinates are positive in the first quadrant. On the other hand, if the solution is in the fourth quadrant, then the sine function is negative because the $y$ coordinate is negative and the cosine function is positive because the $x$ coordinate is positive.
+
+> $$\underline{Example}$$
+>
+> If $\cos(\theta) = \frac{24}{25}$ and $\theta$ is in the fourth quadrant, find $\sin(\theta)$.
+>
+> Using the Pythagorean Identity...
+>
+> $$\begin{array}{lllll}
+    \cos^2 \theta + \sin^2 \theta &=& 1 \\[1em]
+    \left(\frac{24}{25}\right)^2 + \sin^2 \theta &=& 1 \\[1em]
+    1 - \left(\frac{24}{25}\right)^2 &=& \sin^2 \theta \\[1em]
+    1 - \left(\frac{576}{625}\right) &=& \sin^2 \theta \\[1em]
+    \frac{49}{625} &=& \sin^2 \theta \\[1em]
+    \pm \frac{7}{25} &=& \sin \theta \\[1em]
+    \end{array}$$
+>
+> Since $\theta$ is in the fourth quadrant, the sine function is negative. Therefore, $\sin \theta = -\frac{7}{25}$.
+
+:::note
+In trigonometry, writing a trigonometric function as $f^x(\theta)$ is equivalent to writing $(f(\theta))^x$. This notation is a shorthand way of writing the trigonometric function raised to a power. For example, $\cos^2 \theta$ is equivalent to $(\cos \theta)^2$.
+:::
+
+### Special Angles
+
+Using our definitions and the Pythagorean identity, we are able to find the exact values of the sine and cosine functions for the special angles. These angles include $0\degree$, $30\degree$, $45\degree$, $60\degree$, and $90\degree$ which are equivalent to $0$, $\frac{\pi}{6}$, $\frac{\pi}{4}$, $\frac{\pi}{3}$, and $\frac{\pi}{2}$ radians respectively.
+
+> $$\underline{\text{Proof: } 45\degree \text{ Angle}}$$
+>
+> First, lets find the $x$ and $y$ coordinates of $45\degree$ or $\frac{\pi}{4}$. A $45\degree 45\degree 90\degree$ triangle is an isosceles triangle, so the two legs are equal in length. This means for that in a unit circle, $$x = y$$.
+> 
+> <Fig src={alg3} caption='45-45-90 Triangle' num={3}/>
+>
+> We can use the pythagorean theorem to find the value of $x$ and $y$ for $45\degree$...
+>
+> $$\begin{array}{lllll}
+    x^2 + y^2 &=& 1 \\[0.5em]
+    x^2 + x^2 &=& 1 \\[0.5em]
+    2x^2 &=& 1 \\[0.5em]
+    x^2 &=& \frac{1}{2} \\[0.5em]
+    x &=& \frac{1}{\sqrt{2}} \\[0.5em]
+    x &=& \frac{\sqrt{2}}{2} \\[0.5em]
+    \end{array}$$
+>
+> Due to the fact that $x = y$, we can say that $y = \frac{\sqrt{2}}{2}$. Therefore, $\cos \frac{\pi}{4} = \frac{\sqrt{2}}{2}$ and $\sin \frac{\pi}{4} = \frac{\sqrt{2}}{2}$. This also makes the coordinate of the point $(\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2})$.
+
+We can also find the values of sine and cosine for $30\degree$ using some clever geometric manipulation...
+
+> $$\underline{\text{Proof: } 30\degree \text{ Angle}}$$
+>
+> To find the values of $\sin$ and $\cos$ for $30\degree$ or $\frac{\pi}{6}$, we can draw a triangle inside the unit circle with one side at an angle of $30\degree$ and another at an angle of $-30\degree$. The two right triangles should result in a triangle that can be combined into one large equailateral triangle where each angle is $60\degree$.
+>
+> <Fig src={alg4} caption='30-60-90 Triangle' num={4}/>
+>
+> Due to the fact that all the angles are equal, the sides are also equal. We know that one side of the triangle is $r$ and another side is $2y$. This means that $r = 2y$ and $y = \frac{r}{2}$. We also know $r = 1$ because the radius of the unit circle is $1$. Therefore, $y = \frac{1}{2}$ and so $\sin(\frac{\pi}{6}) = \frac{1}{2}$.
+>
+> Now that we know the value of $sin(\frac{\pi}{6})$, we can use the Pythagorean Identity to find the value of $\cos(\frac{\pi}{6})$...
+>
+> $$\begin{array}{lllll}
+    \cos^2 \theta + \sin^2 \theta &=& 1 \\[0.5em]
+    \cos^2 (\frac{\pi}{6}) + \sin^2 (\frac{\pi}{6}) &=& 1 \\[0.5em]
+    \cos^2 (\frac{\pi}{6}) + \left(\frac{1}{2}\right)^2 &=& 1 \\[0.5em]
+    \cos^2 (\frac{\pi}{6}) + \frac{1}{4} &=& 1 \\[0.5em]
+    \cos^2 (\frac{\pi}{6}) &=& \frac{3}{4} \\[0.5em]
+    \cos (\frac{\pi}{6}) &=& \frac{\sqrt{3}}{2} \\[0.5em]
+    \end{array}$$
+>
+> Therefore, $\cos(\frac{\pi}{6}) = \frac{\sqrt{3}}{2}$ and $\sin(\frac{\pi}{6}) = \frac{1}{2}$. This also makes the coordinate of the point $(\frac{\sqrt{3}}{2}, \frac{1}{2})$.
+
+For the $60\degree$ angle, we use the same $30\degree-60\degree-90\degree$ triangle in a similar way to find the values of sine and cosine.
+
+> $$\underline{\text{Proof: } 60\degree \text{ Angle}}$$
+>
+> To find the values of $\sin$ and $\cos$ for $60\degree$ or $\frac{\pi}{3}$, we can draw a right triangle $BAD$ inside the unit circle with $A$ at the origin with an angle of $60\degree$ and $B$ at the point $(x, y)$ with an angle of $30\degree$. The hypotenuse of the triangle is the radius of the unit circle which is $1$. The side opposite to the angle $60\degree$ is $y$ and the side adjacent to the angle $60\degree$ is $x$.
+>
+> We can draw another triangle $BCD$ which is a reflection of triangle $BAD$ over the line segment $BD$. When we combine the two triangles, we get an equailateral triangle $ABC$ where each angle is $60\degree$.
+>
+> <Fig src={alg5} caption='30-60-90 Triangle' num={5}/>
+>
+> Since all the angles are equal, all the sides are equal. We know that one side is $r = 1$ and another side is $2x$. This means that $1 = 2x$ and $x = \frac{1}{2}$.
+>
+> We can use the Pythagorean Theorem to find the value of $y$...
+>
+> $$\begin{array}{lllll}
+    x^2 + y^2 &=& 1 \\[0.5em]
+    \left(\frac{1}{2}\right)^2 + y^2 &=& 1 \\[0.5em]
+    \frac{1}{4} + y^2 &=& 1 \\[0.5em]
+    y^2 &=& \frac{3}{4} \\[0.5em]
+    y &=& \frac{\sqrt{3}}{2} \\[0.5em]
+    \end{array}$$
+>
+> We ignore the negative value of $y$ because the angle $60\degree$ is in the first quadrant. Therefore, $\cos(\frac{\pi}{3}) = \frac{1}{2}$ and $\sin(\frac{\pi}{3}) = \frac{\sqrt{3}}{2}$. This also makes the coordinate of the point $(\frac{1}{2}, \frac{\sqrt{3}}{2})$.
+
+Finally, the angles $0\degree$ and $90\degree$ lie on the $x$ and $y$ axes respectively. This means that the coordinates are $(1, 0)$ and $(0, 1)$ respectively. Therefore, $\cos 0\degree = 1$, $\sin 0\degree = 0$, $\cos 90\degree = 0$, and $\sin 90\degree = 1$. Putting all the values together, we get the following table...
+
+| **Angle** | $0$ | $\frac{\pi}{6} \text{ or } 30\degree$ | $\frac{\pi}{4} \text{ or } 45\degree$ | $\frac{\pi}{3} \text{ or } 60\degree$ | $\frac{\pi}{2} \text{ or } 90\degree$ |
+| --- | --- | --- | --- | --- | --- |
+| **Cosine** | $1$ | $\dfrac{\sqrt{3}}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{1}{2}$ | $0$ |
+| **Sine** | $0$ | $\dfrac{1}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{\sqrt{3}}{2}$ | $1$ |
+
+## Reference Angles
+
+So far we have found the sine and cosine values for angles in the first quadrant. However, we can use the unit circle to find the sine and cosine values for angles in the other quadrants through the use of **reference angles**. A reference angle is the acute angle formed by the terminal side of the angle and the $x$-axis.
+
+<Fig src={alg6} caption='Reference Angles' num={6}/>
+
+We can use the following formulas to find the reference angle of an angle $\theta$...
+
+| Quadrant | Degree Range | Radian Range | Reference Angle |
+| -------- | ------------ | ------------ | --------------- |
+| I        | $$0\degree < \theta < 90\degree$$ | $$0 < \theta < \frac{\pi}{2}$$ | $$\theta' = \theta$$ |
+| II       | $$90\degree < \theta < 180\degree$$ | $$\frac{\pi}{2} < \theta < \pi$$ | $$\theta' = 180\degree - \theta = \pi - \theta$$ |
+| III      | $$180\degree < \theta < 270\degree$$ | $$\pi < \theta < \frac{3\pi}{2}$$ | $$\theta' = t - 180\degree = \theta - \pi$$ |
+| IV       | $$270\degree < \theta < 360\degree$$ | $$\frac{3\pi}{2} < \theta < 2\pi$$ | $$\theta' = 360\degree - \theta = 2\pi - \theta$$ |
+
+### Using Reference Angles
+
+The interesting thing about reference angles is that angles have consines and sines with the same absolute value as their reference angles. The sign of the specific cosine and sine function depends on the quadrant in which the angle lies. For example, if the angle is in the second quadrant, then the cosine function is negative because the $x$ coordinate is negative in the second quadrant.
+
+> $$\underline{Example}$$
+>
+> Use the reference angle of $-\frac{\pi}{6}$ to find $\cos(-\frac{\pi}{6})$ and $\sin(-\frac{\pi}{6})$.
+>
+> To find the reference angle of $-\frac{\pi}{6}$, lets make it positive by adding $2\pi$ to it. This gives us $\frac{11\pi}{6}$.
+>
+> Since $\frac{11\pi}{6}$ is in the fourth quadrant, we can use $$\theta' = 2\pi - \theta = 2\pi - \frac{11\pi}{6} = \frac{\pi}{6}$$ as the reference angle.
+>
+> We know that $\cos(\frac{\pi}{6}) = \frac{\sqrt{3}}{2}$ and $\sin(\frac{\pi}{6}) = \frac{1}{2}$. Since the angle is in the fourth quadrant, the cosine function is positive and the sine function is negative. Therefore, $\cos(-\frac{\pi}{6}) = \frac{\sqrt{3}}{2}$ and $\sin(-\frac{\pi}{6}) = -\frac{1}{2}$. 
+
+## Unit Circle
+
+Using the concept of reference angles and special angles, we can complete the unit circle by filling each quadrant with the sine and cosine values of the special angles.
+
+<Fig src={alg7} caption='Unit Circle' num={7}/>
