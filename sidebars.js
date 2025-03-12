@@ -202,6 +202,7 @@ const sidebars = {
             'euler-tako/algebra-trig/sine-cosine/page-1',
             'euler-tako/algebra-trig/sine-cosine/page-2',
             'euler-tako/algebra-trig/sine-cosine/page-3',
+            'euler-tako/algebra-trig/sine-cosine/page-4',
           ]
         },
       ]

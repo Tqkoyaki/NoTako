@@ -1,0 +1,131 @@
+---
+id: page-4
+title: Other Trigonometric Functions
+sidebar_position: 4
+---
+
+We have already defined the sine and cosine functions of an angle. Even though sine and cosine are most often used, there are four other trigonometric functions that we still need to define in terms of a unit circle.
+
+## Trigonometric Functions
+
+Just like with the sine and cosine functions, we can use the $(x, y)$ coordinates to find the other functions. Given that $y$ is the opposite side, $x$ is the adjacent side, and $r = 1$ is the hypotenuse, we can define the other trigonometric functions as follows...
+
+$$\begin{array}{cccccc}
+\tan(\theta) = \dfrac{y}{x}, \:x \neq 0 && \sec(\theta) = \dfrac{1}{x}, \:x \neq 0 \\[1em]
+\cot(\theta) = \dfrac{x}{y}, \:y \neq 0 && \csc(\theta) = \dfrac{1}{y}, \:y \neq 0 \\[1em]
+\end{array}$$
+
+> $$\underline{Example}$$
+>
+> The point $$(\dfrac{\sqrt{2}}{2}, \dfrac{-\sqrt{2}}{2})$$ is on the unit circle. Find $\sin \theta$, $\cos \theta$, $\tan \theta$, $\sec \theta$, $\csc \theta$, and $\cot \theta$.
+>
+> $$\begin{array}{llllll}
+    \cos(\theta) = x = \dfrac{\sqrt{2}}{2} && \sin(\theta) = y = \dfrac{-\sqrt{2}}{2} \\[3em]
+    \sec(\theta) = \dfrac{1}{x} = \dfrac{1}{\dfrac{\sqrt{2}}{2}} = \sqrt{2} && \csc(\theta) = \dfrac{1}{y} = \dfrac{1}{\dfrac{-\sqrt{2}}{2}} = -\sqrt{2} \\[3em]
+    \tan(\theta) = \dfrac{y}{x} = \dfrac{\dfrac{-\sqrt{2}}{2}}{\dfrac{\sqrt{2}}{2}} = -1 && \cot(\theta) = \dfrac{x}{y} = \dfrac{\dfrac{\sqrt{2}}{2}}{\dfrac{-\sqrt{2}}{2}} = -1 \\[3em]
+    \end{array}$$
+>
+> Therefore, the six trigonometric functions are $\sin \theta = \dfrac{-\sqrt{2}}{2}$, $\cos \theta = \dfrac{\sqrt{2}}{2}$, $\tan \theta = -1$, $\sec \theta = \sqrt{2}$, $\csc \theta = -\sqrt{2}$, and $\cot \theta = -1$.
+
+### Special Angles
+
+It is useful to find the values of the trigonometric functions for special angles. The special angles are $0^\circ$, $30^\circ$, $45^\circ$, $60^\circ$, and $90^\circ$. The values of the trigonometric functions for these angles are as follows...
+
+| Angle | $0$ | $\dfrac{\pi}{6}, \text{ or } 45\degree$ | $\dfrac{\pi}{4}, \text{ or } 45\degree$ | $\dfrac{\pi}{3}, \text{ or } 60\degree$ | $\dfrac{\pi}{2}, \text{ or } 90\degree$ |
+|-------|-----|--------------------------------------|--------------------------------------|--------------------------------------|--------------------------------------|
+| **Sine** | $0$ | $\dfrac{1}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{\sqrt{3}}{2}$ | $1$ |
+| **Cosine** | $1$ | $\dfrac{\sqrt{3}}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{1}{2}$ | $0$ |
+| **Tangent** | $0$ | $\dfrac{\sqrt{3}}{3}$ | $1$ | $\sqrt{3}$ | Undefined |
+| **Secant** | $1$ | $\dfrac{2\sqrt{3}}{3}$ | $\sqrt{2}$ | $2$ | Undefined |
+| **Cosecant** | Undefined | $2$ | $\sqrt{2}$ | $\dfrac{2\sqrt{3}}{3}$ | $1$ |
+| **Cotangent** | Undefined | $\sqrt{3}$ | $1$ | $\dfrac{\sqrt{3}}{3}$ | $0$ |
+
+### Reference Angle
+
+The procedure for evaluating the trigonometric functions of angles outside the first quadrant is the same as for the sine and cosine functions. We start by finding the reference angle formed by the terminal side of the given angle with the horizontal axis. The trigonometric function values for the original angle will be the same as the values for the reference angle, but with the appropriate sign based on the quadrant.
+
+The positive or negative sign is determined by the $x$ and $y$ values in the original quadrant. The signs are as follows...
+
+- In the first quadrant, all trigonometric functions are positive.
+- In the second quadrant, only $$\sin(\theta)$$ and $$\csc(\theta)$$ are positive.
+- In the third quadrant, only $$\tan(\theta)$$ and $$\cot(\theta)$$ are positive.
+- In the fourth quadrant, only $$\cos(\theta)$$ and $$\sec(\theta)$$ are positive.
+
+> $$\underline{Example}$$
+>
+> Use the reference angle to find the value of $\cot(-\dfrac{5\pi}{6})$.
+>
+> Let's begin by finding a positive coterminal angle with $-\dfrac{5\pi}{6}$. We can do this by adding $2\pi$ to the angle. This gives us $-\dfrac{5\pi}{6} + 2\pi = \dfrac{7\pi}{6}$.
+>
+> The angle $\dfrac{7\pi}{6}$ is in the third quadrant. We can now find the reference angle by subtracting $\pi$ from the angle. This gives us $\dfrac{7\pi}{6} - \pi = \dfrac{\pi}{6}$ which is the reference angle.
+>
+> The cotangent value of the reference angle is $\cot(\dfrac{\pi}{6}) = \sqrt{3}$. Since the angle is in the third quadrant, the cotangent value is positive. Therefore, $\cot(-\dfrac{5\pi}{6}) = \sqrt{3}$.
+
+### Even and Odd
+
+An important property that needs to be analyzed is how the trigonometric functions behave when the angle is negative. We can categorize a function as even, odd, or neither based on the following behaviors when the input is negative...
+- An **even function** is a function where $$f(-x) = f(x)$$. This means that the function is symmetric about the $y$-axis and an example of an even function is $$f(x) = x^2$$ because even if the input is negative, the output will be positive due to the squaring.
+- An **odd function** is a function where $$f(-x) = -f(x)$$. This means that the function is symmetric about the origin and an example of an odd function is $$f(x) = x^3$$ because two inputs that are opposites will have outputs that are also opposites.
+
+In terms of trigonometric functions, the cosine and secant functions are even functions...
+
+$$\begin{array}{llllll}
+\cos(-\theta) = \cos(\theta) && \sec(-\theta) = \sec(\theta) \\[1em]
+\end{array}$$
+
+On the other hand, the sine, tangent, cosecant, and cotangent functions are odd functions...
+
+$$\begin{array}{llllll}
+\sin(-\theta) = -\sin(\theta) && \tan(-\theta) = -\tan(\theta) \\[1em]
+\csc(-\theta) = -\csc(\theta) && \cot(-\theta) = -\cot(\theta) \\[1em]
+\end{array}$$
+
+> $$\underline{Example}$$
+>
+> If the cotangent of angle $\theta$ is $\sqrt{3}$, what is the cotangent of $-\theta$?
+>
+> Since we know that the cotangent function is an odd function, we can use $$\cot(-\theta) = -\cot(\theta)$$ to find the cotangent of $-\theta$.
+>
+> This gives us $$\cot(-\theta) = -\sqrt{3}$$.
+
+## Trigonometric Identities
+
+There are various relationships that exist between the trigonometric functions. These relationships are called trigonometric identities and they are useful for simplifying expressions and solving equations.
+
+We can use the fact that $x = \cos \theta$ and $y = \sin \theta$ to derive the following identities...
+
+$$\begin{array}{cccccc}
+\tan(\theta) = \dfrac{\sin \theta}{\cos \theta} \\[2em]
+\sec(\theta) = \dfrac{1}{\cos \theta} \\[2em]
+\cot(\theta) = \dfrac{\cos \theta}{\sin \theta} = \dfrac{1}{\tan \theta} \\[2em]
+\csc(\theta) = \dfrac{1}{\sin \theta} \\[2em]
+\end{array}$$
+
+### Pythagorean Identity
+
+We can also derive alternative forms of the Pythagorean Identity, $$\cos^2 \theta + \sin^2 \theta = 1$$. The first form can be obtained by dividing both sides by $\cos^2 \theta$...
+
+$$\begin{array}{llllll}
+\cos^2 \theta + \sin^2 \theta = 1 \\[1em]
+\dfrac{\cos^2 \theta}{\cos^2 \theta} + \dfrac{\sin^2 \theta}{\cos^2 \theta} = \dfrac{1}{\cos^2 \theta} \\[1.5em]
+1 + \tan^2 \theta = \sec^2 \theta \\[1em]
+\end{array}$$
+
+We can obtain the second form by dividing both sides by $\sin^2 \theta$...
+
+$$\begin{array}{llllll}
+\cos^2 \theta + \sin^2 \theta = 1 \\[1em]
+\dfrac{\cos^2 \theta}{\sin^2 \theta} + \dfrac{\sin^2 \theta}{\sin^2 \theta} = \dfrac{1}{\sin^2 \theta} \\[1.5em]
+\cot^2 \theta + 1 = \csc^2 \theta \\[1em]
+\end{array}$$
+
+This gives us all three forms of the Pythagorean Identity...
+- $$\cos^2 \theta + \sin^2 \theta = 1$$
+- $$1 + \tan^2 \theta = \sec^2 \theta$$
+- $$\cot^2 \theta + 1 = \csc^2 \theta$$
+
+## Period of a Function
+
+As previously mentioned, the trigonometric functions are functions that repeat their values and a **periodic function** is a function that repeats its value in regular intervals. For the four trigonometric functions, sine, cosine, cosecant, and secant, a revolution of one circle, or $2\pi$, will result in the same outputs for these functions.
+
+The $2\pi$ interval is called the **period** because the period $P$ of a repeating function $f$ is the number representing the interval such that $f(x + P) = f(x)$ for any value of $x$. The period of the sine, cosine, cosecant, and secant functions is $2\pi$ because the function repeats every revolution of the unit circle. However, the period of the tangent and cotangent functions is $\pi$ because the function repeats every half revolution of the unit circle.
