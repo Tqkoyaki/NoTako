@@ -1,0 +1,182 @@
+---
+id: page-1
+title: Graphing Sine and Cosine
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-90.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-91.png';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-92.jpg';
+import alg4 from '@site/static/img/euler/algebra-trig/alg-93.jpg';
+import alg5 from '@site/static/img/euler/algebra-trig/alg-94.jpg';
+import alg6 from '@site/static/img/euler/algebra-trig/alg-95.png';
+import alg7 from '@site/static/img/euler/algebra-trig/alg-96.png';
+import alg8 from '@site/static/img/euler/algebra-trig/alg-97.png';
+
+We have already defined the trigonometric functions in terms of unit circles. Recall that these functions relate real number values to the $x$ and $y$ coordinates of a point on the unit circle. This means that we can also graph these functions on a coordinate plane which gives us another way to visualize and analyze these functions.
+
+## Graphing Sine
+
+Let's start with the sine function. To graph this function, we need to create a table of values for $x$ and $y$.
+
+| $x$ | $0$ | $\dfrac{\pi}{6}$ | $\dfrac{\pi}{4}$ | $\dfrac{\pi}{3}$ | $\dfrac{\pi}{2}$ | $\dfrac{2\pi}{3}$ | $\dfrac{3\pi}{4}$ | $\dfrac{5\pi}{6}$ | $\pi$ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $\sin(x)$ | $0$ | $\dfrac{1}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{\sqrt{3}}{2}$ | $1$ | $\dfrac{\sqrt{3}}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{1}{2}$ | $0$ |
+
+Plotting these points on a graph gives us the following graph...
+
+<Fig src={alg1} caption='Sine Function' num={1}/>
+
+:::note
+The sine values are positive between $0$ and $\pi$ which corresponds to the values of the sine function being positive in the first and second quadrants of the unit circle. In the same way, the sine values are negative between $\pi$ and $2\pi$ which corresponds to the values of the sine function being negative in the third and fourth quadrants of the unit circle.
+:::
+
+## Graphing Cosine
+
+We can also graph the cosine function in a similar way. To graph this function, we need to create a table of values for $x$ and $y$.
+
+| $x$ | $0$ | $\dfrac{\pi}{6}$ | $\dfrac{\pi}{4}$ | $\dfrac{\pi}{3}$ | $\dfrac{\pi}{2}$ | $\dfrac{2\pi}{3}$ | $\dfrac{3\pi}{4}$ | $\dfrac{5\pi}{6}$ | $\pi$ |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| $\cos(x)$ | $1$ | $\dfrac{\sqrt{3}}{2}$ | $\dfrac{\sqrt{2}}{2}$ | $\dfrac{1}{2}$ | $0$ | $-\dfrac{1}{2}$ | $-\dfrac{\sqrt{2}}{2}$ | $-\dfrac{\sqrt{3}}{2}$ | $-1$ |
+
+Plotting these points on a graph gives us the following graph...
+
+<Fig src={alg2} caption='Cosine Function' num={2}/>
+
+:::note
+Now that we have graphed the sine and cosine functions, the domain and range is more apparent. The domain of both functions is $(-\infty, \infty)$ while the range is $[-1, 1]$.
+
+It is also apparent that the sine function is an odd function because it is symmetric about the origin. On the other hand, the cosine function is an even function because it is symmetric about the $y$-axis.
+:::
+
+## Periodic Functions
+
+Both the shapes of the sine and cosine graphs repeat after $2\pi$ units which means the functions are periodic with a period of $2\pi$. A **periodic function** in general is a function for which a horizontal shift, $P$, results in $f(x + P) = f(x)$ for all $x$ in the domain of the function. The period of a periodic function is the smallest positive number $P$ for which this is true. The **period** is the smallest such horizontal shift with $P > 0$.
+
+<Fig src={alg3} caption='Periodic Functions' num={3}/>
+
+## Sinusoidal Functions
+
+A **sinusoidal function** is a function that has a general shape of a sine wave and both the sine and cosine functions are examples of sinusoidal functions. The general forms of sinusoidal functions are $y = A\sin(Bx + C) + D$ and $y = A\cos(Bx + C) + D$ where $A$, $B$, $C$, and $D$ are constants.
+
+:::note
+The curves of sinusoidal functions are not necessarily identical as some can be taller or longer than others.
+:::
+
+### Period
+
+From the general forms of the sinusoidal functions, we can deduce that they are transformations of the sine and cosine functions and we can determine how each constant affects the graph of the function accordingly.
+
+In the general formula, $B$ is related to the period as $$P = \dfrac{2\pi}{| B |}$$. If $$| B | > 1$$, then the period is less than $2\pi$ and the graph is compressed horizontally. If $$| B | < 1$$, then the period is greater than $2\pi$ and the graph is stretched horizontally. Finally, if $$B = 1$$, then the period is $2\pi$.
+
+<Fig src={alg4} caption='Period of Sinusoidal Functions' num={4}/>
+
+### Amplitude
+
+Other than horizontal compression and stretch, the graph can also be vertically compressed or stretched. In the general formula, $A$ relates to the **amplitude** or the greatest distance from rest. The value of $A$ directly represents the vertical stretch factor, and $| A |$ is the amplitude of the function. This means that the local maxima will be $| A |$ units above the horizontal midline of the graph and the local minima will be $| A |$ units below the horizontal midline where the **midline** is the horizontal line that passes through the center of the graph and is given by $y = D$.
+
+Also note that if $| A | > 1$, then the graph is stretched vertically. If $| A | < 1$, then the graph is compressed vertically. Finally, if $A = 1$, then the amplitude is $1$.
+
+<Fig src={alg5} caption='Amplitude of Sinusoidal Functions' num={5}/>
+
+:::note
+Due to the amplitude being the vertical height from the midline, we can also find the amplitude using the formula $$| A | = \dfrac{1}{2} |\text{max} - \text{min}|$$ where the $\text{max}$ and $\text{min}$ are the maximum and minimum values of the function respectively.
+:::
+
+### Phase Shift
+
+Before we explore the phase shift, let's slightly modify the general forms of the sinusoidal functions from $y = A\sin(Bx - C) + D$ and $y = A\cos(Bx - C) + D$ to $y = A\sin(B(x - \dfrac{C}{B})) + D$ and $y = A\cos(B(x - \dfrac{C}{B})) + D$. This is because the value of $\dfrac{C}{B}$ represents the **phase shift** which is the horizontal shift of the graph. If $C > 0$, then the graph is shifted to the right by $| C |$ units and if $C < 0$, then the graph is shifted to the left by $| C |$ units.
+
+<Fig src={alg6} caption='Phase Shift of Sinusoidal Functions' num={6}/>
+
+### Vertical Shift
+
+Finally, the value of $D$ indicates the **vertical shift** of the graph which is the vertical translation of the graph. If $D > 0$, then the graph is shifted up by $D$ units and if $D < 0$, then the graph is shifted down by $| D |$ units.
+
+<Fig src={alg7} caption='Vertical Shift of Sinusoidal Functions' num={7}/>
+
+## Graphing Variations
+
+Given a sinusoidal function in the form $y = A\sin(Bx - C) + D$ or $y = A\cos(Bx - C) + D$, we can find the period, amplitude, phase shift, and midline using the following formulas...
+
+1. The amplitude is $| A |$.
+2. The period is $\dfrac{2\pi}{| B |}$.
+3. The phase shift is $\dfrac{C}{B}$.
+4. The midline is $y = D$.
+
+Given the function $y = A\sin(Bx - C) + D$, we can sketch the graph by following these steps...
+
+1. Find the amplitude and period.
+2. We will graph $y = \sin(Bx)$ first and then will apply the phase shift and vertical shift.
+3. Start at the origin, with the function increasing to the right if $A$ is positive and decreasing to the right if $A$ is negative.
+4. At $x = \dfrac{\pi}{2 | B |}$, the function will reach a local maximum if $A > 0$ and a local minimum if $A < 0$.
+5. The curve returns to the $x$-axis at $x = \dfrac{\pi}{| B |}$.
+6. There is a local minimum for $A > 0$ and a local maximum for $A < 0$ at $x = \dfrac{3\pi}{2 | B |}$ with $y = -A$.
+7. Finally, the curve returns to the $x$-axis at $x = \dfrac{2\pi}{| B |}$.
+8. The rest of the graph can be sketched by following the same pattern.
+9. Now that we have the graph of $y = \sin(Bx)$, we can apply the phase shift of $\dfrac{C}{B}$ units to the right if $C > 0$ and to the left if $C < 0.
+10. Finally, we can apply the vertical shift of $D$ units up if $D > 0$ and down if $D < 0.
+
+An example of this is shown below...
+
+> $$\underline{Example}$$
+>
+> Sketch a graph of $f(x) = 3\sin(\dfrac{\pi}{4}x - \dfrac{\pi}{4})$.
+>
+> The amplitude of the function is $| A | = 3$ and the period is $\dfrac{2\pi}{| B |} = \dfrac{2\pi}{\dfrac{\pi}{4}} = 8$.
+>
+> Starting at the origin the first point is $(0, 0)$ and the function increases to the right because $A > 0$.
+>
+> At $x = \dfrac{\pi}{2 | B |} = \dfrac{\pi}{2(\dfrac{\pi}{4})} = 2$, the function reaches a local maximum of $A = 3$. This point is $(2, 3)$.
+>
+> At $x = \dfrac{\pi}{| B |} = \dfrac{\pi}{\dfrac{\pi}{4}} = 4$, the function returns to the $x$-axis. This point is $(4, 0)$.
+>
+> At $x = \dfrac{3\pi}{2 | B |} = \dfrac{3\pi}{2(\dfrac{\pi}{4})} = 6$, the function reaches a local minimum of $-A = -3$. This point is $(6, -3)$.
+>
+> Finally, at $x = \dfrac{2\pi}{| B |} = \dfrac{2\pi}{\dfrac{\pi}{4}} = 8$, the function returns to the $x$-axis. This point is $(8, 0)$. After this the pattern repeats.
+>
+> Now we can apply the phase shift of $\dfrac{C}{B} = \dfrac{\pi}{4} \div \dfrac{\pi}{4} = 1$ units to the right. This means the new points are $(1, 0)$, $(3, 3)$, $(5, 0)$, $(7, -3)$, and $(9, 0)$.
+>
+> Finally, there is no vertical shift because $D = 0$ so we can use the points to sketch the graph.
+>
+> <Fig src={alg8} caption='Solution' num={8}/>
+
+
+
+### Cosine Form
+
+We can graph the cosine function in a similar way. Given the function $y = A\cos(Bx - C) + D$, we can sketch the graph by following these steps...
+1. Find the amplitude and period.
+2. We will graph $y = \cos(Bx)$ first and then will apply the phase shift and vertical shift.
+3. Start at the point $(0, A)$, with the function decreasing to the right if $A$ is positive and increasing to the right if $A$ is negative.
+4. At $x = \dfrac{\pi}{2 | B |}$, the function will reach the $x$-axis.
+5. The function will reach a local minimum if $A > 0$ and a local maximum if $A < 0$ at $x = \dfrac{\pi}{| B |}$.
+6. The function will return to the $x$-axis at $x = \dfrac{3\pi}{2 | B |}$.
+7. Finally, there is a local maximum for $A > 0$ and a local minimum for $A < 0$ at $x = \dfrac{2\pi}{| B |}$ with $y = -A$.
+8. The rest of the graph can be sketched by following the same pattern.
+9. Now that we have the graph of $y = \cos(Bx)$, we can apply the phase shift of $\dfrac{C}{B}$ units to the right if $C > 0$ and to the left if $C < 0.
+10. Finally, we can apply the vertical shift of $D$ units up if $D > 0$ and down if $D < 0.
+
+
+## Real World Applications
+
+We can use the transformations of sine and cosine functions in numerous applications especially anything related to circular motion.
+
+> $$\underline{Example}$$
+>
+> The London Eye is a huge Ferris wheel with a diameter of $135$ meters ($443$ feet). It completes one rotation every $30$ minutes. Riders board from a platform $2$ meters above the ground. Express a rider's height above the ground as a function of time in minutes.
+>
+> With a diameter of $135$ meters, the radius of the Ferris wheel is $67.5$ meters. This means the height will osciallate between $67.5$ meters above and below the center. This means the amplitude is $67.5$ meters.
+>
+> The passengers board $2$ meters above the ground which means the center of the wheel is located $67.5 + 2 = 69.5$ meters above the ground. This means the midline of the oscillation will be at $69.5$ meters.
+>
+> The wheel also takes $30$ minutes to complete one revolution which means the period is $30$ minutes.
+>
+> Finally, since the rider boards at the lowest point, the height must start at the smallest possible value and start increasing from there. This shape is the shape of a vertically reflected cosine function.
+>
+> The information we have extracted from the problem are that the amplitude is $A = 67.5$, the midline is $D = 69.5$, the period is $P = 30$, and the shape is $-\cos(t)$.
+>
+> We can also find the value of $B$ using the formula $P = \dfrac{2\pi}{| B |}$ which gives us $30 = \dfrac{2\pi}{| B |}$. This means $| B | = \dfrac{2\pi}{30} = \dfrac{\pi}{15}$.
+>
+> Putting all this information together, we get the function $h(t) = -67.5\cos(\dfrac{\pi}{15}t) + 69.5$ where $t$ is in minutes and $y$ is measured in meters.

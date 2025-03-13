@@ -197,12 +197,19 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Sine and Cosine Functions',
+          label: 'Trigonometric Functions',
           items: [
             'euler-tako/algebra-trig/sine-cosine/page-1',
             'euler-tako/algebra-trig/sine-cosine/page-2',
             'euler-tako/algebra-trig/sine-cosine/page-3',
             'euler-tako/algebra-trig/sine-cosine/page-4',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Periodic Functions',
+          items: [
+            'euler-tako/algebra-trig/periodic/page-1',
           ]
         },
       ]
