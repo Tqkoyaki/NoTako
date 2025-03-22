@@ -210,6 +210,7 @@ const sidebars = {
           label: 'Periodic Functions',
           items: [
             'euler-tako/algebra-trig/periodic/page-1',
+            'euler-tako/algebra-trig/periodic/page-2',
           ]
         },
       ]
