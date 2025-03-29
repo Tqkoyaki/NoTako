@@ -211,6 +211,7 @@ const sidebars = {
           items: [
             'euler-tako/algebra-trig/periodic/page-1',
             'euler-tako/algebra-trig/periodic/page-2',
+            'euler-tako/algebra-trig/periodic/page-3',
           ]
         },
       ]
