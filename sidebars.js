@@ -214,6 +214,13 @@ const sidebars = {
             'euler-tako/algebra-trig/periodic/page-3',
           ]
         },
+        {
+          type: 'category',
+          label: 'Trigonometric Identities and Equations',
+          items: [
+            'euler-tako/algebra-trig/trig-identities/page-1',
+          ]
+        },
       ]
     }
   ],

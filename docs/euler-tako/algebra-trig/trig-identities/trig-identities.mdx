@@ -1,0 +1,108 @@
+---
+id: page-1
+title: Trigonometric Identities
+sidebar_position: 1
+---
+
+**Trigonometric identities** are expressions and equations that allow us to express trigonometric functions in many different ways. By using these identities, we can simplify complex trigonometric expressions, solve equations, and prove relationships between functions.
+
+## Pythagorean Identities
+
+The **pythagorean identities** are equations involving trigonometric functions based on the properties of a right triangle. 
+
+We can derive the first identity from the unit circle which can be defined as $$x^2 + y^2 = 1$$ because it is a circle with a radius of $1$. The coordinates of a point on this unit circle can also be expressed as $$x = \cos \theta$$ and $$y = \sin \theta$$. So, by substituting these values into the equation of the unit circle, we get the first pythagorean identity $$\sin^2 \theta + \cos^2 \theta = 1$$.
+
+The second identity $$1 + \cot^2 \theta = \csc^2 \theta$$ can be derived by manipulating the first identity and we can verify the identity by rewriting $$1 + \cot^2 \theta$$ as $$\csc^2 \theta$$...
+
+$$\begin{array}{ccccc}
+1 + \cot^2 \theta &=& 1 + (\dfrac{\cos \theta}{\sin \theta})^2 \\[1em]
+&=& (\dfrac{\sin \theta}{\sin \theta})^2 + (\dfrac{\cos \theta}{\sin \theta})^2 \\[1em]
+&=& \dfrac{\sin^2 \theta}{\sin^2 \theta} + \dfrac{\cos^2 \theta}{\sin^2 \theta} \\[1em]
+&=& \dfrac{\cos^2 \theta + \sin^2 \theta}{\sin^2 \theta} \\[1em]
+&=& \dfrac{1}{\sin^2 \theta} \\[1em]
+&=& \csc^2 \theta \\[1em]
+\end{array}$$
+
+The third and final pythagorean identity is $$1 + \tan^2 \theta = \sec^2 \theta$$ which can also be derived by manipulating the first identity and we can verify the identity by rewriting $$1 + \tan^2 \theta$$ as $$\sec^2 \theta$$...
+
+$$\begin{array}{ccccc}
+1 + \tan^2 \theta &=& 1 + (\dfrac{\sin \theta}{\cos \theta})^2 \\[1em]
+&=& (\dfrac{\cos \theta}{\cos \theta})^2 + (\dfrac{\sin \theta}{\cos \theta})^2 \\[1em]
+&=& \dfrac{\cos^2 \theta}{\cos^2 \theta} + \dfrac{\sin^2 \theta}{\cos^2 \theta} \\[1em]
+&=& \dfrac{\sin^2 \theta + \cos^2 \theta}{\cos^2 \theta} \\[1em]
+&=& \dfrac{1}{\cos^2 \theta} \\[1em]
+&=& \sec^2 \theta \\[1em]
+\end{array}$$
+
+This gives us all three forms of the pythagorean identity...
+
+$$\begin{array}{cccccc}
+\sin^2 \theta + \cos^2 \theta &=& 1 \\[1em]
+1 + \cot^2 \theta &=& \csc^2 \theta \\[1em]
+1 + \tan^2 \theta &=& \sec^2 \theta \\[1em]
+\end{array}$$
+
+## Even-Odd Identities
+
+The **even-odd identities** relate the value of a trigonometric function at a given angle to the value of the function at the opposite angle. Except for $y = 0$, every other function in mathematics can be categorized as odd, even, or neither.
+
+An odd function is one in which $$f(-x) = -f(x)$$ for all $x$ in the domain of $f$ causing the graph of the function to be symmetric about the origin. An example of an odd function is $$\sin \theta$$ because $$\sin (-\theta) = -\sin \theta$$.
+
+On the other hand, an even function is one in which $$f(-x) = f(x)$$ for all $x$ in the domain of $f$ causing the graph of the function to be symmetric about the $y$-axis. An example of an even function is $$\cos \theta$$ because $$\cos (-\theta) = \cos \theta$$.
+
+Given the fact that $$\sin \theta$$ is an odd function and $$\cos \theta$$ is an even function, we can derive the following even-odd identities...
+
+$$\begin{array}{ccccccccc}
+\tan(-\theta) &=& \dfrac{\sin (-\theta)}{\cos (-\theta)} &=& \dfrac{-\sin \theta}{\cos \theta} &=& -\tan \theta & \text{(ODD)} \\[1em]
+\cot(-\theta) &=& \dfrac{\cos (-\theta)}{\sin (-\theta)} &=& \dfrac{\cos \theta}{-\sin \theta} &=& -\cot \theta & \text{(ODD)} \\[1em]
+\csc(-\theta) &=& \dfrac{1}{\sin (-\theta)} &=& \dfrac{1}{-\sin \theta} &=& -\csc \theta & \text{(ODD)} \\[1em]
+\sec(-\theta) &=& \dfrac{1}{\cos (-\theta)} &=& \dfrac{1}{\cos \theta} &=& \sec \theta & \text{(EVEN)} \\[1em]
+\end{array}$$
+
+Putting everything together gives us the following even-odd identities...
+
+$$\begin{array}{ccccccccc}
+\sin(-\theta) &=& -\sin \theta &&&  \cos(-\theta) &=& \cos \theta \\[1em]
+\csc(-\theta) &=& -\csc \theta &&&  \sec(-\theta) &=& \sec \theta \\[1em]
+\cot(-\theta) &=& -\cot \theta &&&  \tan(-\theta) &=& -\tan \theta \\[1em]
+\end{array}$$
+
+...where $$\sin \theta$$, $$\tan \theta$$, $$\csc \theta$$, and $$\cot \theta$$ are odd functions while $$\cos \theta$$ and $$\sec \theta$$ are even functions.
+
+## Reciprocal Identities
+
+**Reciprocal identities** are identities that relate the trigonometric functions that are reciprocals of each other. We have already encounted these identities when defining trigonometric functions from right angles and they are as follows...
+
+$$\begin{array}{ccccccccc}
+\sin \theta &=& \dfrac{1}{\csc \theta} &&&  \csc \theta &=& \dfrac{1}{\sin \theta} \\[1em]
+\cos \theta &=& \dfrac{1}{\sec \theta} &&&  \sec \theta &=& \dfrac{1}{\cos \theta} \\[1em]
+\tan \theta &=& \dfrac{1}{\cot \theta} &&&  \cot \theta &=& \dfrac{1}{\tan \theta} \\[1em]
+\end{array}$$
+
+## Quotient Identities
+
+**Quotient identities** are identities that a set of quotient identities which relate the trigonometric functions that are quotients of each other which can and have been useful in verifying other identities. The quotient identities are as follows...
+
+$$\begin{array}{ccccccccc}
+\tan \theta &=& \dfrac{\sin \theta}{\cos \theta} &&&  \cot \theta &=& \dfrac{\cos \theta}{\sin \theta} \\[1em]
+\end{array}$$
+
+## Simplifying Equations
+
+Trigonometric identities are critical in simplifying trigonometric equations but just as critical is the ability to recognize and use the basic properties and formulas of algebra, such as the difference of squares formula, the perfect square formula, or substitution to simplify trigonometric equations. For example, the equation $$(\sin x + 1)(\sin x - 1) = 0$$ resembles the equation $$(x + 1)(x - 1) = 0$$ which is in the form needed to apply the difference of squares formula. Using algebraic properties and formulas like this makes many trigonometric equations easier to understand and solve which is valuable in all fields of mathematics, science, and engineering.
+
+> $$\underline{Example}$$
+>
+> Use algebraic techniques to verify the identity: $$\dfrac{\cos \theta}{1 + \sin \theta} = \dfrac{1 - \sin \theta}{\cos \theta}$$.
+>
+> We can verify this identity by manipulating the left side of the equation, $$\dfrac{\cos \theta}{1 + \sin \theta}$$, to rewrite it as the right side of the equation, $$\dfrac{1 - \sin \theta}{\cos \theta}$$.
+>
+> Let's start by multiplying the numerator and denominator of $$\dfrac{\cos \theta}{1 + \sin \theta}$$ by $$1 - \sin \theta$$. This gives us $$\dfrac{\cos \theta (1 - \sin \theta)}{(1 + \sin \theta)(1 - \sin \theta)}$$.
+>
+> The denominator, $$(1 + \sin \theta)(1 - \sin \theta)$$ resembles the form $$(a + b)(a - b)$$ which is the difference of squares. The formula states that $$(a + b)(a - b) = a^2 - b^2$$. So, we can rewrite the denominator as $$1 - \sin^2 \theta$$.
+>
+> The current form of the equation is $$\dfrac{\cos \theta (1 - \sin \theta)}{1 - \sin^2 \theta}$$. We can now use the pythagorean identity $$1 - \sin^2 \theta = \cos^2 \theta$$ which we get by subtracting $$\sin^2 \theta$$ from both sides of the first pythagorean identity $$\sin^2 \theta + \cos^2 \theta = 1$$. This gives us $$\dfrac{\cos \theta (1 - \sin \theta)}{\cos^2 \theta}$$.
+>
+> Finally, we can simplify the equation by dividing $$\cos \theta$$ in the numerator by $$\cos^2 \theta$$ in the denominator. This gives us $$\dfrac{1 - \sin \theta}{\cos \theta}$$ which is the right side of the equation.
+>
+> Therefore, we have verified the identity $$\dfrac{\cos \theta}{1 + \sin \theta} = \dfrac{1 - \sin \theta}{\cos \theta}$$.
