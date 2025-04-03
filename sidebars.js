@@ -219,6 +219,7 @@ const sidebars = {
           label: 'Trigonometric Identities and Equations',
           items: [
             'euler-tako/algebra-trig/trig-identities/page-1',
+            'euler-tako/algebra-trig/trig-identities/page-2',
           ]
         },
       ]

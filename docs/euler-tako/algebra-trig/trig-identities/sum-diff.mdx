@@ -1,0 +1,169 @@
+---
+id: page-2
+title: Sum and Difference Identities
+sidebar_position: 2
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-107.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-108.png';
+
+Finding the exact value of the sine, cosine, or tangent of an angle is often easier if we can rewrite a given angle as a sum or difference of two angles that we know the exact value for. For example, we can't currently find the exact value of $$\sin(15^\circ)$$ but once we derive the sum and difference identities, we can rewrite it as $$\sin(45^\circ - 30^\circ)$$ to find the exact value.
+
+## Difference of Cosine
+
+To derive all the sum and difference identities, we will begin by deriving the difference formula for cosine. Let's begin by drawing an angle $$\alpha$$ on the unit circle where the initial side of the angle is the positive $$x$$-axis. This angle intersects the unit circle at the coordinates $$(\cos \alpha, \sin \alpha)$$ which we will call point $$P$$. Next, we will draw a second angle $$\beta$$ that is also drawn in standard position and intersects the unit circle at point $$Q$$ which has the coordinates $$(\cos \beta, \sin \beta)$$. These two points create a new angle $$\angle POQ$$ where $$O$$ is the origin and this angle is equal to $$\alpha - \beta$$.
+
+Before we can derive the formula, we also need to plot two additional points. The first point is $$A$$ which is at an angle of $$\alpha - \beta$$ in standard position and this point has coordinates $$(\cos(\alpha - \beta), \sin(\alpha - \beta))$$. The second point is $$B$$ which is on the positive $x$-axis and this point has coordinates $$(1, 0)$$. All of these points plotted gives us the following diagram...
+
+<Fig src={alg1} caption='Difference of Cosine' num={1}/>
+
+The angles $$\angle AOB$$ and $$\angle POQ$$ are both equal to $$\alpha - \beta$$ which means the triangles $$\triangle AOB$$ and $$\triangle POQ$$ are similar. In fact, they are rotations of each other. This also means that the line segments $$AB$$ and $$PQ$$ must be equal in length and so if we find the length of these two segments, we can set them equal to each other. Once we do that, we can solve for $$\cos(\alpha - \beta)$$ in terms of $$\cos \alpha$$ and $$\cos \beta$$ giving us the difference formula for cosine.
+
+The length of segment $$PQ$$ can be found using the distance formula where $$P = (\cos \alpha, \sin \alpha)$$ and $$Q = (\cos \beta, \sin \beta)$$...
+
+$$\begin{array}{lllllllll}
+\text{PQ} &=& \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\[1em]
+&=& \sqrt{(\cos \beta - \cos \alpha)^2 + (\sin \beta - \sin \alpha)^2} \\[1em]
+&=& \sqrt{(\cos^2 \beta - 2\cos \alpha \cos \beta + \cos^2 \alpha) + (\sin^2 \beta - 2\sin \alpha \sin \beta + \sin^2 \alpha)} \\[1em]
+&=& \sqrt{(\cos^2 \alpha + \sin^2 \alpha) + (\cos^2 \beta + \sin^2 \beta) - 2\cos \alpha \cos \beta -  2\sin \alpha \sin \beta} \\[1em]
+&=& \sqrt{1 + 1 - 2(\cos \alpha \cos \beta + \sin \alpha \sin \beta)} \\[1em]
+&=& \sqrt{2 - 2(\cos \alpha \cos \beta + \sin \alpha \sin \beta)} \\[1em]
+\end{array}$$
+
+Next, the length of segment $$AB$$ can be found using the distance formula where $$A = (\cos(\alpha - \beta), \sin(\alpha - \beta))$$ and $$B = (1, 0)$$...
+
+$$\begin{array}{lllllllll}
+\text{AB} &=& \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \\[1em]
+&=& \sqrt{(1 - \cos(\alpha - \beta))^2 + (0 - \sin(\alpha - \beta))^2} \\[1em]
+&=& \sqrt{(1 - \cos(\alpha - \beta))^2 + (-\sin(\alpha - \beta))^2} \\[1em]
+&=& \sqrt{(1 - 2\cos(\alpha - \beta) + \cos^2(\alpha - \beta)) + (\sin^2(\alpha - \beta))} \\[1em]
+&=& \sqrt{1 - 2\cos(\alpha - \beta) + (\cos^2(\alpha - \beta) + \sin^2(\alpha - \beta))} \\[1em]
+&=& \sqrt{1 - 2\cos(\alpha - \beta) + 1} \\[1em]
+&=& \sqrt{2 - 2\cos(\alpha - \beta)} \\[1em]
+\end{array}$$
+
+Finally, we can set the lengths of segments $$PQ$$ and $$AB$$ equal to each other to solve for $$\cos(\alpha - \beta)$$...
+$$\begin{array}{cccccccc}
+\text{PQ} &=& \text{AB} \\[1em]
+\sqrt{2 - 2(\cos \alpha \cos \beta + \sin \alpha \sin \beta)} &=& \sqrt{2 - 2\cos(\alpha - \beta)} \\[1em]
+2 - 2(\cos \alpha \cos \beta + \sin \alpha \sin \beta) &=& 2 - 2\cos(\alpha - \beta) \\[1em]
+-2(\cos \alpha \cos \beta + \sin \alpha \sin \beta) &=& -2\cos(\alpha - \beta) \\[1em]
+\cos \alpha \cos \beta + \sin \alpha \sin \beta &=& \cos(\alpha - \beta) \\[1em]
+\end{array}$$
+
+So, the derived formula for the difference of cosine is $$\cos(\alpha - \beta) = \cos \alpha \cos \beta + \sin \alpha \sin \beta$$.
+
+### Sum of Cosine
+
+We can derive the sum formula for cosine by using the difference of cosine because $$\cos(\alpha + \beta) = \cos(\alpha - (-\beta))$$ which means we can use the difference of cosine formula to find the sum of cosine formula.
+
+$$\begin{array}{cccccccc}
+\cos(\alpha + \beta) &=& \cos(\alpha - (-\beta)) \\[1em]
+&=& \cos \alpha \cos(-\beta) + \sin \alpha \sin(-\beta) \\[1em]
+&=& \cos \alpha \cos \beta + \sin \alpha (-\sin \beta) \\[1em]
+&=& \cos \alpha \cos \beta - \sin \alpha \sin \beta \\[1em]
+\end{array}$$
+
+So, the derived formula for the sum of cosine is $$\cos(\alpha + \beta) = \cos \alpha \cos \beta - \sin \alpha \sin \beta$$.
+
+## Cofunction Identities
+ 
+In order to derive the sum of sine formula, we need the cofunction identities. Let's begin by drawing a right triangle with an angle $$\theta$$ in standard position. So, the coordinates of the point where the terminal side of the angle intersects the unit circle is $$(x, y)$$. Using these coordinates, we can deduce that the length of the opposite side of the triangle is $$y$$ and the length of the adjacent side is $$x$$. We also know the value of the hypotenuse is $$1$$ because the radius of the unit circle is $1$. Finally, the angles of the triangle are $$\theta$$ and $$\frac{\pi}{2}$$ so the third angle must be $$\frac{\pi}{2} - \theta$$ because the sum of the angles in a triangle is equal to $$\pi$$. This gives us the following diagram...
+
+<Fig src={alg2} caption='Cofunction' num={2}/>
+
+Using the diagram, we can solve for the values of the six trigonometric functions for the angle $$\theta$$ and the angle $$\frac{\pi}{2} - \theta$$ giving us the following equations...
+
+$$\begin{array}{lllllllll}
+\sin \theta = y && \sin(90^\circ - \theta) = x \\[1em]
+\cos \theta = x && \cos(90^\circ - \theta) = y \\[1em]
+\tan \theta = \frac{y}{x} && \tan(90^\circ - \theta) = \frac{x}{y} \\[1em]
+\csc \theta = \frac{1}{y} && \csc(90^\circ - \theta) = \frac{1}{x} \\[1em]
+\sec \theta = \frac{1}{x} && \sec(90^\circ - \theta) = \frac{1}{y} \\[1em]
+\cot \theta = \frac{x}{y} && \cot(90^\circ - \theta) = \frac{y}{x} \\[1em]
+\end{array}$$
+
+Using these equations, we can derive the cofunction identities by rewriting the equations in terms of $$\theta$$ and $$\frac{\pi}{2} - \theta$$. This gives us the following cofunction identities...
+
+$$\begin{array}{lllllllll}
+\sin \alpha &=& \cos(90^\circ - \theta) \\[1em]
+\cos \alpha &=& \sin(90^\circ - \theta) \\[1em]
+\tan \alpha &=& \cot(90^\circ - \theta) \\[1em]
+\csc \alpha &=& \sec(90^\circ - \theta) \\[1em]
+\sec \alpha &=& \csc(90^\circ - \theta) \\[1em]
+\cot \alpha &=& \tan(90^\circ - \theta) \\[1em]
+\end{array}$$
+
+### Sum of Sine
+
+Using the cofunction identities, we can rewrite $$\sin(\alpha + \beta)$$ as $$\sin(\alpha + \beta) = \cos(\frac{\pi}{2} - (\alpha + \beta))$$ which is in the same form as the difference of cosine formula. So, we can use the difference of cosine formula to find the sum of sine formula...
+
+$$\begin{array}{cccccccc}
+\sin(\alpha + \beta) &=& \cos(\frac{\pi}{2} - (\alpha + \beta)) \\[1em]
+&=& \cos(\frac{\pi}{2} - \alpha - \beta) \\[1em]
+&=& \cos((\frac{\pi}{2} - \alpha) - \beta) \\[1em]
+&=& \cos(\frac{\pi}{2} - \alpha)\cos \beta + \sin(\frac{\pi}{2} - \alpha)\sin \beta \\[1em]
+&=& \sin \alpha \cos \beta + \cos \alpha \sin \beta \\[1em]
+\end{array}$$
+
+So, the derived formula for the sum of sine is $$\sin(\alpha + \beta) = \sin \alpha \cos \beta + \cos \alpha \sin \beta$$.
+
+### Difference of Sine
+
+We can derive the difference formula for sine by using the sum of sine formula because $$\sin(\alpha - \beta) = \sin(\alpha + (-\beta))$$...
+
+$$\begin{array}{cccccccc}
+\sin(\alpha - \beta) &=& \sin(\alpha + (-\beta)) \\[1em]
+&=& \sin \alpha \cos(-\beta) + \cos \alpha \sin(-\beta) \\[1em]
+&=& \sin \alpha \cos \beta + \cos \alpha (-\sin \beta) \\[1em]
+&=& \sin \alpha \cos \beta - \cos \alpha \sin \beta \\[1em]
+\end{array}$$
+
+So, the derived formula for the difference of sine is $$\sin(\alpha - \beta) = \sin \alpha \cos \beta - \cos \alpha \sin \beta$$.
+
+## Sum and Difference of Tangent
+
+Using the fact that $$\tan \theta = \dfrac{\sin \theta}{\cos \theta}$$, we can derive the sum and difference formulas for tangent. Let's begin with the sum of tangent formula...
+
+$$\begin{array}{cccccccc}
+\tan(\alpha + \beta) &=& \dfrac{\sin(\alpha + \beta)}{\cos(\alpha + \beta)} \\[1.5em]
+&=& \dfrac{\sin \alpha \cos \beta + \cos \alpha \sin \beta}{\cos \alpha \cos \beta - \sin \alpha \sin \beta} \\[1.5em]
+&=& \dfrac{\sin \alpha \cos \beta + \cos \alpha \sin \beta}{\cos \alpha \cos \beta} \div \dfrac{\cos \alpha \cos \beta - \sin \alpha \sin \beta}{\cos \alpha \cos \beta} \\[1.5em]
+&=& (\dfrac{\sin \alpha \cos \beta}{\cos \alpha \cos \beta} + \dfrac{\cos \alpha \sin \beta}{\cos \alpha \cos \beta}) \div (\dfrac{\cos \alpha \cos \beta}{\cos \alpha \cos \beta} - \dfrac{\sin \alpha \sin \beta}{\cos \alpha \cos \beta}) \\[1.5em]
+&=& (\dfrac{\sin \alpha}{\cos \alpha} + \dfrac{\sin \beta}{\cos \beta}) \div (1 - \dfrac{\sin \alpha \sin \beta}{\cos \alpha \cos \beta}) \\[1.5em]
+&=& (\tan \alpha + \tan \beta) \div (1 - \tan \alpha \tan \beta) \\[1.5em]
+&=& \dfrac{\tan \alpha + \tan \beta}{1 - \tan \alpha \tan \beta} \\[1.5em]
+\end{array}$$
+
+So, the derived formula for the sum of tangent is $$\tan(\alpha + \beta) = \dfrac{\tan \alpha + \tan \beta}{1 - \tan \alpha \tan \beta}$$. We can now derive the difference of tangent formula using the sum of tangent formula because $$\tan(\alpha - \beta) = \tan(\alpha + (-\beta))$$...
+
+$$\begin{array}{cccccccc}
+\tan(\alpha - \beta) &=& \tan(\alpha + (-\beta)) \\[1em]
+&=& \dfrac{\tan \alpha + \tan(-\beta)}{1 - \tan \alpha \tan(-\beta)} \\[1.5em]
+&=& \dfrac{\tan \alpha + (-\tan \beta)}{1 - \tan \alpha (-\tan \beta)} \\[1.5em]
+&=& \dfrac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta} \\[1.5em]
+\end{array}$$
+
+So, the derived formula for the difference of tangent is $$\tan(\alpha - \beta) = \dfrac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}$$.
+
+## Trigonometric Identities
+
+The cofunction identities are...
+
+$$\begin{array}{ccccccccc}
+\sin(90^\circ - \theta) &=& \cos \theta &&&  \cos(90^\circ - \theta) &=& \sin \theta \\[1em]
+\csc(90^\circ - \theta) &=& \sec \theta &&&  \sec(90^\circ - \theta) &=& \csc \theta \\[1em]
+\tan(90^\circ - \theta) &=& \cot \theta &&&  \cot(90^\circ - \theta) &=& \tan \theta \\[1em]
+\end{array}$$
+
+and the sum and difference identities are...
+
+$$\begin{array}{ccccccccc}
+\sin(\alpha + \beta) &=& \sin \alpha \cos \beta + \cos \alpha \sin \beta \\[1.5em]
+\sin(\alpha - \beta) &=& \sin \alpha \cos \beta - \cos \alpha \sin \beta \\[1.5em]
+\cos(\alpha + \beta) &=& \cos \alpha \cos \beta - \sin \alpha \sin \beta \\[1.5em]
+\cos(\alpha - \beta) &=& \cos \alpha \cos \beta + \sin \alpha \sin \beta \\[1.5em]
+\tan(\alpha + \beta) &=& \dfrac{\tan \alpha + \tan \beta}{1 - \tan \alpha \tan \beta} \\[1.5em]
+\tan(\alpha - \beta) &=& \dfrac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta} \\[1.5em]
+\end{array}$$
