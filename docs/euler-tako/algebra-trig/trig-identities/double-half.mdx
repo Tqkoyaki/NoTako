@@ -1,0 +1,154 @@
+---
+id: page-3
+title: Half and Double Angle Identities
+sidebar_position: 3
+---
+
+We have already derived formulas for the sum and difference of angles which allowed us to precisely calculate the sine, cosine, and tangent of many new angles using the special angles. We can take this a step further by deriving formulas for the double and half angles of sine, cosine, and tangent which will gives us even more tools to manipulate the angles inside of trigonometric functions.
+
+## Double Angle
+
+To derive the double angle formulas, we can use the sum formulas by letting $$\theta = \alpha$$ and $$\theta = \beta$$ causing both angles to be equal. If we sum them up we get $$\theta + \theta = 2\theta$$ which is the double angle.
+
+The double angle formula for $$\sin(2\theta)$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\sin(\alpha + \beta) &=& \sin(\alpha)\cos(\beta) + \cos(\alpha)\sin(\beta) \\[0.5em]
+\sin(\theta + \theta) &=& \sin(\theta)\cos(\theta) + \cos(\theta)\sin(\theta) \\[0.5em]
+\sin(2\theta) &=& \sin(\theta)\cos(\theta) + \cos(\theta)\sin(\theta) \\[0.5em]
+&=& 2\sin(\theta)\cos(\theta) \\[0.5em]
+\end{array}$$
+
+The double angle formula for $$\cos(2\theta)$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\cos(\alpha + \beta) &=& \cos(\alpha)\cos(\beta) - \sin(\alpha)\sin(\beta) \\[0.5em]
+\cos(\theta + \theta) &=& \cos(\theta)\cos(\theta) - \sin(\theta)\sin(\theta) \\[0.5em]
+\cos(2\theta) &=& \cos(\theta)\cos(\theta) - \sin(\theta)\sin(\theta) \\[0.5em]
+&=& \cos^2(\theta) - \sin^2(\theta) \\[0.5em]
+\end{array}$$
+
+:::note
+We can create two more double angles formulas for $$\cos(2\theta)$$ by using the Pythagorean identity $$\sin^2(\theta) + \cos^2(\theta) = 1$$ to substitute for $$\sin^2(\theta)$$ and $$\cos^2(\theta)$$ in the double angle formula we just derived. This gives us...
+
+- $$\cos(2\theta) = \cos^2(\theta) - \sin^2(\theta) = (1 - \sin^2(\theta)) - \sin^2(\theta) = 1 - 2\sin^2(\theta)$$
+- $$\cos(2\theta) = \cos^2(\theta) - \sin^2(\theta) = \cos^2(\theta) - (1 - \cos^2(\theta)) = 2\cos^2(\theta) - 1$$
+:::
+
+Finally, the double angle formula for $$\tan(2\theta)$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\tan(\alpha + \beta) &=& \dfrac{\tan(\alpha) + \tan(\beta)}{1 - \tan(\alpha)\tan(\beta)} \\[1.5em]
+\tan(\theta + \theta) &=& \dfrac{\tan(\theta) + \tan(\theta)}{1 - \tan(\theta)\tan(\theta)} \\[1.5em]
+\tan(2\theta) &=& \dfrac{\tan(\theta) + \tan(\theta)}{1 - \tan^2(\theta)} \\[1.5em]
+&=& \dfrac{2\tan(\theta)}{1 - \tan^2(\theta)} \\[1.5em]
+\end{array}$$
+
+### Verify Identities
+
+As we grow our toolbox of identities, we are able to manipulate trigonometric expressions in more ways. We can use these identities like the double angle formulas to verify other identities...
+
+> $$\underline{Example}$$
+>
+> Verify the identity $$\cos^4(\theta) - \sin^4(\theta) = \cos(2\theta)$$
+>
+> We can manipulate $$\cos^{4}\theta - \sin^{4}\theta$$ to arrive at $$\cos(2\theta)$$...
+>
+> $$\begin{array}{lllllllll}
+> \cos(2\theta) &=& (\cos^{2}\theta)^2 - (\sin^{2}\theta)^2 \\[1.5em]
+> &=& (\cos^{2}\theta - \sin^{2}\theta)(\cos^{2}\theta + \sin^{2}\theta) \\[1.5em]
+> &=& (\cos^{2}\theta - \sin^{2}\theta)(1) \\[1.5em]
+> &=& \cos^{2}\theta - \sin^{2}\theta \\[1.5em]
+> &=& \cos(2\theta) \\[1.5em]
+> \end{array}$$
+>
+> This verifies the identity.
+
+## Reduction Formulas
+
+The reduction formulas are formulas which allow us to reduce the power of a trigonometric function to a lower power. This can be useful when we are trying to integrate trigonometric functions and we can derive them from the double angles formulas.
+
+The reduction formula for $$\sin^{2}\theta$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\cos(2\theta) &=& 1 - 2\sin^{2}\theta \\[1.5em]
+\cos(2\theta) - 1 &=& -2\sin^{2}\theta \\[1.5em]
+1 - \cos(2\theta) &=& 2\sin^{2}\theta \\[1.5em]
+\dfrac{1 - \cos(2\theta)}{2} &=& \sin^{2}\theta \\[1.5em]
+\end{array}$$
+
+The reduction formula for $$\cos^{2}\theta$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\cos(2\theta) &=& 2\cos^{2}\theta - 1 \\[1.5em]
+1 + \cos(2\theta) &=& 2\cos^{2}\theta \\[1.5em]
+\dfrac{1 + \cos(2\theta)}{2} &=& \cos^{2}\theta \\[1.5em]
+\end{array}$$
+
+Finally, the reduction formula for $$\tan^{2}\theta$$ is derived using the other two reduction formulas as follows...
+
+$$\begin{array}{lllllllll}
+\tan^{2}\theta &=& \dfrac{\sin^{2}\theta}{\cos^{2}\theta} \\[1.5em]
+&=& (\dfrac{1 - \cos(2\theta)}{2}) \div (\dfrac{1 + \cos(2\theta)}{2}) \\[1.5em]
+&=& (\dfrac{1 - \cos(2\theta)}{2})(\dfrac{2}{1 + \cos(2\theta)}) \\[1.5em]
+&=& \dfrac{1 - \cos(2\theta)}{1 + \cos(2\theta)} \\[1.5em]
+\end{array}$$
+
+## Half Angle
+
+The half angle formulas are formulas which allow us to find the sine, cosine, and tangent of half angles. These formulas are useful for finding the exact value of angles that are half of special angles and we can derive them by substituting $$\dfrac{\alpha}{2}$$ for $$\theta$$ in the reduction formulas.
+
+The half angle formula for $$\sin(\dfrac{\alpha}{2})$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\sin^{2}\theta &=& \dfrac{1 - \cos(2\theta)}{2} \\[1.5em]
+\sin^{2}(\dfrac{\alpha}{2}) &=& \dfrac{1 - \cos(2 (\alpha / 2))}{2} \\[1.5em]
+&=& \dfrac{1 - \cos(\alpha)}{2} \\[1.5em]
+\sin(\dfrac{\alpha}{2}) &=& \pm\sqrt{\dfrac{1 - \cos \alpha}{2}} \\[1.5em]
+\end{array}$$
+
+The half angle formula for $$\cos(\dfrac{\alpha}{2})$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\cos^{2}\theta &=& \dfrac{1 + \cos(2\theta)}{2} \\[1.5em]
+\cos^{2}(\dfrac{\alpha}{2}) &=& \dfrac{1 + \cos(2 (\alpha / 2))}{2} \\[1.5em]
+&=& \dfrac{1 + \cos(\alpha)}{2} \\[1.5em]
+\cos(\dfrac{\alpha}{2}) &=& \pm\sqrt{\dfrac{1 + \cos \alpha}{2}} \\[1.5em]
+\end{array}$$
+
+Finally, the half angle formula for $$\tan(\dfrac{\alpha}{2})$$ is derived as follows...
+
+$$\begin{array}{lllllllll}
+\tan^{2}\theta &=& \dfrac{1 - \cos(2\theta)}{1 + \cos(2\theta)} \\[1.5em]
+\tan^{2}(\dfrac{\alpha}{2}) &=& \dfrac{1 - \cos(2 (\alpha / 2))}{1 + \cos(2 (\alpha / 2))} \\[1.5em]
+&=& \dfrac{1 - \cos(\alpha)}{1 + \cos(\alpha)} \\[1.5em]
+\tan(\dfrac{\alpha}{2}) &=& \pm\sqrt{\dfrac{1 - \cos \alpha}{1 + \cos \alpha}} \\[1.5em]
+\end{array}$$
+
+## Summary
+
+The double angles formulas are...
+
+$$\begin{array}{lllllllll}
+\sin(2\theta) &=& 2\sin(\theta)\cos(\theta) \\[1.5em]
+\cos(2\theta) &=& \cos^{2}(\theta) - \sin^{2}(\theta) \\[0.5em]
+&=& 2\cos^{2}(\theta) - 1 \\[0.5em]
+&=& 1 - 2\sin^{2}(\theta) \\[1.5em]
+\tan(2\theta) &=& \dfrac{2\tan(\theta)}{1 - \tan^{2}(\theta)} \\[1.5em]
+\end{array}$$
+
+The half angle formulas are...
+
+$$\begin{array}{lllllllll}
+\sin(\dfrac{\alpha}{2}) &=& \pm\sqrt{\dfrac{1 - \cos \alpha}{2}} \\[1.5em]
+\cos(\dfrac{\alpha}{2}) &=& \pm\sqrt{\dfrac{1 + \cos \alpha}{2}} \\[1.5em]
+\tan(\dfrac{\alpha}{2}) &=& \pm\sqrt{\dfrac{1 - \cos \alpha}{1 + \cos \alpha}} \\[1.5em]
+\end{array}$$
+
+Finally, the reduction formulas are...
+
+$$\begin{array}{lllllllll}
+\sin^{2}\theta &=& \dfrac{1 - \cos(2\theta)}{2} \\[1.5em]
+\cos^{2}\theta &=& \dfrac{1 + \cos(2\theta)}{2} \\[1.5em]
+\tan^{2}\theta &=& \dfrac{1 - \cos(2\theta)}{1 + \cos(2\theta)} \\[1.5em]
+\end{array}$$
