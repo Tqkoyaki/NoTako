@@ -1,0 +1,113 @@
+---
+id: page-4
+title: Sum and Product Identities
+sidebar_position: 4
+---
+
+Adding on to the previous identities, we can also express the sum and product of trigonometric functions in terms of each other. These identities are useful for simplifying expressions and solving equations.
+
+## Product as Sum
+
+We can derive the product-to-sum identities by adding or subtracting the sum-to-product identities together. The product of two cosine functions can be derived by adding $$\cos(\alpha - \beta)$$ and $$\cos(\alpha + \beta)$$ together...
+
+$$\begin{array}{ccccc}
+\phantom{+\:} \cos(\alpha - \beta) &=& \cos \alpha \cos \beta + \sin \alpha \sin \beta \\[0.5em]
++\: \cos(\alpha + \beta) &=& \cos \alpha \cos \beta - \sin \alpha \sin \beta \\[1em]
+\hline \\[0em]
+\cos(\alpha - \beta) + \cos(\alpha + \beta) &=& 2 \cos \alpha \cos \beta \\[0.5em]
+\dfrac{1}{2} \Bigl[\cos(\alpha - \beta) + \cos(\alpha + \beta)\Bigr] &=& \cos \alpha \cos \beta \\[0.5em]
+\end{array}$$
+
+The product of a sine and a cosine function can be derived by adding $$\sin(\alpha + \beta)$$ and $$\sin(\alpha - \beta)$$ together...
+
+$$\begin{array}{ccccc}
+\phantom{+\:} \sin(\alpha + \beta) &=& \sin \alpha \cos \beta + \cos \alpha \sin \beta \\[0.5em]
++\: \sin(\alpha - \beta) &=& \sin \alpha \cos \beta - \cos \alpha \sin \beta \\[1em]
+\hline \\[0em]
+\sin(\alpha + \beta) + \sin(\alpha - \beta) &=& 2 \sin \alpha \cos \beta \\[0.5em]
+\dfrac{1}{2} \Bigl[\sin(\alpha + \beta) + \sin(\alpha - \beta)\Bigr] &=& \sin \alpha \cos \beta \\[0.5em]
+\end{array}$$
+
+The product of two sine functions can be derived by subtracting $$\cos(\alpha + \beta)$$ from $$\cos(\alpha - \beta)$$...
+
+$$\begin{array}{ccccc}
+\phantom{-\:} \cos(\alpha - \beta) &=& \sin \alpha \sin \beta + \cos \alpha \cos \beta \\[0.5em]
+-\: \cos(\alpha + \beta) &=& \sin \alpha \sin \beta - \cos \alpha \cos \beta \\[1em]
+\hline \\[0em]
+\cos(\alpha - \beta) - \cos(\alpha + \beta) &=& 2 \sin \alpha \sin \beta \\[0.5em]
+\dfrac{1}{2} \Bigl[\cos(\alpha - \beta) - \cos(\alpha + \beta)\Bigr] &=& \sin \alpha \sin \beta \\[0.5em]
+\end{array}$$
+
+Finally, the product of cosine and a sine function can be derived by subtracting $$\sin(\alpha - \beta)$$ from $$\sin(\alpha + \beta)$$...
+
+$$\begin{array}{ccccc}
+\phantom{-\:} \sin(\alpha + \beta) &=& \sin \alpha \cos \beta + \cos \alpha \sin \beta \\[0.5em]
+-\: \sin(\alpha - \beta) &=& \sin \alpha \cos \beta - \cos \alpha \sin \beta \\[1em]
+\hline \\[0em]
+\sin(\alpha + \beta) - \sin(\alpha - \beta) &=& 2 \cos \alpha \sin \beta \\[0.5em]
+\dfrac{1}{2} \Bigl[\sin(\alpha + \beta) - \sin(\alpha - \beta)\Bigr] &=& \cos \alpha \sin \beta \\[0.5em]
+\end{array}$$
+
+## Sum as Product
+
+Sometimes it is useful to reverse the process and express the sum of two trigonometric functions in terms of their product. These identities can be derived through the use of product-to-sum identities and substitute. We can express both $$\alpha$$ and $$\beta$$ in terms of $$u$$ and $$v$$ where $$\alpha = \dfrac{u + v}{2}$$ and $$\beta = \dfrac{u - v}{2}$$. Substituting these values into $$\alpha + \beta$$ and $$\alpha - \beta$$ gives us the following equations...
+
+$$\begin{array}{cccccccccc}
+\alpha + \beta &=& \dfrac{u + v}{2} + \dfrac{u - v}{2} \:\:\:\:&&\:\:\:\: \alpha - \beta &=& \dfrac{u + v}{2} - \dfrac{u - v}{2} \\[1em]
+&=& \dfrac{u + v + u - v}{2} && &=& \dfrac{u + v - u + v}{2} \\[1em]
+&=& \dfrac{2u}{2} && &=& \dfrac{2v}{2} \\[1em]
+&=& u && &=& v \\[1em]
+\end{array}$$
+
+
+We can use the facts that $$\alpha = \dfrac{u + v}{2}$$, $$\beta = \dfrac{u - v}{2}$$, $$\alpha + \beta = u$$, and $$\alpha - \beta = v$$ to derive all the sum-to-product identities. Substituting into $$\cos(\alpha)\cos(\beta)$$ gives us the following equation...
+
+$$\begin{array}{ccccc}
+\cos(\alpha)\cos(\beta) &=& \dfrac{1}{2} \Bigl[\cos(\alpha + \beta) + \cos(\alpha - \beta)\Bigr] \\[1em]
+2\cos(\alpha)\cos(\beta) &=& \cos(\alpha + \beta) + \cos(\alpha - \beta) \\[1em]
+2\cos(\dfrac{u + v}{2})\cos(\dfrac{u - v}{2}) &=& \cos(u) + \cos(v) \\[1em]
+\end{array}$$
+
+Substituting into $$\sin(\alpha)\cos(\beta)$$ gives us the following equation...
+
+$$\begin{array}{ccccc}
+\sin(\alpha)\cos(\beta) &=& \dfrac{1}{2} \Bigl[\sin(\alpha + \beta) + \sin(\alpha - \beta)\Bigr] \\[1em]
+2\sin(\alpha)\cos(\beta) &=& \sin(\alpha + \beta) + \sin(\alpha - \beta) \\[1em]
+2\sin(\dfrac{u + v}{2})\cos(\dfrac{u - v}{2}) &=& \sin(u) + \sin(v) \\[1em]
+\end{array}$$
+
+Substituting into $$\sin(\alpha)\sin(\beta)$$ gives us the following equation...
+
+$$\begin{array}{ccccc}
+\sin(\alpha)\sin(\beta) &=& \dfrac{1}{2} \Bigl[\cos(\alpha - \beta) - \cos(\alpha + \beta)\Bigr] \\[1em]
+2\sin(\alpha)\sin(\beta) &=& \cos(\alpha - \beta) - \cos(\alpha + \beta) \\[1em]
+2\sin(\dfrac{u + v}{2})\sin(\dfrac{u - v}{2}) &=& \cos(u) - \cos(v) \\[1em]
+\end{array}$$
+
+Finally, substituting into $$\cos(\alpha)\sin(\beta)$$ gives us the following equation...
+
+$$\begin{array}{ccccc}
+\cos(\alpha)\sin(\beta) &=& \dfrac{1}{2} \Bigl[\sin(\alpha + \beta) - \sin(\alpha - \beta)\Bigr] \\[1em]
+2\cos(\alpha)\sin(\beta) &=& \sin(\alpha + \beta) - \sin(\alpha - \beta) \\[1em]
+2\cos(\dfrac{u + v}{2})\sin(\dfrac{u - v}{2}) &=& \sin(u) - \sin(v) \\[1em]
+\end{array}$$
+
+## Trigonometric Identities
+
+All the product-to-sum identities are...
+
+$$\begin{array}{ccccccccc}
+\cos(\alpha)\cos(\beta) &=& \dfrac{1}{2} \Bigl[\cos(\alpha + \beta) + \cos(\alpha - \beta)\Bigr] \\[1em]
+\sin(\alpha)\cos(\beta) &=& \dfrac{1}{2} \Bigl[\sin(\alpha + \beta) + \sin(\alpha - \beta)\Bigr] \\[1em]
+\sin(\alpha)\sin(\beta) &=& \dfrac{1}{2} \Bigl[\cos(\alpha - \beta) - \cos(\alpha + \beta)\Bigr] \\[1em]
+\cos(\alpha)\sin(\beta) &=& \dfrac{1}{2} \Bigl[\sin(\alpha + \beta) - \sin(\alpha - \beta)\Bigr] \\[1em]
+\end{array}$$
+
+All the sum-to-product identities are...
+
+$$\begin{array}{ccccccccc}
+\cos(\alpha) + \cos(\beta) &=& 2 \cos (\dfrac{\alpha + \beta}{2}) \cos (\dfrac{\alpha - \beta}{2}) \\[1em]
+\sin(\alpha) + \sin(\beta) &=& 2 \sin (\dfrac{\alpha + \beta}{2}) \cos (\dfrac{\alpha - \beta}{2}) \\[1em]
+\sin(\alpha) - \sin(\beta) &=& 2 \cos (\dfrac{\alpha + \beta}{2}) \sin (\dfrac{\alpha - \beta}{2}) \\[1em]
+\cos(\alpha) - \cos(\beta) &=& -2 \sin (\dfrac{\alpha + \beta}{2}) \sin (\dfrac{\alpha - \beta}{2}) \\[1em]
+\end{array}$$

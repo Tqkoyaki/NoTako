@@ -221,6 +221,7 @@ const sidebars = {
             'euler-tako/algebra-trig/trig-identities/page-1',
             'euler-tako/algebra-trig/trig-identities/page-2',
             'euler-tako/algebra-trig/trig-identities/page-3',
+            'euler-tako/algebra-trig/trig-identities/page-4',
           ]
         },
       ]
