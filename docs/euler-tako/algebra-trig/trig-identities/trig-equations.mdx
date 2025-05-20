@@ -1,0 +1,186 @@
+---
+id: page-5
+title: Trigonometric Equations
+sidebar_position: 5
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-109.jpg';
+
+We have explored the trigonometric functions and their properties in the previous sections. However, those are just tools to help us work with equations that involve trigonometric functions. By utilizing the properties of trigonometric functions and algebraic manipulation, we can solve a variety of equations, including ones that model real-world phenomena.
+
+## Linear Equations
+
+Oftentimes, we will solve a trigonometric equation over a specific interval. However, just as often, we will be interested in all possible solutions which may cause us to have an infinite number of solutions as trigonometric functions are periodic.
+
+We know that trigonometric functions repeat their values at regular intervals called the period so we could add or subtract $Pk$ to a solution of the equation where $P$ is the period of the function and $k$ is any integer. This would give us a general solution to the equation.
+
+> $$\underline{Example}$$
+>
+> Find all the solutions to the following linear equation: $$2 \sin x + 1 = 0$$
+>
+> We can start by isolating the sine function...
+>
+> $$\begin{array}{cccccccc}
+> 2 \sin x + 1 &=& 0 \\[0.5em]
+> 2 \sin x &=& -1 \\[0.5em]
+> \sin x &=& -\frac{1}{2} \\[0.5em]
+> \end{array}$$
+>
+> Using the unit circle, we can find that $$\sin x = -\frac{1}{2}$$ at $$x = \frac{7\pi}{6}$$ and $$x = \frac{11\pi}{6}$$. 
+>
+> However, we are looking for all solutions to the equation so we need to add the period of the sine function to both solutions using $$x = Pk$$ where $$P = 2\pi$$ and $$k$$ is any integer.
+>
+> The solutions are $$x = \frac{7\pi}{6} + 2\pi k$$ and $$x = \frac{11\pi}{6} + 2\pi k$$ where $k$ is any integer.
+
+:::note
+Just like rational equations, the domain of a trigonometric function must be considered before assuming that any solution is valid because we could have any number of solutions including no solution at all depending on the domain.
+:::
+
+## Single Function Equations
+
+When working with equations that involve only one trigonometric function, their solutions typically involve using algebraic techniques and the unit circle. However, when these equations involve trigonometric functions other than sine and cosine, we typically try to use trigonometric properties to solve the equation for sine or cosine because they are convenient to work with.
+
+> $$\underline{Example}$$
+>
+> Find all solutions in the interval $$[0, 4\pi)$$ to the following equation: $$\csc \theta = -2$$.
+>
+> We can rewrite cosecant in terms of sine and then isolate the sine function...
+>
+> $$\begin{array}{cccccccc}
+> \csc \theta &=& -2 \\[0.5em]
+> \dfrac{1}{\sin \theta} &=& -2 \\[1em]
+> 1 &=& -2 \sin \theta \\[0.5em]
+> \sin \theta &=& -\frac{1}{2} \\[0.5em]
+> \end{array}$$
+>
+> Using the unit circle, we can find that $$\sin \theta = -\dfrac{1}{2}$$ at $$\theta = \dfrac{7\pi}{6}$$ and $$\theta = \dfrac{11\pi}{6}$$.
+>
+> Using the periodicity of sine, we can find all solutions in the interval $$[0, 4\pi)$$ by adding the period of sine to each solution: $$\theta = \dfrac{7\pi}{6}, \dfrac{11\pi}{6}, \dfrac{7\pi}{6} + 2\pi, \dfrac{11\pi}{6} + 2\pi$$. All other solutions are outside of the interval $$[0, 4\pi)$$.
+>
+> The solutions are $$\theta = \dfrac{7\pi}{6}, \dfrac{11\pi}{6}, \dfrac{19\pi}{6}, \dfrac{23\pi}{6}$$.
+
+### Tangent and Cotangent Equations
+
+The use of just sine or cosine tends to not be possible all the time with tangent and cotangent functions so we try to solve for tangent and use tangents period of $$\pi$$ to find any additional solutions.
+
+> $$\underline{Example}$$
+>
+> Find all solutions in the interval $$[0, 2\pi)$$ to the following equation: $$\tan (\theta - \dfrac{\pi}{2}) = 1$$.
+>
+> Using the unit circle, we can find that $$\tan \theta = 1$$ at $$\theta = \dfrac{\pi}{4}$$. However, the angle we are looking for is $$\theta - \dfrac{\pi}{2}$$ which we can find using the equation $$\theta - \dfrac{\pi}{2} = \dfrac{\pi}{4}$$. This gives us $$\theta = \dfrac{\pi}{4} + \dfrac{\pi}{2} = \dfrac{3\pi}{4}$$.
+>
+> We can use the fact that the period of tangent is $$\pi$$ to find the general solution: $$\theta = \dfrac{3\pi}{4} + \pi k$$ where $$k$$ is any integer.
+>
+> Using this general solution, we can find all solutions in the interval $$[0, 2\pi)$$ by substituting $$k = 0$$ and $$k = 1$$. Every other solution will be outside of the interval.
+>
+> This gives us the solutions $$\theta = \dfrac{3\pi}{4}$$ and $$\theta = \dfrac{7\pi}{4}$$.
+
+## Quadratic Form
+
+The quadratic form is a pattern we can find in a multitude of equations including ones that involve trigonmetric functions. If there is only one trigonometric function represented and one of the terms is squared, then we can think about the equation as a quadratic equation. This means we can replace the trigonometric function with a variable such as $$x$$ or $$u$$ and then solve the equation as we would a quadratic equation. Once we have solved for the variable, we can substitute back in the trigonometric function to find the solutions.
+
+> $$\underline{Example}$$
+>
+> Solve the quadratic equation $$2 \cos^2{\theta} + \cos{\theta} = 0$$.
+>
+> We can substitute $$u = \cos{\theta}$$ to get the following equation: $$2u^2 + u = 0$$. We can now solve for $$u$$ using algebraic techniques.
+>
+> $$\begin{array}{cccccccc}
+> 2u^2 + u &=& 0 \\[0.5em]
+> u(2u + 1) &=& 0 \\[0.5em]
+> u = 0 \quad &\text{or}& \quad 2u + 1 = 0 \\[0.5em]
+> u = 0 \quad &\text{or}& \quad u = -\dfrac{1}{2} \\[0.5em]
+> \end{array}$$
+>
+> We can now substitute back in for $$u$$ to get the following equations: $$\cos{\theta} = 0$$ and $$\cos{\theta} = -\dfrac{1}{2}$$.
+>
+> Solving for $$\cos{\theta} = 0$$ gives us the solutions $$\theta = \dfrac{\pi}{2} + \pi k$$ where $$k$$ is any integer.
+>
+> Solving for $$\cos{\theta} = -\dfrac{1}{2}$$ gives us the solutions $$\theta = \dfrac{2\pi}{3} + 2\pi k$$ and $$\theta = \dfrac{4\pi}{3} + 2\pi k$$ where $$k$$ is any integer.
+>
+> The solutions in the interval $$[0, 2\pi)$$ are $$\theta = \dfrac{\pi}{2}, \dfrac{2\pi}{3}, \dfrac{4\pi}{3}, \dfrac{3\pi}{2}$$.
+
+## Fundemental Identities
+
+Algebraic techniques are valuable for working with trigonometric equations but we also have a variety of powerful identities that are just as valuable because they make solving equations simpler. Once we identity that a portion of the equation matches any side of an identity, we can replace it with the other side to make the equation easier to work with. By doing this, we can solve a plethora of equations that involve trigonometric functions.
+
+> $$\underline{Example}$$
+>
+> Use identities to solve the trigonometric equation over the interval $$[0, 2\pi)$$: $$\cos x \cos{(2x)} + \sin x \sin{(2x)} = \dfrac{\sqrt{3}}{2}$$.
+>
+> The left side of the equation, $$\cos x \cos{(2x)} + \sin x \sin{(2x)}$$, matches the cosine of a sum identity: $$\cos{(a + b)} = \cos a \cos b - \sin a \sin b$$. We can use this identity to simplify and solve the equation...
+>
+> $$\begin{array}{cccccccc}
+> \cos x \cos{(2x)} + \sin x \sin{(2x)} &=& \dfrac{\sqrt{3}}{2} \\[1em]
+> \cos{(x - 2x)} &=& \dfrac{\sqrt{3}}{2} \\[1em]
+> \cos{(-x)} &=& \dfrac{\sqrt{3}}{2} \\[1em] 
+> \end{array}$$
+>
+> We can simplify further by using the negative angle identity where $$\cos{(-x)} = \cos x$$ to get the following equation: $$\cos x = \dfrac{\sqrt{3}}{2}$$.
+>
+> Using the unit circle, we can find that $$\cos x = \dfrac{\sqrt{3}}{2}$$ at $$x = \dfrac{\pi}{6}$$ and $$x = \dfrac{11\pi}{6}$$.
+>
+> The solutions in the interval $$[0, 2\pi)$$ are $$x = \dfrac{\pi}{6}$$ and $$x = \dfrac{11\pi}{6}$$.
+
+## Multiple Angles
+
+Sometimes it is not possible to solve a trigonmetric equation with identities that have multiple angles such as $$\sin(2x)$$ or $$\cos(3x)$$. In these cases, we can use our fundemental knowledge of trigonometry to analyze the equation and find a solution. For example, we know that $$\sin(2x)$$ is a horizontal compression of $$\sin x$$ by a factor of $$2$$. This means there are twice as many solutions in the same interval because the function $$y = \sin(2x)$$ will complete $$2$$ cycles at the same time as $$y = \sin x$$ completes one cycle. This is valuable information because it allows us to understand how many solutions to expect and gives us another way to analyze the equation which in turn helps us solve the equation.
+
+> $$\underline{Example}$$
+>
+> Solve exactly: $$\cos(2x) = \dfrac{1}{2}$$ on $$[0,2\pi)$$.
+>
+> The trigonometric function $$\cos(2x)$$ is a horizontal compression of the cosine function by a factor of $$2$$ which means that the function will complete $$2$$ cycles in the same interval as the cosine function. This means we can expect $$2$$ times as many solutions in the interval $$[0, 2\pi)$$.
+>
+> Using the unit circle, we can find that $$\cos x = \dfrac{1}{2}$$ at $$x = \dfrac{\pi}{3}$$ and $$x = \dfrac{5\pi}{3}$$. As we are compressing the function by a factor of $$2$$, we can find the solutions for $$\cos(2x) = \dfrac{1}{2}$$ by dividing the solutions by $$2$$. This gives us $$x = \dfrac{\pi}{6}$$ and $$x = \dfrac{5\pi}{6}$$.
+>
+> We have $$2$$ solutions in the interval $$[0, 2\pi)$$ but we are expecting twice as many solutions compared to $$y = \cos x$$. This means we need to add the period of the function to each solution to find the other solutions in the interval $$[0, 2\pi)$$.
+>
+> $$\begin{array}{cccccccc}
+> 2x &=& \dfrac{\pi}{3} + 2\pi k && 2x &=& \dfrac{5\pi}{3} + 2\pi k \\[1em]
+> 2x &=& \dfrac{\pi}{3} + 2\pi (1) && 2x &=& \dfrac{5\pi}{3} + 2\pi (1) \\[1em]
+> 2x &=& \dfrac{7\pi}{3} && 2x &=& \dfrac{11\pi}{3} \\[1em]
+> x &=& \dfrac{7\pi}{6} && x &=& \dfrac{11\pi}{6} \\[1em]
+> \end{array}$$
+>
+> Both $$x = \dfrac{7\pi}{6}$$ and $$x = \dfrac{11\pi}{6}$$ are inside the interval $$[0, 2\pi)$$ so we can keep them as solutions. If we try any other value for $$k$$, we will get a solution outside of the interval.
+>
+> So, the solutions are $$x = \dfrac{\pi}{6}, \dfrac{5\pi}{6}, \dfrac{7\pi}{6}, \dfrac{11\pi}{6}$$.
+
+:::note
+When we solve a problem similar to the form of $$\sin(nx) = c$$, we must go around the unit circle $$n$$ times.
+:::
+
+## Right Triangles
+
+Finally, we can use all of our techniques to solve trigonmetric equations with the properties of right triangles and the Pythagorean Theorem. This is useful for solving models that involve right triangles as countless real-world applications can be modelled using these right triangles.
+
+> $$\underline{Example}$$
+>
+> One of the cables that anchors the center of the London Eye Ferris wheel to the ground must be replaced. The center of the Ferris wheel is $$69.5$$ meters above the ground, and the second anchor on the ground is $$23$$ meters from the base of the Ferris wheel. Approximately how long is the cable, and what is the angle of elevation (from ground up to the center of the Ferris wheel)?
+>
+> <Fig src={alg1} caption='Right Triangles' num={1}/>
+>
+> We can find the length of the cable using the Pythagorean Theorem. We know the length of both of the sides which we can use to find the length of the hypotenuse...
+>
+> $$\begin{array}{cccccccc}
+> c^2 &=& a^2 + b^2 \\[0.5em]
+> c^2 &=& 69.5^2 + 23^2 \\[0.5em]
+> c^2 &=& 69.5^2 + 529 \\[0.5em]
+> c^2 &=& 4830.25 + 529 \\[0.5em]
+> c^2 &=& 5359.25 \\[0.5em]
+> c &=& \sqrt{5359.25} \\[0.5em]
+> c &\approx& 73.2 \text{ meters} \\[0.5em]
+> \end{array}$$
+>
+> We can find the angle of elevation using the tangent function. We know the length of the opposite side and the adjacent side so we can use $$\tan \theta = \dfrac{opposite}{adjacent}$$ to find the angle of elevation...
+>
+> $$\begin{array}{cccccccc}
+> \tan \theta &=& \dfrac{opposite}{adjacent} \\[1em]
+> \tan \theta &=& \dfrac{69.5}{23} \\[1em]
+> \theta &=& \tan^{-1}(\dfrac{69.5}{23}) \\[1em]
+> \theta &\approx& 71.69^{\circ} \\[1em]
+> \end{array}$$
+>
+> The length of the cable is approximately $$73.2$$ meters and the angle of elevation is approximately $$71.69^{\circ}$$.
