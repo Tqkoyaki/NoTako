@@ -225,6 +225,13 @@ const sidebars = {
             'euler-tako/algebra-trig/trig-identities/page-5',
           ]
         },
+        {
+          type: 'category',
+          label: 'Applications of Trigonometry',
+          items: [
+            'euler-tako/algebra-trig/trig-app/page-1',
+          ]
+        }
       ]
     }
   ],

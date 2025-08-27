@@ -1,0 +1,232 @@
+---
+id: page-1
+title: Law of Sines
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-110.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-111.png';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-112.png';
+import alg4 from '@site/static/img/euler/algebra-trig/alg-113.png';
+import alg5 from '@site/static/img/euler/algebra-trig/alg-114.png';
+import alg6 from '@site/static/img/euler/algebra-trig/alg-115.png';
+import alg7 from '@site/static/img/euler/algebra-trig/alg-116.png';
+import alg8 from '@site/static/img/euler/algebra-trig/alg-117.png';
+import alg9 from '@site/static/img/euler/algebra-trig/alg-118.png';
+
+So far we have derived various tools like the Pythagorean Theorem and Trigonometric Identities to solve problems involving right triangles. Now we will extend our knowledge by deriving tools like the **Law of Sines** in order to solve problems involving all types of triangles.
+
+## Oblique Triangles
+
+Any triangle that is not a right triangle is an **oblique triangle**. We can draw a perpendicular line from one vertex to the opposite side for any of these oblique triangles which will form two right triangles. We can then use all the properties of right triangles to solve the oblique triangle (finding all the missing sides and angles).
+
+This method will work for any oblique triangle, but it is not always the most efficient method. Let's look at three situations for which we will derive a more efficient method to solve...
+
+1. **ASA** (Angle-Side-Angle) - The measurements of two angles and a side between them are known.
+
+<Fig src={alg1} caption='ASA Triangle' num={1}/>
+
+2. **AAS** (Angle-Angle-Side) - The measurements of two angles and a side opposite one of them are known.
+
+<Fig src={alg2} caption='AAS Triangle' num={2}/>
+
+3. **SSA** (Side-Side-Angle) - The measurements of two sides and an angle not between them are known.
+
+<Fig src={alg3} caption='SSA Triangle' num={3}/>
+
+:::note
+We can solve any oblique triangle as long as we have at least three known values (sides or angles) where at least one of them is a side.
+:::
+
+### Law of Sines
+
+We can derive the **Law of Sines** by drawing a perpendicular line from one vertex to the opposite side of an oblique triangle and then using the properties of right triangles. Let $a$, $b$, and $c$ be the lengths of the sides of an oblique triangle and let $\alpha$, $\beta$, and $\gamma$ be the angles opposite those sides. We can draw a perpendicular line from $\beta$ to side $b$ where the length of the perpendicular line is $h$. This gives us the following triangle...
+
+<Fig src={alg4} caption='Law of Sines Derivation' num={4} />
+
+Using the right triangle properties, we know that $\sin \alpha = \dfrac{h}{c}$ and $\sin \gamma = \dfrac{h}{a}$. We can then solve for $h$ for both equations to get $h = c \sin \alpha$ and $h = a \sin \gamma$. Finally, setting these two equations equal and simplifying gives us...
+
+$$\begin{array}{cccccc}
+c \sin \alpha &=& a \sin \gamma \\[0.5em]
+(\dfrac{1}{ac}) (c \sin \alpha) &=& (\dfrac{1}{ac}) (a \sin \gamma) \\[1em]
+\dfrac{\sin \alpha}{a} &=& \dfrac{\sin \gamma}{c} \\[1em]
+\end{array}$$
+
+Now instead of drawing a perpendicular line from $\beta$ to side $b$, we can draw a perpendicular line from $\alpha$ to side $a$ or from $\gamma$ to side $c$. We can use the same process to obtain...
+
+$$\begin{array}{ccccccccccccccccc}
+\dfrac{\sin \alpha}{a} &=& \dfrac{\sin \beta}{b} & \& & \dfrac{\sin \beta}{b} &=& \dfrac{\sin \gamma}{c}
+\end{array}$$
+
+Putting these equations together gives us the **Law of Sines**...
+
+$$\begin{array}{ccccccccccccccccc}
+\dfrac{\sin \alpha}{a} &=& \dfrac{\sin \beta}{b} &=& \dfrac{\sin \gamma}{c}
+\end{array}$$
+
+> $$\underline{Example}$$
+>
+> Solve the triangle to the nearest tenth.
+>
+> <Fig src={alg5} caption='Law of Sines Example' num={5} />
+>
+> This is an ASA triangle because we know two angles and a side which is between them. This means we can use the Law of Sines to find the missing side and angle.
+>
+> Before we use the Law of Sines, we can easily find the missing angle $\beta$ by using the fact that the sum of the angles in a triangle is $180^\circ$.
+>
+> $$\begin{array}{ccccccccccccccccc}
+\alpha + \beta + \gamma &=& 180^\circ \\[0.5em]
+98^\circ + \beta + 43^\circ &=& 180^\circ \\[0.5em]
+\beta + 141^\circ &=& 180^\circ \\[0.5em]
+\beta &=& 39^\circ
+\end{array}$$
+>
+> Now that we know all the angles, we can start finding the values of the missing sides. We will do this by using the known value of $b$ and the Law of Sines.
+>
+> $$\begin{array}{ccccccccccccccccc}
+\dfrac{\sin \alpha}{a} &=& \dfrac{\sin \beta}{b} &&&& \dfrac{\sin \gamma}{c} &=& \dfrac{\sin \beta}{b} \\[1.5em]
+\dfrac{\sin 98^\circ}{a} &=& \dfrac{\sin 39^\circ}{22} &&&& \dfrac{\sin 43^\circ}{c} &=& \dfrac{\sin 39^\circ}{22} \\[1.5em]
+\dfrac{22 \sin 98^\circ}{\sin 39^\circ} &=& a &&&& \dfrac{22 \sin 43^\circ}{\sin 39^\circ} &=& c \\[1.5em]
+34.6 &\approx& a &&&& 23.8 &\approx& c
+\end{array}$$
+>
+> Now we have all the missing values of the triangle. The values of the angles are $\alpha = 98^\circ$, $\beta = 39^\circ$, and $\gamma = 43^\circ$. The values of the sides are $a \approx 34.6$, $b = 22$, and $c \approx 23.8$.
+
+
+:::note
+We can also invert the Law of Sines to get the following equation...
+$$\begin{array}{ccccccccccccccccc}
+\dfrac{a}{\sin \alpha} &=& \dfrac{b}{\sin \beta} &=& \dfrac{c}{\sin \gamma}
+\end{array}$$
+Both equations represent the same relationship between the sides and angles of a triangle thus both are variations of the Law of Sines.
+:::
+
+### SSA Ambiguity
+
+Sometimes when solving an oblique triangle, some solutions may not be straightforward because more than one triangle may satisfy the given criteria. We describe these cases as **ambiguious cases** and they typically occur with triangles classified as SSA (Side-Side-Angle) Triangles. The possible cases are...
+
+<Fig src={alg6} caption='SSA Ambiguity' num={6} />
+
+> $$\underline{Example}$$
+>
+> In the triangle shown below, solve for the unknown side and angles. Round your answers to the nearest tenth.
+>
+> <Fig src={alg7} caption='SSA Ambiguity Example' num={7} />
+>
+> To figure out the pair of ratios from the Law of Sines we need, we can look at the known values. We know the value of $\gamma = 85^\circ$, $c = 12$, and $b = 9$ meaning we can find the value of $\beta$ using $\dfrac{\sin \beta}{b} = \dfrac{\sin \gamma}{c}$.
+>
+> $$\begin{array}{ccccccccccccccccc}
+\dfrac{\sin \beta}{b} &=& \dfrac{\sin \gamma}{c} \\[1.5em]
+\dfrac{\sin \beta}{9} &=& \dfrac{\sin 85^\circ}{12} \\[1.5em]
+12 \sin \beta &=& 9 \sin 85^\circ \\[1.5em]
+\sin \beta &=& \dfrac{9 \sin 85^\circ}{12} \\[1.5em]
+\beta &=& \sin^{-1} \left(\dfrac{9 \sin 85^\circ}{12}\right) \\[1.5em]
+\beta &\approx& \sin^{-1} (0.7471) \\[1.5em]
+\beta &\approx& 48.3^\circ
+\end{array}$$
+>
+> Due to SSA ambiguity, there may be another solution for $\beta$. Since the sine function is positive in both the first and second quadrants, we can find a second possible angle by using the fact that $\sin(180^\circ - x) = \sin x$.
+>
+> $$\begin{array}{ccccccccccccccccc}
+\beta &\approx& 180^\circ - 48.3^\circ \\[1.5em]
+\beta &\approx& 131.7^\circ
+\end{array}$$
+>
+> However, this second solution is not valid because the sum of the angles in a triangle must equal $180^\circ$. Since we already have $\gamma = 85^\circ$, the sum of these two angles are already over $180^\circ$, thus the only valid solution is $\beta \approx 48.3^\circ$.
+>
+> Now that we know that there is only one valid solution for $\beta$, we can use it to find the remaining unknown values. We can find the remaining angle using the fact that the sum of the angles in a triangle is $180^\circ$.
+>
+> $$\begin{array}{ccccccccccccccccc}
+\alpha + \beta + \gamma &=& 180^\circ \\[0.5em]
+98^\circ + 48.3^\circ + \alpha &=& 180^\circ \\[0.5em]
+133.3 + \alpha &\approx& 180^\circ \\[0.5em]
+\alpha &=& 180^\circ - 133.3^\circ \\[0.5em]
+\alpha &\approx& 46.7^\circ
+\end{array}$$
+>
+> Finally, we can use the Law of Sines to find the value of side $a$.
+>
+> $$\begin{array}{ccccccccccccccccc}
+\dfrac{a}{\sin \alpha} &=& \dfrac{c}{\sin \gamma} \\[1.5em]
+\dfrac{a}{\sin 46.7^\circ} &=& \dfrac{12}{\sin 85^\circ} \\[1.5em]
+a \sin 85^\circ &=& 12 \sin 46.7^\circ \\[1.5em]
+a &=& \dfrac{12 \sin 46.7^\circ}{\sin 85^\circ} \\[1.5em]
+a &\approx& 8.8
+\end{array}$$
+>
+> So, the angles of the triangle are $\alpha \approx 46.7^\circ$, $\beta \approx 48.3^\circ$, and $\gamma = 85^\circ$. The sides of the triangle are $a \approx 8.8$, $b = 9$, and $c = 12$.
+
+## Finding Area
+
+The area of a triangle can be found using the formula $A = \dfrac{1}{2}bh$ where $b$ is the length of the base and $h$ is the height (the perpendicular line from the opposite vertex to the base). However, to be able to use this formula, we need to know the value of $h$. Luckily, we can remedy this issue for oblique triangles by rewriting the formula using the Law of Sines.
+
+<Fig src={alg8} caption='Finding Area of Oblique Triangle' num={8} />
+
+In both figures above, we can draw a perpendicular line to represent the height and then apply the trigonometric property $\sin \alpha = \dfrac{\text{opposite}}{\text{hypotenuse}} = \dfrac{h}{c}$. After some rearranging, we can solve for $h$:
+
+$$\begin{array}{ccccccccccccccccc}
+\sin \alpha &=& \dfrac{h}{c} \\[1.5em]
+h &=& c \sin \alpha
+\end{array}$$
+
+Now we can substitute this expression for $h$ into the area formula:
+
+$$\begin{array}{ccccccccccccccccc}
+A &=& \dfrac{1}{2}bh \\[1.5em]
+&=& \dfrac{1}{2}b(c \sin \alpha) \\[1.5em]
+&=& \dfrac{1}{2}bc \sin \alpha
+\end{array}$$
+
+Similarly, we can arrive at the other two variations of the area formula by drawing the height from different vertices. This would give us $$A = \dfrac{1}{2}a(c\sin \beta)$$ and $$A = \dfrac{1}{2}a(b \sin \gamma)$$.
+
+So, the formula for the area of an oblique triangle is given by $$A = \dfrac{1}{2}ab \sin \gamma = \dfrac{1}{2}bc \sin \alpha = \dfrac{1}{2}ac \sin \beta$$.
+
+> $$\underline{Example}$$
+>
+> Find the area of the triangle given $\beta = 42^\circ$, $a = 7.2 \text{ ft}$, and $c = 3.4 \text{ ft}$. Round your answer to the nearest tenth.
+>
+> Due to the fact we know the values of $a$, $c$, and $\beta$, we can use the area formula $A = \dfrac{1}{2}ac \sin \beta$ to find the area of the triangle.
+>
+> $$\begin{array}{ccccccccccccccccc}
+A &=& \dfrac{1}{2}ac \sin \beta \\[1.5em]
+&=& \dfrac{1}{2}(7.2)(3.4) \sin 42^\circ \\[1.5em]
+&\approx& 8.2
+\end{array}$$
+>
+> The area of the triangle is approximately $8.2 \text{ ft}^2$.
+
+## Real World Applications
+
+The applications of the Law of Sines are countless especially in calculus, engineering, and physics involving three dimensions and motion.
+
+> $$\underline{Example}$$
+>
+> The diagram below represents the height of a blimp flying over a football stadium. Find the height of the blimp if the angle of elevation at the southern end zone, point A, is $70^\circ$, the angle of elevation from the northern end zone, point $B$, is $62^\circ$, and the distance between the viewing points of the two end zones is $145$ yards.
+>
+> <Fig src={alg9} caption='Law of Sines Real World Example' num={9} />
+>
+> We can start by finding the value of angle $C$ using the other two angles because all the angles in a triangle must sum to $180^\circ$.
+>
+> $$C = 180^\circ - 70^\circ - 62^\circ = 48^\circ$$
+>
+> We now know the value of the ratio $\dfrac{\sin C}{c}$ which we can use with the Law of Sines to find the value of side $a$ or $b$. This would give us a hypotenuse to use to solve for the height. For this case, let's solve for $a$...
+>
+> $$\begin{array}{ccccccccccccccccc}
+\dfrac{\sin A}{a} &=& \dfrac{\sin C}{c} \\[1.5em]
+\dfrac{\sin 70^\circ}{a} &=& \dfrac{\sin 48^\circ}{145} \\[1.5em]
+a\sin 48^\circ &=& 145\sin 70^\circ \\[1.5em]
+a &=& \dfrac{145\sin 70^\circ}{\sin 48^\circ} \\[1.5em]
+a &\approx&  183.35
+\end{array}$$
+>
+> We can now use the formula $$\sin B = \dfrac{h}{a}$$ to solve for the height $h$...
+>
+> $$\begin{array}{ccccccccccccccccc}
+\sin B &=& \dfrac{h}{a} \\[1.5em]
+\sin 62^\circ &=& \dfrac{h}{183.35} \\[1.5em]
+h &=& 183.35 \sin 62^\circ \\[1.5em]
+h &\approx&  161.9
+\end{array}$$
+>
+> So, the height of the blimp is approximately $161.9$ yards.
