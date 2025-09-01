@@ -230,6 +230,7 @@ const sidebars = {
           label: 'Applications of Trigonometry',
           items: [
             'euler-tako/algebra-trig/trig-app/page-1',
+            'euler-tako/algebra-trig/trig-app/page-2',
           ]
         }
       ]

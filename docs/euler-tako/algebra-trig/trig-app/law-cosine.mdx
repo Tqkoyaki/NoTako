@@ -1,0 +1,169 @@
+---
+id: page-2
+title: Law of Cosines
+sidebar_position: 2
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-119.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-120.png';
+
+Even though the Law of Sines enables us to solve many oblique triangles, it does not help with triangles where the known angle is between two known sides or when all three sides are known but no angles are known. We refer to these triangles are **SAS** (side-angle-side) and **SSS** (side-side-side) triangles respectively and for these cases, we can use the Law of Cosines to find the unknown angles or sides.
+
+## Law of Cosines
+
+In order to derive the Law of Cosines, we need to use the **Generalized Pythagorean Theorem**, which is an extension of the Pythagorean Theorem for non-right triangles. To derive this theorem, we place an arbitrary non-right triangle $ABC$ somewhere in the coordinate plane where the vertex $A$ is at the origin, the side $c$ is drawn along the $x$-axis, and the vertex $C$ is located at some point $(x, y)$ in the plane.
+
+<Fig src={alg1} caption='Generalized Pythagorean Theorem' num={1}/>
+
+:::note
+The triangle could have been placed anywhere in the plane but for the sake of simplicity, we placed it in this specific location making it easier to derive the theorem with.
+:::
+
+When we draw a perpendicular line from $C$ to the $x$-axis, we get a right triangle which lets us get these identities:
+
+$$\begin{array}{cccccccccccccc}
+\cos \theta = \dfrac{x \text{ (adjacent)}}{b \text{ (hypotenuse)}} &&&& \sin \theta = \dfrac{y \text{ (opposite)}}{b \text{ (hypotenuse)}} \\[1.5em]
+x = b \cos \theta &&&& y = b \sin \theta
+\end{array}$$
+
+Now if we use the side $(x - c)$ as one leg of a right triangle and $y$ as the second leg, we can find the length of hypotenuse $a$ using the Pythagorean Theorem...
+
+$$\begin{array}{cccccccccccccc}
+a^2 &=& (x - c)^2 + y^2 \\[1em]
+&=& (b \cos \theta - c)^2 + (b \sin \theta)^2 \\[1em]
+&=& (b^2 \cos^2 \theta - 2bc \cos \theta + c^2) + (b^2 \sin^2 \theta) \\[1em]
+&=& b^2 (\cos^2 \theta + \sin^2 \theta) + c^2 - 2bc \cos \theta \\[1em]
+a^2 &=& b^2 + c^2 - 2bc \cos \theta
+\end{array}$$
+
+The formula we derived is one of the three equations of the **Law of Cosines** and the other equations can be found in a similar fashion. However, all of these equations state that the square of any side of a triangle is equal to the sum of the squares of the other two sides minus the product of the other two sides and the cosine of the included angle. This means all the equations for the **Law of Cosines** are...
+
+1. $a^2 = b^2 + c^2 - 2bc \cos \alpha$
+2. $b^2 = a^2 + c^2 - 2ac \cos \beta$
+3. $c^2 = a^2 + b^2 - 2ab \cos \gamma$
+
+...where $\alpha$, $\beta$, and $\gamma$ are the angles opposite to sides $a$, $b$, and $c$ respectively.
+
+:::note
+To make solving for an angle easier, we can rearrange the Law of Cosines in terms of cosine which gives us...
+
+1. $$\cos \alpha = \dfrac{b^2 + c^2 - a^2}{2bc} \\[1.5em]$$
+2. $$\cos \beta = \dfrac{a^2 + c^2 - b^2}{2ac} \\[1.5em]$$
+3. $$\cos \gamma = \dfrac{a^2 + b^2 - c^2}{2ab}$$
+:::
+
+> $$\underline{Example}$$
+>
+> Find the missing side and angles of the given triangle: $\alpha = 30^\circ$, $b = 12$, $c = 24$.
+>
+> We can use the Law of Cosine to find the value of the unknown side $a$. For this case, we will use the formula $a^2 = b^2 + c^2 - 2bc \cos \alpha$ because we know the value of $\alpha$, $b$, and $c$ leaving only $a$ as the unknown variable...
+>
+> $$\begin{array}{cccccccccccccc}
+a^2 &=& b^2 + c^2 - 2bc \cos \alpha \\[1em]
+a^2 &=& 12^2 + 24^2 - 2 \cdot 12 \cdot 24 \cdot \cos 30^\circ \\[1em]
+&=& 144 + 576 - 576 \cdot \dfrac{\sqrt{3}}{2} \\[1em]
+&=& 720 - 288\sqrt{3} \\[1em]
+a &\approx& \sqrt{221.13} \\[1em]
+a &\approx& 14.9
+\end{array}$$
+>
+> Now we can find one of the missing angles using all the three sides. For this case, let's find the value of $\beta$.
+>
+> $$\begin{array}{cccccccccccccc}
+\cos \beta &=& \dfrac{a^2 + c^2 - b^2}{2ac} \\[1.5em]
+\cos \beta &\approx& \dfrac{(14.9)^2 + (24)^2 - (12)^2}{2 \cdot 14.9 \cdot 24} \\[1.5em]
+\cos \beta &\approx& \dfrac{222.01 + 576 - 144}{2 \cdot 14.9 \cdot 24} \\[1.5em]
+\cos \beta &\approx& \dfrac{654.01}{715.2} \\[1.5em]
+\beta &\approx& \cos^{-1} \left(\dfrac{654.01}{715.2}\right) \\[1.5em]
+\beta &\approx& 23.9^\circ
+\end{array}$$
+>
+> Finally, we can find the last angle using the fact that the sum of all angles in a triangle is $180^\circ$.
+>
+> $$\begin{array}{cccccccccccccc}
+180^\circ &=& \alpha + \beta + \gamma \\[1.5em]
+&\approx& 30^\circ + 23.9^\circ + \gamma \\[1.5em]
+&\approx& 53.9^\circ + \gamma \\[1.5em]
+126.1^\circ &\approx& \gamma
+\end{array}$$
+>
+> So, all the angles of the triangle are $\alpha = 30^\circ$, $\beta \approx 23.9^\circ$, and $\gamma \approx 126.1^\circ$ and all the sides are $a \approx 14.9$, $b = 12$, and $c = 24$.
+
+## Heron's Formula
+
+We can use the Law of Cosines to derive the **Heron's Formula** which is a valuable formula because it allows us to find the area of an oblique triangle when we know the lengths of all three sides.
+
+To derive this formula, let $a$, $b$, and $c$ be the sides of the triangle and $\alpha$, $\beta$, and $\gamma$ be the opposite angles to the sides respectively. To derive the formula, we can use any of the Law of Cosines equations to express one of the angles in terms of the sides. In this case, we can use the formula...
+
+$\cos \gamma = \dfrac{a^2 + b^2 - c^2}{2ab}$
+
+With this formula, $a$ would be the base of the triangle meaning the altitude/height would be $b \sin \gamma$. Finally, we will also need the trigonometric identity $\sin \gamma = \sqrt{1 - \cos^2 \gamma}$. Putting this all together, we can derive Heron's Formula...
+
+$$\begin{array}{cccccccccccccc}
+A &=& \dfrac{1}{2} (\text{base})(\text{altitude}) \\[1.5em]
+&=& \dfrac{1}{2} (a) (b \sin \gamma) \\[1.5em]
+&=& \dfrac{1}{2}ab \sqrt{1 - \cos^2 \gamma} \\[1.5em]
+&=& \dfrac{1}{2}ab \sqrt{1 - \left(\dfrac{a^2 + b^2 - c^2}{2ab}\right)^2} \\[1.5em]
+&=& \dfrac{1}{2}ab \sqrt{1 - \dfrac{\left(a^2 + b^2 - c^2\right)^2}{4a^2b^2}} \\[1.5em]
+&=& \dfrac{1}{2}ab \sqrt{\dfrac{4a^2b^2 - \left(a^2 + b^2 - c^2\right)^2}{4a^2b^2}} \\[1.5em]
+&=& \dfrac{1}{2}ab \cdot \dfrac{\sqrt{4a^2b^2 - \left(a^2 + b^2 - c^2\right)^2}}{2ab} \\[1.5em]
+&=& \dfrac{1}{4}\sqrt{4a^2b^2 - \left(a^2 + b^2 - c^2\right)^2} \\[1.5em]
+&=& \dfrac{1}{4}\sqrt{\left(2ab\right)^2 - \left(a^2 + b^2 - c^2\right)^2} \\[1.5em]
+&=& \dfrac{1}{4}\sqrt{\left(2ab + (a^2 + b^2 - c^2)\right)\left(2ab - (a^2 + b^2 - c^2)\right)} \\[1.5em]
+&=& \dfrac{1}{4}\sqrt{\left(a^2 + 2ab + b^2 - c^2\right)\left(c^2 - a^2 + 2ab - b^2\right)} \\[1.5em]
+&=& \dfrac{1}{4}\sqrt{\left((a + b)^2 - c^2\right)\left(c^2 - (a - b)^2\right)} \\[1.5em]
+&=& \dfrac{1}{4}\sqrt{\left((a + b) - c\right)\left((a + b) + c\right)\left(c - (a - b)\right)\left(c + (a - b)\right)} \\[1.5em]
+&=& \sqrt{\dfrac{\left(a + b - c\right)\left(a + b + c\right)\left(c - a - b\right)\left(c + a - b\right)}{16}} \\[1.5em]
+&=& \sqrt{\left(\dfrac{a + b + c}{2}\right)\left(\dfrac{b + c - a}{2}\right)\left(\dfrac{a + c - b}{2}\right)\left(\dfrac{a + b - c}{2}\right)}
+\end{array}$$
+
+We can simplify this formula even further by substituting $s = \dfrac{a + b + c}{2}$, which is one half of the perimeter of the triangle also known as the **semi-perimeter**. This gives us the final form of **Heron's Formula**...
+
+$$A = \sqrt{s(s - a)(s - b)(s - c)}$$
+
+where $s = \dfrac{a + b + c}{2}$ is the semi-perimeter of the triangle.
+
+> $$\underline{Example}$$
+>
+> Use Heron's formula to find the area of a triangle with sides of lengths $a = 29.7 \text{ ft}$, $b = 42.3 \text{ ft}$, and $c = 38.4 \text{ ft}$.
+>
+> First, we need to find the semi-perimeter $s$...
+>
+> $$s = \dfrac{a + b + c}{2} = \dfrac{29.7 + 42.3 + 38.4}{2} = 55.2 \text{ ft}$$
+>
+> Now we can use Heron's formula to find the area of the triangle...
+>
+> $$\begin{array}{cccccccccccccc}
+A &=& \sqrt{s(s - a)(s - b)(s - c)} \\[1.5em]
+&=& \sqrt{55.2(55.2 - 29.7)(55.2 - 42.3)(55.2 - 38.4)} \\[1.5em]
+&=& \sqrt{55.2(25.5)(12.9)(16.8)} \\[1.5em]
+&=& \sqrt{305055.072} \\[1.5em]
+&\approx& 552 \text{ ft}^2
+\end{array}$$
+>
+> Therefore, the area of the triangle is approximately $552 \text{ ft}^2$.
+
+## Real World Applications
+
+Just like with the Law of Sines, the Law of Cosine is an invaluable tool in various fields because with both these laws, we can solve all possible oblique triangles.
+
+> $$\underline{Example}$$
+>
+> Suppose a boat leaves port, travels $10$ miles, turns $20$ degrees, and travels another $8$ miles. How far from port is the boat?
+>
+> <Fig src={alg2} caption='Law of Cosines Real World Example' num={2}/>
+>
+> We can label the values of the triangle as $a = 8$, $b = 10$, and $\gamma = 180^\circ - 20^\circ = 160^\circ$. To find the distance from the boat to the port, we will need to find the value of the side $c$ which we can do using the Law of Cosines...
+>
+> $$\begin{array}{cccccccccccccc}
+c^2 &=& a^2 + b^2 - 2ab \cos \gamma \\[1.5em]
+&=& (8)^2 + (10)^2 - 2(8)(10) \cos(160^\circ) \\[1.5em]
+&=& 64 + 100 - 160 \cos(160^\circ) \\[1.5em]
+&=& 164 - 160 \cos(160^\circ) \\[1.5em]
+c^2 &\approx& 314.35 \\[1.5em]
+c &\approx& \sqrt{314.35} \\[1.5em]
+c &\approx& 17.7 \text{ miles}
+\end{array}$$
+>
+> Therefore, the distance from the boat to the port is approximately $17.7 \text{ miles}$.
