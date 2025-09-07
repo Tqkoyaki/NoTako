@@ -1,0 +1,128 @@
+---
+id: page-3
+title: Polar Coordinates
+sidebar_position: 3
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-121.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-122.png';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-123.png';
+
+The rectangular coordinate system where we have the $x$-axis and $y$-axis is an extremely useful tool in mathematics and engineering. However, sometimes there are applications that are circular in nature, and in such cases, polar coordinates can be more convenient.
+
+## Plotting Polar Coordinates
+
+The **polar coordinate system** is a two-dimensional system where the grid is represented as a series of concentric circles radiating out from the **pole** (the origin).
+
+<Fig src={alg1} caption='Polar Coordinate System' num={1}/>
+
+Each **polar coordinate** in this system is labeled as $(r, \theta)$, where $r$ is the distance from the pole and $\theta$ is the angle measured from the positive $x$-axis.
+
+> $\underline{Example}$
+>
+> Plot the point $(3, \dfrac{\pi}{2})$ on the polar grid.
+>
+> The point is $3$ units away from the pole because $r = 3$ and the angle is $\theta = \dfrac{\pi}{2}$ which means we are sweeping in a counterclockwise direction $90^\circ$ from the polar axis. Putting this all together gives us the solution...
+>
+> <Fig src={alg2} caption='Plotting Polar Coordinates' num={2}/>
+
+## Transforming Between Coordinate System
+
+We often may need to convert between rectangular and polar coordinates which we are able to do using some basic relationships.
+
+<Fig src={alg3} caption='Transforming Between Coordinate Systems' num={3} />
+
+Off this diagram, we can see the following right triangles relationships which will help us in our transformations...
+1. $$\cos \theta = \dfrac{x}{r} \Rightarrow x = r \cos \theta \\[1em]$$
+2. $$\sin \theta = \dfrac{y}{r} \Rightarrow y = r \sin \theta \\[1em]$$
+3. $$r^2 = x^2 + y^2 \\[1em]$$
+4. $$\tan \theta = \dfrac{y}{x} \\[1em]$$
+
+Firstly, we have two equations $$x = r \cos \theta$$ and $$y = r \sin \theta$$ which are equations that give us rectangular coordinates and are written in terms of polar coordinates. Therefore, these equations are used to convert from polar to rectangular coordinates through substitution.
+
+> $$\underline{Example}$$
+>
+> Write the polar coordinates $(-1, \dfrac{2\pi}{3})$ in rectangular form.
+>
+> From the polar coordinates, we know that $r = -1$ and $\theta = \dfrac{2\pi}{3}$. Using the equations above, we can find $x$ and $y$ as follows...
+>
+> $$\begin{array}{cccccccccccccccccccc}
+x &=& r \cos \theta &&&& y &=& r \sin \theta \\[1em]
+x &=& -1 \cos \dfrac{2\pi}{3} &&&& y &=& -1 \sin \dfrac{2\pi}{3} \\[1em]
+x &=& -1 \left(-\dfrac{1}{2}\right) &&&& y &=& -1 \left(\dfrac{\sqrt{3}}{2}\right) \\[1em]
+x &=& \dfrac{1}{2} &&&& y &=& -\dfrac{\sqrt{3}}{2} \\[1em]
+\end{array}$$
+>
+> Therefore, the rectangular coordinates are $\left(\dfrac{1}{2}, -\dfrac{\sqrt{3}}{2}\right)$.
+
+Instead of converting from polar to rectangular, we may need to convert from rectangular to polar. For this, we could use $$r^2 = x^2 + y^2$$ and $$\tan \theta = \dfrac{y}{x}$$ as both equations are written in terms of rectangular coordinates and can be used to find polar coordinates.
+
+> $$\underline{Example}$$
+>
+> Write the rectangular coordinates $(3, 3)$ in polar form.
+>
+> From the rectangular coordinates, we know that $x = 3$ and $y = 3$. Using the equations above, we can find $r$ and $\theta$ as follows...
+>
+> $$\begin{array}{cccccccccccccccccccc}
+r^2 &=& x^2 + y^2 &&&& \tan \theta &=& \dfrac{y}{x} \\[1em]
+r^2 &=& 3^2 + 3^2 &&&& \tan \theta &=& \dfrac{3}{3} \\[1em]
+r^2 &=& 9 + 9 &&&& \tan \theta &=& 1 \\[1em]
+r^2 &=& 18 &&&& \theta &=& \tan^{-1}(1) \\[1em]
+r &=& \sqrt{18} &&&& \theta &=& \dfrac{\pi}{4}, \dfrac{5\pi}{4} \\[1em]
+r &=& 3\sqrt{2} &&&& \theta &=& \dfrac{\pi}{4} \\[1em]
+\end{array}$$
+>
+> Even though, $\theta = \dfrac{5\pi}{4}$ is also a solution, we ignore it as $(3, 3)$ is in the first quadrant and only $\dfrac{\pi}{4}$ is in the first quadrant.
+>
+> So, the polar coordinates are $\left(3\sqrt{2}, \dfrac{\pi}{4}\right)$.
+
+## Transforming Between Equations
+
+Just like with coordinates, we can convert equations between the polar and rectangular forms using all the trigonmetric relationships we have established. However, even though we can convert between the two forms in a similar manner, the process is significantly more difficult.
+
+> $$\underline{Example}$$
+>
+> Rewrite the Cartesian equation $y^2 = 6y - x^2$ in polar form.
+>
+> The terms $y^2$ and $x^2$ make it difficult to directly substitute using $x = r \cos \theta$ and $y = r \sin \theta$. However, we can use the relationship $r^2 = x^2 + y^2$ to help us instead. If we rearrange the equation, we can get the value of $r$...
+>
+> $$\begin{array}{cccccccccccccccccccc}
+y^2 &=& 6y - x^2 \\[1em]
+x^2 + y^2 &=& 6y \\[1em]
+r^2 &=& 6r \sin \theta \\[1em]
+r^2 - 6r \sin \theta &=& 0 \\[1em]
+r (r - 6 \sin \theta) &=& 0 \\[1em]
+r = 0 && r - 6 \sin \theta = 0 \\[1em]
+r = 0 && r = 6 \sin \theta \\[1em]
+\end{array}$$
+>
+> We reject $r = 0$ as it is the trivial solution due to it only representing one point, $(0,0)$. 
+>
+> Therefore, the polar form of the equation is $r = 6 \sin \theta$.
+
+Using the same process and relationships, we can also convert polar equations to rectangular equations.
+
+> $$\underline{Example}$$
+>
+> Rewrite the polar equation $r = 2 \sin \theta$ in Cartesian form.
+>
+> The equation uses sine which means we can directly substitute using $y = r \sin \theta$. After that we will just need to substitute for $r$ so that the entire equation is in terms of $x$ and $y$...
+>
+> $$\begin{array}{cccccccccccccccccccc}
+r &=& 2 \sin \theta \\[1em]
+r &=& 2 \left(\dfrac{y}{r}\right) \\[1em]
+r^2 &=& 2 \left(\dfrac{y}{r}\right) r \\[1em]
+r^2 &=& 2y \\[1em]
+x^2 + y^2 &=& 2y \\[1em]
+x^2 + y^2 - 2y &=& 0 \\[1em]
+x^2 + y^2 - 2y + 1 - 1 &=& 0 \\[1em]
+x^2 + (y - 1)^2 - 1 &=& 0 \\[1em]
+x^2 + (y - 1)^2 &=& 1 \\[1em]
+\end{array}$$
+>
+> Therefore, the Cartesian form of the equation is $x^2 + (y - 1)^2 = 1$. Note that this is the equation of a circle with center at $(0, 1)$ and radius $1$.
+
+:::note
+**Cartesian form** is another name for rectangular form. Just like how the **Cartesian coordinate system** is another name for the rectangular coordinate system.
+:::

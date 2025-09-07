@@ -231,6 +231,7 @@ const sidebars = {
           items: [
             'euler-tako/algebra-trig/trig-app/page-1',
             'euler-tako/algebra-trig/trig-app/page-2',
+            'euler-tako/algebra-trig/trig-app/page-3',
           ]
         }
       ]
