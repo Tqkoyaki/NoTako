@@ -1,0 +1,240 @@
+---
+id: page-5
+title: Complex Numbers
+sidebar_position: 5
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-134.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-135.jpg';
+
+**Complex numbers** are numbers that consist of a real part and an imaginary part often in the form of $a + bi$ where $a$ is the real part, $b$ is the coefficient of the imaginary part, and $i$ is the imaginary unit which is defined as $i = \sqrt{-1}$.
+
+We can combine our knowledge of trigonometry and complex numbers together to express complex numbers in polar form and perform operations such as finding products, quotients, powers, and roots of complex numbers. This gives us a new perspective on complex numbers and allows us to solve problems that would be difficult or impossible to solve using only rectangular form.
+
+## Graphing Complex Numbers
+
+Plotting complex numbers of the form $a + bi$ on a coordinate plane is similar to plotting points in a Cartesian coordinate system with the exception that the horizontal axis represents the real part $a$ and the vertical axis represents the imaginary part $bi$.
+
+> $$\underline{Example}$$
+>
+> Plot the complex number $1 + 5i$ on the complex plane.
+>
+> From the origin, we move 1 unit to the right because $a = 1$ and then move 5 units up because $b = 5$. The point $(1, 5)$ represents the complex number $1 + 5i$ on the complex plane.
+>
+> <Fig src={alg1} caption="Plotting Complex Numbers" num={1} />
+
+### Absolute Value
+
+The **absolute value** of a complex number $a + bi$ is the same as the magnitude or $|z|$. This means that the absolute value of a complex number is the measure of the distance from the origin to the point $(a, b)$ on the complex plane. So, Given $z = a + bi$, a complex number, the absolute value of $z$ is defined as $|z| = \sqrt{\vphantom{a^{a^2}} a^2 + b^2}$.
+
+> $$\underline{Example}$$
+>
+> Find the absolute value of the complex number $z = 12 - 5i$.
+>
+> To find the absolute value of $z$, we use the formula $|z| = \sqrt{\vphantom{a^{a^2}} a^2 + b^2}$ where $a = 12$ and $b = -5$.
+>
+> $$|z| = \sqrt{\vphantom{a^{a^2}} 12^2 + (-5)^2} = \sqrt{\vphantom{a^2} 144 + 25} = \sqrt{\vphantom{a^2} 169} = 13$$
+>
+> So, the absolute value of the complex number $z = 12 - 5i$ is $13$.
+
+:::note
+We often use the term **modulus** to represent the absolute value of a complex number, or the distance from the origin to the point $(a, b)$ on the complex plane.
+:::
+
+## Complex Numbers in Polar Form
+
+The **polar form of a complex number** is another way to express complex numbers using trigonometric functions. A complex number in polar form expresses a number in terms of an angle $\theta$ and its distance from the origin $r$.
+
+<Fig src={alg2} caption="Complex Numbers in Polar Form" num={2} />
+
+Considering the complex number $z = x + yi$ is expressed in rectangular form, we can use the same trigonometric relationships to convert it to polar form. Thse identities are...
+
+1. $x = r \cos(\theta)$
+2. $y = r \sin(\theta)$
+3. $r = \sqrt{\vphantom{a^{a^2}} x^2 + y^2}$
+
+We can substitute these identities into the rectangular form of a complex number, $z = x + yi$, to get the following conversion...
+
+$$\begin{array}{ccccccccccccc}
+z &=& x + yi \\[1em]
+&=& r \cos \theta + r \sin \theta (i) \\[1em]
+&=& r (\cos\theta + i \sin \theta)
+\end{array}$$
+
+The polar form is written as $z = r (\cos\theta + i \sin \theta)$ where $r$ is the modulus (or absolute value) of the complex number and $\theta$ is the argument (or angle) of the complex number.
+
+> $$\underline{Example}$$
+>
+> Express $z = \sqrt{3} + i$ in polar form.
+>
+> We can find the modulus $r$ first using the formula $r = \sqrt{\vphantom{a^{a^2}} x^2 + y^2}$ where $x = \sqrt{3}$ and $y = 1$.
+>
+> $$r = \sqrt{\vphantom{a^{a^2}} (\sqrt{3})^2 + 1^2} = \sqrt{\vphantom{a^2} 3 + 1} = \sqrt{\vphantom{a^2} 4} = 2$$
+>
+> Next, we can find the argument $\theta$ using either $\cos \theta = \frac{x}{r}$ or $\sin \theta = \frac{y}{r}$. We will use $\cos \theta = \frac{x}{r}$...
+>
+> $$\cos \theta = \dfrac{x}{r} = \dfrac{\sqrt{3}}{2} \rightarrow \theta = \dfrac{\pi}{6}$$
+>
+> Now that we have both $r$ and $\theta$, we can substitute them into the polar form equation $z = r (\cos\theta + i \sin \theta)$.
+>
+> So, $z = \sqrt{3} + i$ in polar form is $z = 2 \left( \cos \left(\dfrac{\pi}{6}\right) + i \sin \left(\dfrac{\pi}{6}\right) \right)$.
+
+
+:::note
+We often use the abbreviation $r \:\text{cis}\: \theta$ to represent $r (\cos\theta + i \sin \theta)$ due to its frequent use in polar form.
+:::
+
+### Converting from Polar to Rectangular Form
+
+We can also convert back from polar form to rectangular form by evaluating $\cos \theta$ and $\sin \theta$ to eliminate $\theta$ and then distributing $r$ to eliminate $r$.
+
+> $$\underline{Example}$$
+>
+> Convert the complex number to rectangular form: $z = 4 \left( \cos \dfrac{11\pi}{6} + i \sin \dfrac{11\pi}{6} \right)$.
+>
+> We can start by evaluating $\cos \dfrac{11\pi}{6}$ and $\sin \dfrac{11\pi}{6}$.
+>
+> $z = 4 \left( \cos \dfrac{11\pi}{6} + i \sin \dfrac{11\pi}{6} \right) = 4 \left( \dfrac{\sqrt{3}}{2} + i \left(-\dfrac{1}{2}\right) \right)$
+>
+> Now we can distribute $4$ to eliminate $r$.
+>
+> $z = 4 \left( \dfrac{\sqrt{3}}{2} + i \left(-\dfrac{1}{2}\right) \right) = 2\sqrt{3} - 2i$
+>
+> So, the rectangular form of the complex number is $z = 2\sqrt{3} - 2i$.
+
+### Finding Products
+
+Now that we can convert between rectangular and polar forms of complex numbers, we can use the polar form to apply various operations on complex numbers. The first operation we will look at is finding the product of two complex numbers in polar form.
+
+If $z_1 = r_1 (\cos \theta_1 + i \sin \theta_1)$ and $z_2 = r_2 (\cos \theta_2 + i \sin \theta_2)$, then the product of $z_1$ and $z_2$ is given by $$z_1 z_2 = r_1 r_2 \left( \cos(\theta_1 + \theta_2) + i \sin(\theta_1 + \theta_2) \right)$$. This means to multiply two complex numbers in polar form, we multiply their moduli and add their arguments.
+
+> $$\underline{Example}$$
+>
+> Find the product of $z_1z_2$ where $z_1 = 4 \left(\cos \left(80^\circ \right) + i \sin \left(80^\circ \right) \right)$ and $z_2 = 2 \left( \cos \left(145^\circ \right) + i \sin \left(145^\circ \right) \right)$.
+>
+> To find the product of $z_1$ and $z_2$, we can use the formula for multiplying complex numbers in polar form...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+z_1 z_2 &=& r_1 r_2 \left( \cos(\theta_1 + \theta_2) + i \sin(\theta_1 + \theta_2) \right) \\[1em]
+&=& 4 \cdot 2 \left( \cos(80^\circ + 145^\circ) + i \sin(80^\circ + 145^\circ) \right) \\[1em]
+&=& 8 \left( \cos(225^\circ) + i \sin(225^\circ) \right) \\[1em]
+&=& 8 \left( -\dfrac{\sqrt{2}}{2} + i \left(-\dfrac{\sqrt{2}}{2}\right) \right) \\[1em]
+&=& -4\sqrt{2} - \left(4\sqrt{2}\right) i
+\end{array}$$
+>
+> So, the product of $z_1$ and $z_2$ is $-4\sqrt{2} - \left(4\sqrt{2}\right) i$.
+
+### Finding Quotients
+
+Similar to finding the product of two complex numbers in polar form, we can find the quotient of complex numbers in polar form by dividing their moduli and subtracting their arguments. This is because if $z_1 = r_1 (\cos \theta_1 + i \sin \theta_1)$ and $z_2 = r_2 (\cos \theta_2 + i \sin \theta_2)$, then the quotient of $z_1$ and $z_2$ is given by $$\dfrac{z_1}{z_2} = \dfrac{r_1}{r_2} \left( \cos(\theta_1 - \theta_2) + i \sin(\theta_1 - \theta_2) \right)$$.
+
+> $$\underline{Example}$$
+>
+> Find the quotient of $\dfrac{z_1}{z_2}$ where $z_1 = 2\sqrt{3} \left(\cos \left(150^\circ \right) + i \sin \left(150^\circ \right) \right)$ and $z_2 = 2 \left( \cos \left(30^\circ \right) + i \sin \left(30^\circ \right) \right)$.
+>
+> To find the quotient of $z_1$ and $z_2$, we can use the formula for dividing complex numbers in polar form...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+\dfrac{z_1}{z_2} &=& \dfrac{r_1}{r_2} \left( \cos(\theta_1 - \theta_2) + i \sin(\theta_1 - \theta_2) \right) \\[1em]
+&=& \dfrac{2\sqrt{3}}{2} \left( \cos(150^\circ - 30^\circ) + i \sin(150^\circ - 30^\circ) \right) \\[1em]
+&=& \sqrt{3} \left( \cos(120^\circ) + i \sin(120^\circ) \right) \\[1em]
+&=& \sqrt{3} \left( -\dfrac{1}{2} + i \left(\dfrac{\sqrt{3}}{2}\right) \right) \\[1em]
+&=& -\dfrac{\sqrt{3}}{2} + \dfrac{3}{2} i
+\end{array}$$
+>
+> So, the quotient of $z_1$ and $z_2$ is $-\dfrac{\sqrt{3}}{2} + \dfrac{3}{2} i$.
+
+### Finding Powers
+
+Finding the power of a complex number is also made easier using polar form. If $z = r (\cos \theta + i \sin \theta)$, then the power of $z$ is given by $$z^n = r^n \left( \cos(n\theta) + i \sin(n\theta) \right)$$ where $n$ is a positive integer. This means to raise a complex number in polar form to a power, we raise its modulus to that power and multiply its argument by that power.
+
+> $$\underline{Example}$$
+>
+> Evaluate the expression $\left( 1 + i \right)^5$.
+>
+> To evaluate $\left( 1 + i \right)^5$, we can first convert $1 + i$ to polar form. We can find the modulus $r$ using the formula $r = \sqrt{\vphantom{a^{a^2}} x^2 + y^2}$ where $x = 1$ and $y = 1$.
+>
+> $$r = \sqrt{\vphantom{a^{a^2}} 1^2 + 1^2} = \sqrt{\vphantom{a^2} 1 + 1} = \sqrt{\vphantom{a^2} 2}$$
+>
+> Next, we can find the argument $\theta$ using either $\cos \theta = \dfrac{x}{r}$ or $\sin \theta = \dfrac{y}{r}$. We will use $\cos \theta = \dfrac{x}{r}$...
+>
+> $$\cos \theta = \dfrac{x}{r} = \dfrac{1}{\sqrt{2}} = \dfrac{\sqrt{2}}{2} \rightarrow \theta = \dfrac{\pi}{4}$$
+>
+> Now that we have both $r$ and $\theta$, we can substitute them into the polar form equation $z = r (\cos\theta + i \sin \theta)$. So, $1 + i$ in polar form is $z = \sqrt{2} \left( \cos \left(\dfrac{\pi}{4}\right) + i \sin \left(\dfrac{\pi}{4}\right) \right)$.
+>
+> We can now use the formula for finding the power of a complex number in polar form to evaluate $\left( 1 + i \right)^5$...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+z^n &=& r^n \left( \cos(n\theta) + i \sin(n\theta) \right) \\[1em]
+&=& \left(\sqrt{2}\right)^5 \left( \cos\left(5 \cdot \dfrac{\pi}{4}\right) + i \sin\left(5 \cdot \dfrac{\pi}{4}\right) \right) \\[1em]
+&=& \sqrt{32} \left( \cos\left(\dfrac{5\pi}{4}\right) + i \sin\left(\dfrac{5\pi}{4}\right) \right) \\[1em]
+&=& 4\sqrt{2} \left( -\dfrac{\sqrt{2}}{2} + i \left(-\dfrac{\sqrt{2}}{2}\right) \right) \\[1em]
+&=& -4 - 4i
+\end{array}$$
+>
+> So, the value of $\left( 1 + i \right)^5$ is $-4 - 4i$.
+
+### Finding Roots
+
+Finally, to find the $n^{th}$ root of a complex number in polar form, we can use the formula $$z^{1/n} = r^{1/n} \left( \cos\left(\dfrac{\theta}{n} + \dfrac{2k\pi}{n}\right) + i \sin\left(\dfrac{\theta}{n} + \dfrac{2k\pi}{n}\right) \right)$$ where $k = 0, 1, 2, \ldots, n-1$. We add $\dfrac{2k\pi}{n}$ to $\dfrac{\theta}{n}$ to account for and obtain all the periodic roots of the complex number. This means to find the $n^{th}$ root of a complex number in polar form, we take the $n^{th}$ root of its modulus and divide its argument by $n$ while adding $\dfrac{2k\pi}{n}$ for each integer value of $k$ from $0$ to $n-1$.
+
+> $$\underline{Example}$$
+>
+> Find the four fourth roots of $16 \left( \cos \left (120^\circ \right) + i \sin \left (120^\circ \right) \right)$.
+>
+> Let's begin by substituting the known values into the formula to obtain a general expression for the roots...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+z^{1/n} &=& r^{1/n} \left( \cos\left(\dfrac{\theta}{n} + \dfrac{2k\pi}{n}\right) + i \sin\left(\dfrac{\theta}{n} + \dfrac{2k\pi}{n}\right) \right) \\[1.5em]
+&=& 16^{1/4} \left( \cos\left(\dfrac{120^\circ}{4} + \dfrac{2k\pi}{4}\right) + i \sin\left(\dfrac{120^\circ}{4} + \dfrac{2k\pi}{4}\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(30^\circ + \dfrac{\pi}{2} k\right) + i \sin\left(30^\circ + \dfrac{\pi}{2} k\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{\pi}{2} k\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{\pi}{2} k\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) \right)
+\end{array}$$
+>
+> We know that there will be four roots since $n = 4$. These roots can be found by substituting $k = 0, 1, 2, 3$ into the general expression we just found. For $k = 0$...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+z^{1/4} &=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (0)\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (0)\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6}\right) + i \sin\left(\dfrac{\pi}{6}\right) \right) \\[1.5em]
+&=& 2 \left( \dfrac{\sqrt{3}}{2} + i \left(\dfrac{1}{2}\right) \right) \\[1.5em]
+&=& \sqrt{3} + i
+\end{array}$$
+>
+> For $k = 1$...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+z^{1/4} &=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (1)\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (1)\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{4\pi}{6}\right) + i \sin\left(\dfrac{4\pi}{6}\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{2\pi}{3}\right) + i \sin\left(\dfrac{2\pi}{3}\right) \right) \\[1.5em]
+&=& 2 \left( -\dfrac{1}{2} + i \left(\dfrac{\sqrt{3}}{2}\right) \right) \\[1.5em]
+&=& -1 + \sqrt{3} i
+\end{array}$$
+>
+> For $k = 2$...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+z^{1/4} &=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (2)\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (2)\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{6\pi}{6}\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{6\pi}{6}\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{7\pi}{6}\right) + i \sin\left(\dfrac{7\pi}{6}\right) \right) \\[1.5em]
+&=& 2 \left( -\dfrac{\sqrt{3}}{2} + i \left(-\dfrac{1}{2}\right) \right) \\[1.5em]
+&=& -\sqrt{3} - i
+\end{array}$$
+>
+> Finally, for $k = 3$...
+>
+> $$\begin{array}{ccccccccccccccccccc}
+z^{1/4} &=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} k\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (3)\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{3\pi}{6} (3)\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{\pi}{6} + \dfrac{9\pi}{6}\right) + i \sin\left(\dfrac{\pi}{6} + \dfrac{9\pi}{6}\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{10\pi}{6}\right) + i \sin\left(\dfrac{10\pi}{6}\right) \right) \\[1.5em]
+&=& 2 \left( \cos\left(\dfrac{5\pi}{3}\right) + i \sin\left(\dfrac{5\pi}{3}\right) \right) \\[1.5em]
+&=& 2 \left( \dfrac{1}{2} + i \left(-\dfrac{\sqrt{3}}{2}\right) \right) \\[1.5em]
+&=& 1 - \sqrt{3} i
+\end{array}$$
+>
+> So, the four fourth roots of $16 \left( \cos \left (120^\circ \right) + i \sin \left (120^\circ \right) \right)$ are $\sqrt{3} + i$, $-1 + \sqrt{3} i$, $-\sqrt{3} - i$, and $1 - \sqrt{3} i$.
