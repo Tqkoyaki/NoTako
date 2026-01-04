@@ -1,0 +1,68 @@
+---
+id: page-6
+title: Parametric Equations
+sidebar_position: 6
+---
+import Fig from '@site/src/components/Figure';
+
+**Parametric Equations** are equations that help define a curve using a new variable, called a **parameter**. Instead of expressing $$y$$ directly in terms of $$x$$ (or vice versa), both $$x$$ and $$y$$ are expressed in terms of a third variable, usually denoted as $$t$$. This method is particularly useful for simplifying complex shapes, modeling objects in motion and representing relationships where the variables depend on a hidden factor like time.
+
+## Parameterizing a Curve
+
+When an object moves along a curve in a given direction and in a given amount of time, we can describe its position given by $$x$$ and $$y$$ coordinates. However, both $$x$$ and $$y$$ vary over time making them functions of time. For this reason, we can add another variable $$t$$ which is the parameter upon which both $$x$$ and $$y$$ depend on. So, when we are parameterizing a curve, we are translating a single equation in two variables, such as $$x$$ and $$y$$, into an equivalent pair of equations in three variables, such as $$x$$, $$y$$, and $$t$$.
+
+In mathematical terms, suppose $$t$$ is a number on an interval $$I$$ and the set of ordered pairs, $$(x(t), y(t))$$, where $$t \in I$$, $$x = f(t)$$, and $$y = g(t)$$ forms a curve on the parameter $$t$$. Then, $$x = f(t)$$ and $$y = g(t)$$ are called the **parametric equations** of the curve.
+
+> $\underline{Example}$
+>
+> Parameterize the curve given by $$x = y^3 - 2y$$.
+>
+> There can be multiple ways to parameterize a curve as long as the resulting equations satisfy the original equation. We could always let $$x = t$$ and solve for $$y$$ in terms of $$t$$ but this equation is already solved for $$x$$. This means if we let $$y = t$$, it would be much easier to express $$x$$ in terms of $$t$$.
+>
+> So, letting $$y = t$$, we can substitute this into the original equation to get $$x = t^3 - 2t$$. 
+>
+> Therefore, the parametric equations of the curve are $$x(t) = t^3 - 2t$$ and $$y(t) = t$$.
+
+:::note
+Sometimes, when we are parameterizing a curve, the curve can not be a function because it fails the vertical line test. However, parametric equations can still represent these curves because they do not require $$y$$ to be expressed as a function of $$x$$ or vice versa. This means parametric equations allow us to describe more complex curves that would otherwise be impossible to represent with standard functions.
+:::
+
+## Eliminating the Parameter
+
+Sometimes, we may want to eliminate the parameter from parametric equations to express the relationship between $$x$$ and $$y$$ directly. This process involves solving one of the parametric equations for the parameter and substituting it into the other equation.
+
+> $\underline{Example}$
+>
+> Eliminate the parameter for the equations $$x(t) = t^2$$ and $$y(t) = \ln (t)$$ where $$t > 0$$. Write the final equation as a rectangular equation.
+>
+> Lets first write $$x(t)$$ in terms of $$t$$ so that we can substitute it into $$y(t)$$. From $$x(t) = t^2$$, we can take the square root of both sides to get $$t = \sqrt{x}$$.
+>
+> Now, substituting $$t = \sqrt{x}$$ into $$y(t) = \ln (t)$$ gives us $$y = \ln(\sqrt{x})$$.
+>
+> So, the rectangular equation that relates $$x$$ and $$y$$ is $$y = \ln(\sqrt{x})$$ where $$x > 0$$.
+
+### Trigonometric Equations
+
+We can eliminate the parameter from trigonometric equations using straightforward substituion as well. However, we may need to use some familiar trigonometric identities to help us simplify the final equation.
+
+The identities we may need to use are...
+1. $$x(t) = a \cos(t)$$ and $$y(t) = b \sin(t)$$ where $$a$$ and $$b$$ are constants.
+2. $$\dfrac{x}{a} = \cos(t)$$ and $$\dfrac{y}{b} = \sin(t)$$ which we get by solving for $$\cos(t)$$ and $$\sin(t)$$ respectively.
+3. $$\cos^2(t) + \sin^2(t) = 1$$ which is the Pythagorean identity.
+4. $$\left(\dfrac{x}{a}\right)^2 + \left(\dfrac{y}{b}\right)^2 = 1$$ which we get by substituting into the Pythagorean identity.
+
+> $\underline{Example}$
+>
+> Eliminate the parameter from the equations $$x(t) = 2 \cos(t)$$ and $$y(t) = 3 \sin(t)$$. Write the final equation as a Cartesian equation.
+>
+> Firstly, let's solve in terms of $$\cos (t)$$ and $$\sin (t)$$ so that we can substitute them into the Pythagorean identity to eliminate them. From $$x(t) = 2 \cos(t)$$, we can solve for $$\cos (t)$$ to get $$\cos (t) = \dfrac{x}{2}$$ and from $$y(t) = 3 \sin(t)$$, we can solve for $$\sin (t)$$ to get $$\sin (t) = \dfrac{y}{3}$$.
+>
+> We can now substitute $$\cos (t)$$ and $$\sin (t)$$ into the Pythagorean identity $$\cos^2(t) + \sin^2(t) = 1$$ to get...
+>
+> $$\begin{array}{cccccccccccccc}
+\cos^2(t) + \sin^2(t) &=& 1 \\[1em]
+\left(\dfrac{x}{2}\right)^2 + \left(\dfrac{y}{3}\right)^2 &=& 1 \\[1em]
+\dfrac{x^2}{4} + \dfrac{y^2}{9} &=& 1
+\end{array}$$
+>
+> So, the Cartesian equation that relates $$x$$ and $$y$$ is $$\dfrac{x^2}{4} + \dfrac{y^2}{9} = 1$$.

@@ -1,0 +1,88 @@
+---
+id: page-7
+title: Graphing Parametric Equations
+sidebar_position: 7
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-136.png';
+
+
+Many subjects like physics and engineering involve complex data and relationships which are best represented using parametric equations. Due to this flexibility, like with other functions, it is invaluable to be able to graph parametric equations to visualize these relationships as it can provide insights that are not immediately obvious from the equations alone.
+
+## Plotting Parametric Equations
+
+Given a pair of parametric equations, we can sketch a graph by plotting points. We begin by constructing a table with columns for $$t$$, $$x(t)$$, and $$y(t)$$. After, we can evaluate $$x$$ and $$y$$ for values of $$t$$ over the interval for which the functions are defined. Finally, we plot the points $$(x(t), y(t))$$ on a coordinate plane and connect them to visualize the curve.
+
+> $\underline{Example}$
+>
+> Sketch the graph of the parametric equations $$x = \sqrt{t}$$ and $$y = 2t + 3$$ where $$0 \leq t \leq 3$$.
+>
+> Let's start with a table to evaluate $$x$$ and $$y$$ for values of $$t$$ from $$0$$ to $$3$$.
+>
+> | $$t$$ | $$x(t) = \sqrt{t}$$       | $$y(t) = 2t + 3$$ |
+> |-------|---------------------------|-------------------|
+> | $$0$$ | $$0$$                     | $$3$$             |
+> | $$1$$ | $$1$$                     | $$5$$             |
+> | $$2$$ | $$\sqrt{2} \approx 1.41$$ | $$7$$             |
+> | $$3$$ | $$\sqrt{3} \approx 1.73$$ | $$9$$             |
+>
+> Now, we can plot these points to sketch the graph of the parametric equations...
+>
+> <Fig src={alg1} caption='Parametric Graph' num={1}/>
+
+## Applications of Parametric Equations
+
+There are many advantages to using parameteric equations for solving read-world problems especially when it involves motion. For example, while a rectangular equation in $$x$$ and $$y$$ gives an overall picture of an object's path, it does not reveal the position of an object at a specific time. On the other hand, a set of parametric equations illustrates how the values of $$x$$ and $$y$$ change depending on $$t$$ allowing us to track the object's position at any given moment.
+
+A common application of parametric equations is solving problems involving projectile motion. In this type of motion, an object is propelled forward in an upward direction forming an angle of $$\theta$$ to the horizontal, with an initial speed of $$v_0$$, and at a height $$h$$ above the horizontal.
+
+The parametric equations that describe the path of an object in projectile motion are...
+
+1. $$x(t) = (v_0 \cos \theta) t$$
+2. $$y(t) = -\frac{1}{2}gt^2 + (v_0 \sin \theta) t + h$$ 
+
+...where $$t$$ is the time, $$v_0$$ is the initial speed, $$h$$ is the initial height, $$\theta$$ is the angle of projection, and  $$g$$ is the acceleration due to gravity, approximately $$9.8 \, m/s^2$$ or $$32 \, ft/s^2$$.
+
+> $$\underline{Example}$$
+>
+> A batter hits a ball with an initial velocity of $$140 \, ft/s$$ at an angle of $$45^\circ$$ to the horizontal, making contact $$3$$ feet above the ground. Find the parametric equations to model the path of the ball and determine where the ball is after $$2$$ seconds.
+>
+> We can start by identifying the known values from the problem. The initial velocity is $$v_0 = 140 \, ft/s$$, the angle of projection is $$\theta = 45^\circ$$, and the initial height is $$h = 3 \, ft$$.
+>
+> We can substitute these values into $$x(t) = (v_0 \cos \theta) t$$ which gives us...
+>
+> $$\begin{array}{ccccccccccccccccc}
+x(t) &=& (v_0 \cos \theta) t \\[1em]
+&=& (140 \cos 45^\circ) t \\[1em]
+&=& (140 \cdot \frac{\sqrt{2}}{2}) t \\[1em]
+&=& (70\sqrt{2}) t
+\end{array}$$
+>
+> We can do the same for $$y(t) = -\frac{1}{2}gt^2 + (v_0 \sin \theta) t + h$$ which gives us...
+>
+> $$\begin{array}{ccccccccccccccccc}
+y(t) &=& -\frac{1}{2}gt^2 + (v_0 \sin \theta) t + h \\[1em]
+&=& -\dfrac{1}{2} \cdot 32 t^2 + (140 \sin 45^\circ) t + 3 \\[1em]
+&=& -16t^2 + (140 \cdot \frac{\sqrt{2}}{2}) t + 3 \\[1em]
+&=& -16t^2 + (70\sqrt{2}) t + 3
+\end{array}$$
+>
+> Finally, to find the position of the ball after $$2$$ seconds, we can substitute $$t = 2$$ into both parametric equations. Starting with $$x(t)$$...
+>
+> $$\begin{array}{ccccccccccccccccc}
+x(t) &=& (70\sqrt{2}) t \\[1em]
+x(2) &=& (70\sqrt{2}) (2) \\[1em]
+&=& 140\sqrt{2} \approx 197.99 \, ft
+\end{array}$$
+>
+> Now for $$y(t)$$...
+>
+> $$\begin{array}{ccccccccccccccccc}
+y(t) &=& -16t^2 + (70\sqrt{2}) t + 3 \\[1em]
+y(2) &=& -16(2)^2 + (70\sqrt{2}) (2) + 3 \\[1em]
+&=& -64 + 140\sqrt{2} + 3 \\[1em]
+&=& 140\sqrt{2} - 61 \approx 136.99 \, ft
+\end{array}$$
+>
+> So, the parametric equations that model the path of the ball are $$x(t) = (70\sqrt{2}) t$$ and $$y(t) = -16t^2 + (70\sqrt{2}) t + 3$$ and after $$2$$ seconds, the ball is approximately at the position $$(198, 137)$$ feet.
