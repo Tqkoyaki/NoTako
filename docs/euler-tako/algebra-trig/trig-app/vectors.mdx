@@ -1,0 +1,297 @@
+---
+id: page-8
+title: Vectors
+sidebar_position: 8
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-137.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-138.png';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-139.jpg';
+import alg4 from '@site/static/img/euler/algebra-trig/alg-140.png';
+import alg5 from '@site/static/img/euler/algebra-trig/alg-141.png';
+import alg6 from '@site/static/img/euler/algebra-trig/alg-142.png';
+
+A **vector** is a specific quantity drawn as a line segment with a arrow at one end pointing in a specific direction. It has an **initial point** where the vector starts and a **terminal point** where the vector ends.
+
+A vector is defined by its **magnitude**, or length of the line, and its direction which is indicated by an arrowhead at the terminal point.
+
+<Fig src={alg1} caption='Vector' num={1}/>
+
+:::note
+There are various symbols that can be used to represent a vector such as...
+- A lower case, boldfaced type (with or without an arrow on top) such as $\mathbf{v}$ or $\vec{v}$.
+- An upper case set of letters with an arrow on top such as $\overrightarrow{AB}$ where $A$ is the initial point and $B$ is the terminal point.
+- With angle brackets such as $\langle a, b \rangle$ where $a$ and $b$ are the coordinates of the terminal point $(a, b)$ and the initial point is at the origin $(0, 0)$.
+:::
+
+## Standard Position
+
+For a vector to be in **standard position**, its initial point must be at the origin of the coordinate plane. This means when a vector is written using angle bracket such as $\langle a, b \rangle$, it is in standard position because the initial point is at the origin $(0, 0)$ and the terminal point is at $(a, b)$.
+
+We can change any vector into standard position by translating the vector so that its initial point is at the origin. Thus, if the initial point of a vector $\overrightarrow{AB}$ is $A (x_1, y_1)$ and the terminal point is $B (x_2, y_2)$, then the position vector can be found by calculating...
+
+$$\overrightarrow{CD} = \langle x_2 - x_1, y_2 - y_1 \rangle$$ 
+
+where $C$ is the initial point at the origin and $D$ is the terminal point at $(x_2 - x_1, y_2 - y_1)$.
+
+:::note
+Even though we change the position of a vector to be in standard position, the magnitude and direction of the vector remain unchanged meaning they are equivalent. This is because vectors are defined by their magnitude and direction, not by their specific location in the coordinate plane.
+:::
+
+## Magnitude and Direction
+
+A vector is defined by its magnitude and direction which means we need to have a way to calculate these two properties if we want to work with vector. This is relatively easy because we can find a vectors magnitude using the Pythagorean Theorem or the distance formula and we can find its direction using the inverse tangent function.
+
+Given a position vector $\mathbf{v} = \langle a, b \rangle$, the magnitude is given by $$|\mathbf{v}| = \sqrt{a^2 + b^2}$$ and the direction is given by $\theta$ = $\tan^{-1} \left( \dfrac{b}{a} \right)$ where $\theta$ is the angle between the vector and the positive $x$-axis.
+
+> $\underline{Example}$
+>
+> Find the magnitude and direction of the vector with initial point $P (-8, 1)$ and terminal point $Q (-2, -5)$.
+>
+> First we need to translate the vector $\overrightarrow{PQ}$ to be in standard position by calculating the position vector $\overrightarrow{RS}$ where $R$ is the initial point at the origin and $S$ is the terminal point at $(x_2 - x_1, y_2 - y_1)$...
+>
+> $$\begin{array}{cccccccccccccc}
+\overrightarrow{RS} &=& \langle x_2 - x_1, y_2 - y_1 \rangle \\[1em]
+&=& \langle -2 - (-8), -5 - 1 \rangle \\[1em]
+&=& \langle 6, -6 \rangle
+\end{array}$$
+>
+> Now lets find the magnitude of the vector $\overrightarrow{RS}$ using the formula $|\mathbf{v}| = \sqrt{a^2 + b^2}$ where $a$ and $b$ are the coordinates of the terminal point $(a, b)$...
+>
+> $$\begin{array}{cccccccccccccc}
+|\overrightarrow{RS}| &=& \sqrt{6^2 + (-6)^2} \\[1em]
+&=& \sqrt{36 + 36} \\[1em]
+&=& \sqrt{72} \\[1em]
+&=& 6\sqrt{2}
+\end{array}$$
+>
+> Finally, we can find the direction of the vector $\overrightarrow{RS}$ using the formula $\theta$ = $\tan^{-1} \left( \dfrac{b}{a} \right)$ where $a$ and $b$ are the coordinates of the terminal point $(a, b)$...
+>
+> $$\begin{array}{cccccccccccccc}
+\theta &=& \tan^{-1} \left( \dfrac{b}{a} \right) \\[1em]
+&=& \tan^{-1} \left( \dfrac{-6}{6} \right) \\[1em]
+&=& \tan^{-1} (-1) \\[1em]
+&=& 315^\circ
+\end{array}$$
+>
+> Therefore, the magnitude of the vector is $6\sqrt{2}$ and its direction is $315^\circ$. This vector can be drawn as...
+>
+> <Fig src={alg2} caption='Vector Example' num={2}/>
+
+:::note
+Now that we can calculate the magnitude and direction of any vector, we can test if two vectors are equivalent by comparing their magnitudes and directions. If two vectors have the same magnitude and direction, then they are equivalent even if they are in different positions in the coordinate plane.
+:::
+
+## Vector Addition
+
+The sum of two vectors $\mathbf{u}$ and $\mathbf{v}$ also known as **vector addition** produces a third vector $\mathbf{u + v}$ which is the **resultant vector**. To find $\mathbf{u + v}$, we first draw the vector $\mathbf{u}$ and from the terminal end of $\mathbf{u}$, we draw the vector $\mathbf{v}$. This means that the initial point of $\mathbf{v}$ is at the terminal point of $\mathbf{u}$. Finally, we can draw the resultant vector $\mathbf{u + v}$ from the initial point of $\mathbf{u}$ to the terminal point of $\mathbf{v}$.
+
+<Fig src={alg3} caption='Vector Addition' num={3}/>
+
+**Vector subtraction** is similar to vector addition. To find $\mathbf{u - v}$, we view it as $\mathbf{u + (-v)}$ where $-v$ is the vector $\mathbf{v}$ with the opposite direction. This means that to find $\mathbf{u - v}$, we first draw the vector $\mathbf{u}$ and from the terminal end of $\mathbf{u}$, we draw the vector $-v$. Finally, we can draw the resultant vector $\mathbf{u - v}$ from the initial point of $\mathbf{u}$ to the terminal point of $-v$.
+
+> $\underline{Example}$
+>
+> Given $\mathbf{u} = \langle 3, -2 \rangle$ and $\mathbf{v} = \langle -1, 4 \rangle$, find two new vectors $\mathbf{u + v}$, and $\mathbf{u - v}$.
+>
+> We can find $\mathbf{u + v}$ by adding the corresponding components of $\mathbf{u}$ and $\mathbf{v}$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+\mathbf{u + v} &=& \langle 3 + (-1), -2 + 4 \rangle \\[1em]
+&=& \langle 2, 2 \rangle
+\end{array}$$
+>
+> We can find $\mathbf{u - v}$ by subtracting the corresponding components of $\mathbf{v}$ from $\mathbf{u}$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+\mathbf{u - v} &=& \langle 3 - (-1), -2 - 4 \rangle \\[1em]
+&=& \langle 4, -6 \rangle
+\end{array}$$
+>
+> Therefore, $\mathbf{u + v} = \langle 2, 2 \rangle$ and $\mathbf{u - v} = \langle 4, -6 \rangle$.
+>
+> <Fig src={alg4} caption='Vector Addition and Subtraction Example' num={4}/>
+
+## Scalar Multiplication
+
+**Scalar multiplication** is the process of multiplying a vector by a scalar (a real number). To find the product, we multiply each component of the vector by the scalar. Thus, to multiply $\mathbf{v} = \langle a, b \rangle$ by a scalar $k$, we calculate...
+
+$k\mathbf{v} = \langle ka, kb \rangle$
+
+where $ka$ and $kb$ are the components of the resulting vector. The magnitude of the resulting vector is $|k|$ times the magnitude of the original vector and its direction is the same as the original vector if $k$ is positive and opposite if $k$ is negative.
+
+> $\underline{Example}$
+>
+> Find the scalar multiple $3 \mathbf{u}$ given $\mathbf{u} = \langle 5, 4 \rangle$.
+>
+> We can find $3 \mathbf{u}$ by multiplying each component of $\mathbf{u}$ by $3$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+3 \mathbf{u} &=& \langle 3 \cdot 5, 3 \cdot 4 \rangle \\[1em]
+&=& \langle 15, 12 \rangle
+\end{array}$$
+>
+> Therefore, $3 \mathbf{u} = \langle 15, 12 \rangle$.
+
+## Component Form
+
+In some cases, it is helpful to break down a vector into its components. A vector can be expressed in **component form** as the sum of its horizontal and vertical components. The horizontal component is the projection of the vector onto the $x$-axis and the vertical component is the projection of the vector onto the $y$-axis.
+
+For example, given a vector $\mathbf{v} = \langle 3, 4 \rangle$, its horizontal component is $\langle 3, 0 \rangle$ and its vertical component is $\langle 0, 4 \rangle$. Therefore, we can write $\mathbf{v}$ in component form as $\mathbf{v} = \langle 3, 0 \rangle + \langle 0, 4 \rangle$ which is equivalent to $\mathbf{v} = \langle 3, 4 \rangle$.
+
+### Unit Vector
+
+In addition to finding a vector's components, it is often useful to find a vector's **unit vector** which is a vector with a magnitude of $1$ that points in the same direction as the original vector. If $\mathbf{v} = \langle a, b \rangle$ is a nonzero vector, then its unit vector $\mathbf{u}$ can be found by dividing each component of $\mathbf{v}$ by the magnitude of $\mathbf{v}$ which gives us...
+
+$\mathbf{u} = \dfrac{\mathbf{v}}{|\mathbf{v}|} = \left\langle \dfrac{a}{|\mathbf{v}|}, \dfrac{b}{|\mathbf{v}|} \right\rangle$
+
+Unit vectors are also often defined in terms of components with a horizontal and vertical unit vector. The horizontal unit vector is written as $\mathbf{i} = \langle 1, 0 \rangle$ and is directed along the positive horizontal axis. While the vertical unit vector is written as $\mathbf{j} = \langle 0, 1 \rangle$ and is directed along the positive vertical axis.
+
+> $\underline{Example}$
+>
+> Find a unit vector in the same direction as $\mathbf{v} = \langle -5, 12 \rangle$.
+>
+> We can start by finding the magnitude of $\mathbf{v}$ using the formula $|\mathbf{v}| = \sqrt{a^2 + b^2}$ where $a$ and $b$ are the components of the terminal point $(a, b)$...
+>
+> $$\begin{array}{cccccccccccccc}
+|\mathbf{v}| &=& \sqrt{(-5)^2 + 12^2} \\[1em]
+&=& \sqrt{25 + 144} \\[1em]
+&=& \sqrt{169} \\[1em]
+&=& 13
+\end{array}$$
+>
+> Now we can find the unit vector $\mathbf{u}$ by dividing each component of $\mathbf{v}$ by the magnitude of $\mathbf{v}$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+\mathbf{u} &=& \dfrac{\mathbf{v}}{|\mathbf{v}|} \\[1em]
+&=& \left\langle \dfrac{-5}{13}, \dfrac{12}{13} \right\rangle
+\end{array}$$
+>
+> Therefore, a unit vector in the same direction as $\mathbf{v}$ is $\mathbf{u} = \dfrac{-5}{13} \:\mathbf{i} + \dfrac{12}{13} \:\mathbf{j}$ or $\mathbf{u} = \left\langle \dfrac{-5}{13}, \dfrac{12}{13} \right\rangle$. 
+>
+> <Fig src={alg5} caption='Unit Vector Example' num={5}/>
+
+:::note
+The magnitude is always a scalar and so dividing by a scalar is equivalent to multiplying by the reciprocal of the scalar.
+:::
+
+## Rectangular Form
+
+Now that we have general strategies for working with vectors, we can represent vectors in **rectangular form** where we represent vectors in rectangular coordinates in term of $\mathbf{i}$ and $\mathbf{j}$ which are the horizontal and vertical unit vectors respectively. Given a vector $\mathbf{v}$ with initial point $P = (x_1, y_1)$ and terminal point $Q = (x_2, y_2)$, we can write $\mathbf{v}$ in rectangular form as...
+
+$\mathbf{v} = (x_2 - x_1) \:\mathbf{i} + (y_2 - y_1) \:\mathbf{j}$
+
+where $x_2 - x_1$ is the horizontal component of the vector and $y_2 - y_1$ is the vertical component of the vector.
+
+> $\underline{Example}$
+>
+> Write the vector $\mathbf{u}$ with initial point $P = (-1, 6)$ and terminal point $Q = (7, -5)$ in terms of $\mathbf{i}$ and $\mathbf{j}$.
+>
+> We can substitute the coordinates of the initial point and terminal point into the formula $\mathbf{u} = (x_2 - x_1) \:\mathbf{i} + (y_2 - y_1) \:\mathbf{j}$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+\mathbf{u} &=& (x_2 - x_1) \mathbf{i} + (y_2 - y_1) \mathbf{j} \\[1em]
+&=& (7 - (-1)) \mathbf{i} + (-5 - 6) \mathbf{j} \\[1em]
+&=& 8 \mathbf{i} - 11 \mathbf{j}
+\end{array}$$
+>
+> Therefore, the vector $\mathbf{u}$ can be written in rectangular form as $\mathbf{u} = 8 \mathbf{i} - 11 \mathbf{j}$.
+
+### Performing Operations
+
+When vectors are written in terms of $\mathbf{i}$ and $\mathbf{j}$, we can perform vector operations such as addition, subtraction and scalar multiplication by performing operations on each component of the vector.
+
+Given $\mathbf{v} = a \mathbf{i} + b \mathbf{j}$ and $\mathbf{u} = c \mathbf{i} + d \mathbf{j}$, we can find $\mathbf{v + u}$, $\mathbf{v - u}$, and $k \mathbf{v}$ by performing the following operations...
+1. $\mathbf{v + u} = (a + c) \mathbf{i} + (b + d) \mathbf{j}$
+2. $\mathbf{v - u} = (a - c) \mathbf{i} + (b - d) \mathbf{j}$
+3. $k \mathbf{v} = (ka) \mathbf{i} + (kb) \mathbf{j}$
+
+> $\underline{Example}$
+>
+> Find the sum of $\mathbf{v_1} = 2 \mathbf{i} - 3 \mathbf{j}$ and $\mathbf{v_2} = 4 \mathbf{i} + 5 \mathbf{j}$.
+>
+> We can find $\mathbf{v_1 + v_2}$ by adding the corresponding components of $\mathbf{v_1}$ and $\mathbf{v_2}$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+\mathbf{v_1 + v_2} &=& (2 + 4) \mathbf{i} + (-3 + 5) \mathbf{j} \\[1em]
+&=& 6 \mathbf{i} + 2 \mathbf{j}
+\end{array}$$
+>
+> Therefore, the sum of $\mathbf{v_1}$ and $\mathbf{v_2}$ is $\mathbf{v_1 + v_2} = 6 \mathbf{i} + 2 \mathbf{j}$.
+
+## Component Form Using Direction
+
+Calculating direction follows the same process used for polar coordinates but instead of using $r$, we use the magnitude of the vector $|\mathbf{v}|$. Given a position vector $\mathbf{v} = \langle x, y \rangle$ and a direction angle $\theta$...
+
+1. $\cos \theta = \dfrac{x}{|\mathbf{v}|}$
+2. $\sin \theta = \dfrac{y}{|\mathbf{v}|}$
+3. $x = |\mathbf{v}| \cos \theta$
+4. $y = |\mathbf{v}| \sin \theta$
+
+meaning $\mathbf{v} = x \mathbf{i} + y \mathbf{j} = |\mathbf{v}| \cos \theta \mathbf{i} + |\mathbf{v}| \sin \theta \mathbf{j}$ where the magnitude of the vector is $|\mathbf{v}| = \sqrt{x^2 + y^2}$.
+
+> $\underline{Example}$
+>
+> Given a vector with length $7$ and an angle of $135^\circ$, write it in component form.
+>
+> We know the magnitude of the vector is $|\mathbf{v}| = 7$ and the direction angle is $\theta = 135^\circ$. We can find the horizontal and vertical components of the vector using the formulas $x = |\mathbf{v}| \cos \theta$ and $y = |\mathbf{v}| \sin \theta$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+x &=& |\mathbf{v}| \cos \theta &&&&& y &=& |\mathbf{v}| \sin \theta \\[1em]
+x &=& 7 \cos 135^\circ &&&&& y &=& 7 \sin 135^\circ \\[1em]
+x &=& 7 \cdot \left(-\dfrac{\sqrt{2}}{2}\right) &&&&& y &=& 7 \cdot \dfrac{\sqrt{2}}{2} \\[1em]
+x &=& -\dfrac{7\sqrt{2}}{2} &&&&& y &=& \dfrac{7\sqrt{2}}{2}
+\end{array}$$
+>
+> Therefore, the vector can be written in component form as $\mathbf{v} = -\dfrac{7\sqrt{2}}{2} \mathbf{i} + \dfrac{7\sqrt{2}}{2} \mathbf{j}$.
+
+## Dot Product
+
+Other than multiplying a vector by a scalar, we can also multiply two vectors together using the **dot product**. The dot product of two vectors $\mathbf{v} = \langle a, b \rangle$ and $\mathbf{u} = \langle c, d \rangle$ is the sum of the product of the horizontal components and the product of the vertical components...
+
+$\mathbf{v} \cdot \mathbf{u} = ac + bd$
+
+where the angle between the two vectors can be found using the formula...
+
+$\cos \theta = \dfrac{\mathbf{v}}{|\mathbf{v}|} \cdot \dfrac{\mathbf{u}}{|\mathbf{u}|}$
+
+where $\theta$ is the angle between the two vectors.
+
+> $\underline{Example}$
+>
+> Find the dot product of $\mathbf{v_1} = 5\mathbf{i} + 2\mathbf{j}$ and $\mathbf{v_2} = 3\mathbf{i} + 7\mathbf{j}$. Then, find the angle between the two vectors.
+>
+> First, we can find the dot product $\mathbf{v_1} \cdot \mathbf{v_2}$ by calculating the sum of the product of the horizontal components and the product of the vertical components which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+\mathbf{v_1} \cdot \mathbf{v_2} &=& (5)(3) + (2)(7) \\[1em]
+&=& 15 + 14 \\[1em]
+&=& 29
+\end{array}$$
+>
+> Now to find the angle, we need to find the magnitudes of $\mathbf{v_1}$ and $\mathbf{v_2}$ using the formula $|\mathbf{v}| = \sqrt{a^2 + b^2}$ where $a$ and $b$ are the components of the terminal point $(a, b)$...
+>
+> $$\begin{array}{cccccccccccccc}
+|\mathbf{v_1}| &=& \sqrt{5^2 + 2^2} &&&&& |\mathbf{v_2}| &=& \sqrt{3^2 + 7^2} \\[1em]
+|\mathbf{v_1}| &=& \sqrt{25 + 4} &&&&& |\mathbf{v_2}| &=& \sqrt{9 + 49} \\[1em]
+|\mathbf{v_1}| &=& \sqrt{29} &&&&& |\mathbf{v_2}| &=& \sqrt{58}
+\end{array}$$
+>
+> Finally, we can find the angle $\theta$ between the two vectors using the formula $\cos \theta = \dfrac{\mathbf{v}}{|\mathbf{v}|} \cdot \dfrac{\mathbf{u}}{|\mathbf{u}|}$ which gives us...
+>
+> $$\begin{array}{cccccccccccccc}
+\cos \theta &=& \dfrac{\mathbf{v_1}}{|\mathbf{v_1}|} \cdot \dfrac{\mathbf{v_2}}{|\mathbf{v_2}|} \\[1em]
+&=& \dfrac{5\mathbf{i} + 2\mathbf{j}}{\sqrt{29}} \cdot \dfrac{3\mathbf{i} + 7\mathbf{j}}{\sqrt{58}} \\[1em]
+&=& \dfrac{5}{\sqrt{29}} \cdot \dfrac{3}{\sqrt{58}} + \dfrac{2}{\sqrt{29}} \cdot \dfrac{7}{\sqrt{58}} \\[1em]
+&=& \dfrac{15}{\sqrt{29} \sqrt{58}} + \dfrac{14}{\sqrt{29} \sqrt{58}} \\[1em]
+&=& \dfrac{29}{\sqrt{29} \sqrt{58}} \\[1em]
+&=& \dfrac{29}{\sqrt{29 \cdot 58}} \\[1em]
+&=& \dfrac{29}{\sqrt{1682}} \\[1em]
+\theta &=& \cos^{-1} \left( \dfrac{29}{\sqrt{1682}} \right) \\[1em]
+&=& 45^\circ
+\end{array}$$
+>
+> Therefore, the dot product of $\mathbf{v_1}$ and $\mathbf{v_2}$ is $29$ and the angle between the two vectors is $45^\circ$.
+>
+> <Fig src={alg6} caption='Dot Product Example' num={6}/>
