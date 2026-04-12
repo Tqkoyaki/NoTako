@@ -1,0 +1,232 @@
+---
+id: page-1
+title: Systems of Linear Equations
+sidebar_position: 1
+---
+import Fig from '@site/src/components/Figure';
+
+import alg1 from '@site/static/img/euler/algebra-trig/alg-143.png';
+import alg2 from '@site/static/img/euler/algebra-trig/alg-144.png';
+import alg3 from '@site/static/img/euler/algebra-trig/alg-145.png';
+
+A **system of linear equations** consists of two or more linear equations made up of two or more variables such that all equations in the system are considered simultaneously. So, to find the solution to a system of linear equations, we must find values for each variable in the system that will satisfy all of the equations at the same time.
+
+## Types of Solutions
+
+There are three types of systems of linear equations and each type has a different type of solution...
+
+1. An **independent system** has exactly one solution $$(x, y)$$. The point where the two lines intersect on the graph is the only solution to the system.
+2. An **inconsistent system** has no solution. The lines representing the equations are parallel and will never intersect, so there is no point that satisfies both equations at the same time.
+3. A **dependent system** has infinitely many solutions. The lines are coincident meaning they are the same line, so every point on the line satisfies both equations in the system.
+
+<Fig src={alg1} caption='Types of Systems of Linear Equations' num={1}/>
+
+:::note
+Both independent and dependent systems are **consistent systems** which are systems that have at least one solution. In contrast, inconsistent systems are **inconsistent systems** because they have no solutions.
+:::
+
+## Solving by Graphing
+
+Solving a system of linear equations by graphing is relatively straightforward. To do this, graph each equation in the system on the same coordinate plane and then look for the points where the lines intersect. The coordinates of the intersection points represent the solutions to the system of equations.
+
+> $\underline{Example}$
+>
+> Solve the following system of linear equations by graphing.
+>
+> $$\begin{cases}
+> 2x - 5y = -25 \\
+> -4x + 5y = 35
+> \end{cases}
+> $$
+>
+> Before graphing, it is helpful to rewrite each equation in slope-intercept form ($y = mx + b$) so that the lines can be easily plotted on the coordinate plane.
+>
+> $$\begin{array}{cccccccccccccc}
+> 2x - 5y &=& -25 &&& -4x + 5y &=& 35 \\[1em]
+> 2x + 25 &=& 5y &&& -4x - 35 &=& -5y \\[1em]
+> \dfrac{2}{5}x + 5 &=& y &&& \dfrac{4}{5}x + 7 &=& y
+> \end{array}$$
+>
+> Now we can graph $y = \dfrac{2}{5}x + 5$ and $y = \dfrac{4}{5}x + 7$ on the same coordinate plane to find the point of intersection which represents the solution to the system of equations.
+>
+> <Fig src={alg2} caption='Solving by Graphing Example' num={2}/>
+>
+> The lines intersect at $(-5, 3)$ making it the solution to the system of equations.
+
+## Solving by Substitution
+
+Solving a linear system of equations by graphing is simple but not precise because it can be difficult to determine the exact point of intersection if the solution contains decimals or fractions. One alternative method that can give an exact solution is the **substitution method** in which we solve one of the equations for one variable in terms of the other variable and then substitute that expression into the other equation to solve for the remaining variable.
+
+> $\underline{Example}$
+>
+> Solve the following system of equations by substitution.
+>
+> $$\begin{cases}
+> x = y + 3 \\
+> 4 = 3x - 2y
+> \end{cases}$$
+>
+> In this case, the first equation is already solved for $x$ in terms of $y$ so we don't need to solve it further before substituting $x = y + 3$ into the second equation to solve for $y$.
+>
+> $$\begin{array}{cccccccccccccc}
+> 4 &=& 3x - 2y \\[0.5em]
+> 4 &=& 3(y + 3) - 2y \\[0.5em]
+> 4 &=& 3y + 9 - 2y \\[0.5em]
+> 4 &=& y + 9 \\[0.5em]
+> -5 &=& y
+> \end{array}$$
+>
+> Now that we have $y = -5$, we can substitute this value back into the first equation $x = y + 3$ to solve for $x$.
+>
+> $$x = y + 3 = -5 + 3 = -2$$
+>
+> So the solution to the system of equations is $x = -2$, $y = -5$ or as an ordered pair $(-2, -5)$.
+
+## Solving by Addition
+
+A third method for solving a system of linear equations is the **addition method** (also called the **elimination method**). In this method, we add two terms with the same variable, but with opposite coefficients, so that the sum is zero. Most equations don't immediately lend themselves to elimination, so it may be necessary to first multiply one or both of the equations by a constant so that the coefficients of one of the variables are opposites before adding the equations together to eliminate that variable. Once a variable has been eliminated, the resulting equation in a single variable can then be solved, and that solution can be substituted back into one of the original equations to solve for the remaining variable.
+
+> $\underline{Example}$
+>
+> Solve the system of equations by addition (elimination) method.
+>
+> $$\begin{cases}
+> 2x + 3y = 8 \\
+> 3x + 5y = 10
+> \end{cases}$$
+>
+> To use the addition method, we want to eliminate one of the variables by adding the equations together after making the coefficients of one of the variables opposites. Let's do this with $x$...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+>   2x + 3y &=& 8  & \xrightarrow{\times 3} & 6x + 9y &=& 24 \\[0.5em]
+>   3x + 5y &=& 10 & \xrightarrow{\times -2} & -6x - 10y &=& -20 \\[0.5em]
+> \end{array}$$
+>
+> Now we can add the two equations together to eliminate $x$ and solve for $y$.
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+>   6x + 9y &=& 24 \\[0.5em]
+>   -6x - 10y &=& -20 \\[0.5em]
+> \hline
+>   -y &=& 4 \\[0.5em]
+>   y &=& -4
+> \end{array}$$
+>
+> We can now substitute $y = -4$ back into one of the original equations to solve for $x$...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+>   2x + 3y &=& 8 \\[0.5em]
+>   2x + 3(-4) &=& 8 \\[0.5em]
+>   2x - 12 &=& 8 \\[0.5em]
+>   2x &=& 20 \\[0.5em]
+>   x &=& 10
+> \end{array}$$
+>
+> We can verify the solution $(10, -4)$ by substituting $x = 10$ and $y = -4$ into the second original equation $3x + 5y = 10$ to make sure it satisfies that equation as well.
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+>   3x + 5y &=& 10 \\[0.5em]
+>   3(10) + 5(-4) &=& 10 \\[0.5em]
+>   30 - 20 &=& 10 \\[0.5em]
+>   10 &=& 10
+> \end{array}$$
+>
+> Therefore the solution to the system of equations is $x = 10$, $y = -4$ or as an ordered pair $(10, -4)$.
+
+## Identifying Solutions
+
+Other than having a single unique solution, a system of linear equations can also have no solution. This means the two lines are parallel and never intersect. We can identify no solution by rewriting the equations in slope-intercept form $y = mx + b$ and seeing if the lines have the same slope $m$ but different $y$-intercepts $b$. This means they are parallel lines and will never meet.
+
+> $\underline{Example}$
+>
+> $$\begin{cases}
+> 2y - 2x = 2 \\
+> 2y - 2x = 6
+> \end{cases}$$
+>
+> If we rewrite both equations in slope-intercept form $y = mx + b$ we get...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+> 2y - 2x &=& 2 & \rightarrow & y - x = 1 & \rightarrow & y = x + 1 \\[0.5em]
+> 2y - 2x &=& 6 & \rightarrow & y - x = 3 & \rightarrow & y = x + 3
+> \end{array}$$
+>
+> We can see that the two lines have the same slope $m = 1$ but different $y$-intercepts $b = 1$ and $b = 3$. Therefore the lines are parallel and the system has no solution.
+
+The other type of solution occurs when the system has infinitely many solutions. This happens when the two equations represent the same line, i.e., they have the same slope and the same $y$-intercept so that every point on the line satisfies both equations.
+
+> $\underline{Example}$
+>
+> $$\begin{cases}
+> y - 2x = 5 \\
+> -3y + 6x = -15
+> \end{cases}$$
+>
+> If we rewrite both equations in slope-intercept form $y = mx + b$ we get...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+> y - 2x &=& 5 & \rightarrow & y = 2x + 5 \\[0.5em]
+> -3y + 6x &=& -15 & \rightarrow & -3y = -6x - 15 & \rightarrow & y = 2x + 5
+> \end{array}$$
+>
+> We can see that both equations reduce to the same line $y = 2x + 5$, so every point on that line satisfies both equations. Therefore the system has infinitely many solutions.
+
+## Real World Problems
+
+Systems of linear equations can be used to model and solve various real world problems like determining the point at which a business would break even (where total revenue equals total cost). To calculate the break-even point, we need to set up the system of linear equations.
+
+One equation in the system is the **revenue function** which is the function that is used to calculate the amount of money that comes into the business. It can be represented by the equation $R = xp$, where $x$ is the quantity, $p$ is the price per unit, and $R$ is the total revenue.
+
+The other equation in the system is the **cost function** which is the function used to calculate the costs of doing business.
+
+We can solve for the system to see when the revenue equals the costs, i.e., when $R = C$. This will give us the break-even point where the business neither makes a profit nor a loss. Any revenue above the break-even point will result in a profit, and any revenue below the break-even point will result in a loss.
+
+<Fig src={alg3} caption='Break-Even Point' num={3} />
+
+> $\underline{Example}$
+>
+> The cost of a ticket to the circus is $$\$25.00$$ for children and $$\$50.00$$ for adults. On a certain day, attendance at the circus is $$2000$$ and the total gate revenue is $$\$70000$$. How many children and how many adults bought tickets?
+>
+> The two unknowns in this problem are the number of children tickets sold $x$ and the number of adult tickets sold $y$.
+>
+> We can set up the system of equations based on the information given...
+>
+> 1. The total number of tickets sold is $$2000$$ which we can represent as $$x + y = 2000$$
+>
+> 2. The total revenue from ticket sales is $$70000$$ which we can represent as $$25x + 50y = 70000$$
+>
+> We can solve this system of linear equations to find the values of $$x$$ and $$y$$ that satisfy both equations...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+> x + y &=& 2000 & \rightarrow & y &=& -x + 2000
+> \end{array}$$
+>
+> We can substitute $$y = -x + 2000$$ into the second equation $$25x + 50y = 70000$$ to solve for $$x$$...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+> 25x + 50y &=& 70000 \\[0.5em]
+> 25x + 50(-x + 2000) &=& 70000 \\[0.5em]
+> 25x - 50x + 100000 &=& 70000 \\[0.5em]
+> -25x + 100000 &=& 70000 \\[0.5em]
+> -25x &=& -30000 \\[0.5em]
+> x &=& 1200
+> \end{array}$$
+>
+> We can now substitute $$x = 1200$$ back into $$y = -x + 2000$$ to solve for $$y$$...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+> y &=& -x + 2000 \\[0.5em]
+> y &=& -1200 + 2000 \\[0.5em]
+> y &=& 800
+> \end{array}$$
+>
+> Finally, we can check our solution by substituting $$x = 1200$$ and $$y = 800$$ into the other original equation $25x + 50y = 70000$ to make sure it is satisfied...
+>
+> $$\begin{array}{ccccccccccccccccccccccccc}
+> 25x + 50y &=& 70000 \\[0.5em]
+> 25(1200) + 50(800) &=& 70000 \\[0.5em]
+> 30000 + 40000 &=& 70000 \\[0.5em]
+> 70000 &=& 70000
+> \end{array}$$
+>
+> So, there were $$1200$$ children tickets and $$800$$ adult tickets sold.

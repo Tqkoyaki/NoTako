@@ -238,6 +238,13 @@ const sidebars = {
             'euler-tako/algebra-trig/trig-app/page-7',
             'euler-tako/algebra-trig/trig-app/page-8',
           ]
+        },
+        {
+          type: 'category',
+          label: 'Systems of Equations and Inequalities',
+          items: [
+            'euler-tako/algebra-trig/systems/page-1',
+          ]
         }
       ]
     }
